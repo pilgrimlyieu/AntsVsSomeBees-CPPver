@@ -1,25 +1,21 @@
 {
-    "qtConfigure.qtDir": "D:/Software/Qt",
-    "qtConfigure.qtKitDir": "D:/Software/Qt/6.7.3/mingw_64",
-    "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",
-    "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
-    "targetName": "MyToy",
-    "files.associations": {
-        "*.snippets": "vim-snippet",
-        "*.hsnips": "hsnips",
-        "*.json": "jsonl",
-        "qwidget": "cpp",
-        "qapplication": "cpp",
-        "qdate": "cpp"
-    },
-    "qttools.visualizerFile": "D:/Project/School/CPP/asset/qt6.natvis",
-    "qttools.searchMode": "path",
-    "qttools.useExternalBrowser": true,
-    "terminal.integrated.env.windows": {
-        "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
-    },
-    "python.terminal.activateEnvironment": false,
-    "qttools.extraSearchDirectories": [
-        "D:/Software/Qt/6.7.3/mingw_64/bin"
-    ],
+    // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
+    // "python.terminal.activateEnvironment": false,
+    // "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",
+    // "qtConfigure.qtDir": "D:/Software/Qt",
+    // "qtConfigure.qtKitDir": "D:/Software/Qt/6.7.3/mingw_64",
+    // "qttools.extraSearchDirectories": [
+    //     "D:/Software/Qt/6.7.3/mingw_64/bin"
+    // ],
+    // "qttools.searchMode": "path",
+    // "qttools.useExternalBrowser": true,
+    // "qttools.visualizerFile": "D:/Project/School/CPP/asset/qt6.natvis",
+    // "targetName": "MyToy",
+    // "terminal.integrated.env.windows": {
+    //     "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
+    // },
+    "C_Cpp.autoAddFileAssociations": false,
+    "C_Cpp.formatting": "clangFormat",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 }

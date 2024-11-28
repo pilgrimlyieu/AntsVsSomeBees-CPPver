@@ -1,0 +1,13 @@
+BasedOnStyle: LLVM
+AlignArrayOfStructures: Left
+AlignConsecutiveMacros:
+  Enabled: true
+AlignEscapedNewlinesLeft: true
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseExpressionOnASingleLine: false
+AllowShortCompoundRequirementOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+IndentWidth: 4
+InsertBraces: true
+ColumnLimit: 100
