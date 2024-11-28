@@ -1,5 +1,9 @@
 build
 material
+private.*
+
+# Upload when I use it
+resource
 
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
