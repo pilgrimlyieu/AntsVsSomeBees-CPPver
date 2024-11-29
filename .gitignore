@@ -1,9 +1,17 @@
 build
 material
 private.*
+.vscode/compile_commands.json
+# cache
+# *.log
+# *.lock
+.xmake
 
 # Upload when I use it
 resource
+
+# Temporary notes
+TODO.md
 
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------

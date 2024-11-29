@@ -1,21 +1,25 @@
 {
-    // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
-    // "python.terminal.activateEnvironment": false,
-    // "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",
-    // "qtConfigure.qtDir": "D:/Software/Qt",
-    // "qtConfigure.qtKitDir": "D:/Software/Qt/6.7.3/mingw_64",
-    // "qttools.extraSearchDirectories": [
-    //     "D:/Software/Qt/6.7.3/mingw_64/bin"
-    // ],
-    // "qttools.searchMode": "path",
-    // "qttools.useExternalBrowser": true,
-    // "qttools.visualizerFile": "D:/Project/School/CPP/asset/qt6.natvis",
-    // "targetName": "MyToy",
-    // "terminal.integrated.env.windows": {
-    //     "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
-    // },
-    "C_Cpp.autoAddFileAssociations": false,
-    "C_Cpp.formatting": "clangFormat",
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
+  "C_Cpp.autoAddFileAssociations": false,
+  "C_Cpp.formatting": "clangFormat",
+  "C_Cpp.inlayHints.parameterNames.suppressWhenArgumentContainsName": false,
+  "C_Cpp.markdownInComments": "enabled",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 4,
+  // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
+  // "python.terminal.activateEnvironment": false,
+  // "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",
+  // "qtConfigure.qtDir": "D:/Software/Qt",
+  // "qtConfigure.qtKitDir": "D:/Software/Qt/6.7.3/mingw_64",
+  // "qttools.extraSearchDirectories": [
+  //     "D:/Software/Qt/6.7.3/mingw_64/bin"
+  // ],
+  // "qttools.searchMode": "path",
+  // "qttools.useExternalBrowser": true,
+  // "qttools.visualizerFile": "D:/Project/School/CPP/asset/qt6.natvis",
+  // "terminal.integrated.env.windows": {
+  //     "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
+  // },
+  "targetName": "MyToy",
+  "xmake.debugConfigType": "codelldb",
+  // "xmake.runMode": "buildRun" // 有点问题
 }

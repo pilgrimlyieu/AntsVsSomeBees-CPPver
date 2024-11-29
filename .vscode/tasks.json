@@ -1,108 +1,164 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        // Credit: https://www.cnblogs.com/RioTian/p/18281114
-        // {
-        //     "label": "qmake-debug",
-        //     "type": "shell",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build"
-        //     },
-        //     "command": "qmake",
-        //     "args": [
-        //         "../src.pro",
-        //         "-spec",
-        //         "win32-g++",
-        //         "\"CONFIG+=debug\"",
-        //         "\"CONFIG+=qml_debug\""
-        //     ],
-        //     "hide": true
-        // },
-        // {
-        //     "label": "构建调试版本",
-        //     "type": "shell",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build"
-        //     },
-        //     "command": "mingw32-make",
-        //     "args": [
-        //         "-f",
-        //         "Makefile.Debug",
-        //         "-j16"
-        //     ],
-        //     "dependsOn": [
-        //         "qmake-debug"
-        //     ],
-        //     "problemMatcher": []
-        // },
-        // {
-        //     "label": "构建并运行调试版本",
-        //     "type": "process",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build/debug",
-        //     },
-        //     "command": "${config:targetName}.exe",
-        //     "dependsOn": [
-        //         "构建调试版本"
-        //     ],
-        //     "problemMatcher": []
-        // },
-        // {
-        //     "label": "qmake-release",
-        //     "type": "shell",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build"
-        //     },
-        //     "command": "qmake",
-        //     "args": [
-        //         "../src.pro",
-        //         "-spec",
-        //         "win32-g++",
-        //         "\"CONFIG+=release\"",
-        //         "\"CONFIG+=qtquickcompiler\""
-        //     ],
-        //     "hide": true
-        // },
-        // {
-        //     "label": "构建发布版本",
-        //     "type": "shell",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build"
-        //     },
-        //     "command": "mingw32-make",
-        //     "args": [
-        //         "-f",
-        //         "Makefile.Release",
-        //         "-j16"
-        //     ],
-        //     "dependsOn": [
-        //         "qmake-release"
-        //     ],
-        //     "problemMatcher": []
-        // },
-        // {
-        //     "label": "构建并运行发布版本",
-        //     "type": "process",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build/release"
-        //     },
-        //     "command": "${config:targetName}.exe",
-        //     "dependsOn": [
-        //         "构建发布版本"
-        //     ],
-        //     "problemMatcher": []
-        // },
-        // {
-        //     "label": "清理",
-        //     "type": "shell",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/build"
-        //     },
-        //     "command": "mingw32-make",
-        //     "args": [
-        //         "clean"
-        //     ],
-        //     "problemMatcher": []
-        // }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Debug",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "xmake f -m debug && xmake build ${config:targetName}",
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [""]
+    },
+    {
+      "label": "Build Release",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "xmake f -m release && xmake build ${config:targetName}",
+      ],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [""]
+    },
+    {
+      "label": "Build Check",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "xmake f -m check && xmake build ${config:targetName}",
+      ],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [""]
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "xmake",
+      "args": ["clean"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+    // Credit: https://www.cnblogs.com/RioTian/p/18281114
+    // {
+    //     "label": "qmake-debug",
+    //     "type": "shell",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build"
+    //     },
+    //     "command": "qmake",
+    //     "args": [
+    //         "../src.pro",
+    //         "-spec",
+    //         "win32-g++",
+    //         "\"CONFIG+=debug\"",
+    //         "\"CONFIG+=qml_debug\""
+    //     ],
+    //     "hide": true
+    // },
+    // {
+    //     "label": "构建调试版本",
+    //     "type": "shell",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build"
+    //     },
+    //     "command": "mingw32-make",
+    //     "args": [
+    //         "-f",
+    //         "Makefile.Debug",
+    //         "-j16"
+    //     ],
+    //     "dependsOn": [
+    //         "qmake-debug"
+    //     ],
+    //     "problemMatcher": []
+    // },
+    // {
+    //     "label": "构建并运行调试版本",
+    //     "type": "process",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build/debug",
+    //     },
+    //     "command": "${config:targetName}.exe",
+    //     "dependsOn": [
+    //         "构建调试版本"
+    //     ],
+    //     "problemMatcher": []
+    // },
+    // {
+    //     "label": "qmake-release",
+    //     "type": "shell",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build"
+    //     },
+    //     "command": "qmake",
+    //     "args": [
+    //         "../src.pro",
+    //         "-spec",
+    //         "win32-g++",
+    //         "\"CONFIG+=release\"",
+    //         "\"CONFIG+=qtquickcompiler\""
+    //     ],
+    //     "hide": true
+    // },
+    // {
+    //     "label": "构建发布版本",
+    //     "type": "shell",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build"
+    //     },
+    //     "command": "mingw32-make",
+    //     "args": [
+    //         "-f",
+    //         "Makefile.Release",
+    //         "-j16"
+    //     ],
+    //     "dependsOn": [
+    //         "qmake-release"
+    //     ],
+    //     "problemMatcher": []
+    // },
+    // {
+    //     "label": "构建并运行发布版本",
+    //     "type": "process",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build/release"
+    //     },
+    //     "command": "${config:targetName}.exe",
+    //     "dependsOn": [
+    //         "构建发布版本"
+    //     ],
+    //     "problemMatcher": []
+    // },
+    // {
+    //     "label": "清理",
+    //     "type": "shell",
+    //     "options": {
+    //         "cwd": "${workspaceFolder}/build"
+    //     },
+    //     "command": "mingw32-make",
+    //     "args": [
+    //         "clean"
+    //     ],
+    //     "problemMatcher": []
+    // }
+  ]
 }
