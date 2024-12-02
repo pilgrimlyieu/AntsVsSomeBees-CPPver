@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release", "mode.check")
 
-set_languages("c++17")
+set_languages("cxx17")
 set_targetdir("build")
 set_toolchains("clang")
 

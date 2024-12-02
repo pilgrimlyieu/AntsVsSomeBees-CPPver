@@ -3,6 +3,7 @@
   "C_Cpp.formatting": "clangFormat",
   "C_Cpp.inlayHints.parameterNames.suppressWhenArgumentContainsName": false,
   "C_Cpp.markdownInComments": "enabled",
+  "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
@@ -20,6 +21,6 @@
   //     "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
   // },
   "targetName": "MyToy",
-  "xmake.debugConfigType": "codelldb",
-  // "xmake.runMode": "buildRun" // 有点问题
+  "xmake.debugConfigType": "codelldb"
+  // "xmake.runMode": "buildRun", // 有点问题
 }
