@@ -4,7 +4,7 @@
 #include "Place.h"
 
 class Water : public Place {
-  public:
+public:
     void addInsect(Insect *insect);
 };
 

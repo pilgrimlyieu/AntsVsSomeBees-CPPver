@@ -4,7 +4,8 @@
 #include "Insect.h"
 
 class Ant : public Insect {
-  public:
+public:
+    string name = "Ant";                   // the name of the Ant
     static const int foodCost = 0;         // the food cost of the Ant
     static const bool isContainer = false; // if the Ant is a Container
     static const bool blocksPath = false;  // if the Ant can block the path
@@ -14,7 +15,9 @@ class Ant : public Insect {
 
     static Ant *construct(GameState &gamestate);
 
-    void action(GameState &gamestate);
+    void action(GameState &gamestate) override;
+
+    void injuryCallback();
 
     void deathCallback();
 

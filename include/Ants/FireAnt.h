@@ -4,9 +4,10 @@
 #include "Ant.h"
 
 class FireAnt : public Ant {
-    string name = "Fire";
-    int damage = 3;
-    int foodCost = 5;
+public:
+    string name = "Fire"; // the name of the FireAnt
+    int damage = 3;       // the damage dealt by the FireAnt
+    int foodCost = 5;     // the food cost of the FireAnt
 
     void reduceHealth(int amount);
 };

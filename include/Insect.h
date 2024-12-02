@@ -6,8 +6,9 @@
 using namespace std;
 
 class Insect {
-  public:
-    static const bool isWaterProof = false; // whether this insect is waterproof
+public:
+    string name = "Insect";                 // the name of this insect
+    static const bool isWaterProof = false; // the water proof ability of this insect
     int damage = 0;                         // the amount of damage this insect deals
     int health;                             // the current health of this insect
     Place *place;                           // the place where this insect is located
@@ -16,7 +17,9 @@ class Insect {
 
     void reduceHealth(int amount);
 
-    void action(GameState &gamestate);
+    virtual void action(GameState &gamestate) = 0;
+
+    void injuryCallback();
 
     void deathCallback();
 
@@ -27,6 +30,8 @@ class Insect {
     operator string() const;
 
     void kill();
+
+    virtual ~Insect() = default;
 };
 
 #endif // INSECT_H

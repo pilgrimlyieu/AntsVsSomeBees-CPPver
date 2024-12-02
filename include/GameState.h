@@ -4,7 +4,7 @@
 #include "Utilities.h"
 
 class GameState {
-  public:
+public:
     g_time time = 0;
     int food = 0;
     // strategy;

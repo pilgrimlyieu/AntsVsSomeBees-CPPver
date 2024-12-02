@@ -3,16 +3,15 @@
 
 #include "Utilities.h"
 
-using namespace std;
-
 class Place {
-  public:
-    static const bool isHive = false;
-    string name = "Place";
-    Place *exit;
-    Place *entrance;
-    list<Bee *> bees = {};
-    Ant *ant = nullptr;
+public:
+    // exit <- place -> entrance
+    string name = "Place";            // the name of the Place
+    static const bool isHive = false; // whether this place is a hive
+    Place *exit;                      // the exit of the Place
+    Place *entrance;                  // the entrance of the Place
+    list<Bee *> bees = {};            // the bees in the Place
+    Ant *ant = nullptr;               // the ant in the Place
 
     Bee *randomBee();
 

@@ -4,8 +4,8 @@
 #include "Place.h"
 
 class Hive : public Place {
-  public:
-    static const bool isHive = true;
+public:
+    static const bool isHive = true; // whether this place is a hive
     Hive(); // TODO: Add `assaultPlan`
 };
 

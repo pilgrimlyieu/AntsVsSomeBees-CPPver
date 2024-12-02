@@ -4,10 +4,10 @@
 #include "Ant.h"
 
 class ContainerAnt : public Ant {
-  public:
-    string name = "Container";
-    static const bool isContainer = true;
-    Ant *antContained;
+public:
+    string name = "Container";            // the name of the Ant
+    static const bool isContainer = true; // if the Ant is a Container
+    Ant *antContained;                    // the Ant contained in the container
 
     ContainerAnt(int health = 1);
 

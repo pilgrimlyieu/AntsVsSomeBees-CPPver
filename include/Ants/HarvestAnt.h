@@ -4,9 +4,9 @@
 #include "Ant.h"
 
 class HarvestAnt : public Ant {
-  public:
-    string name = "Harvester";
-    static const int foodCost = 2;
+public:
+    string name = "Harvester";     // the name of the HarvestAnt
+    static const int foodCost = 2; // the food cost of the HarvestAnt
 
     void action(GameState &gamestate);
 };
