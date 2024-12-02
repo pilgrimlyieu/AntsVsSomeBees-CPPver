@@ -5,6 +5,7 @@
 #include <cstdarg>
 #include <list>
 #include <stdexcept>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;

@@ -1,18 +1,19 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
+#include "QueenAnt.h"
 #include "Utilities.h"
 
 class GameState {
 public:
-    g_time time = 0;
+    g_time time = TIME_START;
     int food = 0;
     // strategy;
     Place *beehive;
     // antTypes;
     // dimensions;
     list<Bee *> activeBees = {};
-    Ant *Queen; // TODO: Change to Queen
+    QueenAnt *Queen = nullptr;
     // this.configure // TODO: Implement
 };
 

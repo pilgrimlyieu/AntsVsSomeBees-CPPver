@@ -1,5 +1,6 @@
 #include "Bee.h"
 #include "Ant.h"
+#include "GameState.h"
 #include "Place.h"
 
 /**
@@ -51,7 +52,21 @@ bool Bee::blocked() {
  * @param gamestate The current state of the game.
  */
 void Bee::action(GameState &gamestate) {
-    // TODO
+    Place *destination = place->exit;
+    if (scaredTime > 0) {
+        destination = (place->entrance->isHive) ? place : place->entrance;
+    }
+    if (slowedTime > 0 && gamestate.time % 2 == 1) {
+        slowedTime--;
+    } else {
+        slowedTime = max(TIME_START, slowedTime - 1);
+        if (blocked()) {
+            sting(place->ant);
+        } else if (health > 0 && destination != nullptr) {
+            moveTo(destination);
+            scaredTime = max(TIME_START, scaredTime - 1);
+        }
+    }
 }
 
 /**
