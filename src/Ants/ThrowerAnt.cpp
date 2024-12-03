@@ -4,18 +4,15 @@
 #include "Place.h"
 
 /**
- * @brief the nearest bee within the specified range.
+ * @brief 获取 ThrowerAnt 射程范围内最近的 Bee
  *
- * This function searches for the nearest bee within the range defined by
- * `minRange` and `maxRange` from the current place of the ThrowerAnt.
+ * 从当前位置向入口，直到 Hive 方向遍历，获取射程范围内最近的 Bee 。
  *
- * It starts from the current place and moves towards the hive, checking
- * each place for bees.
+ * 若有多只 Bee 与 ThrowerAnt 的距离相同，则随机选择一只 Bee 。
  *
- * If a bee is found within the specified range, it
- * returns a pointer to a randomly selected bee from that place.
+ * 没有找到 Bee 时，则返回 `nullptr`。
  *
- * @return A pointer to a Bee object if a bee is found within the range, otherwise returns nullptr.
+ * @return 射程范围内最近的 Bee
  */
 Bee *ThrowerAnt::nearestBee() {
     Place *place = this->place;
@@ -31,12 +28,11 @@ Bee *ThrowerAnt::nearestBee() {
 }
 
 /**
- * @brief Throws an attack at the specified target bee.
+ * @brief 对目标 Bee 进行远程攻击
  *
- * This function reduces the health of the target bee by the damage amount
- * if the target is not a null pointer.
+ * 对指定的 Bee 进行远程攻击，对其造成伤害。
  *
- * @param target A pointer to the Bee object that will be attacked.
+ * @param target 目标 Bee
  */
 void ThrowerAnt::throwAt(Bee *target) {
     if (target != nullptr) {
@@ -45,11 +41,9 @@ void ThrowerAnt::throwAt(Bee *target) {
 }
 
 /**
- * @brief Executes the action of the ThrowerAnt.
+ * @brief 执行 ThrowerAnt 的动作
  *
- * This function performs the action of the ThrowerAnt by throwing at the nearest bee.
- *
- * @param gamestate The current state of the game.
+ * ThrowerAnt 的动作是对射程范围内最近的 Bee 进行远程攻击。
  */
 void ThrowerAnt::action(GameState &gamestate) {
     throwAt(nearestBee());

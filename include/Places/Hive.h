@@ -5,7 +5,7 @@
 
 class Hive : public Place {
 public:
-    static const bool isHive = true; // whether this place is a hive
+    static const bool isHive = true; //!< 是否是 Hive
     Hive(); // TODO: Add `assaultPlan`
 };
 

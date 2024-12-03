@@ -4,20 +4,18 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a new TankAnt object with the specified health.
+ * @brief 构造一个新的 TankAnt
  *
- * @param health The initial health of the TankAnt. Defaults to 2.
+ * @param health TankAnt 的初始生命值，默认为 2
  */
 TankAnt::TankAnt(int health) : ContainerAnt(health) {}
 
 /**
- * @brief Executes the action of the TankAnt.
+ * @brief 执行 TankAnt 的动作
  *
- * This method iterates through all the bees in the current place of the TankAnt.
+ * TankAnt 的动作是对所有当前 Place 中的 Bee 造成伤害。
  *
- * The TankAnt deals damage to each bee in the place, and do the action of the ContainerAnt.
- *
- * @param gamestate The current state of the game.
+ * 同时会执行身为 ContainerAnt 的动作。
  */
 void TankAnt::action(GameState &gamestate) {
     vector<Bee *> killedBees;

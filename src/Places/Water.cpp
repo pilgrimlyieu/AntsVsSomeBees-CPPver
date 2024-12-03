@@ -2,12 +2,11 @@
 #include "Insect.h"
 
 /**
- * @brief Adds an insect to the water place.
+ * @brief 将一个 Insect 添加到当前 Water
  *
- * This function adds an insect to the water place by calling the base class
- * Place's addInsect method. If the insect is not waterproof, it will be killed.
+ * 若 Insect 不抗水，则立即杀死。
  *
- * @param insect A pointer to the Insect object to be added.
+ * @param insect 指向要添加的 Insect 的指针
  */
 void Water::addInsect(Insect *insect) {
     Place::addInsect(insect);

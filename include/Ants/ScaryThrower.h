@@ -7,8 +7,8 @@ class ScaryThrower : public ThrowerAnt {
     void throwAt(Bee *target);
 
 public:
-    string name = "Scary";         // the name of the Ant
-    static const int foodCost = 6; // the food cost of the Ant
+    inline static const string name = "Scary"; //!< 类名
+    static const int foodCost = 6;             //!< 食物消耗
 };
 
 #endif // SCARYTHROWER_H

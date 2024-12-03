@@ -5,7 +5,7 @@
 
 class BodyguardAnt : public ContainerAnt {
 public:
-    string name = "Bodyguard"; // the name of the Ant
+    inline static const string name = "Bodyguard"; //!< 类名
 
     BodyguardAnt(int health = 2);
 };

@@ -1,8 +1,8 @@
 #include "BodyguardAnt.h"
 
 /**
- * @brief Constructs a new BodyguardAnt object with the specified health.
+ * @brief 构造一个新的 BodyguardAnt
  *
- * @param health The initial health of the BodyguardAnt. Default value is 2.
+ * @param health BodyguardAnt 的初始生命值，默认为 2
  */
 BodyguardAnt::BodyguardAnt(int health) : ContainerAnt(health) {}

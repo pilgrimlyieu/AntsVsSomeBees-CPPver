@@ -5,12 +5,11 @@
 
 class Bee : public Insect {
 public:
-    string name = "Bee";                   // the name of the Bee
-    static const int damage = 1;           // the damage of the Bee
-    static const bool isWaterProof = true; // the water proof ability of the Bee
-    g_time slowedTime = 0;                 // the time the Bee is slowed
-    g_time scaredTime = 0;                 // the time the Bee is scared
-    bool isScared = false;                 // the scared status of the Bee
+    inline static const string name = "Bee"; //!< 类名
+    static const int damage = 1;             //!< 伤害
+    static const bool isWaterProof = true;   //!< 是否抗水
+    g_time slowedTime = 0;                   //!< 减速效果剩余时间
+    g_time scaredTime = 0;                   //!< 恐惧效果剩余时间
 
     Bee(int health, Place *place = nullptr);
 

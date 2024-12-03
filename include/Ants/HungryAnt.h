@@ -3,12 +3,12 @@
 
 #include "Ant.h"
 
-class HungryAnt : Ant {
+class HungryAnt : public Ant {
 public:
-    string name = "Hungry";        // the name of the HungryAnt
-    static const int foodCost = 4; // the food cost of the HungryAnt
-    g_time chewDuration = 3;       // the duration of the HungryAnt's chewing
-    g_time chewCountDown;          // the countdown for the HungryAnt's chewing
+    inline static const string name = "Hungry"; //!< 类名
+    static const int foodCost = 4;              //!< 食物消耗
+    static const g_time chewDuration = 3;       //!< 咀嚼持续时间
+    g_time chewCountDown = 0;                   //!< 咀嚼倒计时
 
     HungryAnt(int health = 1);
 

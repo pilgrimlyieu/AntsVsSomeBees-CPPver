@@ -5,9 +5,9 @@
 
 class ScubaThrower : public ThrowerAnt {
 public:
-    string name = "Scuba";                // the name of the Ant
-    static const int foodCost = 6;        // the food cost of the Ant
-    static const int isWaterProof = true; // the water proof ability of the Ant
+    inline static const string name = "Scuba"; //!< 类名
+    static const int foodCost = 6;             //!< 食物消耗
+    static const int isWaterProof = true;      //!< 是否抗水
 };
 
 #endif // SCUBATHROWER_H

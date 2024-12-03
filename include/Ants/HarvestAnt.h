@@ -5,8 +5,8 @@
 
 class HarvestAnt : public Ant {
 public:
-    string name = "Harvester";     // the name of the HarvestAnt
-    static const int foodCost = 2; // the food cost of the HarvestAnt
+    inline static const string name = "Harvester"; //!< 类名
+    static const int foodCost = 2;                 //!< 食物消耗
 
     void action(GameState &gamestate);
 };

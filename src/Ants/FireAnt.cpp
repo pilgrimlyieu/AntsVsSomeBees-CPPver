@@ -3,21 +3,13 @@
 #include "Place.h"
 
 /**
- * Reduces the health of the FireAnt by the specified amount and deals damage to bees in the same
- * place.
+ * @brief 减少 FireAnt 的健康值
  *
- * @param amount The amount of health to reduce from the FireAnt.
+ * 减少 FireAnt 的健康值，并在健康值小于等于 0 时使 FireAnt 死亡。
  *
- * This method calculates the total damage to be dealt, which includes an additional damage if the
- * amount is greater than or equal to the FireAnt's current health. It then iterates through all the
- * bees in the same place as the FireAnt.
+ * FireAnt 在受到伤害时，会对其所在的 Place 中的所有 Bee 造成伤害。
  *
- * If a bee's health is less than or equal to the total damage, it is marked to be killed.
- *
- * Otherwise, the bee's health is reduced by the FireAnt's damage value.
- *
- * Finally, all marked bees have their health reduced by the total damage, and the FireAnt's health
- * is reduced by the specified amount.
+ * @param amount 要减少的健康值
  */
 void FireAnt::reduceHealth(int amount) {
     int totalDamage = amount + ((amount >= health) ? damage : 0);

@@ -5,8 +5,8 @@
 
 class WallAnt : public Ant {
 public:
-    string name = "Wall";          // the name of the Ant
-    static const int foodCost = 4; // the food cost of the Ant
+    inline static const string name = "Wall"; //!< 类名
+    static const int foodCost = 4;            //!< 食物消耗
 
     WallAnt(int health = 4);
 };

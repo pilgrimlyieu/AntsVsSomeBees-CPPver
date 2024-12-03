@@ -4,24 +4,20 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a new HungryAnt object with the specified health.
+ * @brief 构造一个新的 HungryAnt
  *
- * This constructor initializes a HungryAnt object by calling the base class
- * Ant constructor with the given health value. Additionally, it initializes
- * the chewCountDown member to 0.
- *
- * @param health The initial health value for the HungryAnt. Default value is 1.
+ * @param health HungryAnt 的初始生命值，默认为 1
  */
-HungryAnt::HungryAnt(int health) : Ant(health), chewCountDown(0) {}
+HungryAnt::HungryAnt(int health) : Ant(health) {}
 
 /**
- * @brief Executes the action of the HungryAnt.
+ * @brief 执行 HungryAnt 的动作
  *
- * The HungryAnt will attempt to eat a random bee in its place if it is not currently chewing.
+ * HungryAnt 的动作是吃掉当前 Place 随机的一个 Bee 。
  *
- * If the HungryAnt is chewing, it will decrement its chew countdown.
+ * 每次 HungryAnt 吃掉一个 Bee 后，需要等待 chewDuration 回合后才能再次吃掉 Bee 。
  *
- * @param gamestate The current state of the game.
+ * @param gamestate 当前的游戏状态。
  */
 void HungryAnt::action(GameState &gamestate) {
     if (chewCountDown == 0) {

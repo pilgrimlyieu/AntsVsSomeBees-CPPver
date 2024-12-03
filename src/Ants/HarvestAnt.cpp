@@ -2,12 +2,11 @@
 #include "GameState.h"
 
 /**
- * @brief Increases the food count in the game state.
+ * @brief 执行 HarvestAnt 的动作
  *
- * This function represents the action of a HarvestAnt, which
- * increases the food count in the provided game state by 1.
+ * HarvestAnt 的动作是收获食物，每次收获 1 个食物。
  *
- * @param gamestate A reference to the current game state.
+ * @param gamestate 当前的游戏状态。
  */
 void HarvestAnt::action(GameState &gamestate) {
     gamestate.food += 1;

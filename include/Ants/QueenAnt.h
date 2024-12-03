@@ -5,8 +5,8 @@
 
 class QueenAnt : public ScubaThrower {
 public:
-    string name = "Queen";         // the name of the Ant
-    static const int foodCost = 7; // the food cost of the Ant
+    inline static const string name = "Queen"; //!< 类名
+    static const int foodCost = 7;             //!< 食物消耗
 
     static QueenAnt *construct(GameState &gamestate);
 

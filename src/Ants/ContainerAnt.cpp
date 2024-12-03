@@ -3,71 +3,58 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a new ContainerAnt object with the specified health.
+ * @brief 构造一个新的 ContainerAnt
  *
- * This constructor initializes a ContainerAnt object with the given health value.
+ * 初始化 ContainerAnt 的生命值为 1，且不包含任何 Ant 。
  *
- * It also sets the antContained member to nullptr.
- *
- * @param health The initial health value for the ContainerAnt. Default value is 1.
+ * @param health ContainerAnt 的初始生命值，默认为 1
  */
 ContainerAnt::ContainerAnt(int health) : Ant(health), antContained(nullptr) {}
 
 /**
- * @brief Determines if the current ContainerAnt can contain another Ant.
+ * @brief 判断当前 ContainerAnt 是否还可以容纳另一个 Ant
  *
- * This function checks if the current ContainerAnt is not already containing another Ant
- * and if the other Ant is not a container itself.
+ * 默认情况下，ContainerAnt 只能容纳一个 Ant ，同时不允许容纳其他 ContainerAnt 。
  *
- * @param other A pointer to the Ant that is being checked for containment.
- * @return true if the current ContainerAnt can contain the other Ant, false otherwise.
+ * @param other 要容纳的 Ant
+ * @return 当前 ContainerAnt 是否还可以容纳另一个 Ant
  */
 bool ContainerAnt::canContain(Ant *other) {
     return antContained == nullptr && !other->isContainer;
 }
 
 /**
- * @brief Stores the given ant in the container.
+ * @brief 将指定的 Ant 容纳到当前 ContainerAnt 中
  *
- * This function assigns the provided Ant pointer to the antContained member variable,
- * effectively storing the ant within the ContainerAnt object.
+ * 将指定的 Ant 容纳到当前 ContainerAnt 中。
  *
- * @param ant A pointer to the Ant object to be stored.
+ * @param ant 要容纳的 Ant
  */
 void ContainerAnt::storeAnt(Ant *ant) {
     antContained = ant;
 }
 
 /**
- * @brief Removes the specified ant from the container.
+ * @brief 从当前 ContainerAnt 中移除指定的 Ant
  *
- * This function checks if the specified ant is the one currently stored in the container.
+ * 从当前 ContainerAnt 中移除指定的 Ant 。
  *
- * If it is, the antContained member variable is set to nullptr, effectively removing the ant.
- *
- * If the specified ant is not the one stored in the container, an exception is thrown.
- *
- * @param ant Pointer to the Ant object to be removed.
- * @throws std::invalid_argument if the container does not contain the specified ant.
+ * @param ant 要移除的 Ant
+ * @throws invalid_argument 若当前 ContainerAnt 并未容纳指定的 Ant
  */
 void ContainerAnt::removeAnt(Ant *ant) {
     if (antContained != ant) {
-        throw invalid_argument(
-            format("%s does not contain %s", string(*this).c_str(), string(*ant).c_str()));
+        throw invalid_argument(string_format("%s 并未容纳 %s", name.c_str(), name.c_str()));
     }
     antContained = nullptr;
 }
 
 /**
- * @brief Removes the ContainerAnt from the specified place.
+ * @brief 从指定的 Place 中移除当前 ContainerAnt
  *
- * This function checks if the current ContainerAnt is the ant present in the given place.
+ * 若当前 ContainerAnt 在 Place 中，则将其从 Place 中移除，并把容纳的 Ant 添加到 Place 中。
  *
- * If it is, it sets the place's ant to the ant contained within the ContainerAnt.
- *
- * Otherwise, it calls the removeFrom function of the base Ant class.
- *
- * @param place A pointer to the Place object from which the ContainerAnt should be removed.
+ * @param place 指向要移除的 Place 的指针
  */
 void ContainerAnt::removeFrom(Place *place) {
     if (place->ant == this) {
@@ -79,14 +66,11 @@ void ContainerAnt::removeFrom(Place *place) {
 }
 
 /**
- * @brief Executes the action of the contained ant if it exists.
+ * @brief ContainerAnt 的行动函数
  *
- * This method checks if there is an ant contained within the ContainerAnt.
+ * 若当前 ContainerAnt 中包含 Ant ，则执行该 Ant 的行动函数。
  *
- * If there is, it calls the action method of the contained ant, passing the
- * current game state as a parameter.
- *
- * @param gamestate The current state of the game.
+ * @param gamestate 游戏状态
  */
 void ContainerAnt::action(GameState &gamestate) {
     if (antContained != nullptr) {

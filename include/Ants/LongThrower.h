@@ -5,9 +5,9 @@
 
 class LongThrower : public ThrowerAnt {
 public:
-    string name = "LongThrower";   // the name of the LongThrower
-    static const int foodCost = 2; // the food cost of the LongThrower
-    int minRange = 5;              // the minimum range of the LongThrower
+    inline static const string name = "LongThrower"; //!< 类名
+    static const int foodCost = 2;                   //!< 食物消耗
+    int minRange = 5;                                //!< 最小射程
 };
 
 #endif // LONGTHROWER_H

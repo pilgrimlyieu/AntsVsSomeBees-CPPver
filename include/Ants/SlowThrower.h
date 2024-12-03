@@ -7,8 +7,8 @@ class SlowThrower : public ThrowerAnt {
     void throwAt(Bee *target);
 
 public:
-    string name = "Slow";          // the name of the Ant
-    static const int foodCost = 4; // the food cost of the Ant
+    inline static const string name = "Slow"; //!< 类名
+    static const int foodCost = 4;            //!< 食物消耗
 };
 
 #endif // SLOWTHROWER_H

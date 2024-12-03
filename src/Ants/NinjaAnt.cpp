@@ -3,11 +3,9 @@
 #include "Place.h"
 
 /**
- * @brief Executes the action of the NinjaAnt.
+ * @brief 执行 NinjaAnt 的动作
  *
- * NinjaAnt damages all bees in its place.
- *
- * @param gamestate The current state of the game.
+ * NinjaAnt 的动作是对当前位置的所有 Bee 造成伤害。
  */
 void NinjaAnt::action(GameState &gamestate) {
     vector<Bee *> killedBees;

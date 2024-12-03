@@ -4,15 +4,12 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a QueenAnt if one does not already exist in the game state.
+ * @brief 构造一个新的 QueenAnt
  *
- * This function checks if the QueenAnt is already present in the game state.
+ * 有且仅有一个 QueenAnt
  *
- * If not, it constructs a new QueenAnt and assigns it to the game state's Queen pointer.
- *
- * @param gamestate Reference to the current game state.
- * @return Pointer to the newly constructed QueenAnt if one did not already exist, otherwise
- * nullptr.
+ * @param gamestate 当前游戏状态的引用
+ * @return 若 QueenAnt 已存在，则返回 `nullptr`；否则返回一个新的 QueenAnt
  */
 QueenAnt *QueenAnt::construct(GameState &gamestate) {
     if (gamestate.Queen == nullptr) {
@@ -23,11 +20,9 @@ QueenAnt *QueenAnt::construct(GameState &gamestate) {
 }
 
 /**
- * @brief Executes the action of the QueenAnt.
+ * @brief 执行 QueenAnt 的动作
  *
- * The QueenAnt buffs all the ants after it in the path.
- *
- * @param gamestate The current state of the game.
+ * QueenAnt 的动作是对当前位置的所有 Bee 造成伤害，并对所有出口方向的 Ant 加成。
  */
 void QueenAnt::action(GameState &gamestate) {
     ThrowerAnt::action(gamestate);
@@ -45,13 +40,13 @@ void QueenAnt::action(GameState &gamestate) {
 }
 
 /**
- * @brief Reduces the health of the QueenAnt by a specified amount.
+ * @brief 减少 QueenAnt 的生命值
  *
- * This function decreases the health of the QueenAnt by the given amount.
- * If the health drops to zero or below, it indicates that the QueenAnt has died,
- * and the game should end.
+ * 减少 QueenAnt 的生命值，并在生命值小于等于 0 时结束游戏。
  *
- * @param amount The amount by which to reduce the QueenAnt's health.
+ * @param amount 要减少的生命值
+ *
+ * @todo 当 QueenAnt 死亡时结束游戏
  */
 void QueenAnt::reduceHealth(int amount) {
     health -= amount;
@@ -61,9 +56,11 @@ void QueenAnt::reduceHealth(int amount) {
 }
 
 /**
- * @brief This method is intentionally left empty because the game ends when the QueenAnt dies.
+ * @brief 从指定的 Place 中移除 QueenAnt
  *
- * @param place The place from which the QueenAnt would be removed. This parameter is not used.
+ * QueenAnt 死亡时结束游戏，因此不需要从 Place 中移除 QueenAnt 。
+ *
+ * @param place 指向要移除的 Place 的指针
  */
 void QueenAnt::removeFrom(Place *place) {
     // Do nothing because game ends when QueenAnt dies

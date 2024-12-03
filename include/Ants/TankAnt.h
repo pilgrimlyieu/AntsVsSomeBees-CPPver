@@ -3,15 +3,15 @@
 
 #include "ContainerAnt.h"
 
-class TankAnt : ContainerAnt {
+class TankAnt : public ContainerAnt {
 public:
-    string name = "Tank";          // the name of the Ant
-    static const int foodCost = 6; // the food cost of the Ant
-    static const int damage = 1;   // the damage of the Ant
+    inline static const string name = "Tank"; //!< 类名
+    static const int foodCost = 6;            //!< 食物消耗
+    static const int damage = 1;              //!< 伤害
 
     TankAnt(int health = 2);
 
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate);
 };
 
 #endif // TANKANT_H

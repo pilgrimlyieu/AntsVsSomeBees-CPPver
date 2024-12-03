@@ -1,8 +1,8 @@
 #include "WallAnt.h"
 
 /**
- * @brief Constructs a new WallAnt object with the specified health.
+ * @brief 构造一个新的 WallAnt
  *
- * @param health The initial health of the WallAnt. Default value is 4.
+ * @param health WallAnt 的初始生命值，默认为 4
  */
 WallAnt::WallAnt(int health) : Ant(health) {}

@@ -2,13 +2,11 @@
 #include "Bee.h"
 
 /**
- * @brief Throws a slow effect at the target bee.
+ * @brief 对目标 Bee 进行远程攻击
  *
- * This function applies a slow effect to the target bee. The slow effect lasts for a duration of 3
- * turns.
+ * 对指定的 Bee 进行远程攻击，使其减速 3 回合。
  *
- * @param target A pointer to the Bee object that will be slowed. If the target is nullptr, no
- * action is taken.
+ * @param target 目标 Bee
  */
 void SlowThrower::throwAt(Bee *target) {
     if (target != nullptr) {

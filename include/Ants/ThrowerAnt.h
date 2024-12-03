@@ -9,11 +9,11 @@ protected:
     void throwAt(Bee *target);
 
 public:
-    string name = "Thrower";       // the name of the Ant
-    int damage = 1;                // the damage of the Ant
-    static const int foodCost = 3; // the food cost of the Ant
-    int minRange = 0;              // the minimum range of the Ant
-    int maxRange = INT_MAX;        // the maximum range of the Ant
+    inline static const string name = "Thrower"; //!< 类名
+    int damage = 1;                              //!< 伤害
+    static const int foodCost = 3;               //!< 食物消耗
+    int minRange = 0;                            //!< 最小射程
+    int maxRange = INT_MAX;                      //!< 最大射程
 
     void action(GameState &gamestate);
 };

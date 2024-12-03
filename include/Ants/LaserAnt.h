@@ -4,15 +4,16 @@
 #include "ThrowerAnt.h"
 
 class LaserAnt : public ThrowerAnt {
-    int insectsShot = 0; // the number of insects shot by the LaserAnt
+private:
+    int insectsShot = 0; //!< 射击的昆虫数量
 
     unordered_map<Insect *, int> getTargets();
     int getDamage(int distance);
 
 public:
-    string name = "Laser";          // the name of the Ant
-    static const int foodCost = 10; // the food cost of the Ant
-    static const int damage = 2;    // the damage of the Ant
+    inline static const string name = "Laser"; //!< 类名
+    static const int foodCost = 10;            //!< 食物消耗
+    static const int damage = 2;               //!< 伤害
 
     void action(GameState &gamestate) override;
 };

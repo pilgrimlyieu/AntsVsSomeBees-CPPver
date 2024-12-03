@@ -1,8 +1,8 @@
 #include "AntRemover.h"
 
 /**
- * @brief Constructs a new AntRemover object with the specified health.
+ * @brief 构造一个新的 AntRemover
  *
- * @param health The initial health of the AntRemover. Default value is 0.
+ * @param health AntRemover 的初始生命值，默认为 0
  */
 AntRemover::AntRemover(int health) : Ant(health) {}

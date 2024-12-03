@@ -5,13 +5,13 @@
 
 class Place {
 public:
-    // exit <- place -> entrance
-    string name = "Place";            // the name of the Place
-    static const bool isHive = false; // whether this place is a hive
-    Place *exit;                      // the exit of the Place
-    Place *entrance;                  // the entrance of the Place
-    list<Bee *> bees = {};            // the bees in the Place
-    Ant *ant = nullptr;               // the ant in the Place
+    // exit <- place -> entrance --> Hive
+    string name = "Place";            //!< 名称
+    static const bool isHive = false; //!< 是否是 Hive
+    Place *exit;                      //!< 出口（指向下一个 Place）
+    Place *entrance;                  //!< 入口（指向上一个 Place）
+    list<Bee *> bees = {};            //!< 在 Place 中的 Bee 列表
+    Ant *ant = nullptr;               //!< 在 Place 中的 Ant
 
     Bee *randomBee();
 
@@ -21,9 +21,9 @@ public:
 
     void removeInsect(Insect *insect);
 
-    void operator<<(Insect *insect);
+    Place &operator<<(Insect *insect);
 
-    void operator>>(Insect *insect);
+    Place &operator>>(Insect *insect);
 
     operator string() const;
 

@@ -7,17 +7,17 @@ using namespace std;
 
 class Insect {
 public:
-    string name = "Insect";                 // the name of this insect
-    static const bool isWaterProof = false; // the water proof ability of this insect
-    int damage = 0;                         // the amount of damage this insect deals
-    int health;                             // the current health of this insect
-    Place *place;                           // the place where this insect is located
+    inline static const string name = "Insect"; //!< 类名
+    static const bool isWaterProof = false;     //!< 是否抗水
+    int damage = 0;                             //!< 伤害
+    int health;                                 //!< 生命值
+    Place *place = nullptr;                     //!< 所在地点
 
     Insect(int health, Place *place);
 
     void reduceHealth(int amount);
 
-    virtual void action(GameState &gamestate) = 0;
+    virtual void action(GameState &gamestate) = 0; //!< 执行 Insect 的动作
 
     void injuryCallback();
 

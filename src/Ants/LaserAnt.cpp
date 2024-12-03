@@ -3,16 +3,11 @@
 #include "Place.h"
 
 /**
- * @brief Retrieves the targets within the range of the LaserAnt.
+ * @brief 获取 LaserAnt 的所有攻击目标及其距离
  *
- * This function traverses the places starting from the current place of the LaserAnt
- * and collects all the ants and bees encountered along the way until it reaches the hive.
+ * 从当前位置向入口，直到 Hive 方向遍历，获取所有攻击目标及其距离。
  *
- * The targets are stored in an unordered_map with the insect pointers as keys and their
- * respective distances from the LaserAnt as values.
- *
- * @return An unordered_map where the keys are pointers to Insect objects (either ants or bees)
- *         and the values are the distances of these insects from the LaserAnt.
+ * @return 所有攻击目标及其距离
  */
 unordered_map<Insect *, int> LaserAnt::getTargets() {
     unordered_map<Insect *, int> targets;
@@ -32,13 +27,12 @@ unordered_map<Insect *, int> LaserAnt::getTargets() {
 }
 
 /**
- * @brief Calculates the damage dealt by the LaserAnt based on the distance to the target and the
- * number of insects shot.
+ * @brief 获取 LaserAnt 对指定距离的目标造成的伤害
  *
- * damage = baseDamage - 0.25 * distance - insectsShot / 16
+ * 最终伤害 = 基础伤害 - 0.25 * 距离 - 已射击昆虫数量 / 16
  *
- * @param distance The distance to the target.
- * @return int The calculated damage, ensuring it is not less than 0.
+ * @param distance 目标距离
+ * @return 造成的伤害
  */
 int LaserAnt::getDamage(int distance) {
     double trueDamage = damage - 0.25 * distance - ((double)insectsShot) / 16;
@@ -46,15 +40,11 @@ int LaserAnt::getDamage(int distance) {
 }
 
 /**
- * @brief Executes the action of the LaserAnt in the game.
+ * @brief 执行 LaserAnt 的动作
  *
- * This function targets multiple insects within range and deals damage to them.
+ * LaserAnt 的动作是对所有攻击目标射击。
  *
- * The damage dealt to each insect is determined by the getDamage function.
- *
- * The number of insects shot is tracked by the insectsShot counter.
- *
- * @param gamestate The current state of the game.
+ * 对于每个目标，计算 LaserAnt 对其造成的伤害，并减少目标的生命值。
  */
 void LaserAnt::action(GameState &gamestate) {
     unordered_map<Insect *, int> targets = getTargets();

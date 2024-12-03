@@ -2,13 +2,11 @@
 #include "Bee.h"
 
 /**
- * @brief Throws a scare effect at the specified Bee target.
+ * @brief 对目标 Bee 进行远程攻击
  *
- * This function applies a scare effect to the given Bee target, causing it to be scared for a
- * duration of 2 units.
+ * 对指定的 Bee 进行远程攻击，使其受到恐惧效果 2 回合。
  *
- * @param target A pointer to the Bee object to be scared. If the target is nullptr, the function
- * does nothing.
+ * @param target 目标 Bee
  */
 void ScaryThrower::throwAt(Bee *target) {
     if (target != nullptr) {

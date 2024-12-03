@@ -1,3 +1,4 @@
+#include "AntRemover.h"
 #include "FireAnt.h"
 #include "Utilities.h"
 #include <iostream>
@@ -8,5 +9,5 @@ int main(int argc, char *argv[]) {
     while (b--) {
         cout << b << endl;
     }
-    std::cout << format("Hello, %s!", "world") << std::endl;
+    std::cout << string_format("Hello, %s!", "world") << std::endl;
 }

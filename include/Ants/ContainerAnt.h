@@ -5,9 +5,9 @@
 
 class ContainerAnt : public Ant {
 public:
-    string name = "Container";            // the name of the Ant
-    static const bool isContainer = true; // if the Ant is a Container
-    Ant *antContained;                    // the Ant contained in the container
+    inline static const string name = "Container"; //!< 类名
+    static const bool isContainer = true;          //!< 是否可以容纳其他 Ant
+    Ant *antContained;                             //!< 容纳的 Ant
 
     ContainerAnt(int health = 1);
 

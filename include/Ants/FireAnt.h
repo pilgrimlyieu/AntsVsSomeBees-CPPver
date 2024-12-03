@@ -5,9 +5,9 @@
 
 class FireAnt : public Ant {
 public:
-    string name = "Fire"; // the name of the FireAnt
-    int damage = 3;       // the damage dealt by the FireAnt
-    int foodCost = 5;     // the food cost of the FireAnt
+    inline static const string name = "Fire"; //!< 类名
+    int damage = 3;                           //!< 伤害
+    int foodCost = 5;                         //!< 食物消耗
 
     void reduceHealth(int amount);
 };

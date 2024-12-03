@@ -4,52 +4,55 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a new Bee object with the specified health and place.
+ * @brief 构造一个新的 Bee
  *
- * @param health The initial health of the bee.
- * @param place A pointer to the Place object where the bee is located.
+ * @param health Bee 的初始生命值，默认为 1
+ * @param place 指向 Bee 所在的 Place 的指针，默认为 `nullptr`
  */
 Bee::Bee(int health, Place *place) : Insect(health, place) {}
 
 /**
- * @brief Causes the bee to sting an ant, reducing the ant's health.
+ * @brief 对指定的 Ant 进行攻击
  *
- * @param ant A pointer to the Ant object that will be stung.
+ * 对指定的 Ant 进行攻击，使其减少健康值。
+ *
+ * @param ant 目标 Ant
  */
 void Bee::sting(Ant *ant) {
     ant->reduceHealth(damage);
 }
 
 /**
- * @brief Moves the bee to a new place.
+ * @brief 将 Bee 移动到指定的 Place
  *
- * This function removes the bee from its current place and adds it to the specified new place.
+ * 将 Bee 从当前 Place 移动到指定的 Place 。
  *
- * @param place A pointer to the new Place object where the bee will be moved.
+ * @param place 指向要移动到的 Place 的指针。
  */
 void Bee::moveTo(Place *place) {
     this->place->removeInsect(this);
-    place->addInsect(this);
+    *place << this;
 }
 
 /**
- * @brief Checks if the bee is blocked by an ant.
+ * @brief 判断 Bee 是否被阻挡
  *
- * This function determines if the bee's path is blocked by an ant in its current place.
- * It returns true if there is an ant in the bee's place and the ant blocks the path.
- *
- * @return true if the bee is blocked by an ant, false otherwise.
+ * @return 若 Bee 被阻挡，则返回 `true`；否则返回 `false`。
  */
 bool Bee::blocked() {
     return place->ant != nullptr && place->ant->blocksPath;
 }
 
 /**
- * @brief Perform an action for the Bee.
+ * @brief 执行 Bee 的动作
  *
- * This method is called to perform an action for the Bee within the given game state.
+ * 在正常状态下，Bee 会尝试移动到下一个 Place 。若被阻挡则攻击当前 Place 中的 Ant 。
  *
- * @param gamestate The current state of the game.
+ * 若 Bee 处于恐惧状态，则会尝试返回 Hive 。
+ *
+ * 若 Bee 处于减速状态，则每 2 个回合移动一次。
+ *
+ * @param gamestate 当前的游戏状态。
  */
 void Bee::action(GameState &gamestate) {
     Place *destination = place->exit;
@@ -70,27 +73,27 @@ void Bee::action(GameState &gamestate) {
 }
 
 /**
- * @brief Handles the injury of the Bee object.
+ * @brief 受伤回调函数
+ *
+ * 当 Bee 受伤时调用此函数。
  */
 void Bee::injuryCallback() {
     // TODO
 }
 
 /**
- * @brief Handles the death of the Bee object.
+ * @brief 死亡回调函数
+ *
+ * 当 Bee 死亡时调用此函数。
  */
 void Bee::deathCallback() {
     // TODO
 }
 
 /**
- * @brief Adds the current Bee instance to the specified Place.
+ * @brief 将 Bee 添加到指定的 Place
  *
- * This function adds the current Bee instance to the bees vector of the given Place.
- * It also calls the addTo function of the base class Insect to perform any additional
- * operations required by the base class.
- *
- * @param place A pointer to the Place where the Bee should be added.
+ * @param place 指向 Place 的指针。
  */
 void Bee::addTo(Place *place) {
     place->bees.push_back(this);
@@ -98,13 +101,9 @@ void Bee::addTo(Place *place) {
 }
 
 /**
- * @brief Removes the bee from the specified place.
+ * @brief 从指定的 Place 中移除 Bee
  *
- * This function removes the bee from the list of bees in the given place
- * and then calls the base class's removeFrom function to perform any
- * additional removal operations.
- *
- * @param place A pointer to the Place object from which the bee should be removed.
+ * @param place 指向要移除的 Place 的指针。
  */
 void Bee::removeFrom(Place *place) {
     place->bees.remove(this);
@@ -112,25 +111,25 @@ void Bee::removeFrom(Place *place) {
 }
 
 /**
- * @brief Slows down the bee for a specified length of time.
+ * @brief 减速 Bee 一段时间
  *
- * @param length The duration for which the bee will be slowed down.
+ * 减速 Bee 一段时间，可以叠加。
+ *
+ * @param length 减速的时间长度。
  */
 void Bee::slow(g_time length) {
     slowedTime += length;
 }
 
 /**
- * @brief Scares the bee for a specified length of time.
+ * @brief 使 Bee 恐惧一段时间
  *
- * This function sets the bee's scared state to true and increases the scared time
- * by the specified length if the bee is not already scared.
+ * 使 Bee 恐惧一段时间，不能叠加。
  *
- * @param length The duration for which the bee should be scared.
+ * @param length 恐惧的时间长度。
  */
 void Bee::scare(g_time length) {
-    if (!isScared) {
-        scaredTime += length;
-        isScared = true;
+    if (scaredTime == 0) {
+        scaredTime = length;
     }
 }

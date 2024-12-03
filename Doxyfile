@@ -1,0 +1,19 @@
+# Doxyfile 1.12.0
+
+PROJECT_NAME           = CPP
+OUTPUT_DIRECTORY       = D:/Project/School/CPP/doc
+ALLOW_UNICODE_NAMES    = YES
+OUTPUT_LANGUAGE        = Chinese
+FULL_PATH_NAMES        = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
+MARKDOWN_ID_STYLE      = GITHUB
+EXTRACT_PRIVATE        = YES
+INPUT                  = D:/Project/School/CPP
+RECURSIVE              = YES
+HTML_COLORSTYLE        = LIGHT
+GENERATE_TREEVIEW      = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_IMAGE_FORMAT       = svg

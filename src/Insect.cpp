@@ -2,10 +2,10 @@
 #include "Place.h"
 
 /**
- * @brief Constructs a new Insect object with the specified health and place.
+ * @brief Insect 类的构造函数
  *
- * @param health The initial health of the insect.
- * @param place A pointer to the Place object where the insect is located.
+ * @param health 初始化 Insect 的健康值
+ * @param place 指向 Place 的指针，用于初始化 Insect 的位置
  */
 Insect::Insect(int health, Place *place) {
     this->health = health;
@@ -13,13 +13,11 @@ Insect::Insect(int health, Place *place) {
 }
 
 /**
- * @brief Reduces the health of the insect by a specified amount.
+ * @brief 减少 Insect 的健康值
  *
- * This function decreases the health of the insect by the given amount.
- * If the health drops to zero or below, it triggers the death callback
- * and removes the insect from its current place.
+ * 减少 Insect 的健康值，并在健康值小于等于 0 时使 Insect 死亡。
  *
- * @param amount The amount by which to reduce the insect's health.
+ * @param amount 要减少的健康值
  */
 void Insect::reduceHealth(int amount) {
     health -= amount;
@@ -30,59 +28,55 @@ void Insect::reduceHealth(int amount) {
         delete this;
     }
 }
-
 /**
- * @brief Handles the action of the insect.
+ * @brief 受伤回调函数
  *
- * This function is called to perform an action for the insect within the given game state.
- * The specific action performed by the insect is defined by the derived class.
+ * 当 Insect 受伤时调用此函数。
  */
 void Insect::injuryCallback() {
     // TODO
 }
 
 /**
- * @brief Handles the death of the insect.
+ * @brief 死亡回调函数
+ *
+ * 当 Insect 死亡时调用此函数。
  */
 void Insect::deathCallback() {
     // TODO
 }
 
 /**
- * @brief Adds the insect to a specified place.
+ * @brief 将该 Insect 添加到指定的 Place
  *
- * This function sets the place of the insect to the given place.
- *
- * @param place A pointer to the Place object where the insect will be added.
+ * @param place 指向 Place 的指针。
  */
 void Insect::addTo(Place *place) {
     this->place = place;
 }
 
 /**
- * @brief Removes the insect from the specified place and deletes the insect object.
+ * @brief 从指定的 Place 中移除 Insect
  *
- * This function sets the place pointer of the insect to nullptr.
- *
- * @param place A pointer to the Place object from which the insect is being removed.
+ * @param place 要从中移除 Insect 的 Place 。
  */
-void Insect::removeFrom(Place *place) {}
-
-/**
- * @brief Converts the Insect object to a string representation.
- *
- * This operator overload allows an Insect object to be converted to a
- * string that includes the name, health, and damage of the insect.
- *
- * @return A string representation of the Insect object in the format
- *         "name(health, damage)".
- */
-Insect::operator string() const {
-    return format("%s(%d, %d)", name.c_str(), health, damage);
+void Insect::removeFrom(Place *place) {
+    this->place = nullptr;
 }
 
 /**
- * @brief Kills the insect by reducing its health to zero.
+ * @brief 将 Insect 转换为字符串表示形式
+ *
+ * 该操作符重载函数将 Insect 转换为一个字符串，格式为 "name(health, damage)"。
+ *
+ * @return string 表示 Insect 的字符串。
+ */
+Insect::operator string() const {
+    return string_format("%s(%d, %d)", name.c_str(), health, damage);
+}
+
+/**
+ * @brief 杀死该 Insect
  */
 void Insect::kill() {
     reduceHealth(health);
