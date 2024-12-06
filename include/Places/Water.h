@@ -3,7 +3,7 @@
 
 #include "Place.h"
 
-class Water : public Place {
+class Water final : public Place {
 public:
     void addInsect(Insect *insect);
 };

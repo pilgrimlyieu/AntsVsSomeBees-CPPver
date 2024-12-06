@@ -4,7 +4,7 @@
 #include "QueenAnt.h"
 #include "Utilities.h"
 
-class GameState {
+class GameState final {
 public:
     g_time time = TIME_START;
     int food = 0;
@@ -12,7 +12,7 @@ public:
     Place *beehive;
     // antTypes;
     // dimensions;
-    list<Bee *> activeBees = {};
+    std::list<Bee *> activeBees = {};
     QueenAnt *Queen = nullptr;
     // this.configure // TODO: Implement
 };

@@ -3,11 +3,13 @@
 
 #include "ContainerAnt.h"
 
-class BodyguardAnt : public ContainerAnt {
-public:
-    inline static const string name = "Bodyguard"; //!< 类名
+class BodyguardAnt final : public ContainerAnt {
+private:
+    inline static const std::string name = "Bodyguard"; //!< 类名
+    static const int foodCost = 4;                      //!< 食物消耗
 
-    BodyguardAnt(int health = 2);
+public:
+    explicit BodyguardAnt(int health = 2);
 };
 
 #endif // BODYGUARDANT_H

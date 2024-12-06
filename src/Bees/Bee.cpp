@@ -14,7 +14,7 @@ Bee::Bee(int health, Place *place) : Insect(health, place) {}
 /**
  * @brief 对指定的 Ant 进行攻击
  *
- * 对指定的 Ant 进行攻击，使其减少健康值。
+ * 对指定的 Ant 进行攻击，使其减少生命值。
  *
  * @param ant 目标 Ant
  */
@@ -46,7 +46,7 @@ bool Bee::blocked() {
 /**
  * @brief 执行 Bee 的动作
  *
- * 在正常状态下，Bee 会尝试移动到下一个 Place 。若被阻挡则攻击当前 Place 中的 Ant 。
+ * 在正常状态下 Bee 会尝试移动到下一个 Place 。若被阻挡则攻击当前 Place 中的 Ant 。
  *
  * 若 Bee 处于恐惧状态，则会尝试返回 Hive 。
  *
@@ -62,12 +62,12 @@ void Bee::action(GameState &gamestate) {
     if (slowedTime > 0 && gamestate.time % 2 == 1) {
         slowedTime--;
     } else {
-        slowedTime = max(TIME_START, slowedTime - 1);
+        slowedTime = std::max(TIME_START, slowedTime - 1);
         if (blocked()) {
             sting(place->ant);
         } else if (health > 0 && destination != nullptr) {
             moveTo(destination);
-            scaredTime = max(TIME_START, scaredTime - 1);
+            scaredTime = std::max(TIME_START, scaredTime - 1);
         }
     }
 }

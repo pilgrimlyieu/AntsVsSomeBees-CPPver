@@ -9,8 +9,8 @@
  *
  * @return 所有攻击目标及其距离
  */
-unordered_map<Insect *, int> LaserAnt::getTargets() {
-    unordered_map<Insect *, int> targets;
+std::unordered_map<Insect *, int> LaserAnt::getTargets() {
+    std::unordered_map<Insect *, int> targets;
     int distance = 0;
     Place *currentPlace = place;
     while (!currentPlace->isHive) {
@@ -36,7 +36,7 @@ unordered_map<Insect *, int> LaserAnt::getTargets() {
  */
 int LaserAnt::getDamage(int distance) {
     double trueDamage = damage - 0.25 * distance - ((double)insectsShot) / 16;
-    return (int)max(0.0, trueDamage);
+    return (int)std::max(0.0, trueDamage);
 }
 
 /**
@@ -47,7 +47,7 @@ int LaserAnt::getDamage(int distance) {
  * 对于每个目标，计算 LaserAnt 对其造成的伤害，并减少目标的生命值。
  */
 void LaserAnt::action(GameState &gamestate) {
-    unordered_map<Insect *, int> targets = getTargets();
+    std::unordered_map<Insect *, int> targets = getTargets();
     for (auto &target : targets) {
         int damage = getDamage(target.second);
         target.first->reduceHealth(damage);

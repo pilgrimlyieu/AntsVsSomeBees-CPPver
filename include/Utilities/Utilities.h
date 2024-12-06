@@ -9,8 +9,6 @@
 #include <unordered_map>
 #include <vector>
 
-using namespace std;
-
 class GameState;
 class Place;
 class Insect;
@@ -27,7 +25,7 @@ class Bee;
  * @param index 要检索的元素的索引，从 0 开始。
  * @return T 类型的元素。
  *
- * @throws out_of_range 若索引超出范围。
+ * @throws std::out_of_range 若索引超出范围。
  *
  * @example
  * @code
@@ -35,9 +33,9 @@ class Bee;
  * int value = get(myList, 2); // value = 3
  * @endcode
  */
-template <class T> T get(const list<T> &list, int index) {
+template <class T> T get(const std::list<T> &list, int index) {
     if (index < 0 || index >= list.size()) {
-        throw out_of_range("索引超出范围");
+        throw std::out_of_range("索引超出范围");
     }
     auto it = list.begin();
     advance(it, index);
@@ -56,17 +54,17 @@ template <class T> T get(const list<T> &list, int index) {
  * @param format 包含格式说明符的格式化字符串。
  * @param args 用于格式化的参数。
  * @return 格式化后的字符串。
- * @throws runtime_error 若在格式化过程中发生错误。
+ * @throws std::runtime_error 若在格式化过程中发生错误。
  */
-template <typename... Args> string string_format(const string &format, Args... args) {
+template <typename... Args> std::string string_format(const std::string &format, Args... args) {
     int size_s = snprintf(nullptr, 0, format.c_str(), args...) + 1;
     if (size_s <= 0) {
-        throw runtime_error("格式化字符串失败");
+        throw std::runtime_error("格式化字符串失败");
     }
     size_t size = static_cast<size_t>(size_s);
-    unique_ptr<char[]> buf = make_unique<char[]>(size);
+    auto buf = std::make_unique<char[]>(size);
     snprintf(buf.get(), size, format.c_str(), args...);
-    return string(buf.get(), buf.get() + size - 1);
+    return std::string(buf.get(), buf.get() + size - 1);
 }
 
 #endif // UTILITIES_H

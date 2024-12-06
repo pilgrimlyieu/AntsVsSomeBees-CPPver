@@ -3,18 +3,18 @@
 
 #include "ThrowerAnt.h"
 
-class LaserAnt : public ThrowerAnt {
+class LaserAnt final : public ThrowerAnt {
 private:
-    int insectsShot = 0; //!< 射击的昆虫数量
+    inline static const std::string name = "Laser"; //!< 类名
+    static const int foodCost = 10;                 //!< 食物消耗
+    int damage = 2;                                 //!< 伤害
+    int insectsShot = 0;                            //!< 射击的昆虫数量
 
-    unordered_map<Insect *, int> getTargets();
+    std::unordered_map<Insect *, int> getTargets();
+
     int getDamage(int distance);
 
 public:
-    inline static const string name = "Laser"; //!< 类名
-    static const int foodCost = 10;            //!< 食物消耗
-    static const int damage = 2;               //!< 伤害
-
     void action(GameState &gamestate) override;
 };
 

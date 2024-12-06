@@ -14,7 +14,7 @@ ContainerAnt::ContainerAnt(int health) : Ant(health), antContained(nullptr) {}
 /**
  * @brief 判断当前 ContainerAnt 是否还可以容纳另一个 Ant
  *
- * 默认情况下，ContainerAnt 只能容纳一个 Ant ，同时不允许容纳其他 ContainerAnt 。
+ * 默认情况下 ContainerAnt 只能容纳一个 Ant ，同时不允许容纳其他 ContainerAnt 。
  *
  * @param other 要容纳的 Ant
  * @return 当前 ContainerAnt 是否还可以容纳另一个 Ant
@@ -26,8 +26,6 @@ bool ContainerAnt::canContain(Ant *other) {
 /**
  * @brief 将指定的 Ant 容纳到当前 ContainerAnt 中
  *
- * 将指定的 Ant 容纳到当前 ContainerAnt 中。
- *
  * @param ant 要容纳的 Ant
  */
 void ContainerAnt::storeAnt(Ant *ant) {
@@ -37,14 +35,12 @@ void ContainerAnt::storeAnt(Ant *ant) {
 /**
  * @brief 从当前 ContainerAnt 中移除指定的 Ant
  *
- * 从当前 ContainerAnt 中移除指定的 Ant 。
- *
  * @param ant 要移除的 Ant
- * @throws invalid_argument 若当前 ContainerAnt 并未容纳指定的 Ant
+ * @throws std::invalid_argument 若当前 ContainerAnt 并未容纳指定的 Ant
  */
 void ContainerAnt::removeAnt(Ant *ant) {
     if (antContained != ant) {
-        throw invalid_argument(string_format("%s 并未容纳 %s", name.c_str(), name.c_str()));
+        throw std::invalid_argument(string_format("%s 并未容纳 %s", name.c_str(), name.c_str()));
     }
     antContained = nullptr;
 }

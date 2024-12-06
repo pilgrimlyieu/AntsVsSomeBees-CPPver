@@ -1,11 +1,18 @@
 {
   "C_Cpp.autoAddFileAssociations": false,
   "C_Cpp.formatting": "clangFormat",
-  "C_Cpp.inlayHints.parameterNames.suppressWhenArgumentContainsName": false,
+  "C_Cpp.intelliSenseEngine": "enabled",
   "C_Cpp.markdownInComments": "enabled",
+  //   "clangd.arguments": [
+  //     "--compile-commands-dir=.vscode",
+  //     "--background-index",
+  //     "--clang-tidy",
+  //     "-j=16"
+  //   ],
+  //   "clangd.enable": true,
+  //   "clangd.enableCodeCompletion": false,
+  //   "clangd.enableHover": false,
   "editor.detectIndentation": false,
-  "editor.insertSpaces": true,
-  "editor.tabSize": 4,
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
   // "python.terminal.activateEnvironment": false,
   // "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",

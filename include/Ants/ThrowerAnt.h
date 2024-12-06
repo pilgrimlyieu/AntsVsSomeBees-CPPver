@@ -4,18 +4,21 @@
 #include "Ant.h"
 
 class ThrowerAnt : public Ant {
+private:
+    inline static const std::string name = "Thrower"; //!< 类名
+    int damage = 1;                                   //!< 伤害
+    static const int foodCost = 3;                    //!< 食物消耗
+
 protected:
+    static const int minRange = 0;       //!< 最小射程
+    static const int maxRange = INT_MAX; //!< 最大射程
+
     Bee *nearestBee();
+
     void throwAt(Bee *target);
 
 public:
-    inline static const string name = "Thrower"; //!< 类名
-    int damage = 1;                              //!< 伤害
-    static const int foodCost = 3;               //!< 食物消耗
-    int minRange = 0;                            //!< 最小射程
-    int maxRange = INT_MAX;                      //!< 最大射程
-
-    void action(GameState &gamestate);
+    void action(GameState &gamestate) override;
 };
 
 #endif // THROWERANT_H

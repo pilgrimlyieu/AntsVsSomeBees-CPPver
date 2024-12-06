@@ -71,10 +71,10 @@ bool Ant::canContain(Ant *other) {
  * 默认 Ant 不能容纳其他 Ant ，因此调用此函数会抛出异常。
  *
  * @param other 指向要容纳的另一只 Ant 的指针。
- * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
+ * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::storeAnt(Ant *other) {
-    throw invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
+    throw std::invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
 }
 
 /**
@@ -83,10 +83,10 @@ void Ant::storeAnt(Ant *other) {
  * 默认 Ant 不能容纳其他 Ant ，因此调用此函数会抛出异常。
  *
  * @param other 指向要移除的 Ant 的指针。
- * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
+ * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::removeAnt(Ant *other) {
-    throw invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
+    throw std::invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
 }
 
 /**
@@ -103,7 +103,7 @@ void Ant::removeAnt(Ant *other) {
  * 3. 否则，抛出异常。
  *
  * @param place 指向要添加到的 Place 的指针。
- * @throws invalid_argument 若当前 Ant 不能容纳 Place 中的 Ant 。
+ * @throws std::invalid_argument 若当前 Ant 不能容纳 Place 中的 Ant 。
  */
 void Ant::addTo(Place *place) {
     if (place->ant == nullptr) {
@@ -115,7 +115,7 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            throw invalid_argument(string_format("两只 Ant 在 %s 中", place->name.c_str()));
+            throw std::invalid_argument(string_format("两只 Ant 在 %s 中", place->name.c_str()));
         }
     }
     Insect::addTo(place);
@@ -129,13 +129,14 @@ void Ant::addTo(Place *place) {
  * 若当前 Ant 不在 Place 中，则抛出异常。
  *
  * @param place 指向要移除的 Place 的指针。
- * @throws invalid_argument 若当前 Ant 不在 Place 中。
+ * @throws std::invalid_argument 若当前 Ant 不在 Place 中。
  */
 void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
     } else if (place->ant == nullptr) {
-        throw invalid_argument(string_format("%s 不在 %s 中", name.c_str(), place->name.c_str()));
+        throw std::invalid_argument(
+            string_format("%s 不在 %s 中", name.c_str(), place->name.c_str()));
     } else {
         removeAnt(place->ant);
     }

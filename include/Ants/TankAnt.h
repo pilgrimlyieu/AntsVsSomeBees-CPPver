@@ -3,15 +3,16 @@
 
 #include "ContainerAnt.h"
 
-class TankAnt : public ContainerAnt {
+class TankAnt final : public ContainerAnt {
+private:
+    inline static const std::string name = "Tank"; //!< 类名
+    static const int foodCost = 6;                 //!< 食物消耗
+    int damage = 1;                                //!< 伤害
+
 public:
-    inline static const string name = "Tank"; //!< 类名
-    static const int foodCost = 6;            //!< 食物消耗
-    static const int damage = 1;              //!< 伤害
+    explicit TankAnt(int health = 2);
 
-    TankAnt(int health = 2);
-
-    void action(GameState &gamestate);
+    void action(GameState &gamestate) override;
 };
 
 #endif // TANKANT_H

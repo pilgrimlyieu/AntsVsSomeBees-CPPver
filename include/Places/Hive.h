@@ -3,10 +3,11 @@
 
 #include "Place.h"
 
-class Hive : public Place {
+class Hive final : public Place {
 public:
     static const bool isHive = true; //!< 是否是 Hive
-    Hive(); // TODO: Add `assaultPlan`
+
+    explicit Hive(); // TODO: Add `assaultPlan`
 };
 
 #endif // HIVE_H

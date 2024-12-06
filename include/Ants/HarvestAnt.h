@@ -3,12 +3,13 @@
 
 #include "Ant.h"
 
-class HarvestAnt : public Ant {
-public:
-    inline static const string name = "Harvester"; //!< 类名
-    static const int foodCost = 2;                 //!< 食物消耗
+class HarvestAnt final : public Ant {
+private:
+    inline static const std::string name = "Harvester"; //!< 类名
+    static const int foodCost = 2;                      //!< 食物消耗
 
-    void action(GameState &gamestate);
+public:
+    void action(GameState &gamestate) override;
 };
 
 #endif // HARVESTANT_H

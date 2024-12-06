@@ -18,7 +18,7 @@ TankAnt::TankAnt(int health) : ContainerAnt(health) {}
  * 同时会执行身为 ContainerAnt 的动作。
  */
 void TankAnt::action(GameState &gamestate) {
-    vector<Bee *> killedBees;
+    std::vector<Bee *> killedBees;
     for (Bee *bee : place->bees) {
         if (bee->health <= damage) {
             killedBees.push_back(bee);

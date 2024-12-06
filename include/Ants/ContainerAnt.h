@@ -4,22 +4,26 @@
 #include "Ant.h"
 
 class ContainerAnt : public Ant {
+private:
+    inline static const std::string name = "Container"; //!< 类名
+
+protected:
+    static const bool isContainer = true; //!< 是否可以容纳其他 Ant
+
+    explicit ContainerAnt(int health = 1); //!< 抽象类，不可实例化
+
 public:
-    inline static const string name = "Container"; //!< 类名
-    static const bool isContainer = true;          //!< 是否可以容纳其他 Ant
-    Ant *antContained;                             //!< 容纳的 Ant
+    Ant *antContained; //!< 容纳的 Ant
 
-    ContainerAnt(int health = 1);
+    bool canContain(Ant *other) override;
 
-    bool canContain(Ant *other);
+    void storeAnt(Ant *ant) override;
 
-    void storeAnt(Ant *ant);
+    void removeAnt(Ant *ant) override;
 
-    void removeAnt(Ant *ant);
+    void removeFrom(Place *place) override;
 
-    void removeFrom(Place *place);
-
-    void action(GameState &gamestate);
+    void action(GameState &gamestate) override;
 };
 
 #endif // CONTAINERANT_H

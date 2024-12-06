@@ -5,9 +5,9 @@
 
 int main(int argc, char *argv[]) {
     int b;
-    cin >> b;
+    std::cin >> b;
     while (b--) {
-        cout << b << endl;
+        std::cout << b << std::endl;
     }
     std::cout << string_format("Hello, %s!", "world") << std::endl;
 }

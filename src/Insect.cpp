@@ -4,7 +4,7 @@
 /**
  * @brief Insect 类的构造函数
  *
- * @param health 初始化 Insect 的健康值
+ * @param health 初始化 Insect 的生命值
  * @param place 指向 Place 的指针，用于初始化 Insect 的位置
  */
 Insect::Insect(int health, Place *place) {
@@ -13,11 +13,11 @@ Insect::Insect(int health, Place *place) {
 }
 
 /**
- * @brief 减少 Insect 的健康值
+ * @brief 减少 Insect 的生命值
  *
- * 减少 Insect 的健康值，并在健康值小于等于 0 时使 Insect 死亡。
+ * 减少 Insect 的生命值，并在生命值小于等于 0 时使 Insect 死亡。
  *
- * @param amount 要减少的健康值
+ * @param amount 要减少的生命值
  */
 void Insect::reduceHealth(int amount) {
     health -= amount;
@@ -28,6 +28,7 @@ void Insect::reduceHealth(int amount) {
         delete this;
     }
 }
+
 /**
  * @brief 受伤回调函数
  *
@@ -69,9 +70,9 @@ void Insect::removeFrom(Place *place) {
  *
  * 该操作符重载函数将 Insect 转换为一个字符串，格式为 "name(health, damage)"。
  *
- * @return string 表示 Insect 的字符串。
+ * @return std::string 表示 Insect 的字符串。
  */
-Insect::operator string() const {
+Insect::operator std::string() const {
     return string_format("%s(%d, %d)", name.c_str(), health, damage);
 }
 

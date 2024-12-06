@@ -2,6 +2,7 @@ build
 material
 private.*
 .vscode/compile_commands.json
+.cache
 # cache
 # *.log
 # *.lock

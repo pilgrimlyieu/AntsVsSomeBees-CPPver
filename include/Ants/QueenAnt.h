@@ -3,18 +3,19 @@
 
 #include "ScubaThrower.h"
 
-class QueenAnt : public ScubaThrower {
-public:
-    inline static const string name = "Queen"; //!< 类名
-    static const int foodCost = 7;             //!< 食物消耗
+class QueenAnt final : public ScubaThrower {
+private:
+    inline static const std::string name = "Queen"; //!< 类名
+    static const int foodCost = 7;                  //!< 食物消耗
 
+public:
     static QueenAnt *construct(GameState &gamestate);
 
     void action(GameState &gamestate) override;
 
     void reduceHealth(int amount);
 
-    void removeFrom(Place *place);
+    void removeFrom(Place *place) override;
 };
 
 #endif // QUEENANT_H

@@ -3,17 +3,17 @@
 #include "Place.h"
 
 /**
- * @brief 减少 FireAnt 的健康值
+ * @brief 减少 FireAnt 的生命值
  *
- * 减少 FireAnt 的健康值，并在健康值小于等于 0 时使 FireAnt 死亡。
+ * 减少 FireAnt 的生命值，并在生命值小于等于 0 时使 FireAnt 死亡。
  *
  * FireAnt 在受到伤害时，会对其所在的 Place 中的所有 Bee 造成伤害。
  *
- * @param amount 要减少的健康值
+ * @param amount 要减少的生命值
  */
 void FireAnt::reduceHealth(int amount) {
     int totalDamage = amount + ((amount >= health) ? damage : 0);
-    vector<Bee *> killedBees;
+    std::vector<Bee *> killedBees;
     for (Bee *bee : place->bees) {
         if (bee->health <= totalDamage) {
             killedBees.push_back(bee);

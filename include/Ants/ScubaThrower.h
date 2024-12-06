@@ -4,10 +4,12 @@
 #include "ThrowerAnt.h"
 
 class ScubaThrower : public ThrowerAnt {
+private:
+    inline static const std::string name = "Scuba"; //!< 类名
+    static const int foodCost = 6;                  //!< 食物消耗
+
 public:
-    inline static const string name = "Scuba"; //!< 类名
-    static const int foodCost = 6;             //!< 食物消耗
-    static const int isWaterProof = true;      //!< 是否抗水
+    static const int isWaterProof = true; //!< 是否抗水
 };
 
 #endif // SCUBATHROWER_H
