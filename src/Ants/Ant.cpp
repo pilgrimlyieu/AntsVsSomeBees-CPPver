@@ -7,7 +7,7 @@
  *
  * @param health Ant 的初始生命值，默认为 1
  */
-Ant::Ant(int health) : Insect(health, nullptr), buffed(false) {}
+Ant::Ant(double health) : Insect(health, nullptr), buffed(false) {}
 
 /**
  * @brief 构造一个新的 Ant

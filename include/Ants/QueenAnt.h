@@ -9,13 +9,13 @@ private:
     static const int foodCost = 7;                  //!< 食物消耗
 
 public:
-    static QueenAnt *construct(GameState &gamestate);
+    QueenAnt *construct(GameState &gamestate) override final;
 
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override final;
 
-    void reduceHealth(int amount);
+    void reduceHealth(int amount) override final;
 
-    void removeFrom(Place *place) override;
+    void removeFrom(Place *place) override final;
 };
 
 #endif // QUEENANT_H

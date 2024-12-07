@@ -45,13 +45,11 @@ void QueenAnt::action(GameState &gamestate) {
  * 减少 QueenAnt 的生命值，并在生命值小于等于 0 时结束游戏。
  *
  * @param amount 要减少的生命值
- *
- * @todo 当 QueenAnt 死亡时结束游戏
  */
 void QueenAnt::reduceHealth(int amount) {
     health -= amount;
-    if (health <= 0) {
-        // TODO: Game ends when QueenAnt dies
+    if (health <= 0.0) {
+        antsLose();
     }
 }
 

@@ -11,9 +11,9 @@ private:
     g_time chewCountDown = 0;                        //!< 咀嚼倒计时
 
 public:
-    explicit HungryAnt(int health = 1);
+    explicit HungryAnt(double health = 1.0);
 
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override final;
 };
 
 #endif // HUNGRYANT_H

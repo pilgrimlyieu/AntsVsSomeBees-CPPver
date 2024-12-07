@@ -10,18 +10,18 @@ private:
 protected:
     static const bool isContainer = true; //!< 是否可以容纳其他 Ant
 
-    explicit ContainerAnt(int health = 1); //!< 抽象类，不可实例化
+    explicit ContainerAnt(double health = 1.0); //!< 抽象类，不可实例化
 
 public:
     Ant *antContained; //!< 容纳的 Ant
 
-    bool canContain(Ant *other) override;
+    bool canContain(Ant *other) override final;
 
-    void storeAnt(Ant *ant) override;
+    void storeAnt(Ant *ant) override final;
 
-    void removeAnt(Ant *ant) override;
+    void removeAnt(Ant *ant) override final;
 
-    void removeFrom(Place *place) override;
+    void removeFrom(Place *place) override final;
 
     void action(GameState &gamestate) override;
 };

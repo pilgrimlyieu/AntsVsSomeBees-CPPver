@@ -9,7 +9,7 @@ private:
     static const int foodCost = 4;                 //!< 食物消耗
 
 public:
-    explicit WallAnt(int health = 4);
+    explicit WallAnt(double health = 4.0);
 };
 
 #endif // WALLANT_H

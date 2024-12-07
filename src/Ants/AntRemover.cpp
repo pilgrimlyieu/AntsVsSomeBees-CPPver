@@ -5,4 +5,4 @@
  *
  * @param health AntRemover 的初始生命值，默认为 0
  */
-AntRemover::AntRemover(int health) : Ant(health) {}
+AntRemover::AntRemover(double health) : Ant(health) {}

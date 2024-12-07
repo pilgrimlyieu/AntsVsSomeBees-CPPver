@@ -7,12 +7,12 @@ class TankAnt final : public ContainerAnt {
 private:
     inline static const std::string name = "Tank"; //!< 类名
     static const int foodCost = 6;                 //!< 食物消耗
-    int damage = 1;                                //!< 伤害
+    double damage = 1.0;                           //!< 伤害
 
 public:
-    explicit TankAnt(int health = 2);
+    explicit TankAnt(double health = 2.0);
 
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override final;
 };
 
 #endif // TANKANT_H

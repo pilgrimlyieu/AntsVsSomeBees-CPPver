@@ -18,9 +18,9 @@ public:
 
     Bee *randomBee();
 
-    void addInsect(Insect *insect);
+    virtual void addInsect(Insect *insect);
 
-    void removeInsect(Insect *insect);
+    virtual void removeInsect(Insect *insect);
 
     Place &operator<<(Insect *insect);
 

@@ -8,7 +8,7 @@
  *
  * @param health HungryAnt 的初始生命值，默认为 1
  */
-HungryAnt::HungryAnt(int health) : Ant(health) {}
+HungryAnt::HungryAnt(double health) : Ant(health) {}
 
 /**
  * @brief 执行 HungryAnt 的动作

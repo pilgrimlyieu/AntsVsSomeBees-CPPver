@@ -8,7 +8,7 @@
  *
  * @param health TankAnt 的初始生命值，默认为 2
  */
-TankAnt::TankAnt(int health) : ContainerAnt(health) {}
+TankAnt::TankAnt(double health) : ContainerAnt(health) {}
 
 /**
  * @brief 执行 TankAnt 的动作

@@ -9,7 +9,7 @@ private:
     static const int foodCost = 2;                      //!< 食物消耗
 
 public:
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override final;
 };
 
 #endif // HARVESTANT_H

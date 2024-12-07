@@ -5,4 +5,4 @@
  *
  * @param health BodyguardAnt 的初始生命值，默认为 2
  */
-BodyguardAnt::BodyguardAnt(int health) : ContainerAnt(health) {}
+BodyguardAnt::BodyguardAnt(double health) : ContainerAnt(health) {}

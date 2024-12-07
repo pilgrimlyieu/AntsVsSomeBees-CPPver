@@ -9,7 +9,7 @@
  * @param health Bee 的初始生命值，默认为 1
  * @param place 指向 Bee 所在的 Place 的指针，默认为 `nullptr`
  */
-Bee::Bee(int health, Place *place) : Insect(health, place) {}
+Bee::Bee(double health, Place *place) : Insect(health, place) {}
 
 /**
  * @brief 对指定的 Ant 进行攻击
@@ -65,7 +65,7 @@ void Bee::action(GameState &gamestate) {
         slowedTime = std::max(TIME_START, slowedTime - 1);
         if (blocked()) {
             sting(place->ant);
-        } else if (health > 0 && destination != nullptr) {
+        } else if (health > 0.0 && destination != nullptr) {
             moveTo(destination);
             scaredTime = std::max(TIME_START, scaredTime - 1);
         }

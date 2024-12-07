@@ -7,7 +7,7 @@
  * @param health 初始化 Insect 的生命值
  * @param place 指向 Place 的指针，用于初始化 Insect 的位置
  */
-Insect::Insect(int health, Place *place) {
+Insect::Insect(double health, Place *place) {
     this->health = health;
     this->place = place;
 }
@@ -22,7 +22,7 @@ Insect::Insect(int health, Place *place) {
 void Insect::reduceHealth(int amount) {
     health -= amount;
     injuryCallback();
-    if (health <= 0) {
+    if (health <= 0.0) {
         deathCallback();
         place->removeInsect(this);
         delete this;

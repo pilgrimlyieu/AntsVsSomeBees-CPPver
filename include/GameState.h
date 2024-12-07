@@ -17,4 +17,8 @@ public:
     // this.configure // TODO: Implement
 };
 
+void antsWin();
+
+void antsLose();
+
 #endif // GAMESTATE_H

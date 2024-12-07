@@ -9,7 +9,7 @@ private:
     static const int foodCost = 4;                      //!< 食物消耗
 
 public:
-    explicit BodyguardAnt(int health = 2);
+    explicit BodyguardAnt(double health = 2.0);
 };
 
 #endif // BODYGUARDANT_H

@@ -34,9 +34,9 @@ std::unordered_map<Insect *, int> LaserAnt::getTargets() {
  * @param distance 目标距离
  * @return 造成的伤害
  */
-int LaserAnt::getDamage(int distance) {
+double LaserAnt::getDamage(int distance) {
     double trueDamage = damage - 0.25 * distance - ((double)insectsShot) / 16;
-    return (int)std::max(0.0, trueDamage);
+    return std::max(0.0, trueDamage);
 }
 
 /**
@@ -49,7 +49,7 @@ int LaserAnt::getDamage(int distance) {
 void LaserAnt::action(GameState &gamestate) {
     std::unordered_map<Insect *, int> targets = getTargets();
     for (auto &target : targets) {
-        int damage = getDamage(target.second);
+        double damage = getDamage(target.second);
         target.first->reduceHealth(damage);
         if (damage > 0) {
             insectsShot++;

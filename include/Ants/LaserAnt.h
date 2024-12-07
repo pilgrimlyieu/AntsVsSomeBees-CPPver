@@ -7,15 +7,15 @@ class LaserAnt final : public ThrowerAnt {
 private:
     inline static const std::string name = "Laser"; //!< 类名
     static const int foodCost = 10;                 //!< 食物消耗
-    int damage = 2;                                 //!< 伤害
+    double damage = 2.0;                            //!< 伤害
     int insectsShot = 0;                            //!< 射击的昆虫数量
 
     std::unordered_map<Insect *, int> getTargets();
 
-    int getDamage(int distance);
+    double getDamage(int distance);
 
 public:
-    void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override final;
 };
 
 #endif // LASERANT_H

@@ -8,20 +8,20 @@ private:
     inline static const std::string name = "Insect"; //!< 类名
 
 protected:
-    int damage = 0;         //!< 伤害
+    double damage = 0.0;    //!< 伤害
     Place *place = nullptr; //!< 所在地点
 
-    void injuryCallback();
+    virtual void injuryCallback();
 
-    void deathCallback();
+    virtual void deathCallback();
 
 public:
-    int health;                             //!< 生命值
+    double health;                          //!< 生命值
     static const bool isWaterProof = false; //!< 是否抗水
 
-    explicit Insect(int health, Place *place);
+    explicit Insect(double health, Place *place);
 
-    void reduceHealth(int amount);
+    virtual void reduceHealth(int amount);
 
     virtual void action(GameState &gamestate) = 0; //!< 执行 Insect 的动作
 

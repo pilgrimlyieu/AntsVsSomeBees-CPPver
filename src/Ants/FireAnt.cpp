@@ -12,7 +12,7 @@
  * @param amount 要减少的生命值
  */
 void FireAnt::reduceHealth(int amount) {
-    int totalDamage = amount + ((amount >= health) ? damage : 0);
+    double totalDamage = amount + ((amount >= health) ? damage : 0);
     std::vector<Bee *> killedBees;
     for (Bee *bee : place->bees) {
         if (bee->health <= totalDamage) {

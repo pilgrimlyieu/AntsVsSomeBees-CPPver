@@ -9,7 +9,7 @@
  *
  * @param health ContainerAnt 的初始生命值，默认为 1
  */
-ContainerAnt::ContainerAnt(int health) : Ant(health), antContained(nullptr) {}
+ContainerAnt::ContainerAnt(double health) : Ant(health), antContained(nullptr) {}
 
 /**
  * @brief 判断当前 ContainerAnt 是否还可以容纳另一个 Ant

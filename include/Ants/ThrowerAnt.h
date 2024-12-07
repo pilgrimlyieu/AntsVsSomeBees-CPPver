@@ -6,7 +6,7 @@
 class ThrowerAnt : public Ant {
 private:
     inline static const std::string name = "Thrower"; //!< 类名
-    int damage = 1;                                   //!< 伤害
+    double damage = 1.0;                              //!< 伤害
     static const int foodCost = 3;                    //!< 食物消耗
 
 protected:
@@ -15,7 +15,7 @@ protected:
 
     Bee *nearestBee();
 
-    void throwAt(Bee *target);
+    virtual void throwAt(Bee *target);
 
 public:
     void action(GameState &gamestate) override;

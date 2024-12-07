@@ -9,7 +9,7 @@ private:
     static const int foodCost = 6;                  //!< 食物消耗
 
 public:
-    static const int isWaterProof = true; //!< 是否抗水
+    static const bool isWaterProof = true; //!< 是否抗水
 };
 
 #endif // SCUBATHROWER_H

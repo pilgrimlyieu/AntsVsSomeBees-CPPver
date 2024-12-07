@@ -1,9 +1,10 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#include "TypeDefinition.h"
 #include <cstdarg>
+#include <functional>
 #include <list>
+#include <map>
 #include <memory>
 #include <stdexcept>
 #include <unordered_map>
@@ -14,6 +15,11 @@ class Place;
 class Insect;
 class Ant;
 class Bee;
+
+using g_time = int;
+#define TIME_START (g_time)0
+
+using Bee_t = std::function<Bee *(int)>;
 
 /**
  * @brief 获取列表中指定索引处的元素。
@@ -66,5 +72,7 @@ template <typename... Args> std::string string_format(const std::string &format,
     snprintf(buf.get(), size, format.c_str(), args...);
     return std::string(buf.get(), buf.get() + size - 1);
 }
+
+bool isBee(Bee_t beeType, Insect *insect);
 
 #endif // UTILITIES_H
