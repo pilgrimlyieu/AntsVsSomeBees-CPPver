@@ -3,10 +3,9 @@
 
 #include "Bee.h"
 
-class Wasp : public Bee {
-private:
-    inline static const std::string name = "Wasp"; //!< 类名
-    constexpr static const double damage = 2.0;    //!< 伤害
+class Wasp : virtual public Bee {
+public:
+    explicit Wasp(double health, Place *place = nullptr);
 };
 
 #endif // WASP_H

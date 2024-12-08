@@ -6,6 +6,23 @@
 /**
  * @brief 构造一个新的 QueenAnt
  *
+ * 默认 QueenAnt 的属性：
+ *
+ * - 类名 name 为 "Queen"
+ *
+ * - 食物消耗 foodCost 为 7
+ *
+ * @param health QueenAnt 的初始生命值，默认为 1.0
+ */
+QueenAnt::QueenAnt(double health)
+    : ScubaThrower(health, {
+                               .name = "Queen",
+                               .foodCost = 7,
+                           }) {}
+
+/**
+ * @brief 构造一个新的 QueenAnt
+ *
  * 有且仅有一个 QueenAnt
  *
  * @param gamestate 当前游戏状态的引用
@@ -46,7 +63,7 @@ void QueenAnt::action(GameState &gamestate) {
  *
  * @param amount 要减少的生命值
  */
-void QueenAnt::reduceHealth(int amount) {
+void QueenAnt::reduceHealth(double amount) {
     health -= amount;
     if (health <= 0.0) {
         antsLose();

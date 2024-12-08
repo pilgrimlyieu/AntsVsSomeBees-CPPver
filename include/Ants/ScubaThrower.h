@@ -3,13 +3,15 @@
 
 #include "ThrowerAnt.h"
 
-class ScubaThrower : public ThrowerAnt {
-private:
-    inline static const std::string name = "Scuba"; //!< 类名
-    static const int foodCost = 6;                  //!< 食物消耗
+struct scuba_thrower_properties : thrower_ant_properties {
+    std::string name = "Scuba";
+    int foodCost = 6;
+    bool isWaterProof = true;
+};
 
+class ScubaThrower : public ThrowerAnt {
 public:
-    static const bool isWaterProof = true; //!< 是否抗水
+    explicit ScubaThrower(double health = 1.0, scuba_thrower_properties properties = {});
 };
 
 #endif // SCUBATHROWER_H

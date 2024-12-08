@@ -6,9 +6,25 @@
 /**
  * @brief 构造一个新的 HungryAnt
  *
- * @param health HungryAnt 的初始生命值，默认为 1
+ * 默认 HungryAnt 的属性：
+ *
+ * - 类名 name 为 "Hungry"
+ *
+ * - 食物消耗 foodCost 为 4
+ *
+ * - 咀嚼持续时间 chewDuration 为 3
+ *
+ * - 咀嚼倒计时 chewCountDown 为 0
+ *
+ * @param health HungryAnt 的初始生命值，默认为 1.0
  */
-HungryAnt::HungryAnt(double health) : Ant(health) {}
+HungryAnt::HungryAnt(double health)
+    : Ant(health,
+          {
+              .name = "Hungry",
+              .foodCost = 4,
+          }),
+      chewDuration(3), chewCountDown(0) {}
 
 /**
  * @brief 执行 HungryAnt 的动作

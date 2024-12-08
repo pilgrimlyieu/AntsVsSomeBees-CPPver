@@ -6,15 +6,16 @@
 
 class Boss final : public Wasp, public Hornet {
 private:
-    inline static const std::string name = "Boss"; //!< 类名
-    constexpr static const double damageCap = 8.0; //!< 受伤害上限
+    const double damageCap; //!< 受伤害上限
 
-    double damageModifier(int amount);
+    double damageModifier(double amount);
 
 public:
+    explicit Boss(double health = 10.0, Place *place = nullptr);
+
     using Wasp::action;
 
-    void reduceHealth(int amount) override final;
+    void reduceHealth(double amount) override final;
 };
 
 #endif // BOSS_H

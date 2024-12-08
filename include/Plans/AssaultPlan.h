@@ -5,12 +5,12 @@
 
 class AssaultPlan final {
 private:
-    std::map<g_time, std::vector<Bee *>> waves;
+    std::map<g_time, bee_list> waves;
 
 public:
-    AssaultPlan &addWave(Bee_t beeType, double beeHealth, g_time time, int count);
+    AssaultPlan &addWave(bee_t beeType, double beeHealth, g_time time, int count);
 
-    std::vector<Bee *> getBees() const;
+    bee_list getBees() const;
 };
 
 #endif // ASSAUTPLAN_H

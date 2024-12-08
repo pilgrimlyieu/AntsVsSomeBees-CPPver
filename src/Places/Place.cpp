@@ -18,10 +18,15 @@ Bee *Place::randomBee() {
 /**
  * @brief Place 类的构造函数，初始化一个 Place
  *
+ * 默认 Place 的属性：
+ *
+ * - 是否是 Hive isHive 为 false
+ *
  * @param name Place 的名称
  * @param exit Place 的出口
  */
-Place::Place(std::string name, Place *exit) {
+Place::Place(std::string name, Place *exit, place_properties properties)
+    : name(name), isHive(properties.isHive), exit(exit) {
     this->name = name;
     this->exit = exit;
     if (this->exit != nullptr) {

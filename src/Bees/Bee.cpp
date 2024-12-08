@@ -6,10 +6,20 @@
 /**
  * @brief 构造一个新的 Bee
  *
- * @param health Bee 的初始生命值，默认为 1
- * @param place 指向 Bee 所在的 Place 的指针，默认为 `nullptr`
+ * 默认 Bee 的属性：
+ *
+ * - 类名 name 为 "Bee"
+ *
+ * - 伤害 damage 为 1.0
+ *
+ * - 是否抗水 isWaterProof 为 true
+ *
+ * @param health Bee 的初始生命值
+ * @param place Bee 所在的 Place，默认为 nullptr
+ * @param properties Bee 的属性
  */
-Bee::Bee(double health, Place *place) : Insect(health, place) {}
+Bee::Bee(double health, Place *place, bee_properties properties)
+    : Insect(health, place, properties), slowedTime(0), scaredTime(0) {}
 
 /**
  * @brief 对指定的 Ant 进行攻击

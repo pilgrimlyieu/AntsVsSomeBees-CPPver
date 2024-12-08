@@ -5,11 +5,18 @@
 /**
  * @brief 构造一个新的 ContainerAnt
  *
- * 初始化 ContainerAnt 的生命值为 1，且不包含任何 Ant 。
+ * 默认 ContainerAnt 的属性：
  *
- * @param health ContainerAnt 的初始生命值，默认为 1
+ * - 类名 name 为 "Container"
+ *
+ * - 是否可以容纳其他 Ant isContainer 为 true
+ *
+ * - 容纳的 Ant antContained 为 nullptr
+ *
+ * @param health ContainerAnt 的初始生命值，默认为 1.0
  */
-ContainerAnt::ContainerAnt(double health) : Ant(health), antContained(nullptr) {}
+ContainerAnt::ContainerAnt(double health, container_ant_properties properties)
+    : Ant(health, properties), antContained(nullptr) {}
 
 /**
  * @brief 判断当前 ContainerAnt 是否还可以容纳另一个 Ant
@@ -40,7 +47,8 @@ void ContainerAnt::storeAnt(Ant *ant) {
  */
 void ContainerAnt::removeAnt(Ant *ant) {
     if (antContained != ant) {
-        throw std::invalid_argument(string_format("%s 并未容纳 %s", name.c_str(), name.c_str()));
+        throw std::invalid_argument(
+            std::format("{} does not contain {}", (std::string) * this, (std::string)*ant));
     }
     antContained = nullptr;
 }

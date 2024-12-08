@@ -3,6 +3,16 @@
 /**
  * @brief 构造一个新的 AntRemover
  *
- * @param health AntRemover 的初始生命值，默认为 0
+ * 默认 AntRemover 的属性：
+ *
+ * - 类名 name 为 "Remover"
+ *
+ * - 生命值 health 为 0.0
+ *
+ * - 食物消耗 foodCost 为 1
  */
-AntRemover::AntRemover(double health) : Ant(health) {}
+AntRemover::AntRemover()
+    : Ant(0.0, {
+                   .name = "Remover",
+                   .foodCost = 1,
+               }) {}

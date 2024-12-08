@@ -2,15 +2,23 @@
 #include "Place.h"
 
 /**
- * @brief Insect 类的构造函数
+ * @brief Insect 类的构造函数，初始化一个 Insect
  *
- * @param health 初始化 Insect 的生命值
- * @param place 指向 Place 的指针，用于初始化 Insect 的位置
+ * 默认 Insect 的属性：
+ *
+ * - 类名 name 为 "Insect"
+ *
+ * - 伤害 damage 为 0.0
+ *
+ * - 是否抗水 isWaterProof 为 false
+ *
+ * @param health Insect 的初始生命值
+ * @param place Insect 所在的 Place，默认为 nullptr
+ * @param properties Insect 的属性
  */
-Insect::Insect(double health, Place *place) {
-    this->health = health;
-    this->place = place;
-}
+Insect::Insect(double health, Place *place, insect_properties properties)
+    : name(properties.name), damage(properties.damage), place(place), health(health),
+      isWaterProof(properties.isWaterProof) {}
 
 /**
  * @brief 减少 Insect 的生命值
@@ -19,7 +27,7 @@ Insect::Insect(double health, Place *place) {
  *
  * @param amount 要减少的生命值
  */
-void Insect::reduceHealth(int amount) {
+void Insect::reduceHealth(double amount) {
     health -= amount;
     injuryCallback();
     if (health <= 0.0) {
@@ -73,7 +81,7 @@ void Insect::removeFrom(Place *place) {
  * @return std::string 表示 Insect 的字符串。
  */
 Insect::operator std::string() const {
-    return string_format("%s(%d, %d)", name.c_str(), health, damage);
+    return std::format("{}({}, {})", name, health, damage);
 }
 
 /**

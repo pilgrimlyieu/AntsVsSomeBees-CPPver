@@ -5,10 +5,10 @@
 
 class ScaryThrower final : public ThrowerAnt {
 private:
-    inline static const std::string name = "Scary"; //!< 类名
-    static const int foodCost = 6;                  //!< 食物消耗
-
     void throwAt(Bee *target) override final;
+
+public:
+    explicit ScaryThrower(double health = 1.0);
 };
 
 #endif // SCARYTHROWER_H

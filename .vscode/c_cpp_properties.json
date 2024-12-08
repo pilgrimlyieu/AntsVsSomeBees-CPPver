@@ -6,7 +6,7 @@
                 "${workspaceFolder}/include/**"
             ],
             "cStandard": "c11",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "compilerPath": "D:/Software/mingw64/bin/clang++.exe",
             "compileCommands": ".vscode/compile_commands.json",
             "intelliSenseMode": "windows-clang-x64"

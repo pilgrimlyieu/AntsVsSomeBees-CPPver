@@ -5,9 +5,24 @@
 /**
  * @brief Ant 类的构造函数，初始化一个 Ant
  *
- * @param health Ant 的初始生命值，默认为 1
+ * 默认 Ant 的属性：
+ *
+ * - 类名 name 为 "Ant"
+ *
+ * - 食物消耗 foodCost 为 0
+ *
+ * - 是否被加成 buffed 为 false
+ *
+ * - 是否可以容纳其他 Ant isContainer 为 false
+ *
+ * - 是否阻挡路径 blocksPath 为 true
+ *
+ * @param health Ant 的初始生命值，默认为 1.0
+ * @param properties Ant 的属性
  */
-Ant::Ant(double health) : Insect(health, nullptr), buffed(false) {}
+Ant::Ant(double health, ant_properties properties)
+    : Insect(health, nullptr, properties), foodCost(properties.foodCost), buffed(properties.buffed),
+      isContainer(properties.isContainer), blocksPath(properties.blocksPath) {}
 
 /**
  * @brief 构造一个新的 Ant
@@ -74,7 +89,8 @@ bool Ant::canContain(Ant *other) {
  * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::storeAnt(Ant *other) {
-    throw std::invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
+    throw std::invalid_argument(
+        std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
 }
 
 /**
@@ -86,7 +102,8 @@ void Ant::storeAnt(Ant *other) {
  * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::removeAnt(Ant *other) {
-    throw std::invalid_argument(string_format("%s 不能容纳 %s", name.c_str(), other->name.c_str()));
+    throw std::invalid_argument(
+        std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
 }
 
 /**
@@ -115,7 +132,7 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            throw std::invalid_argument(string_format("两只 Ant 在 %s 中", place->name.c_str()));
+            throw std::invalid_argument(std::format("Two ants in {}", (std::string)*place));
         }
     }
     Insect::addTo(place);
@@ -136,7 +153,7 @@ void Ant::removeFrom(Place *place) {
         place->ant = nullptr;
     } else if (place->ant == nullptr) {
         throw std::invalid_argument(
-            string_format("%s 不在 %s 中", name.c_str(), place->name.c_str()));
+            std::format("{} is not in {}", (std::string) * this, (std::string)*place));
     } else {
         removeAnt(place->ant);
     }

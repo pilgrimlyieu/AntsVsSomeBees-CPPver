@@ -4,10 +4,9 @@
 #include "Bee.h"
 
 class NinjaBee final : public Bee {
-private:
-    inline static const std::string name = "Ninja"; //!< 类名
-
 public:
+    explicit NinjaBee(double health = 1.0, Place *place = nullptr);
+
     bool blocked() override final;
 };
 

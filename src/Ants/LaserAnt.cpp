@@ -3,6 +3,30 @@
 #include "Place.h"
 
 /**
+ * @brief 构造一个新的 LaserAnt
+ *
+ * 默认 LaserAnt 的属性：
+ *
+ * - 类名 name 为 "Laser"
+ *
+ * - 食物消耗 foodCost 为 10
+ *
+ * - 伤害 damage 为 2.0
+ *
+ * - 射击的昆虫数量 insectsShot 为 0
+ *
+ * @param health LaserAnt 的初始生命值，默认为 1.0
+ */
+LaserAnt::LaserAnt(double health)
+    : ThrowerAnt(health,
+                 {
+                     .name = "Laser",
+                     .damage = 2.0,
+                     .foodCost = 10,
+                 }),
+      insectsShot(0) {}
+
+/**
  * @brief 获取 LaserAnt 的所有攻击目标及其距离
  *
  * 从当前位置向入口，直到 Hive 方向遍历，获取所有攻击目标及其距离。

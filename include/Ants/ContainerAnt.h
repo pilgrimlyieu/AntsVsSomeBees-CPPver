@@ -3,14 +3,15 @@
 
 #include "Ant.h"
 
+struct container_ant_properties : ant_properties {
+    std::string name = "Container"; //!< 类名
+    bool isContainer = true;        //!< 是否可以容纳其他 Ant
+};
+
 class ContainerAnt : public Ant {
-private:
-    inline static const std::string name = "Container"; //!< 类名
-
 protected:
-    static const bool isContainer = true; //!< 是否可以容纳其他 Ant
-
-    explicit ContainerAnt(double health = 1.0); //!< 抽象类，不可实例化
+    explicit ContainerAnt(double health = 1.0,
+                          container_ant_properties properties = {}); //!< 抽象类，不可实例化
 
 public:
     Ant *antContained; //!< 容纳的 Ant

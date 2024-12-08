@@ -4,16 +4,14 @@
 #include "ScubaThrower.h"
 
 class QueenAnt final : public ScubaThrower {
-private:
-    inline static const std::string name = "Queen"; //!< 类名
-    static const int foodCost = 7;                  //!< 食物消耗
-
 public:
+    explicit QueenAnt(double health = 1.0);
+
     QueenAnt *construct(GameState &gamestate) override final;
 
     void action(GameState &gamestate) override final;
 
-    void reduceHealth(int amount) override final;
+    void reduceHealth(double amount) override final;
 
     void removeFrom(Place *place) override final;
 };

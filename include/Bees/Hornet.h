@@ -3,12 +3,10 @@
 
 #include "Bee.h"
 
-class Hornet : public Bee {
-private:
-    inline static const std::string name = "Hornet"; //!< 类名
-    constexpr static const double damage = 0.25;     //!< 伤害
-
+class Hornet : virtual public Bee {
 public:
+    explicit Hornet(double health, Place *place = nullptr);
+
     void action(GameState &gamestate) override final;
 
     // TODO: __setattr__

@@ -4,10 +4,9 @@
 #include "Place.h"
 
 class AntHomeBase final : public Place {
-private:
-    inline static const std::string name = "AntHomeBase"; //!< 类名
-
 public:
+    explicit AntHomeBase(std::string name = "AntHomeBase", Place *exit = nullptr);
+
     void addInsect(Insect *insect) override final;
 };
 

@@ -3,25 +3,30 @@
 
 #include "Utilities.h"
 
-class Insect {
-private:
-    inline static const std::string name = "Insect"; //!< 类名
+struct insect_properties {
+    std::string name = "Insect"; //!< 类名
+    double damage = 0.0;         //!< 伤害
+    bool isWaterProof = false;   //!< 是否抗水
+    Place *place;                //!< 所在地点
+};
 
+class Insect {
 protected:
-    double damage = 0.0;    //!< 伤害
-    Place *place = nullptr; //!< 所在地点
+    const std::string name; //!< 类名
+    double damage;          //!< 伤害
+    Place *place;           //!< 所在地点
 
     virtual void injuryCallback();
 
     virtual void deathCallback();
 
 public:
-    double health;                          //!< 生命值
-    static const bool isWaterProof = false; //!< 是否抗水
+    double health;           //!< 生命值
+    const bool isWaterProof; //!< 是否抗水
 
-    explicit Insect(double health, Place *place);
+    explicit Insect(double health, Place *place = nullptr, insect_properties properties = {});
 
-    virtual void reduceHealth(int amount);
+    virtual void reduceHealth(double amount);
 
     virtual void action(GameState &gamestate) = 0; //!< 执行 Insect 的动作
 

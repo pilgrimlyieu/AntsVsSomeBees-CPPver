@@ -8,7 +8,15 @@
  *
  * @param health TankAnt 的初始生命值，默认为 2
  */
-TankAnt::TankAnt(double health) : ContainerAnt(health) {}
+TankAnt::TankAnt(double health)
+    : ContainerAnt(health, {
+                               {
+                                {
+                                       .damage = 1.0,
+                                   }, .foodCost = 6,
+                                },
+                               .name = "Tank",
+}) {}
 
 /**
  * @brief 执行 TankAnt 的动作
@@ -18,7 +26,7 @@ TankAnt::TankAnt(double health) : ContainerAnt(health) {}
  * 同时会执行身为 ContainerAnt 的动作。
  */
 void TankAnt::action(GameState &gamestate) {
-    std::vector<Bee *> killedBees;
+    bee_list killedBees;
     for (Bee *bee : place->bees) {
         if (bee->health <= damage) {
             killedBees.push_back(bee);

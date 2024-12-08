@@ -4,11 +4,9 @@
 #include "Ant.h"
 
 class HarvestAnt final : public Ant {
-private:
-    inline static const std::string name = "Harvester"; //!< 类名
-    static const int foodCost = 2;                      //!< 食物消耗
-
 public:
+    explicit HarvestAnt(double health = 1.0);
+
     void action(GameState &gamestate) override final;
 };
 
