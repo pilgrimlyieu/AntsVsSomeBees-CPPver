@@ -16,11 +16,9 @@ struct ant_properties : insect_properties {
 };
 
 class Ant : public Insect {
-private:
-    const int foodCost; //!< 食物消耗
-
 protected:
-    bool buffed; //!< 是否被加成
+    const int foodCost; //!< 食物消耗
+    bool buffed;        //!< 是否被加成
 
     void injuryCallback() override;
 

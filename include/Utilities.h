@@ -1,6 +1,11 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#if defined(DEBUG) || defined(TEST)
+#define private   public
+#define protected public
+#endif
+
 #include <cstdarg>
 #include <format>
 #include <functional>

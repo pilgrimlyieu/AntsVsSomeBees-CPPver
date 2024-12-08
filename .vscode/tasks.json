@@ -50,6 +50,21 @@
             ]
         },
         {
+            "label": "Build Test",
+            "type": "shell",
+            "command": "xmake",
+            "args": [
+                "test"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                ""
+            ]
+        },
+        {
             "label": "Clean",
             "type": "shell",
             "command": "xmake",
