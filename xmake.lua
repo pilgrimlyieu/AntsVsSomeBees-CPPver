@@ -6,6 +6,7 @@ set_languages("cxx20")
 set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
+set_defaultplat("mingw")
 
 add_includedirs(
     "include",
