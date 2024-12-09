@@ -22,8 +22,14 @@ class Insect;
 class Ant;
 class Bee;
 
+#if defined(DEBUG) || defined(TEST)
+#define THROW_EXCEPTION(ex, msg) throw ex(std::format("[[{}:{}]] {}", __FILE__, __LINE__, msg))
+#else
+#define THROW_EXCEPTION(ex, msg) throw ex(msg)
+#endif
+
 using g_time = int;
-#define TIME_START (g_time)0
+static const g_time TIME_START = (g_time)0;
 
 using bee_t = std::function<Bee *(int)>;
 using bee_list = std::vector<Bee *>;
@@ -48,7 +54,7 @@ using bee_list = std::vector<Bee *>;
  */
 template <class T> T get(const std::list<T> &list, int index) {
     if (index < 0 || index >= list.size()) {
-        throw std::out_of_range("索引超出范围");
+        THROW_EXCEPTION(std::out_of_range, "索引超出范围");
     }
     auto it = list.begin();
     advance(it, index);

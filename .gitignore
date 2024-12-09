@@ -16,5 +16,3 @@ TODO.md
 
 # Doxygen
 doc/html
-
-include/Test/catch_amalgamated.hpp

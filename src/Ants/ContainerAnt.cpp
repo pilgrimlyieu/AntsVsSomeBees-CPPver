@@ -47,7 +47,8 @@ void ContainerAnt::storeAnt(Ant *ant) {
  */
 void ContainerAnt::removeAnt(Ant *ant) {
     if (antContained != ant) {
-        throw std::invalid_argument(
+        THROW_EXCEPTION(
+            std::invalid_argument,
             std::format("{} does not contain {}", (std::string) * this, (std::string)*ant));
     }
     antContained = nullptr;

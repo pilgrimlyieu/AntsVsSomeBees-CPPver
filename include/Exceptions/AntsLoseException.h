@@ -3,9 +3,6 @@
 
 #include "GameOverException.h"
 
-class AntsLoseException final : public GameOverException {
-public:
-    AntsLoseException() = default;
-};
+class AntsLoseException final : public GameOverException {};
 
 #endif // ANTSLOSEEXCEPTION_H

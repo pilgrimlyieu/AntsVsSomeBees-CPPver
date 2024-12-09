@@ -89,8 +89,8 @@ bool Ant::canContain(Ant *other) {
  * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::storeAnt(Ant *other) {
-    throw std::invalid_argument(
-        std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
+    THROW_EXCEPTION(std::invalid_argument,
+                    std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
 }
 
 /**
@@ -102,8 +102,8 @@ void Ant::storeAnt(Ant *other) {
  * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::removeAnt(Ant *other) {
-    throw std::invalid_argument(
-        std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
+    THROW_EXCEPTION(std::invalid_argument,
+                    std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
 }
 
 /**
@@ -132,7 +132,8 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            throw std::invalid_argument(std::format("Two ants in {}", (std::string)*place));
+            THROW_EXCEPTION(std::invalid_argument,
+                            std::format("Two ants in {}", (std::string)*place));
         }
     }
     Insect::addTo(place);
@@ -152,8 +153,8 @@ void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
     } else if (place->ant == nullptr) {
-        throw std::invalid_argument(
-            std::format("{} is not in {}", (std::string) * this, (std::string)*place));
+        THROW_EXCEPTION(std::invalid_argument,
+                        std::format("{} is not in {}", (std::string) * this, (std::string)*place));
     } else {
         removeAnt(place->ant);
     }
