@@ -10,7 +10,7 @@
  *
  * - 伤害 damage 为 0.25
  *
- * @param health Hornet 的初始生命值，默认为 1.0
+ * @param health Hornet 的初始生命值
  * @param place 指向 Hornet 所在的 Place 的指针，默认为 `nullptr`
  */
 Hornet::Hornet(double health, Place *place)

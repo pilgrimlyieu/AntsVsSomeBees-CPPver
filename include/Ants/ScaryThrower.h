@@ -8,7 +8,9 @@ private:
     void throwAt(Bee *target) override final;
 
 public:
-    explicit ScaryThrower(double health = 1.0);
+    explicit ScaryThrower(double health);
+
+    explicit ScaryThrower() : ScaryThrower(1.0) {}
 };
 
 #endif // SCARYTHROWER_H

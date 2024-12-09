@@ -18,15 +18,18 @@ add_includedirs(
 )
 add_files("src/**.cpp")
 
-target("MyToyLib")
+local target_name = "MyToy"
+local lib_name = target_name .. "Lib"
+
+target(lib_name)
     set_kind("static")
 
-target("MyToy")
+target(target_name)
     set_default(true)
     set_kind("binary")
 
     add_files("src/Main.cpp")
-    add_deps("MyToyLib")
+    add_deps(lib_name)
 
 if is_mode("debug") then
     add_defines("DEBUG")
@@ -58,17 +61,18 @@ elseif is_mode("check") then
     end
 end
 
-for _, file in ipairs(os.files("test/**.cpp")) do
+for _, file in ipairs(os.files("test/**/test_*.cpp")) do
     local group = path.directory(path.relative(file, "./test"))
     local name = path.basename(file)
     target("test/" .. group .. "/" .. name)
         set_default(false)
         set_kind("binary")
         set_group(group)
+
         remove_files("src/Main.cpp")
         add_tests(name)
         add_files(file)
         add_defines("TEST")
-        add_deps("MyToyLib")
+        add_deps(lib_name)
         add_packages("catch2")
 end

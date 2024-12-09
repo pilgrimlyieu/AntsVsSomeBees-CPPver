@@ -28,7 +28,11 @@ public:
     const bool isContainer; //!< 是否可以容纳其他 Ant
     const bool blocksPath;  //!< 是否阻挡路径
 
-    explicit Ant(double health = 1.0, ant_properties properties = {});
+    explicit Ant(double health, ant_properties properties);
+
+    explicit Ant(double health) : Ant(health, {}) {}
+
+    explicit Ant() : Ant(1.0) {}
 
     virtual Ant *construct(GameState &gamestate);
 

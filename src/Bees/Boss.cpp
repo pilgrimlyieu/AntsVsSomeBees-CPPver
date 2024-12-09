@@ -7,8 +7,8 @@
  *
  * - 类名 name 为 "Boss"
  *
- * @param health Boss 的初始生命值，默认为 10.0
- * @param place Boss 所在的 Place，默认为 nullptr
+ * @param health Boss 的初始生命值
+ * @param place Boss 所在的 Place，默认为 `nullptr`
  */
 Boss::Boss(double health, Place *place)
     : Bee(health, place,

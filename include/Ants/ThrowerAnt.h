@@ -21,7 +21,11 @@ protected:
     virtual void throwAt(Bee *target);
 
 public:
-    explicit ThrowerAnt(double health = 1.0, thrower_ant_properties properties = {});
+    explicit ThrowerAnt(double health, thrower_ant_properties properties);
+
+    explicit ThrowerAnt(double health) : ThrowerAnt(health, {}) {}
+
+    explicit ThrowerAnt() : ThrowerAnt(1.0) {}
 
     void action(GameState &gamestate) override;
 };

@@ -5,7 +5,7 @@
 
 class AntHomeBase final : public Place {
 public:
-    explicit AntHomeBase(std::string name = "AntHomeBase", Place *exit = nullptr);
+    using Place::Place;
 
     void addInsect(Insect *insect) override final;
 };

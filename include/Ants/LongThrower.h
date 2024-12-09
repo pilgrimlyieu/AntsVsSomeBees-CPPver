@@ -5,7 +5,9 @@
 
 class LongThrower final : public ThrowerAnt {
 public:
-    explicit LongThrower(double health = 1.0);
+    explicit LongThrower(double health);
+
+    explicit LongThrower() : LongThrower(1.0) {}
 };
 
 #endif // LONGTHROWER_H

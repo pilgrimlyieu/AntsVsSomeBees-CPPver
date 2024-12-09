@@ -10,8 +10,12 @@ struct container_ant_properties : ant_properties {
 
 class ContainerAnt : public Ant {
 protected:
-    explicit ContainerAnt(double health = 1.0,
-                          container_ant_properties properties = {}); //!< 抽象类，不可实例化
+    explicit ContainerAnt(double health,
+                          container_ant_properties properties); //!< 抽象类，不可实例化
+
+    explicit ContainerAnt(double health) : ContainerAnt(health, {}) {}
+
+    explicit ContainerAnt() : ContainerAnt(1.0) {}
 
 public:
     Ant *antContained; //!< 容纳的 Ant

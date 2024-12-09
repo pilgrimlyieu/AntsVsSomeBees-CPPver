@@ -5,7 +5,9 @@
 
 class WallAnt final : public Ant {
 public:
-    explicit WallAnt(double health = 4.0);
+    explicit WallAnt(double health);
+
+    explicit WallAnt() : WallAnt(4.0) {}
 };
 
 #endif // WALLANT_H

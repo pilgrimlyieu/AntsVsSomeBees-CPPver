@@ -28,11 +28,28 @@ class Bee;
 #define THROW_EXCEPTION(ex, msg) throw ex(msg)
 #endif
 
+using std::make_shared;
+using std::make_unique;
+using std::shared_ptr;
+using std::unique_ptr;
+
 using g_time = int;
 static const g_time TIME_START = (g_time)0;
 
-using bee_t = std::function<Bee *(int)>;
+using bee_t = std::function<Bee *(double)>;
 using bee_list = std::vector<Bee *>;
+
+/**
+ * @brief 游戏策略
+ *
+ * 接受 GameState 的引用，执行游戏策略。
+ */
+using strat = void (*)(GameState &);
+
+/**
+ * @brief 维度
+ */
+using dim = std::pair<int, int>;
 
 /**
  * @brief 获取列表中指定索引处的元素。

@@ -12,7 +12,9 @@ private:
     double getDamage(int distance);
 
 public:
-    LaserAnt(double health = 1.0);
+    explicit LaserAnt(double health);
+
+    explicit LaserAnt() : LaserAnt(1.0) {}
 
     void action(GameState &gamestate) override final;
 };

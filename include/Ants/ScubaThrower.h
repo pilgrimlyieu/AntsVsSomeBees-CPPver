@@ -11,7 +11,11 @@ struct scuba_thrower_properties : thrower_ant_properties {
 
 class ScubaThrower : public ThrowerAnt {
 public:
-    explicit ScubaThrower(double health = 1.0, scuba_thrower_properties properties = {});
+    explicit ScubaThrower(double health, scuba_thrower_properties properties);
+
+    explicit ScubaThrower(double health) : ScubaThrower(health, {}) {}
+
+    explicit ScubaThrower() : ScubaThrower(1.0) {}
 };
 
 #endif // SCUBATHROWER_H

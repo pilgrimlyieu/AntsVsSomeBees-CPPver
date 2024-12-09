@@ -17,7 +17,7 @@
  * @param properties Insect 的属性
  */
 Insect::Insect(double health, Place *place, insect_properties properties)
-    : name(properties.name), damage(properties.damage), place(place), health(health),
+    : damage(properties.damage), place(place), name(properties.name), health(health),
       isWaterProof(properties.isWaterProof) {}
 
 /**

@@ -5,7 +5,9 @@
 
 class HarvestAnt final : public Ant {
 public:
-    explicit HarvestAnt(double health = 1.0);
+    explicit HarvestAnt(double health);
+
+    explicit HarvestAnt() : HarvestAnt(1.0) {}
 
     void action(GameState &gamestate) override final;
 };

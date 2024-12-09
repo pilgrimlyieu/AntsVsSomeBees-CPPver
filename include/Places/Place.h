@@ -18,7 +18,11 @@ public:
     std::list<Bee *> bees = {};       //!< 在 Place 中的 Bee 列表
     Ant *ant = nullptr;               //!< 在 Place 中的 Ant
 
-    explicit Place(std::string name, Place *exit = nullptr, place_properties properties = {});
+    explicit Place(std::string name, Place *exit, place_properties properties);
+
+    explicit Place(std::string name, Place *exit) : Place(name, exit, {}) {}
+
+    explicit Place(std::string name) : Place(name, nullptr) {}
 
     Bee *randomBee();
 

@@ -5,7 +5,9 @@
 
 class QueenAnt final : public ScubaThrower {
 public:
-    explicit QueenAnt(double health = 1.0);
+    explicit QueenAnt(double health);
+
+    explicit QueenAnt() : QueenAnt(1.0) {}
 
     QueenAnt *construct(GameState &gamestate) override final;
 

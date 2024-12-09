@@ -11,7 +11,9 @@ private:
     double damageModifier(double amount);
 
 public:
-    explicit Boss(double health = 10.0, Place *place = nullptr);
+    explicit Boss(double health, Place *place);
+
+    explicit Boss(double health) : Boss(health, nullptr) {}
 
     using Wasp::action;
 

@@ -5,7 +5,9 @@
 
 class NinjaBee final : public Bee {
 public:
-    explicit NinjaBee(double health = 1.0, Place *place = nullptr);
+    explicit NinjaBee(double health, Place *place);
+
+    explicit NinjaBee(double health) : NinjaBee(health, nullptr) {}
 
     bool blocked() override final;
 };

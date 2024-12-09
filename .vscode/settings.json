@@ -1,17 +1,16 @@
 {
   "C_Cpp.autoAddFileAssociations": false,
+  "C_Cpp.doxygen.generatedStyle": "/**",
+  // "xmake.runMode": "buildRun", // 有点问题
   "C_Cpp.formatting": "clangFormat",
   "C_Cpp.intelliSenseEngine": "enabled",
   "C_Cpp.markdownInComments": "enabled",
-  //   "clangd.arguments": [
-  //     "--compile-commands-dir=.vscode",
-  //     "--background-index",
-  //     "--clang-tidy",
-  //     "-j=16"
-  //   ],
-  //   "clangd.enable": true,
-  //   "clangd.enableCodeCompletion": false,
-  //   "clangd.enableHover": false,
+  "clangd.arguments": [
+    "--compile-commands-dir=.vscode",
+    "--background-index",
+    "--clang-tidy",
+    "-j=16"
+  ],
   "editor.detectIndentation": false,
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
   // "python.terminal.activateEnvironment": false,
@@ -29,5 +28,4 @@
   // },
   "targetName": "MyToy",
   "xmake.debugConfigType": "codelldb"
-  // "xmake.runMode": "buildRun", // 有点问题
 }

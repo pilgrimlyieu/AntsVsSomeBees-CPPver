@@ -4,7 +4,7 @@
         {
             "label": "Build Debug",
             "type": "shell",
-            "command": "bash",
+            "command": "sh",
             "args": [
                 "-c",
                 "xmake f -m debug && xmake build ${config:targetName}"
@@ -20,7 +20,7 @@
         {
             "label": "Build Release",
             "type": "shell",
-            "command": "bash",
+            "command": "sh",
             "args": [
                 "-c",
                 "xmake f -m release && xmake build ${config:targetName}; xmake f -m debug"
@@ -36,7 +36,7 @@
         {
             "label": "Build Check",
             "type": "shell",
-            "command": "bash",
+            "command": "sh",
             "args": [
                 "-c",
                 "xmake f -m check && xmake build ${config:targetName}; xmake f -m debug"

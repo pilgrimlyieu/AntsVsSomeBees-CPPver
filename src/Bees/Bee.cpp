@@ -15,7 +15,7 @@
  * - 是否抗水 isWaterProof 为 true
  *
  * @param health Bee 的初始生命值
- * @param place Bee 所在的 Place，默认为 nullptr
+ * @param place Bee 所在的 Place，默认为 `nullptr`
  * @param properties Bee 的属性
  */
 Bee::Bee(double health, Place *place, bee_properties properties)

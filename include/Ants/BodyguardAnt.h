@@ -5,7 +5,9 @@
 
 class BodyguardAnt final : public ContainerAnt {
 public:
-    explicit BodyguardAnt(double health = 2.0);
+    explicit BodyguardAnt(double health);
+
+    explicit BodyguardAnt() : BodyguardAnt(2.0) {}
 };
 
 #endif // BODYGUARDANT_H

@@ -5,7 +5,9 @@
 
 class TankAnt final : public ContainerAnt {
 public:
-    explicit TankAnt(double health = 2.0);
+    explicit TankAnt(double health);
+
+    explicit TankAnt() : TankAnt(2.0) {}
 
     void action(GameState &gamestate) override final;
 };
