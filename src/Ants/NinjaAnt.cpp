@@ -20,7 +20,7 @@ NinjaAnt::NinjaAnt(double health)
                       {
                        .damage = 1.0,
                        },
-                      .name = "Ninja",
+                      .name = "NinjaAnt",
                       .foodCost = 5,
                       .blocksPath = false,
 }) {}

@@ -15,7 +15,7 @@ TankAnt::TankAnt(double health)
                                        .damage = 1.0,
                                    }, .foodCost = 6,
                                 },
-                               .name = "Tank",
+                               .name = "TankAnt",
 }) {}
 
 /**

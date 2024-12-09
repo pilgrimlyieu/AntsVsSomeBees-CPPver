@@ -7,7 +7,7 @@ class LaserAnt final : public ThrowerAnt {
 private:
     int insectsShot; //!< 射击的昆虫数量
 
-    std::unordered_map<Insect *, int> getTargets();
+    unordered_map<Insect *, int> getTargets();
 
     double getDamage(int distance);
 

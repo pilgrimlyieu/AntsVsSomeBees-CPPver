@@ -5,7 +5,7 @@
 
 class AssaultPlan final {
 private:
-    std::map<g_time, bee_list> waves;
+    map<g_time, bee_list> waves;
 
 public:
     AssaultPlan &addWave(bee_t beeType, double beeHealth, g_time time, int count);

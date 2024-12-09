@@ -4,17 +4,20 @@
 #include "Utilities.h"
 
 struct insect_properties {
-    std::string name = "Insect"; //!< 类名
-    double damage = 0.0;         //!< 伤害
-    bool isWaterProof = false;   //!< 是否抗水
-    Place *place;                //!< 所在地点
+    string name = "Insect";    //!< 类名
+    double damage = 0.0;       //!< 伤害
+    bool isWaterProof = false; //!< 是否抗水
+    Place *place;              //!< 所在地点
 };
-
 class Insect {
+private:
+    Insect(const Insect &) = delete;
+    Insect &operator=(const Insect &) = delete;
+
 protected:
-    const std::string name; //!< 类名
-    double damage;          //!< 伤害
-    Place *place;           //!< 所在地点
+    const string name; //!< 类名
+    double damage;     //!< 伤害
+    Place *place;      //!< 所在地点
 
     virtual void injuryCallback();
 
@@ -30,13 +33,15 @@ public:
 
     virtual void action(GameState &gamestate) = 0; //!< 执行 Insect 的动作
 
-    operator std::string() const;
+    operator string() const;
 
     void kill();
 
     virtual void addTo(Place *place);
 
     virtual void removeFrom(Place *place);
+
+    string getName() const;
 
     virtual ~Insect() = default;
 };

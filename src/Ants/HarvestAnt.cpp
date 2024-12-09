@@ -14,7 +14,7 @@
  */
 HarvestAnt::HarvestAnt(double health)
     : Ant(health, {
-                      .name = "Harvester",
+                      .name = "HarvestAnt",
                       .foodCost = 2,
                   }) {}
 

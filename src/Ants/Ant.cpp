@@ -86,11 +86,11 @@ bool Ant::canContain(Ant *other) {
  * 默认 Ant 不能容纳其他 Ant ，因此调用此函数会抛出异常。
  *
  * @param other 指向要容纳的另一只 Ant 的指针。
- * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
+ * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::storeAnt(Ant *other) {
-    THROW_EXCEPTION(std::invalid_argument,
-                    std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
+    THROW_EXCEPTION(invalid_argument,
+                    format("{} cannot contain {}", (string) * this, (string)*other));
 }
 
 /**
@@ -99,11 +99,11 @@ void Ant::storeAnt(Ant *other) {
  * 默认 Ant 不能容纳其他 Ant ，因此调用此函数会抛出异常。
  *
  * @param other 指向要移除的 Ant 的指针。
- * @throws std::invalid_argument 当不能容纳另一只 Ant 时抛出异常。
+ * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::removeAnt(Ant *other) {
-    THROW_EXCEPTION(std::invalid_argument,
-                    std::format("{} cannot contain {}", (std::string) * this, (std::string)*other));
+    THROW_EXCEPTION(invalid_argument,
+                    format("{} cannot contain {}", (string) * this, (string)*other));
 }
 
 /**
@@ -120,7 +120,7 @@ void Ant::removeAnt(Ant *other) {
  * 3. 否则，抛出异常。
  *
  * @param place 指向要添加到的 Place 的指针。
- * @throws std::invalid_argument 若当前 Ant 不能容纳 Place 中的 Ant 。
+ * @throws invalid_argument 若当前 Ant 不能容纳 Place 中的 Ant 。
  */
 void Ant::addTo(Place *place) {
     if (place->ant == nullptr) {
@@ -132,8 +132,7 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            THROW_EXCEPTION(std::invalid_argument,
-                            std::format("Two ants in {}", (std::string)*place));
+            THROW_EXCEPTION(invalid_argument, format("Two ants in {}", (string)*place));
         }
     }
     Insect::addTo(place);
@@ -147,14 +146,14 @@ void Ant::addTo(Place *place) {
  * 若当前 Ant 不在 Place 中，则抛出异常。
  *
  * @param place 指向要移除的 Place 的指针。
- * @throws std::invalid_argument 若当前 Ant 不在 Place 中。
+ * @throws invalid_argument 若当前 Ant 不在 Place 中。
  */
 void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
     } else if (place->ant == nullptr) {
-        THROW_EXCEPTION(std::invalid_argument,
-                        std::format("{} is not in {}", (std::string) * this, (std::string)*place));
+        THROW_EXCEPTION(invalid_argument,
+                        format("{} is not in {}", (string) * this, (string)*place));
     } else {
         removeAnt(place->ant);
     }

@@ -78,10 +78,10 @@ void Insect::removeFrom(Place *place) {
  *
  * 该操作符重载函数将 Insect 转换为一个字符串，格式为 "name(health, damage)"。
  *
- * @return std::string 表示 Insect 的字符串。
+ * @return string 表示 Insect 的字符串。
  */
-Insect::operator std::string() const {
-    return std::format("{}({}, {})", name, health, damage);
+Insect::operator string() const {
+    return format("{}({}, {})", name, health, damage);
 }
 
 /**
@@ -89,4 +89,13 @@ Insect::operator std::string() const {
  */
 void Insect::kill() {
     reduceHealth(health);
+}
+
+/**
+ * @brief 获取 Insect 的名称
+ *
+ * @return string Insect 的名称
+ */
+string Insect::getName() const {
+    return name;
 }

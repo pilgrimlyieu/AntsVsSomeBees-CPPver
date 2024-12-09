@@ -13,6 +13,6 @@
  */
 AntRemover::AntRemover()
     : Ant(0.0, {
-                   .name = "Remover",
+                   .name = "AntRemover",
                    .foodCost = 1,
                }) {}

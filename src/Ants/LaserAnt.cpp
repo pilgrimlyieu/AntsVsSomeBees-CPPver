@@ -20,7 +20,7 @@
 LaserAnt::LaserAnt(double health)
     : ThrowerAnt(health,
                  {
-                     .name = "Laser",
+                     .name = "LaserAnt",
                      .damage = 2.0,
                      .foodCost = 10,
                  }),
@@ -33,8 +33,8 @@ LaserAnt::LaserAnt(double health)
  *
  * @return 所有攻击目标及其距离
  */
-std::unordered_map<Insect *, int> LaserAnt::getTargets() {
-    std::unordered_map<Insect *, int> targets;
+unordered_map<Insect *, int> LaserAnt::getTargets() {
+    unordered_map<Insect *, int> targets;
     int distance = 0;
     Place *currentPlace = place;
     while (!currentPlace->isHive) {
@@ -71,7 +71,7 @@ double LaserAnt::getDamage(int distance) {
  * 对于每个目标，计算 LaserAnt 对其造成的伤害，并减少目标的生命值。
  */
 void LaserAnt::action(GameState &gamestate) {
-    std::unordered_map<Insect *, int> targets = getTargets();
+    unordered_map<Insect *, int> targets = getTargets();
     for (auto &target : targets) {
         double damage = getDamage(target.second);
         target.first->reduceHealth(damage);

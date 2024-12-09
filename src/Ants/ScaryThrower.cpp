@@ -14,7 +14,7 @@
  */
 ScaryThrower::ScaryThrower(double health)
     : ThrowerAnt(health, {
-                             .name = "Scary",
+                             .name = "ScaryThrower",
                              .foodCost = 6,
                          }) {}
 

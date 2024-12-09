@@ -20,7 +20,7 @@ FireAnt::FireAnt(double health)
                       {
                        .damage = 3.0,
                        },
-                      .name = "Fire",
+                      .name = "FireAnt",
                       .foodCost = 5,
 }) {}
 

@@ -43,13 +43,12 @@ void ContainerAnt::storeAnt(Ant *ant) {
  * @brief 从当前 ContainerAnt 中移除指定的 Ant
  *
  * @param ant 要移除的 Ant
- * @throws std::invalid_argument 若当前 ContainerAnt 并未容纳指定的 Ant
+ * @throws invalid_argument 若当前 ContainerAnt 并未容纳指定的 Ant
  */
 void ContainerAnt::removeAnt(Ant *ant) {
     if (antContained != ant) {
-        THROW_EXCEPTION(
-            std::invalid_argument,
-            std::format("{} does not contain {}", (std::string) * this, (std::string)*ant));
+        THROW_EXCEPTION(invalid_argument,
+                        format("{} does not contain {}", (string) * this, (string)*ant));
     }
     antContained = nullptr;
 }

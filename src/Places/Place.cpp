@@ -25,10 +25,8 @@ Bee *Place::randomBee() {
  * @param name Place 的名称
  * @param exit Place 的出口
  */
-Place::Place(std::string name, Place *exit, place_properties properties)
+Place::Place(string name, Place *exit, place_properties properties)
     : name(name), isHive(properties.isHive), exit(exit) {
-    this->name = name;
-    this->exit = exit;
     if (this->exit != nullptr) {
         this->exit->entrance = this;
     }
@@ -90,11 +88,11 @@ Place &Place::operator>>(Insect *insect) {
 }
 
 /**
- * @brief 重载 std::string 类型转换运算符，将 Place 转换为 string
+ * @brief 重载 string 类型转换运算符，将 Place 转换为 string
  *
- * @return Place 的名称
+ * @return string Place 的名称
  */
-Place::operator std::string() const {
+Place::operator string() const {
     return name;
 }
 

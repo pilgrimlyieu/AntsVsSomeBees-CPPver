@@ -16,7 +16,7 @@
  */
 QueenAnt::QueenAnt(double health)
     : ScubaThrower(health, {
-                               .name = "Queen",
+                               .name = "QueenAnt",
                                .foodCost = 7,
                            }) {}
 

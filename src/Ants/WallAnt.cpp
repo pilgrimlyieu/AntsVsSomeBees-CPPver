@@ -13,6 +13,6 @@
  */
 WallAnt::WallAnt(double health)
     : Ant(health, {
-                      .name = "Wall",
+                      .name = "WallAnt",
                       .foodCost = 4,
                   }) {}

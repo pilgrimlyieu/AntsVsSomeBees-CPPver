@@ -3,6 +3,6 @@
 
 #include "Utilities.h"
 
-class GameOverException : public std::exception {};
+class GameOverException : public exception {};
 
 #endif // GAMEOVEREXCEPTION_H

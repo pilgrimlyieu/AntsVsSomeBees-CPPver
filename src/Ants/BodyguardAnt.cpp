@@ -16,5 +16,5 @@ BodyguardAnt::BodyguardAnt(double health)
                                {
                                 .foodCost = 4,
                                 },
-                               .name = "Bodyguard",
+                               .name = "BodyguardAnt",
 }) {}

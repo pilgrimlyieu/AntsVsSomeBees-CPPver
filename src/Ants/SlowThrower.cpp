@@ -14,7 +14,7 @@
  */
 SlowThrower::SlowThrower(double health)
     : ThrowerAnt(health, {
-                             .name = "Slow",
+                             .name = "SlowThrower",
                              .foodCost = 4,
                          }) {}
 

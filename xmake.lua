@@ -21,16 +21,6 @@ add_files("src/**.cpp")
 local target_name = "MyToy"
 local lib_name = target_name .. "Lib"
 
-target(lib_name)
-    set_kind("static")
-
-target(target_name)
-    set_default(true)
-    set_kind("binary")
-
-    add_files("src/Main.cpp")
-    add_deps(lib_name)
-
 if is_mode("debug") then
     add_defines("DEBUG")
 elseif is_mode("release") then 
@@ -61,6 +51,16 @@ elseif is_mode("check") then
     end
 end
 
+target(lib_name)
+    set_kind("static")
+
+target(target_name)
+    set_default(true)
+    set_kind("binary")
+
+    add_files("src/Main.cpp")
+    add_deps(lib_name)
+
 for _, file in ipairs(os.files("test/**/test_*.cpp")) do
     local group = path.directory(path.relative(file, "./test"))
     local name = path.basename(file)
@@ -72,7 +72,6 @@ for _, file in ipairs(os.files("test/**/test_*.cpp")) do
         remove_files("src/Main.cpp")
         add_tests(name)
         add_files(file)
-        add_defines("TEST")
         add_deps(lib_name)
         add_packages("catch2")
 end

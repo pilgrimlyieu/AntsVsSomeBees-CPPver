@@ -21,7 +21,7 @@
 HungryAnt::HungryAnt(double health)
     : Ant(health,
           {
-              .name = "Hungry",
+              .name = "HungryAnt",
               .foodCost = 4,
           }),
       chewDuration(3), chewCountDown(0) {}

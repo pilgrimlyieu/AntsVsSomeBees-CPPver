@@ -3,14 +3,14 @@
 
 #include "Insect.h"
 
-struct bee_properties : insect_properties {
-    std::string name = "Bee";
-    double damage = 1.0;
-    bool isWaterProof = true;
-};
-
 class Bee : public Insect {
 protected:
+    struct bee_properties : insect_properties {
+        string name = "Bee";
+        double damage = 1.0;
+        bool isWaterProof = true;
+    };
+
     g_time slowedTime; //!< 减速效果剩余时间
     g_time scaredTime; //!< 恐惧效果剩余时间
 
