@@ -7,7 +7,7 @@
       "request": "launch",
       "target": "${config:targetName}",
       "stopAtEntry": true,
-      "preLaunchTask": "Build",
+      "preLaunchTask": "Build Debug",
     }
     // {
     //     "name": "GDB Debug",

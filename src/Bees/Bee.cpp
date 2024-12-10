@@ -41,7 +41,7 @@ void Bee::sting(Ant *ant) {
  */
 void Bee::moveTo(Place *place) {
     this->place->removeInsect(this);
-    *place << this;
+    place->addInsect(this);
 }
 
 /**

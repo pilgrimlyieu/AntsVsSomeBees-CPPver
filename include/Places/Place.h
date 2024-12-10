@@ -33,10 +33,6 @@ public:
 
     virtual void removeInsect(Insect *insect);
 
-    Place &operator<<(Insect *insect);
-
-    Place &operator>>(Insect *insect);
-
     operator string() const;
 
     ~Place();

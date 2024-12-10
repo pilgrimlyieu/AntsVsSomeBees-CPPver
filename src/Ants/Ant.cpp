@@ -25,21 +25,6 @@ Ant::Ant(double health, ant_properties properties)
       isContainer(properties.isContainer), blocksPath(properties.blocksPath) {}
 
 /**
- * @brief 构造一个新的 Ant
- *
- * 在食物充足的情况下，构造一个新的 Ant 。
- *
- * @param gamestate 当前游戏状态的引用
- * @return 若食物成本大于游戏状态中的食物数量，返回 `nullptr`；否则返回一个新的 Ant
- */
-Ant *Ant::construct(GameState &gamestate) {
-    if (foodCost > gamestate.food) {
-        return nullptr;
-    }
-    return new Ant();
-}
-
-/**
  * @brief 执行 Ant 的动作
  *
  * 这个函数定义了 Ant 在给定 GameState 下的具体行为。
@@ -158,43 +143,6 @@ void Ant::removeFrom(Place *place) {
         removeAnt(place->ant);
     }
     Insect::removeFrom(place);
-}
-
-/**
- * @brief 重载 << 运算符，将另一个 Ant 容纳到当前 Ant 中
- *
- * @param other 指向要添加的 Ant 的指针。
- * @return 返回当前 Ant 的指针。
- *
- * @example
- * @code
- * Ant *ant1 = new ContainerAnt();
- * Ant *ant2 = new Ant();
- * *ant1 << ant2; // ant1 容纳了 ant2
- * @endcode
- */
-Ant &Ant::operator<<(Ant *other) {
-    storeAnt(other);
-    return *this;
-}
-
-/**
- * @brief 重载 >> 运算符，将当前 Ant 从另一个 Ant 中移除
- *
- * @param other 指向要移除的 Ant 的指针。
- * @return 返回当前 Ant 的指针。
- *
- * @example
- * @code
- * Ant *ant1 = new ContainerAnt();
- * Ant *ant2 = new Ant();
- * *ant1 << ant2; // ant1 容纳了 ant2
- * *ant1 >> ant2; // ant1 移除了 ant2
- * @endcode
- */
-Ant &Ant::operator>>(Ant *other) {
-    removeAnt(other);
-    return *this;
 }
 
 /**

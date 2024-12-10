@@ -47,7 +47,7 @@ using std::vector;
 using g_time = int;
 static const g_time TIME_START = (g_time)0;
 
-using bee_t = function<Bee *(double)>;
+using bee_type = function<Bee *(double)>;
 using bee_list = vector<Bee *>;
 
 /**

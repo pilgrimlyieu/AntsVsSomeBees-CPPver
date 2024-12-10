@@ -51,43 +51,6 @@ void Place::removeInsect(Insect *insect) {
 }
 
 /**
- * @brief 重载 << 运算符，将一个 Insect 添加到当前 Place
- *
- * @param insect 指向要添加的 Insect 的指针
- * @return 指向当前 Place 的引用
- *
- * @example
- * @code
- * Place place;
- * Insect* insect = new Insect();
- * place << insect; // 将 Insect 添加到 Place 中
- * @endcode
- */
-Place &Place::operator<<(Insect *insect) {
-    addInsect(insect);
-    return *this;
-}
-
-/**
- * @brief 重载 >> 运算符，将一个 Insect 从当前 Place 中移除
- *
- * @param insect 指向要移除的 Insect 的指针
- * @return 指向当前 Place 的引用
- *
- * @example
- * @code
- * Place place;
- * Insect* insect = new Insect();
- * place << insect; // 将 Insect 添加到 Place 中
- * place >> insect; // 将 Insect 从 Place 中移除
- * @endcode
- */
-Place &Place::operator>>(Insect *insect) {
-    removeInsect(insect);
-    return *this;
-}
-
-/**
  * @brief 重载 string 类型转换运算符，将 Place 转换为 string
  *
  * @return string Place 的名称

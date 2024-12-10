@@ -17,7 +17,6 @@ protected:
         bool blocksPath = true;   //!< 是否阻挡路径
     };
 
-    const int foodCost; //!< 食物消耗
     bool buffed;        //!< 是否被加成
 
     void injuryCallback() override;
@@ -25,6 +24,7 @@ protected:
     void deathCallback() override;
 
 public:
+    const int foodCost;     //!< 食物消耗
     const bool isContainer; //!< 是否可以容纳其他 Ant
     const bool blocksPath;  //!< 是否阻挡路径
 
@@ -34,8 +34,6 @@ public:
 
     explicit Ant() : Ant(1.0) {}
 
-    virtual Ant *construct(GameState &gamestate);
-
     virtual void action(GameState &gamestate) override;
 
     virtual bool canContain(Ant *other);
@@ -43,10 +41,6 @@ public:
     virtual void storeAnt(Ant *other);
 
     virtual void removeAnt(Ant *other);
-
-    Ant &operator<<(Ant *other);
-
-    Ant &operator>>(Ant *other);
 
     void addTo(Place *place) override final;
 

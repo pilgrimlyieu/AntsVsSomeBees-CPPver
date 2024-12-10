@@ -9,8 +9,6 @@ public:
 
     explicit QueenAnt() : QueenAnt(1.0) {}
 
-    QueenAnt *construct(GameState &gamestate) override final;
-
     void action(GameState &gamestate) override final;
 
     void reduceHealth(double amount) override final;

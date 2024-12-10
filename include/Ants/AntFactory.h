@@ -2,10 +2,13 @@
 #define ANTFACTORY_H
 
 #include "Ant.h"
+#include "QueenAnt.h"
 
 class AntFactory {
 private:
     using ant_constructor = function<Ant *()>;
+
+    static QueenAnt *queenAnt; //!> QueenAnt
 
     AntFactory() {}
     AntFactory(const AntFactory &) = delete;

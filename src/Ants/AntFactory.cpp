@@ -16,6 +16,8 @@
 #include "ThrowerAnt.h"
 #include "WallAnt.h"
 
+QueenAnt *AntFactory::queenAnt = nullptr;
+
 /**
  * @brief 获取 AntFactory 的单例
  *
@@ -43,9 +45,16 @@ void AntFactory::registerAnt(const string &name, ant_constructor constructor) {
  * @return 创建的 Ant
  */
 Ant *AntFactory::createAnt(const string &name) const {
-    auto it = antConstructors.find(name);
-    if (it != antConstructors.end()) {
-        return it->second();
+    if (name == "QueenAnt") { // 针对 QueenAnt 的特殊处理
+        if (queenAnt == nullptr) {
+            queenAnt = new QueenAnt();
+            return queenAnt;
+        }
+    } else {
+        auto it = antConstructors.find(name);
+        if (it != antConstructors.end()) {
+            return it->second();
+        }
     }
     return nullptr;
 }

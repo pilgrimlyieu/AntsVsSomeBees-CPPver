@@ -9,7 +9,7 @@
  * @param count 要添加的 Bee 的数量
  * @return 返回 AssaultPlan 的引用
  */
-AssaultPlan &AssaultPlan::addWave(bee_t beeType, double beeHealth, g_time time, int count) {
+AssaultPlan &AssaultPlan::addWave(bee_type beeType, double beeHealth, g_time time, int count) {
     bee_list bees;
     for (int i = 0; i < count; i++) {
         bees.push_back(beeType(beeHealth));
@@ -33,4 +33,17 @@ bee_list AssaultPlan::getBees() const {
         bees.insert(bees.end(), wave.second.begin(), wave.second.end());
     }
     return bees;
+}
+
+/**
+ * @brief 获取某个时间的 Bee
+ *
+ * @param time 要获取的时间
+ * @return 该时间的 Bee
+ */
+bee_list &AssaultPlan::operator[](g_time time) {
+    if (waves.find(time) == waves.end()) {
+        waves[time] = {};
+    }
+    return waves[time];
 }
