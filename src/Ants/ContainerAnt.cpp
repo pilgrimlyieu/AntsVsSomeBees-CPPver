@@ -37,6 +37,7 @@ bool ContainerAnt::canContain(Ant *other) {
  */
 void ContainerAnt::storeAnt(Ant *ant) {
     antContained = ant;
+    log(LOGINFO, format("{} is stored in {}", (string)*ant, (string) * this));
 }
 
 /**
@@ -51,6 +52,7 @@ void ContainerAnt::removeAnt(Ant *ant) {
                         format("{} does not contain {}", (string) * this, (string)*ant));
     }
     antContained = nullptr;
+    log(LOGINFO, format("{} is removed from {}", (string)*ant, (string) * this));
 }
 
 /**

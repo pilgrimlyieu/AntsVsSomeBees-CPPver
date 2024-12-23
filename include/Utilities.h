@@ -23,9 +23,13 @@ class Ant;
 class Bee;
 
 #ifdef DEBUG
-#define THROW_EXCEPTION(ex, msg) throw ex(std::format("[[{}:{}]] {}", __FILE__, __LINE__, msg))
+#define THROW_EXCEPTION(ex, msg) \
+    log(LOGERROR, msg);          \
+    throw ex(std::format("[[{}:{}]] {}", __FILE__, __LINE__, msg))
 #else
-#define THROW_EXCEPTION(ex, msg) throw ex(msg)
+#define THROW_EXCEPTION(ex, msg) \
+    log(LOGERROR, msg);          \
+    throw ex(msg)
 #endif
 
 using std::exception;
@@ -63,6 +67,26 @@ using strat = void (*)(GameState &);
 using dim = pair<int, int>;
 
 /**
+ * @brief 日志级别
+ *
+ * - LOGINFO: 信息
+ *
+ * - LOGERROR: 错误
+ *
+ * - LOGTEST: 测试
+ */
+enum class LogLevel {
+    LOGINFO,
+    LOGERROR,
+    LOGTEST,
+};
+using enum LogLevel;
+
+void gameInit();
+
+void log(LogLevel level, const string &msg);
+
+/**
  * @brief 获取列表中指定索引处的元素。
  *
  * 该函数从提供的列表 `list` 中返回给定索引 `index` 处的元素。
@@ -88,6 +112,38 @@ template <class T> T get(const list<T> &list, int index) {
     auto it = list.begin();
     advance(it, index);
     return *it;
+}
+
+/**
+ * @brief 从列表中随机选择一个元素。
+ *
+ * 该函数从提供的列表 `list` 中随机选择一个元素并返回。
+ *
+ * @tparam T `list` 元素的类型。
+ * @param list 要选择元素的列表。
+ * @return T 类型的元素，若列表为空则返回 `nullptr`。
+ */
+template <class T> T *randomElement(const vector<T *> &list) {
+    if (list.size() == 0) {
+        return nullptr;
+    }
+    return list[rand() % list.size()];
+}
+
+/**
+ * @brief 从列表中随机选择一个元素。
+ *
+ * 该函数从提供的列表 `list` 中随机选择一个元素并返回。
+ *
+ * @tparam T `list` 元素的类型。
+ * @param list 要选择元素的列表。
+ * @return T 类型的元素，若列表为空则返回 `nullptr`。
+ */
+template <class T> T *randomElement(const list<T *> &list) {
+    if (list.size() == 0) {
+        return nullptr;
+    }
+    return get(list, rand() % list.size());
 }
 
 #endif // UTILITIES_H

@@ -5,6 +5,7 @@
 #include "AntsWinException.h"
 #include "Bee.h"
 #include "Insect.h"
+#include "Utilities.h"
 
 /**
  * @brief 构造一个新的 GameState
@@ -78,9 +79,10 @@ bool GameState::simulate() {
             time++;
         }
     } catch (AntsWinException &e) {
-        // TODO: log
+        log(LOGINFO, "All bees are vanquished. You win!");
         return true;
     } catch (AntsLoseException &e) {
+        log(LOGINFO, "The ant queen has perished. Please try again.");
         return false;
     }
 }

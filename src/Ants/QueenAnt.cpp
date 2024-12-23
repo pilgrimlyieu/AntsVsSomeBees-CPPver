@@ -39,6 +39,7 @@ void QueenAnt::action(GameState &gamestate) {
         }
         currentPlace = currentPlace->exit;
     }
+    log(LOGINFO, format("{} performs its action", (string) * this));
 }
 
 /**

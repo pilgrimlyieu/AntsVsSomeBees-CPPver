@@ -36,6 +36,7 @@ AntFactory &AntFactory::getInstance() {
  */
 void AntFactory::registerAnt(const string &name, ant_constructor constructor) {
     antConstructors[name] = constructor;
+    log(LOGTEST, format("Registered Ant: {}", name));
 }
 
 /**
@@ -48,14 +49,18 @@ Ant *AntFactory::createAnt(const string &name) const {
     if (name == "QueenAnt") { // 针对 QueenAnt 的特殊处理
         if (queenAnt == nullptr) {
             queenAnt = new QueenAnt();
+            log(LOGTEST, "Created QueenAnt");
             return queenAnt;
         }
+        log(LOGERROR, "QueenAnt has already been created");
     } else {
         auto it = antConstructors.find(name);
         if (it != antConstructors.end()) {
+            log(LOGTEST, format("Creating Ant: {}", name));
             return it->second();
         }
     }
+    log(LOGERROR, format("Ant constructor {} not found", name));
     return nullptr;
 }
 

@@ -1,5 +1,6 @@
 #include "Hive.h"
 #include "GameState.h"
+#include "Utilities.h"
 
 /**
  * @brief 构造一个新的 Hive
@@ -24,9 +25,12 @@ void Hive::strategy(GameState &gameState) {
     for (auto &[name, place] : gameState.places) {
         if (place->entrance == this) {
             exits.push_back(place);
+            log(LOGTEST, format("Bee entrance {} added", name));
         }
     }
     for (auto bee : (*assaultPlan)[gameState.time]) {
-        // TODO
+        gameState.activeBees.push_back(bee);
+        log(LOGTEST, format("Bee {} added", (string)*bee));
+        bee->moveTo(randomElement(exits));
     }
 }

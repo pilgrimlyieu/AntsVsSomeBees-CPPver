@@ -33,6 +33,7 @@ void TankAnt::action(GameState &gamestate) {
         } else {
             bee->reduceHealth(damage);
         }
+        log(LOGINFO, format("{} attacks {}", (string) * this, (string)*bee));
     }
     for (Bee *bee : killedBees) {
         bee->reduceHealth(bee->health);

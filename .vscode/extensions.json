@@ -1,10 +1,8 @@
 {
     "recommendations": [
         "vadimcn.vscode-lldb",
-        "ms-vscode.cpptools",
         "matepek.vscode-catch2-test-adapter",
-        "zatkins-dev.doxdocgen-with-direction",
-        "visualstudioexptteam.vscodeintellicode",
         "tboox.xmake-vscode",
+        "llvm-vs-code-extensions.vscode-clangd",
     ]
 }

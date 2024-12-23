@@ -11,7 +11,7 @@ public:
 
     void action(GameState &gamestate) override final;
 
-    // TODO: __setattr__
+    // TODO: immune
 };
 
 #endif // HORNET_H

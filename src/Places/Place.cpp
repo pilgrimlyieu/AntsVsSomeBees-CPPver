@@ -1,5 +1,6 @@
 #include "Place.h"
 #include "Insect.h"
+#include "Utilities.h"
 
 /**
  * @brief 从当前 Place 随机选择一个 Bee
@@ -9,10 +10,7 @@
  * @return 指向随机选择的 Bee 的指针，若没有 Bee 则返回 `nullptr`。
  */
 Bee *Place::randomBee() {
-    if (bees.size() == 0) {
-        return nullptr;
-    }
-    return get(bees, rand() % bees.size());
+    return randomElement(bees);
 }
 
 /**

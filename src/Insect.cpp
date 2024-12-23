@@ -30,9 +30,11 @@ Insect::Insect(double health, Place *place, insect_properties properties)
 void Insect::reduceHealth(double amount) {
     health -= amount;
     injuryCallback();
+    log(LOGINFO, format("{} is reduced by {}", (string) * this, amount));
     if (health <= 0.0) {
         deathCallback();
         place->removeInsect(this);
+        log(LOGINFO, format("{} is dead", (string) * this));
         delete this;
     }
 }
@@ -61,6 +63,7 @@ void Insect::deathCallback() {
  * @param place 指向 Place 的指针。
  */
 void Insect::addTo(Place *place) {
+    log(LOGINFO, format("{} is added to {}", (string) * this, (string)*place));
     this->place = place;
 }
 
@@ -70,6 +73,7 @@ void Insect::addTo(Place *place) {
  * @param place 要从中移除 Insect 的 Place 。
  */
 void Insect::removeFrom(Place *place) {
+    log(LOGINFO, format("{} is removed from {}", (string) * this, (string)*place));
     this->place = nullptr;
 }
 

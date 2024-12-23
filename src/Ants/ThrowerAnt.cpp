@@ -58,6 +58,10 @@ Bee *ThrowerAnt::nearestBee() {
 void ThrowerAnt::throwAt(Bee *target) {
     if (target != nullptr) {
         target->reduceHealth(damage);
+        log(LOGINFO,
+            format("{} throws at {}, causing {} damage", (string) * this, (string)*target, damage));
+    } else {
+        log(LOGINFO, format("{} throws at nothing", (string) * this));
     }
 }
 

@@ -42,6 +42,7 @@ void FireAnt::reduceHealth(double amount) {
         } else {
             bee->reduceHealth(damage);
         }
+        log(LOGINFO, format("{} attacks {} after attacked", (string) * this, (string)*bee));
     }
     for (Bee *bee : killedBees) {
         bee->reduceHealth(totalDamage);
