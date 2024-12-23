@@ -1,6 +1,5 @@
 #include "Hive.h"
 #include "GameState.h"
-#include "Utilities.h"
 
 /**
  * @brief 构造一个新的 Hive

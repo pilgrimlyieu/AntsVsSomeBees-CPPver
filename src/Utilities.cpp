@@ -27,7 +27,9 @@ void log(LogLevel level, const string &msg) {
         std::cerr << ANSI_RED << "[ERROR] " << msg << ANSI_RESET << std::endl;
         break;
     case LOGTEST:
+#ifdef DEBUG
         std::cout << ANSI_YELLOW << "[TEST] " << msg << ANSI_RESET << std::endl;
+#endif
         break;
     }
 }

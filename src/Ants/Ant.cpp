@@ -21,7 +21,7 @@
  * @param properties Ant 的属性
  */
 Ant::Ant(double health, ant_properties properties)
-    : Insect(health, nullptr, properties), foodCost(properties.foodCost), buffed(properties.buffed),
+    : Insect(health, nullptr, properties), buffed(properties.buffed), foodCost(properties.foodCost),
       isContainer(properties.isContainer), blocksPath(properties.blocksPath) {}
 
 /**

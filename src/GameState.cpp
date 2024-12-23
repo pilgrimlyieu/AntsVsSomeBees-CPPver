@@ -84,6 +84,9 @@ bool GameState::simulate() {
     } catch (AntsLoseException &e) {
         log(LOGINFO, "The ant queen has perished. Please try again.");
         return false;
+    } catch (exception &e) {
+        log(LOGERROR, e.what());
+        return false;
     }
 }
 

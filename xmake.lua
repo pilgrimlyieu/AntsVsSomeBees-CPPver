@@ -26,6 +26,7 @@ if is_mode("debug") then
 elseif is_mode("release") then 
     add_defines("RELEASE")
 elseif is_mode("check") then
+    -- set_policy("build.sanitizer.address", true)
     set_symbols("debug")
     set_optimize("none")
 
@@ -38,17 +39,6 @@ elseif is_mode("check") then
         "-fstack-clash-protection",
         "-Wall"
     )
-
-    if is_os("linux") then
-        -- Not supported for MinGW64 in Windows
-        local sanitize = "address"
-        add_cxflags(
-            "-fsanitize=" .. sanitize
-        )
-        add_ldflags(
-            "-fsanitize=" .. sanitize
-        )
-    end
 end
 
 target(lib_name)
