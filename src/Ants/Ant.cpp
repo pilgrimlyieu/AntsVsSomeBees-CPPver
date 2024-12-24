@@ -75,7 +75,7 @@ bool Ant::canContain(Ant *other) {
  */
 void Ant::storeAnt(Ant *other) {
     THROW_EXCEPTION(invalid_argument,
-                    format("{} cannot contain {}", (string) * this, (string)*other));
+                    format("{} cannot contain {}", string(*this), string(*other)));
 }
 
 /**
@@ -88,7 +88,7 @@ void Ant::storeAnt(Ant *other) {
  */
 void Ant::removeAnt(Ant *other) {
     THROW_EXCEPTION(invalid_argument,
-                    format("{} cannot contain {}", (string) * this, (string)*other));
+                    format("{} cannot contain {}", string(*this), string(*other)));
 }
 
 /**
@@ -110,7 +110,7 @@ void Ant::removeAnt(Ant *other) {
 void Ant::addTo(Place *place) {
     if (place->ant == nullptr) {
         place->ant = this;
-        log(LOGINFO, format("{} is added to {}", (string) * this, (string)*place));
+        log(LOGINFO, format("{} is added to {}", string(*this), string(*place)));
     } else {
         if (place->ant->canContain(this)) {
             place->ant->storeAnt(this);
@@ -118,7 +118,7 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            THROW_EXCEPTION(invalid_argument, format("Two ants in {}", (string)*place));
+            THROW_EXCEPTION(invalid_argument, format("Two ants in {}", string(*place)));
         }
     }
     Insect::addTo(place);
@@ -137,10 +137,9 @@ void Ant::addTo(Place *place) {
 void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
-        log(LOGINFO, format("{} is removed from {}", (string) * this, (string)*place));
+        log(LOGINFO, format("{} is removed from {}", string(*this), string(*place)));
     } else if (place->ant == nullptr) {
-        THROW_EXCEPTION(invalid_argument,
-                        format("{} is not in {}", (string) * this, (string)*place));
+        THROW_EXCEPTION(invalid_argument, format("{} is not in {}", string(*this), string(*place)));
     } else {
         removeAnt(place->ant);
     }
@@ -156,6 +155,6 @@ void Ant::buff() {
     if (!buffed) {
         damage *= 2;
         buffed = true;
-        log(LOGINFO, format("{} is buffed", (string) * this));
+        log(LOGINFO, format("{} is buffed", string(*this)));
     }
 }

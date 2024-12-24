@@ -27,6 +27,6 @@ HarvestAnt::HarvestAnt(double health)
  */
 void HarvestAnt::action(GameState &gamestate) {
     gamestate.food += 1;
-    log(LOGINFO, format("{} harvests 1 food", (string) * this));
+    log(LOGINFO, format("{} harvests 1 food", string(*this)));
     log(LOGTEST, format("Food: {}", gamestate.food));
 }

@@ -28,8 +28,8 @@ SlowThrower::SlowThrower(double health)
 void SlowThrower::throwAt(Bee *target) {
     if (target != nullptr) {
         target->slow(3);
-        log(LOGINFO, format("{} slows {} for 3 rounds", (string) * this, (string)*target));
+        log(LOGINFO, format("{} slows {} for 3 rounds", string(*this), string(*target)));
     } else {
-        log(LOGINFO, format("{} throws at nothing", (string) * this));
+        log(LOGINFO, format("{} throws at nothing", string(*this)));
     }
 }

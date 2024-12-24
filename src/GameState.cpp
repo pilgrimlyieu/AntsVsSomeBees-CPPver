@@ -6,6 +6,7 @@
 #include "Bee.h"
 #include "Insect.h"
 #include "Utilities.h"
+#include "Water.h"
 
 /**
  * @brief 构造一个新的 GameState
@@ -112,6 +113,13 @@ Ant *GameState::deployAnt(string placeName, string antTypeName) {
     return ant;
 }
 
+/**
+ * @brief 移除一个 Ant
+ *
+ * 移除一个 Ant 。
+ *
+ * @param placeName 地点名称
+ */
 void GameState::removeAnt(string placeName) {
     Place *place = places[placeName];
     if (place->ant != nullptr) {
@@ -119,6 +127,13 @@ void GameState::removeAnt(string placeName) {
     }
 }
 
+/**
+ * @brief 获取所有的 Ant
+ *
+ * 获取所有的 Ant 。
+ *
+ * @return 所有的 Ant
+ */
 vector<Ant *> GameState::getAnts() const {
     vector<Ant *> ants;
     for (auto &[name, place] : places) {
@@ -129,6 +144,13 @@ vector<Ant *> GameState::getAnts() const {
     return ants;
 }
 
+/**
+ * @brief 获取所有的 Bee
+ *
+ * 获取所有的 Bee 。
+ *
+ * @return 所有的 Bee
+ */
 vector<Bee *> GameState::getBees() const {
     vector<Bee *> bees;
     for (auto &[name, place] : places) {
@@ -139,6 +161,13 @@ vector<Bee *> GameState::getBees() const {
     return bees;
 }
 
+/**
+ * @brief 获取所有的 Insect
+ *
+ * 获取所有的 Insect 。
+ *
+ * @return 所有的 Insect
+ */
 vector<Insect *> GameState::getInsects() const {
     vector<Insect *> insects;
     vector<Ant *> ants = getAnts();
@@ -148,6 +177,13 @@ vector<Insect *> GameState::getInsects() const {
     return insects;
 }
 
+/**
+ * @brief 将 GameState 转换为字符串表示形式
+ *
+ * 将 GameState 转换为字符串表示形式，格式为 "[Insect1, Insect2, ...] (Food: x, Time: y)"。
+ *
+ * @return GameState 的字符串表示形式
+ */
 GameState::operator string() const {
     string status = format(" (Food: {0}, Time: {1})", food, time);
     string result = "[";
@@ -182,4 +218,46 @@ void antsWin() {
  */
 void antsLose() {
     throw AntsLoseException();
+}
+
+/**
+ * @brief 湿地布局
+ *
+ * 从基地开始，创建一系列的隧道，其中每隔一定距离会有湿地。
+ *
+ * 具体而言，当 `moatFrequency` 不为 0 时，每隔 `moatFrequency` 步会有一个湿地。
+ *
+ * @param base 基地
+ * @param registerPlace 注册 Place 的函数
+ * @param tunnels 隧道数量
+ * @param length 隧道长度
+ * @param moatFrequency 湿地频率
+ */
+void wetLayout(Place *base, GameState::register_place registerPlace, int tunnels, int length,
+               int moatFrequency) {
+    for (int tunnel = 0; tunnel < tunnels; tunnel++) {
+        Place *exit = base;
+        for (int step = 0; step < length; step++) {
+            if (moatFrequency != 0 && (step + 1) % moatFrequency == 0) {
+                exit = new Water(format("Water_{}_{}", tunnel, step), exit);
+            } else {
+                exit = new Place(format("Tunnel_{}_{}", tunnel, step), exit);
+            }
+            registerPlace(exit, step == length - 1);
+        }
+    }
+}
+
+/**
+ * @brief 干地布局
+ *
+ * 从基地开始，创建一系列的隧道。
+ *
+ * @param base 基地
+ * @param registerPlace 注册 Place 的函数
+ * @param tunnels 隧道数量
+ * @param length 隧道长度
+ */
+void dryLayout(Place *base, GameState::register_place registerPlace, int tunnels, int length) {
+    wetLayout(base, registerPlace, tunnels, length, 0);
 }

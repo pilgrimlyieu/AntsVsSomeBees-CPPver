@@ -9,9 +9,13 @@
 
 class GameState final {
 private:
+    using ants_map = unordered_map<string, function<Ant *(double)>>;
     using register_place = function<void(Place *, bool)>;
     using create_places = void (*)(AntHomeBase *, register_place, dim);
-    using ants_map = unordered_map<string, function<Ant *(double)>>;
+
+    friend void wetLayout(Place *base, register_place registerPlace, int tunnels, int length,
+                          int moatFrequency);
+    friend void dryLayout(Place *base, register_place registerPlace, int tunnels, int length);
 
 public:
     g_time time = TIME_START;              //!> 时间
@@ -49,5 +53,11 @@ public:
 void antsWin();
 
 void antsLose();
+
+void wetLayout(Place *base, GameState::register_place registerPlace, int tunnels = 3,
+               int length = 9, int moatFrequency = 3);
+
+void dryLayout(Place *base, GameState::register_place registerPlace, int tunnels = 3,
+               int length = 9);
 
 #endif // GAMESTATE_H

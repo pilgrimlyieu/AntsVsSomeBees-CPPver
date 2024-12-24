@@ -39,12 +39,12 @@ void HungryAnt::action(GameState &gamestate) {
     if (chewCountDown == 0) {
         Bee *bee = place->randomBee();
         if (bee != nullptr) {
-            log(LOGINFO, format("{} eats {}", (string) * this, (string)*bee));
+            log(LOGINFO, format("{} eats {}", string(*this), string(*bee)));
             chewCountDown = chewDuration;
             bee->kill();
         }
     } else {
-        log(LOGTEST, format("{} is chewing, {} rounds left", (string) * this, chewCountDown));
+        log(LOGTEST, format("{} is chewing, {} rounds left", string(*this), chewCountDown));
         chewCountDown--;
     }
 }

@@ -78,8 +78,8 @@ void LaserAnt::action(GameState &gamestate) {
         if (damage > 0) {
             insectsShot++;
         }
-        log(LOGINFO, format("{} shoots {}, dealing {} damage", (string) * this,
-                            (string)*target.first, damage));
+        log(LOGINFO, format("{} shoots {}, dealing {} damage", string(*this), string(*target.first),
+                            damage));
     }
-    log(LOGINFO, format("{} has shot {} insects", (string) * this, insectsShot));
+    log(LOGINFO, format("{} has shot {} insects", string(*this), insectsShot));
 }
