@@ -11,6 +11,10 @@ MARKDOWN_ID_STYLE      = GITHUB
 EXTRACT_PRIVATE        = YES
 INPUT                  = D:/Project/School/CPP
 RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */include/crow.h \
+                         */include/crow/* \
+                         */include/asio/* \
+                         */include/asio.hpp
 HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES
 GENERATE_LATEX         = NO
