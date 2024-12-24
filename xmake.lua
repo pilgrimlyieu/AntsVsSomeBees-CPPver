@@ -1,6 +1,8 @@
 add_rules("mode.debug", "mode.release")
 
+add_requires("nlohmann_json")
 add_requires("catch2")
+-- add_requires("crow") -- OpenSSL 一直失败 :(
 
 set_languages("cxx20")
 set_targetdir("build")
@@ -10,13 +12,17 @@ set_defaultplat("mingw")
 
 add_includedirs(
     "include",
+    "include/asio",
     "include/Ants",
     "include/Bees",
+    "include/crow",
     "include/Exceptions",
     "include/Places",
     "include/Plans"
 )
 add_files("src/**.cpp")
+add_packages("nlohmann_json")
+add_syslinks("wsock32", "ws2_32")
 
 local target_name = "MyToy"
 local lib_name = target_name .. "Lib"

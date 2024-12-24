@@ -1,6 +1,13 @@
 {
   "C_Cpp.autoAddFileAssociations": false,
   "C_Cpp.doxygen.generatedStyle": "/**",
+  "C_Cpp.files.exclude": {
+    "**/.vscode": true,
+    "include/asio.hpp": true,
+    "include/asio/*": true,
+    "include/crow.h": true,
+    "include/crow/*": true
+  },
   // "xmake.runMode": "buildRun", // 有点问题
   "C_Cpp.formatting": "clangFormat",
   "C_Cpp.intelliSenseEngine": "enabled",
