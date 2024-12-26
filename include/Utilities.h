@@ -1,10 +1,15 @@
+/**
+ * @file Utilities.h
+ * @brief 提供一些常用的工具函数和类型定义。
+ */
+
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#ifdef DEBUG
-#define private   public
-#define protected public
-#endif
+// #ifdef DEBUG
+// #define private   public
+// #define protected public
+// #endif
 
 #include <cstdarg>
 #include <format>
@@ -23,13 +28,17 @@ class Ant;
 class Bee;
 
 #ifdef DEBUG
-#define THROW_EXCEPTION(ex, msg) \
-    log(LOGERROR, msg);          \
-    throw ex(std::format("[[{}:{}]] {}", __FILE__, __LINE__, msg))
+#define THROW_EXCEPTION(Ex, msg)                                        \
+    do {                                                                \
+        log(LOGERROR, msg);                                             \
+        throw Ex(std::format("[[{}:{}]] {}", __FILE__, __LINE__, msg)); \
+    } while (0)
 #else
-#define THROW_EXCEPTION(ex, msg) \
-    log(LOGERROR, msg);          \
-    throw ex(msg)
+#define THROW_EXCEPTION(Ex, msg) \
+    do {                         \
+        log(LOGERROR, msg);      \
+        throw Ex(msg);           \
+    } while (0)
 #endif
 
 using std::exception;
@@ -104,7 +113,7 @@ void log(LogLevel level, const string &msg);
  * int value = get(myList, 2); // value = 3
  * @endcode
  */
-template <class T> T get(const list<T> &list, int index) {
+template <typename T> T get(const list<T> &list, int index) {
     if (index < 0 || index >= list.size()) {
         THROW_EXCEPTION(out_of_range,
                         format("Index {} out of range 0..{}", index, list.size() - 1));
@@ -123,7 +132,7 @@ template <class T> T get(const list<T> &list, int index) {
  * @param list 要选择元素的列表。
  * @return T 类型的元素，若列表为空则返回 `nullptr`。
  */
-template <class T> T *randomElement(const vector<T *> &list) {
+template <typename T> T randomElement(const vector<T> &list) {
     if (list.size() == 0) {
         return nullptr;
     }
@@ -139,7 +148,7 @@ template <class T> T *randomElement(const vector<T *> &list) {
  * @param list 要选择元素的列表。
  * @return T 类型的元素，若列表为空则返回 `nullptr`。
  */
-template <class T> T *randomElement(const list<T *> &list) {
+template <typename T> T randomElement(const list<T> &list) {
     if (list.size() == 0) {
         return nullptr;
     }
