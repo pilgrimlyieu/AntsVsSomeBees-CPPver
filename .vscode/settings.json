@@ -19,6 +19,13 @@
     "-j=16"
   ],
   "editor.detectIndentation": false,
+  "errorLens.codeLensEnabled": true,
+  "errorLens.enabledDiagnosticLevels": [
+    "error",
+    "warning",
+    "info",
+    "hint"
+  ],
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
   // "python.terminal.activateEnvironment": false,
   // "qtConfigure.mingwPath": "D:/Software/Qt/Tools/mingw1120_64",

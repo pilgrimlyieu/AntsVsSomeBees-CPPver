@@ -1,0 +1,13 @@
+Checks: modernize-*,
+  -modernize-use-trailing-return-type,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -cppcoreguidelines-slicing,
+  -cppcoreguidelines-owning-memory, # Temporary disable before using smart pointers
+  readability-braces-around-statements,
+  readability-identifier-naming.ClassCase,
+  readability-identifier-naming.StructCase,
+  readability-identifier-naming.TypedefCase,
+  readability-identifier-naming.EnumCase,
+  readability-non-const-parameter,

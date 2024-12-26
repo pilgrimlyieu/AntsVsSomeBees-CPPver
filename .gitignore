@@ -20,3 +20,6 @@ doc/html
 # include
 include/asio*
 include/crow*
+
+# temporary
+test
