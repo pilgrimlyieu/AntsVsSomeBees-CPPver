@@ -27,15 +27,15 @@ TankAnt::TankAnt(double health)
  */
 void TankAnt::action(GameState &gamestate) {
     bee_list killedBees;
-    for (Bee *bee : place->bees) {
+    for (auto bee : place->bees) {
         if (bee->health <= damage) {
             killedBees.push_back(bee);
         } else {
             bee->reduceHealth(damage);
         }
-        log(LOGINFO, format("{} attacks {}", string(*this), string(*bee)));
+        log(LOGINFO, format("{} attacks {}", *this, *bee));
     }
-    for (Bee *bee : killedBees) {
+    for (auto bee : killedBees) {
         bee->reduceHealth(bee->health);
     }
     ContainerAnt::action(gamestate);

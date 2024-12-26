@@ -28,8 +28,8 @@ ScaryThrower::ScaryThrower(double health)
 void ScaryThrower::throwAt(Bee *target) {
     if (target != nullptr) {
         target->scare(2);
-        log(LOGINFO, format("{} scares {} for 2 rounds", string(*this), string(*target)));
+        log(LOGINFO, format("{} scares {} for 2 rounds", *this, *target));
     } else {
-        log(LOGINFO, format("{} throws at nothing", string(*this)));
+        log(LOGINFO, format("{} throws at nothing", *this));
     }
 }

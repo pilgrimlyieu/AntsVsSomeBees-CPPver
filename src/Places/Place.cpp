@@ -55,8 +55,3 @@ void Place::removeInsect(Insect *insect) {
 Place::operator string() const {
     return name;
 }
-
-/**
- * @brief Place 类的析构函数
- */
-Place::~Place() {}

@@ -30,7 +30,7 @@ Bee::Bee(double health, Place *place, bee_properties properties)
  */
 void Bee::sting(Ant *ant) {
     ant->reduceHealth(damage);
-    log(LOGINFO, format("{} stings {} causing {} damage", string(*this), string(*ant), damage));
+    log(LOGINFO, format("{} stings {} causing {} damage", *this, *ant, damage));
 }
 
 /**
@@ -43,7 +43,7 @@ void Bee::sting(Ant *ant) {
 void Bee::moveTo(Place *place) {
     this->place->removeInsect(this);
     place->addInsect(this);
-    log(LOGINFO, format("{} moves to {}", string(*this), string(*place)));
+    log(LOGINFO, format("{} moves to {}", *this, *place));
 }
 
 /**
@@ -131,7 +131,7 @@ void Bee::removeFrom(Place *place) {
  */
 void Bee::slow(g_time length) {
     slowedTime += length;
-    log(LOGINFO, format("{} is slowed for {} turns", string(*this), length));
+    log(LOGINFO, format("{} is slowed for {} turns", *this, length));
 }
 
 /**
@@ -144,8 +144,8 @@ void Bee::slow(g_time length) {
 void Bee::scare(g_time length) {
     if (scaredTime == 0) {
         scaredTime = length;
-        log(LOGINFO, format("{} is scared for {} turns", string(*this), length));
+        log(LOGINFO, format("{} is scared for {} turns", *this, length));
     } else {
-        log(LOGINFO, format("{} is already scared", string(*this)));
+        log(LOGINFO, format("{} is already scared", *this));
     }
 }

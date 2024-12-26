@@ -46,4 +46,10 @@ public:
     virtual ~Insect() = default;
 };
 
+template <std::derived_from<Insect> T> struct std::formatter<T> : std::formatter<string> {
+    auto format(const T &insect, std::format_context &ctx) const {
+        return std::formatter<string>::format(static_cast<string>(insect), ctx);
+    }
+};
+
 #endif // INSECT_H

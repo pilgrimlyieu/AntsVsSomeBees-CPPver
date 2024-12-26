@@ -41,7 +41,7 @@ unordered_map<Insect *, int> LaserAnt::getTargets() {
         if (currentPlace->ant != nullptr && currentPlace->ant != this) {
             targets[currentPlace->ant] = distance;
         }
-        for (Bee *bee : currentPlace->bees) {
+        for (auto bee : currentPlace->bees) {
             targets[bee] = distance;
         }
         currentPlace = currentPlace->entrance;
@@ -78,8 +78,7 @@ void LaserAnt::action(GameState &gamestate) {
         if (damage > 0) {
             insectsShot++;
         }
-        log(LOGINFO, format("{} shoots {}, dealing {} damage", string(*this), string(*target.first),
-                            damage));
+        log(LOGINFO, format("{} shoots {}, dealing {} damage", *this, *target.first, damage));
     }
-    log(LOGINFO, format("{} has shot {} insects", string(*this), insectsShot));
+    log(LOGINFO, format("{} has shot {} insects", *this, insectsShot));
 }
