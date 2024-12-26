@@ -9,7 +9,7 @@ public:
 
     explicit NinjaAnt() : NinjaAnt(1.0) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 };
 
 #endif // NINJAANT_H

@@ -31,7 +31,7 @@ public:
 
     virtual bool blocked();
 
-    virtual void action(GameState &gamestate) override;
+    void action(GameState &gamestate) override;
 
     void addTo(Place *place) override;
 

@@ -9,7 +9,7 @@ public:
 
     explicit Hornet(double health) : Hornet(health, nullptr) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 
     // TODO: immune
 };

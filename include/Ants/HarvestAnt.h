@@ -9,7 +9,7 @@ public:
 
     explicit HarvestAnt() : HarvestAnt(1.0) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 };
 
 #endif // HARVESTANT_H

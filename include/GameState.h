@@ -5,30 +5,30 @@
 #include "AntHomeBase.h"
 #include "Hive.h"
 #include "QueenAnt.h"
-#include "Utilities.h"
 
 class GameState final {
 private:
     using ants_map = unordered_map<string, function<Ant *(double)>>;
     using register_place = function<void(Place *, bool)>;
     using create_places = void (*)(AntHomeBase *, register_place, dim);
+    using places_map = unordered_map<string, Place *>;
 
     friend void wetLayout(Place *base, register_place registerPlace, int tunnels, int length,
                           int moatFrequency);
     friend void dryLayout(Place *base, register_place registerPlace, int tunnels, int length);
 
 public:
-    g_time time = TIME_START;              //!> 时间
-    int food = 0;                          //!> 食物余额
-    strat strategy;                        //!> 游戏策略
-    Hive *beehive;                         //!> 蜂巢
-    dim dimensions;                        //!> 地图尺寸
-    list<Bee *> activeBees = {};           //!> 活动 Bee
-    QueenAnt *Queen = nullptr;             //!> QueenAnt
-    AntHomeBase *base = nullptr;           //!> 基地
-    unordered_map<string, Place *> places; //!> 地点
-    AntFactory *antFactory;                //!> Ant 工厂
-    vector<Place *> bee_entrances;         //!> Bee 入口
+    g_time time = TIME_START;      //!> 时间
+    int food = 0;                  //!> 食物余额
+    strat strategy;                //!> 游戏策略
+    Hive *beehive;                 //!> 蜂巢
+    dim dimensions;                //!> 地图尺寸
+    list<Bee *> activeBees = {};   //!> 活动 Bee
+    QueenAnt *Queen = nullptr;     //!> QueenAnt
+    AntHomeBase *base = nullptr;   //!> 基地
+    places_map places;             //!> 地点
+    AntFactory *antFactory;        //!> Ant 工厂
+    vector<Place *> bee_entrances; //!> Bee 入口
 
     GameState(strat strategy, AntFactory *antFactory, Hive *beehive, create_places createPlaces,
               dim dimensions, int food = 2);
@@ -41,10 +41,13 @@ public:
 
     void removeAnt(string placeName);
 
+    [[nodiscard]]
     vector<Ant *> getAnts() const;
 
+    [[nodiscard]]
     vector<Bee *> getBees() const;
 
+    [[nodiscard]]
     vector<Insect *> getInsects() const;
 
     operator string() const;

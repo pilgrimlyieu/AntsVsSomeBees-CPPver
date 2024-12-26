@@ -9,11 +9,11 @@ public:
 
     explicit QueenAnt() : QueenAnt(1.0) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 
-    void reduceHealth(double amount) override final;
+    void reduceHealth(double amount) final;
 
-    void removeFrom(Place *place) override final;
+    void removeFrom(Place *place) final;
 };
 
 #endif // QUEENANT_H

@@ -17,7 +17,7 @@ public:
 
     using Wasp::action;
 
-    void reduceHealth(double amount) override final;
+    void reduceHealth(double amount) final;
 };
 
 #endif // BOSS_H

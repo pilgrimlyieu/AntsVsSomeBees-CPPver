@@ -1,4 +1,5 @@
 #include "Hive.h"
+#include "Bee.h"
 #include "GameState.h"
 
 /**

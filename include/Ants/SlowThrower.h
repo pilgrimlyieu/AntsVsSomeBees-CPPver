@@ -5,7 +5,7 @@
 
 class SlowThrower final : public ThrowerAnt {
 private:
-    void throwAt(Bee *target) override final;
+    void throwAt(Bee *target) final;
 
 public:
     explicit SlowThrower(double health);

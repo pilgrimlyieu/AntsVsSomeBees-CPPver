@@ -9,7 +9,7 @@ public:
 
     explicit NinjaBee(double health) : NinjaBee(health, nullptr) {}
 
-    bool blocked() override final;
+    bool blocked() final;
 };
 
 #endif // NINJABEE_H

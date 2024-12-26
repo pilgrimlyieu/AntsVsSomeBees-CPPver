@@ -9,7 +9,7 @@ public:
 
     explicit TankAnt() : TankAnt(2.0) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 };
 
 #endif // TANKANT_H

@@ -9,7 +9,7 @@ public:
 
     explicit FireAnt() : FireAnt(3.0) {}
 
-    void reduceHealth(double amount) override final;
+    void reduceHealth(double amount) final;
 };
 
 #endif // FIREANT_H

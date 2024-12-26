@@ -19,13 +19,13 @@ protected:
 public:
     Ant *antContained; //!< 容纳的 Ant
 
-    bool canContain(Ant *other) override final;
+    bool canContain(Ant *other) final;
 
-    void storeAnt(Ant *ant) override final;
+    void storeAnt(Ant *ant) final;
 
-    void removeAnt(Ant *ant) override final;
+    void removeAnt(Ant *ant) final;
 
-    void removeFrom(Place *place) override final;
+    void removeFrom(Place *place) final;
 
     void action(GameState &gamestate) override;
 };

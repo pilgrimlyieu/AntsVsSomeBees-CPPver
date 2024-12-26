@@ -5,9 +5,11 @@
 
 class LaserAnt final : public ThrowerAnt {
 private:
+    using insects_distance = unordered_map<Insect *, int>;
+
     int insectsShot; //!< 射击的昆虫数量
 
-    unordered_map<Insect *, int> getTargets();
+    insects_distance getTargets();
 
     double getDamage(int distance);
 
@@ -16,7 +18,7 @@ public:
 
     explicit LaserAnt() : LaserAnt(1.0) {}
 
-    void action(GameState &gamestate) override final;
+    void action(GameState &gamestate) final;
 };
 
 #endif // LASERANT_H{

@@ -9,8 +9,8 @@ private:
         bool isHive = false; //!< 是否是 Hive
     };
 
-Place(const Place &) = delete;
-Place &operator=(const Place &) = delete;
+protected:
+    ~Place() = default;
 
 public:
     // exit <- place -> entrance --> Hive
@@ -20,6 +20,11 @@ public:
     Place *entrance;       //!< 入口（指向上一个 Place）
     list<Bee *> bees = {}; //!< 在 Place 中的 Bee 列表
     Ant *ant = nullptr;    //!< 在 Place 中的 Ant
+
+    Place(const Place &) = delete;
+    Place &operator=(const Place &) = delete;
+    Place(Place &&) = delete;
+    Place &operator=(Place &&) = delete;
 
     explicit Place(string name, Place *exit, place_properties properties);
 
@@ -34,6 +39,7 @@ public:
     virtual void removeInsect(Insect *insect);
 
     operator string() const;
+};
 
 template <std::derived_from<Place> T> struct std::formatter<T> : std::formatter<string> {
     auto format(const T &place, format_context &ctx) const {

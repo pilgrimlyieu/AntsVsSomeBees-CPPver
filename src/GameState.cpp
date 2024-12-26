@@ -20,7 +20,8 @@
  */
 GameState::GameState(strat strategy, AntFactory *antFactory, Hive *beehive,
                      create_places createPlaces, dim dimensions, int food)
-    : strategy(strategy), beehive(beehive), dimensions(dimensions), antFactory(antFactory) {
+    : strategy(strategy), beehive(beehive), dimensions(std::move(dimensions)),
+      antFactory(antFactory) {
     configure(beehive, createPlaces);
 }
 

@@ -11,9 +11,6 @@ struct insect_properties {
 };
 class Insect {
 private:
-    Insect(const Insect &) = delete;
-    Insect &operator=(const Insect &) = delete;
-
 protected:
     const string name; //!< 类名
     double damage;     //!< 伤害
@@ -24,6 +21,11 @@ protected:
     virtual void deathCallback();
 
 public:
+    Insect(Insect &&) = delete;
+    Insect &operator=(Insect &&) = delete;
+    Insect(const Insect &) = delete;
+    Insect &operator=(const Insect &) = delete;
+
     double health;           //!< 生命值
     const bool isWaterProof; //!< 是否抗水
 
@@ -41,6 +43,7 @@ public:
 
     virtual void removeFrom(Place *place);
 
+    [[nodiscard]]
     string getName() const;
 
     virtual ~Insect() = default;

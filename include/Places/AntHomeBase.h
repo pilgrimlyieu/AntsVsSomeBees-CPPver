@@ -7,7 +7,7 @@ class AntHomeBase final : public Place {
 public:
     using Place::Place;
 
-    void addInsect(Insect *insect) override final;
+    void addInsect(Insect *insect) final;
 };
 
 #endif // ANTHOMEBASE_H

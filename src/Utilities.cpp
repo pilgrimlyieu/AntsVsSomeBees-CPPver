@@ -5,7 +5,7 @@
  * @brief 游戏初始化
  */
 void gameInit() {
-    srand((unsigned)time(NULL));
+    srand((unsigned)time(nullptr));
 }
 
 /**

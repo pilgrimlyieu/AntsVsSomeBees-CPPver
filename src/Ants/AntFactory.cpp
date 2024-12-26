@@ -90,7 +90,7 @@ vector<string> AntFactory::getAntNames() const {
                                                   []() -> Ant * { return new AntClass(); }); \
         }                                                                                    \
     };                                                                                       \
-    static AntClass##Register global_##AntClass##Register;
+    static const AntClass##Register global_##AntClass##Register;
 
 REGISTER_ANT_CLASS(Ant)
 REGISTER_ANT_CLASS(AntRemover)
