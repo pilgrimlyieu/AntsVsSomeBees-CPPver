@@ -9,8 +9,6 @@
  *
  * - 类名 name 为 "Container"
  *
- * - 是否可以容纳其他 Ant isContainer 为 true
- *
  * - 容纳的 Ant antContained 为 nullptr
  *
  * @param health ContainerAnt 的初始生命值，默认为 1.0
@@ -27,7 +25,7 @@ ContainerAnt::ContainerAnt(double health, container_ant_properties properties)
  * @return 当前 ContainerAnt 是否还可以容纳另一个 Ant
  */
 bool ContainerAnt::canContain(Ant *other) {
-    return antContained == nullptr && !other->isContainer;
+    return antContained == nullptr && dynamic_cast<ContainerAnt *>(other) == nullptr;
 }
 
 /**

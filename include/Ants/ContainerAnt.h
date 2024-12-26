@@ -7,7 +7,6 @@ class ContainerAnt : public Ant {
 protected:
     struct container_ant_properties : ant_properties {
         string name = "ContainerAnt"; //!< 类名
-        bool isContainer = true;      //!< 是否可以容纳其他 Ant
     };
 
     explicit ContainerAnt(double health,

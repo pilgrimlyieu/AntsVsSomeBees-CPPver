@@ -33,8 +33,9 @@ void QueenAnt::action(GameState &gamestate) {
         Ant *ant = currentPlace->ant;
         if (ant != nullptr) {
             ant->buff();
-            if (ant->isContainer && ((ContainerAnt *)ant)->antContained != nullptr) {
-                ((ContainerAnt *)ant)->antContained->buff();
+            auto container_ptr = dynamic_cast<ContainerAnt *>(ant);
+            if (container_ptr && container_ptr->antContained != nullptr) {
+                container_ptr->antContained->buff();
             }
         }
         currentPlace = currentPlace->exit;

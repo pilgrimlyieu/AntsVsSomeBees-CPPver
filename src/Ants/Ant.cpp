@@ -13,8 +13,6 @@
  *
  * - 是否被加成 buffed 为 false
  *
- * - 是否可以容纳其他 Ant isContainer 为 false
- *
  * - 是否阻挡路径 blocksPath 为 true
  *
  * @param health Ant 的初始生命值，默认为 1.0
@@ -22,7 +20,7 @@
  */
 Ant::Ant(double health, ant_properties properties)
     : Insect(health, nullptr, properties), buffed(properties.buffed), foodCost(properties.foodCost),
-      isContainer(properties.isContainer), blocksPath(properties.blocksPath) {}
+      blocksPath(properties.blocksPath) {}
 
 /**
  * @brief 执行 Ant 的动作

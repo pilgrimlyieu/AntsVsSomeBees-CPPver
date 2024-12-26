@@ -13,7 +13,6 @@ protected:
         string name = "Ant";      //!< 类名
         int foodCost = 0;         //!< 食物消耗
         bool buffed = false;      //!< 是否被加成
-        bool isContainer = false; //!< 是否可以容纳其他 Ant
         bool blocksPath = true;   //!< 是否阻挡路径
     };
 
