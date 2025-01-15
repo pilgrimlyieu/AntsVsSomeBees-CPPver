@@ -11,8 +11,10 @@ set_defaultmode("debug")
 set_defaultplat("mingw")
 
 add_includedirs(
+    "dependencies",
+    "dependencies/asio",
+    "dependencies/crow",
     "include",
-    "include/asio",
     "include/Ants",
     "include/Bees",
     "include/crow",

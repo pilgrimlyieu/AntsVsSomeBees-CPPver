@@ -4,6 +4,7 @@
             "name": "qt",
             "includePath": [
                 "${workspaceFolder}/include/**",
+                "${workspaceFolder}/dependencies/**",
                 "C:/Users/Fesmoph/AppData/Local/.xmake/packages/c/catch2/v3.7.1/bd925c6e1767490995baa87ce4bd49ad/include"
             ],
             "cStandard": "c11",

@@ -3,10 +3,10 @@
   "C_Cpp.doxygen.generatedStyle": "/**",
   "C_Cpp.files.exclude": {
     "**/.vscode": true,
-    "include/asio.hpp": true,
-    "include/asio/*": true,
-    "include/crow.h": true,
-    "include/crow/*": true
+    "dependencies/asio.hpp": true,
+    "dependencies/asio/*": true,
+    "dependencies/crow.h": true,
+    "dependencies/crow/*": true
   },
   // "xmake.runMode": "buildRun", // 有点问题
   "C_Cpp.formatting": "clangFormat",

@@ -17,9 +17,8 @@ TODO.md
 # Doxygen
 doc/html
 
-# include
-include/asio*
-include/crow*
+# dependencies
+dependencies
 
 # temporary
 test
