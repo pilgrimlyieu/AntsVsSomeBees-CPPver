@@ -1,5 +1,5 @@
-#ifndef WALLANT_H
-#define WALLANT_H
+#ifndef WALLANT_HPP
+#define WALLANT_HPP
 
 #include "Ant.hpp"
 
@@ -10,4 +10,4 @@ public:
     explicit WallAnt() : WallAnt(4.0) {}
 };
 
-#endif // WALLANT_H
+#endif // WALLANT_HPP

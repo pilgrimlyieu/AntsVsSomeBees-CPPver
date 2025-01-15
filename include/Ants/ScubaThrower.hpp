@@ -1,5 +1,5 @@
-#ifndef SCUBATHROWER_H
-#define SCUBATHROWER_H
+#ifndef SCUBATHROWER_HPP
+#define SCUBATHROWER_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -19,4 +19,4 @@ public:
     explicit ScubaThrower() : ScubaThrower(1.0) {}
 };
 
-#endif // SCUBATHROWER_H
+#endif // SCUBATHROWER_HPP

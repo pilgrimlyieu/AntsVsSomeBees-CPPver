@@ -1,5 +1,5 @@
-#ifndef SLOWTHROWER_H
-#define SLOWTHROWER_H
+#ifndef SLOWTHROWER_HPP
+#define SLOWTHROWER_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -13,4 +13,4 @@ public:
     explicit SlowThrower() : SlowThrower(1.0) {};
 };
 
-#endif // SLOWTHROWER_H
+#endif // SLOWTHROWER_HPP

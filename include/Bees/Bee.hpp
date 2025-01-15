@@ -1,5 +1,5 @@
-#ifndef BEE_H
-#define BEE_H
+#ifndef BEE_HPP
+#define BEE_HPP
 
 #include "Insect.hpp"
 
@@ -42,4 +42,4 @@ public:
     void scare(g_time length);
 };
 
-#endif // BEE_H
+#endif // BEE_HPP

@@ -1,5 +1,5 @@
-#ifndef BODYGUARDANT_H
-#define BODYGUARDANT_H
+#ifndef BODYGUARDANT_HPP
+#define BODYGUARDANT_HPP
 
 #include "ContainerAnt.hpp"
 
@@ -10,4 +10,4 @@ public:
     explicit BodyguardAnt() : BodyguardAnt(2.0) {}
 };
 
-#endif // BODYGUARDANT_H
+#endif // BODYGUARDANT_HPP

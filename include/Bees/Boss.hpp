@@ -1,5 +1,5 @@
-#ifndef BOSS_H
-#define BOSS_H
+#ifndef BOSS_HPP
+#define BOSS_HPP
 
 #include "Hornet.hpp"
 #include "Wasp.hpp"
@@ -20,4 +20,4 @@ public:
     void reduceHealth(double amount) final;
 };
 
-#endif // BOSS_H
+#endif // BOSS_HPP

@@ -1,5 +1,5 @@
-#ifndef NINJABEE_H
-#define NINJABEE_H
+#ifndef NINJABEE_HPP
+#define NINJABEE_HPP
 
 #include "Bee.hpp"
 
@@ -12,4 +12,4 @@ public:
     bool blocked() final;
 };
 
-#endif // NINJABEE_H
+#endif // NINJABEE_HPP

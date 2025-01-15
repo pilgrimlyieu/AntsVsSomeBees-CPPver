@@ -1,5 +1,5 @@
-#ifndef FIREANT_H
-#define FIREANT_H
+#ifndef FIREANT_HPP
+#define FIREANT_HPP
 
 #include "Ant.hpp"
 
@@ -12,4 +12,4 @@ public:
     void reduceHealth(double amount) final;
 };
 
-#endif // FIREANT_H
+#endif // FIREANT_HPP

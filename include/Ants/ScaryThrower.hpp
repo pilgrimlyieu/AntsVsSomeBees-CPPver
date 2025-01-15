@@ -1,5 +1,5 @@
-#ifndef SCARYTHROWER_H
-#define SCARYTHROWER_H
+#ifndef SCARYTHROWER_HPP
+#define SCARYTHROWER_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -13,4 +13,4 @@ public:
     explicit ScaryThrower() : ScaryThrower(1.0) {}
 };
 
-#endif // SCARYTHROWER_H
+#endif // SCARYTHROWER_HPP

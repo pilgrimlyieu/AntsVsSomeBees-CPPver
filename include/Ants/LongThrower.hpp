@@ -1,5 +1,5 @@
-#ifndef LONGTHROWER_H
-#define LONGTHROWER_H
+#ifndef LONGTHROWER_HPP
+#define LONGTHROWER_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -10,4 +10,4 @@ public:
     explicit LongThrower() : LongThrower(1.0) {}
 };
 
-#endif // LONGTHROWER_H
+#endif // LONGTHROWER_HPP

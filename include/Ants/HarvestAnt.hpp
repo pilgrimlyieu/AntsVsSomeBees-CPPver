@@ -1,5 +1,5 @@
-#ifndef HARVESTANT_H
-#define HARVESTANT_H
+#ifndef HARVESTANT_HPP
+#define HARVESTANT_HPP
 
 #include "Ant.hpp"
 
@@ -12,4 +12,4 @@ public:
     void action(GameState &gamestate) final;
 };
 
-#endif // HARVESTANT_H
+#endif // HARVESTANT_HPP

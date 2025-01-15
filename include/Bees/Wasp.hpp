@@ -1,5 +1,5 @@
-#ifndef WASP_H
-#define WASP_H
+#ifndef WASP_HPP
+#define WASP_HPP
 
 #include "Bee.hpp"
 
@@ -10,4 +10,4 @@ public:
     explicit Wasp(double health) : Wasp(health, nullptr) {}
 };
 
-#endif // WASP_H
+#endif // WASP_HPP

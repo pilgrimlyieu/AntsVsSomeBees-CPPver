@@ -1,5 +1,5 @@
-#ifndef CONTAINERANT_H
-#define CONTAINERANT_H
+#ifndef CONTAINERANT_HPP
+#define CONTAINERANT_HPP
 
 #include "Ant.hpp"
 
@@ -30,4 +30,4 @@ public:
     void action(GameState &gamestate) override;
 };
 
-#endif // CONTAINERANT_H
+#endif // CONTAINERANT_HPP

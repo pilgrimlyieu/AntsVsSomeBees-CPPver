@@ -1,5 +1,5 @@
-#ifndef TANKANT_H
-#define TANKANT_H
+#ifndef TANKANT_HPP
+#define TANKANT_HPP
 
 #include "ContainerAnt.hpp"
 
@@ -12,4 +12,4 @@ public:
     void action(GameState &gamestate) final;
 };
 
-#endif // TANKANT_H
+#endif // TANKANT_HPP

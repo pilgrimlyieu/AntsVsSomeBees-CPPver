@@ -1,5 +1,5 @@
-#ifndef SHORTTHROWER_H
-#define SHORTTHROWER_H
+#ifndef SHORTTHROWER_HPP
+#define SHORTTHROWER_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -10,4 +10,4 @@ public:
     explicit ShortThrower() : ShortThrower(1.0) {}
 };
 
-#endif // SHORTTHROWER_H
+#endif // SHORTTHROWER_HPP

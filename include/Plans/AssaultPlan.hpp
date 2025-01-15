@@ -1,5 +1,5 @@
-#ifndef ASSAUTPLAN_H
-#define ASSAUTPLAN_H
+#ifndef ASSAUTPLAN_HPP
+#define ASSAUTPLAN_HPP
 
 #include "Utilities.hpp"
 class AssaultPlan final {
@@ -15,4 +15,4 @@ public:
     bees_list &operator[](g_time time);
 };
 
-#endif // ASSAUTPLAN_H
+#endif // ASSAUTPLAN_HPP

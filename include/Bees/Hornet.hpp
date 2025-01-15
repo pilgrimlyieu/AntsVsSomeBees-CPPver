@@ -1,5 +1,5 @@
-#ifndef HORNET_H
-#define HORNET_H
+#ifndef HORNET_HPP
+#define HORNET_HPP
 
 #include "Bee.hpp"
 
@@ -14,4 +14,4 @@ public:
     // TODO: immune
 };
 
-#endif // HORNET_H
+#endif // HORNET_HPP

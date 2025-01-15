@@ -1,5 +1,5 @@
-#ifndef MAKEPLANS_H
-#define MAKEPLANS_H
+#ifndef MAKEPLANS_HPP
+#define MAKEPLANS_HPP
 
 #include "AssaultPlan.hpp"
 

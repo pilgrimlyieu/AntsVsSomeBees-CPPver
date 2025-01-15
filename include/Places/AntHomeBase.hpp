@@ -1,5 +1,5 @@
-#ifndef ANTHOMEBASE_H
-#define ANTHOMEBASE_H
+#ifndef ANTHOMEBASE_HPP
+#define ANTHOMEBASE_HPP
 
 #include "Place.hpp"
 
@@ -10,4 +10,4 @@ public:
     void addInsect(Insect *insect) final;
 };
 
-#endif // ANTHOMEBASE_H
+#endif // ANTHOMEBASE_HPP

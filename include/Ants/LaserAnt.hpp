@@ -1,5 +1,5 @@
-#ifndef LASERANT_H
-#define LASERANT_H
+#ifndef LASERANT_HPP
+#define LASERANT_HPP
 
 #include "ThrowerAnt.hpp"
 
@@ -21,4 +21,4 @@ public:
     void action(GameState &gamestate) final;
 };
 
-#endif // LASERANT_H{
+#endif // LASERANT_HPP{

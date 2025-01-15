@@ -1,5 +1,5 @@
-#ifndef INSECT_H
-#define INSECT_H
+#ifndef INSECT_HPP
+#define INSECT_HPP
 
 #include "Utilities.hpp"
 
@@ -55,4 +55,4 @@ template <std::derived_from<Insect> T> struct std::formatter<T> : std::formatter
     }
 };
 
-#endif // INSECT_H
+#endif // INSECT_HPP

@@ -1,5 +1,5 @@
-#ifndef HUNGRYANT_H
-#define HUNGRYANT_H
+#ifndef HUNGRYANT_HPP
+#define HUNGRYANT_HPP
 
 #include "Ant.hpp"
 
@@ -16,4 +16,4 @@ public:
     void action(GameState &gamestate) final;
 };
 
-#endif // HUNGRYANT_H
+#endif // HUNGRYANT_HPP

@@ -17,8 +17,8 @@ add_includedirs(
     "include",
     "include/Ants",
     "include/Bees",
-    "include/crow",
     "include/Exceptions",
+    "include/GUI",
     "include/Places",
     "include/Plans"
 )

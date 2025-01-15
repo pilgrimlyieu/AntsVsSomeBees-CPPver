@@ -1,5 +1,5 @@
-#ifndef THROWERANT_H
-#define THROWERANT_H
+#ifndef THROWERANT_HPP
+#define THROWERANT_HPP
 
 #include "Ant.hpp"
 
@@ -30,4 +30,4 @@ public:
     void action(GameState &gamestate) override;
 };
 
-#endif // THROWERANT_H
+#endif // THROWERANT_HPP

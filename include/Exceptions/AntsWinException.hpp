@@ -1,8 +1,8 @@
-#ifndef ANTSWINEXCEPTION_H
-#define ANTSWINEXCEPTION_H
+#ifndef ANTSWINEXCEPTION_HPP
+#define ANTSWINEXCEPTION_HPP
 
 #include "GameOverException.hpp"
 
 class AntsWinException final : public GameOverException {};
 
-#endif // ANTSWINEXCEPTION_H
+#endif // ANTSWINEXCEPTION_HPP

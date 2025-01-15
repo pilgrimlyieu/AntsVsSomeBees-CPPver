@@ -1,5 +1,5 @@
-#ifndef QUEENANT_H
-#define QUEENANT_H
+#ifndef QUEENANT_HPP
+#define QUEENANT_HPP
 
 #include "ScubaThrower.hpp"
 
@@ -16,4 +16,4 @@ public:
     void removeFrom(Place *place) final;
 };
 
-#endif // QUEENANT_H
+#endif // QUEENANT_HPP

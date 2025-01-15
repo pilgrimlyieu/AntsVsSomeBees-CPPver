@@ -1,8 +1,8 @@
-#ifndef GAMEOVEREXCEPTION_H
-#define GAMEOVEREXCEPTION_H
+#ifndef GAMEOVEREXCEPTION_HPP
+#define GAMEOVEREXCEPTION_HPP
 
 #include "Utilities.hpp"
 
 class GameOverException : public exception {};
 
-#endif // GAMEOVEREXCEPTION_H
+#endif // GAMEOVEREXCEPTION_HPP

@@ -1,5 +1,5 @@
-#ifndef ANT_H
-#define ANT_H
+#ifndef ANT_HPP
+#define ANT_HPP
 
 #include "Insect.hpp"
 
@@ -47,4 +47,4 @@ public:
     void buff();
 };
 
-#endif // ANT_H
+#endif // ANT_HPP

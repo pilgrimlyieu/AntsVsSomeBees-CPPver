@@ -1,5 +1,5 @@
-#ifndef HIVE_H
-#define HIVE_H
+#ifndef HIVE_HPP
+#define HIVE_HPP
 
 #include "AssaultPlan.hpp"
 #include "Place.hpp"
@@ -14,4 +14,4 @@ public:
     void strategy(GameState &gameState);
 };
 
-#endif // HIVE_H
+#endif // HIVE_HPP

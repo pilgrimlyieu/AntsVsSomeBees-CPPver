@@ -1,5 +1,5 @@
-#ifndef ANTFACTORY_H
-#define ANTFACTORY_H
+#ifndef ANTFACTORY_HPP
+#define ANTFACTORY_HPP
 
 #include "Ant.hpp"
 #include "QueenAnt.hpp"
@@ -33,4 +33,4 @@ public:
     vector<string> getAntNames() const;
 };
 
-#endif // ANTFACTORY_H
+#endif // ANTFACTORY_HPP

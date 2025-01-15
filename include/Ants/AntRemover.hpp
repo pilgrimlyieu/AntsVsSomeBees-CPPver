@@ -1,5 +1,5 @@
-#ifndef ANTREMOVER_H
-#define ANTREMOVER_H
+#ifndef ANTREMOVER_HPP
+#define ANTREMOVER_HPP
 
 #include "Ant.hpp"
 
@@ -8,4 +8,4 @@ public:
     explicit AntRemover();
 };
 
-#endif // ANTREMOVER_H
+#endif // ANTREMOVER_HPP

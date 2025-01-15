@@ -3,8 +3,8 @@
  * @brief 提供一些常用的工具函数和类型定义。
  */
 
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef UTILITIES_HPP
+#define UTILITIES_HPP
 
 // #ifdef DEBUG
 // #define private   public
@@ -112,4 +112,4 @@ template <typename T> T randomElement(const vector<T> &list) {
     return list[rand() % list.size()];
 }
 
-#endif // UTILITIES_H
+#endif // UTILITIES_HPP

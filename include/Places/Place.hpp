@@ -1,5 +1,5 @@
-#ifndef PLACE_H
-#define PLACE_H
+#ifndef PLACE_HPP
+#define PLACE_HPP
 
 #include "Utilities.hpp"
 
@@ -47,4 +47,4 @@ template <std::derived_from<Place> T> struct std::formatter<T> : std::formatter<
     }
 };
 
-#endif // PLACE_H
+#endif // PLACE_HPP

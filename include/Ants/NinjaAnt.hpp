@@ -1,5 +1,5 @@
-#ifndef NINJAANT_H
-#define NINJAANT_H
+#ifndef NINJAANT_HPP
+#define NINJAANT_HPP
 
 #include "Ant.hpp"
 
@@ -12,4 +12,4 @@ public:
     void action(GameState &gamestate) final;
 };
 
-#endif // NINJAANT_H
+#endif // NINJAANT_HPP

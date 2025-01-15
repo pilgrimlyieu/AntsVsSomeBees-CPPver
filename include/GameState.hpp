@@ -1,5 +1,5 @@
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#ifndef GAMESTATE_HPP
+#define GAMESTATE_HPP
 
 #include "AntFactory.hpp"
 #include "AntHomeBase.hpp"
@@ -70,4 +70,4 @@ void wetLayout(Place *base, GameState::register_place_f registerPlace, int tunne
 void dryLayout(Place *base, GameState::register_place_f registerPlace, int tunnels = 3,
                int length = 9);
 
-#endif // GAMESTATE_H
+#endif // GAMESTATE_HPP

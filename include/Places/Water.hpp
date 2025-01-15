@@ -1,5 +1,5 @@
-#ifndef WATER_H
-#define WATER_H
+#ifndef WATER_HPP
+#define WATER_HPP
 
 #include "Place.hpp"
 
@@ -10,4 +10,4 @@ public:
     void addInsect(Insect *insect) final;
 };
 
-#endif // WATER_H
+#endif // WATER_HPP
