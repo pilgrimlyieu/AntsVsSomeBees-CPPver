@@ -2,6 +2,7 @@
 #include "Bee.hpp"
 #include "GameState.hpp"
 #include "Place.hpp"
+#include "WebSocket.hpp"
 
 /**
  * @brief 构造一个新的 ThrowerAnt
@@ -56,6 +57,7 @@ Bee *ThrowerAnt::nearestBee() {
  * @param target 目标 Bee
  */
 void ThrowerAnt::throwAt(Bee *target) {
+    WebSocket::onThrowerAttack(this, target);
     if (target != nullptr) {
         target->reduceHealth(damage);
         log(LOGINFO, format("{} throws at {}, causing {} damage", *this, *target, damage));

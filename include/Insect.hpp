@@ -19,9 +19,9 @@ protected:
     double damage;     //!< 伤害
     Place *place;      //!< 所在地点
 
-    virtual void injuryCallback();
+    void injuryCallback();
 
-    virtual void deathCallback();
+    void deathCallback();
 
 public:
     Insect(Insect &&) = delete;

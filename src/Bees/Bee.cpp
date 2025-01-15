@@ -2,6 +2,7 @@
 #include "Ant.hpp"
 #include "GameState.hpp"
 #include "Place.hpp"
+#include "WebSocket.hpp"
 
 /**
  * @brief 构造一个新的 Bee
@@ -41,6 +42,7 @@ void Bee::sting(Ant *ant) {
  * @param place 指向要移动到的 Place 的指针。
  */
 void Bee::moveTo(Place *place) {
+    WebSocket::onInsectMove(this, place);
     this->place->removeInsect(this);
     place->addInsect(this);
     log(LOGINFO, format("{} moves to {}", *this, *place));
@@ -82,24 +84,6 @@ void Bee::action(GameState &gamestate) {
             scaredTime = std::max(TIME_START, scaredTime - 1);
         }
     }
-}
-
-/**
- * @brief 受伤回调函数
- *
- * 当 Bee 受伤时调用此函数。
- */
-void Bee::injuryCallback() {
-    // TODO
-}
-
-/**
- * @brief 死亡回调函数
- *
- * 当 Bee 死亡时调用此函数。
- */
-void Bee::deathCallback() {
-    // TODO
 }
 
 /**

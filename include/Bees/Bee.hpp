@@ -14,10 +14,6 @@ protected:
     g_time slowedTime; //!< 减速效果剩余时间
     g_time scaredTime; //!< 恐惧效果剩余时间
 
-    void injuryCallback() override;
-
-    void deathCallback() override;
-
 public:
     explicit Bee(double health, Place *place, bee_properties properties);
 

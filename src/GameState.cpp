@@ -82,14 +82,14 @@ void GameState::beesTakeActions() {
  * @return 若 Ant 获胜则返回 `true` ，否则返回 `false` 。
  */
 Generator<optional<bool>> GameState::simulate() {
-    bool result = false;
+    bool result;
     try {
         while (true) {
             beehive->strategy(*this);
-            co_yield std::nullopt;
+            co_yield nullopt;
             antsTakeActions();
             time++;
-            co_yield std::nullopt;
+            co_yield nullopt;
             beesTakeActions();
         }
     } catch (AntsWinException &e) {

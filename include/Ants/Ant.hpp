@@ -18,10 +18,6 @@ protected:
 
     bool buffed; //!< 是否被加成
 
-    void injuryCallback() override;
-
-    void deathCallback() override;
-
 public:
     const int foodCost;    //!< 食物消耗
     const bool blocksPath; //!< 是否阻挡路径

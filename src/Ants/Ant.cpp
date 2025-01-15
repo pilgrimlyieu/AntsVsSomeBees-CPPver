@@ -34,24 +34,6 @@ void Ant::action(GameState &gamestate) {
 }
 
 /**
- * @brief 受伤回调函数
- *
- * 当 Ant 受伤时调用此函数。
- */
-void Ant::injuryCallback() {
-    // TODO
-}
-
-/**
- * @brief 死亡回调函数
- *
- * 当 Ant 死亡时调用此函数。
- */
-void Ant::deathCallback() {
-    // TODO
-}
-
-/**
  * @brief 判断当前 Ant 是否可以容纳另一个 Ant
  *
  * 默认 Ant 始终不能容纳其他 Ant 。
