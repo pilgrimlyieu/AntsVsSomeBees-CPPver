@@ -21,7 +21,7 @@ Hive::Hive(AssaultPlan *assaultPlan) : Place("Hive", nullptr, {.isHive = true}) 
 }
 
 void Hive::strategy(GameState &gameState) {
-    vector<Place *> exits;
+    places_list exits;
     for (auto &[name, place] : gameState.places) {
         if (place->entrance == this) {
             exits.push_back(place);

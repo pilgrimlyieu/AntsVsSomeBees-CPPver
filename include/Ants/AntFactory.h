@@ -7,14 +7,14 @@
 class AntFactory {
 private:
     using ant_constructor = function<Ant *()>;
-    using constructor_map = map<string, ant_constructor>;
+    using constructors_map = map<string, ant_constructor>;
 
     static QueenAnt *queenAnt; //!> QueenAnt
 
     AntFactory() = default;
     ~AntFactory() = default;
 
-    constructor_map antConstructors; //!> Ant 构造函数
+    constructors_map antConstructors; //!> Ant 构造函数
 
 public:
     AntFactory &operator=(AntFactory &&) = delete;

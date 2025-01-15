@@ -7,7 +7,7 @@
 class Hive final : public Place {
 public:
     AssaultPlan *assaultPlan; // TODO initialize
-    bee_list bees;
+    bees_list bees;
 
     explicit Hive(AssaultPlan *assaultPlan);
 

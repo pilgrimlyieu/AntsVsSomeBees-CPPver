@@ -4,7 +4,6 @@
 #include "AntsLoseException.h"
 #include "AntsWinException.h"
 #include "Bee.h"
-#include "Insect.h"
 #include "Utilities.h"
 #include "Water.h"
 
@@ -65,14 +64,14 @@ bool GameState::simulate() {
                     ant->action(*this);
                 }
             }
-            for (auto it = activeBees.begin(); it != activeBees.end();) {
-                Bee *bee = *it;
+            bees_list beesCurrent(activeBees);
+            for (auto bee : beesCurrent) {
                 if (bee->health > 0) {
                     bee->action(*this);
-                    it++;
                 }
                 if (bee->health <= 0) {
-                    it = activeBees.erase(it);
+                    activeBees.erase(std::remove(activeBees.begin(), activeBees.end(), bee),
+                                     activeBees.end());
                 }
             }
             if (activeBees.empty()) {
@@ -135,8 +134,8 @@ void GameState::removeAnt(string placeName) {
  *
  * @return 所有的 Ant
  */
-vector<Ant *> GameState::getAnts() const {
-    vector<Ant *> ants;
+GameState::ants_list GameState::getAnts() const {
+    ants_list ants;
     for (auto &[name, place] : places) {
         if (place->ant != nullptr) {
             ants.push_back(place->ant);
@@ -152,8 +151,8 @@ vector<Ant *> GameState::getAnts() const {
  *
  * @return 所有的 Bee
  */
-vector<Bee *> GameState::getBees() const {
-    vector<Bee *> bees;
+bees_list GameState::getBees() const {
+    bees_list bees;
     for (auto &[name, place] : places) {
         for (auto bee : place->bees) {
             bees.push_back(bee);
@@ -169,10 +168,10 @@ vector<Bee *> GameState::getBees() const {
  *
  * @return 所有的 Insect
  */
-vector<Insect *> GameState::getInsects() const {
-    vector<Insect *> insects;
-    vector<Ant *> ants = getAnts();
-    vector<Bee *> bees = getBees();
+GameState::insects_list GameState::getInsects() const {
+    insects_list insects;
+    ants_list ants = getAnts();
+    bees_list bees = getBees();
     insects.insert(insects.end(), ants.begin(), ants.end());
     insects.insert(insects.end(), bees.begin(), bees.end());
     return insects;
@@ -188,11 +187,14 @@ vector<Insect *> GameState::getInsects() const {
 GameState::operator string() const {
     string status = format(" (Food: {0}, Time: {1})", food, time);
     string result = "[";
-    vector<Insect *> insects = getInsects();
+    insects_list insects = getInsects();
     for (size_t i = 0; i < insects.size(); ++i) {
         result += string(*insects[i]);
         if (i != insects.size() - 1) {
             result += ", ";
+        }
+        if (i % 5 == 4) { // 每行显示 5 个 Insect
+            result += "\n";
         }
     }
     result += "]" + status;
@@ -234,7 +236,7 @@ void antsLose() {
  * @param length 隧道长度
  * @param moatFrequency 湿地频率
  */
-void wetLayout(Place *base, GameState::register_place registerPlace, int tunnels, int length,
+void wetLayout(Place *base, GameState::register_place_f registerPlace, int tunnels, int length,
                int moatFrequency) {
     for (int tunnel = 0; tunnel < tunnels; tunnel++) {
         Place *exit = base;
@@ -259,6 +261,6 @@ void wetLayout(Place *base, GameState::register_place registerPlace, int tunnels
  * @param tunnels 隧道数量
  * @param length 隧道长度
  */
-void dryLayout(Place *base, GameState::register_place registerPlace, int tunnels, int length) {
+void dryLayout(Place *base, GameState::register_place_f registerPlace, int tunnels, int length) {
     wetLayout(base, registerPlace, tunnels, length, 0);
 }

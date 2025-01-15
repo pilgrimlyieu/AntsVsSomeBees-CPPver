@@ -35,17 +35,10 @@ FireAnt::FireAnt(double health)
  */
 void FireAnt::reduceHealth(double amount) {
     double totalDamage = amount + ((amount >= health) ? damage : 0);
-    bee_list killedBees;
-    for (auto bee : place->bees) {
-        if (bee->health <= totalDamage) {
-            killedBees.push_back(bee);
-        } else {
-            bee->reduceHealth(damage);
-        }
-        log(LOGINFO, format("{} attacks {} after attacked", *this, *bee));
-    }
-    for (auto bee : killedBees) {
+    log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
+    std::erase_if(place->bees, [&](auto &bee) {
         bee->reduceHealth(totalDamage);
-    }
+        return bee->health <= 0;
+    });
     Insect::reduceHealth(amount);
 }

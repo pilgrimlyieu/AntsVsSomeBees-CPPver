@@ -31,16 +31,9 @@ NinjaAnt::NinjaAnt(double health)
  * NinjaAnt 的动作是对当前位置的所有 Bee 造成伤害。
  */
 void NinjaAnt::action(GameState &gamestate) {
-    bee_list killedBees;
-    for (auto bee : place->bees) {
-        if (bee->health <= damage) {
-            killedBees.push_back(bee);
-        } else {
-            bee->reduceHealth(damage);
-        }
-        log(LOGINFO, format("{} attacks {}", *this, *bee));
-    }
-    for (auto bee : killedBees) {
+    log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
+    std::erase_if(place->bees, [&](auto &bee) {
         bee->reduceHealth(damage);
-    }
+        return bee->health <= 0;
+    });
 }

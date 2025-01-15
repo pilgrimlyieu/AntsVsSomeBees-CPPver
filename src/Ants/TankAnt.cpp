@@ -26,17 +26,10 @@ TankAnt::TankAnt(double health)
  * 同时会执行身为 ContainerAnt 的动作。
  */
 void TankAnt::action(GameState &gamestate) {
-    bee_list killedBees;
-    for (auto bee : place->bees) {
-        if (bee->health <= damage) {
-            killedBees.push_back(bee);
-        } else {
-            bee->reduceHealth(damage);
-        }
-        log(LOGINFO, format("{} attacks {}", *this, *bee));
-    }
-    for (auto bee : killedBees) {
-        bee->reduceHealth(bee->health);
-    }
+    log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
+    std::erase_if(place->bees, [&](auto &bee) {
+        bee->reduceHealth(damage);
+        return bee->health <= 0;
+    });
     ContainerAnt::action(gamestate);
 }

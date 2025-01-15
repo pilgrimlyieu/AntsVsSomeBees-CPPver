@@ -14,12 +14,13 @@
 #include <cstdarg>
 #include <format>
 #include <functional>
-#include <list>
 #include <map>
 #include <memory>
+#include <ranges>
 #include <stdexcept>
 #include <unordered_map>
 #include <vector>
+
 
 class GameState;
 class Place;
@@ -45,7 +46,6 @@ using std::exception;
 using std::format;
 using std::function;
 using std::invalid_argument;
-using std::list;
 using std::make_shared;
 using std::make_unique;
 using std::map;
@@ -61,7 +61,8 @@ using g_time = int;
 static const g_time TIME_START = (g_time)0;
 
 using bee_type = function<Bee *(double)>;
-using bee_list = vector<Bee *>;
+using bees_list = vector<Bee *>;
+using places_list = vector<Place *>;
 
 /**
  * @brief 游戏策略
@@ -96,34 +97,6 @@ void gameInit();
 void log(LogLevel level, const string &msg);
 
 /**
- * @brief 获取列表中指定索引处的元素。
- *
- * 该函数从提供的列表 `list` 中返回给定索引 `index` 处的元素。
- *
- * @tparam T `list` 元素的类型。
- * @param list 要检索元素的列表。
- * @param index 要检索的元素的索引，从 0 开始。
- * @return T 类型的元素。
- *
- * @throws out_of_range 若索引超出范围。
- *
- * @example
- * @code
- * list<int> myList = {1, 2, 3, 4, 5};
- * int value = get(myList, 2); // value = 3
- * @endcode
- */
-template <typename T> T get(const list<T> &list, int index) {
-    if (index < 0 || index >= list.size()) {
-        THROW_EXCEPTION(out_of_range,
-                        format("Index {} out of range 0..{}", index, list.size() - 1));
-    }
-    auto it = list.begin();
-    advance(it, index);
-    return *it;
-}
-
-/**
  * @brief 从列表中随机选择一个元素。
  *
  * 该函数从提供的列表 `list` 中随机选择一个元素并返回。
@@ -137,22 +110,6 @@ template <typename T> T randomElement(const vector<T> &list) {
         return nullptr;
     }
     return list[rand() % list.size()];
-}
-
-/**
- * @brief 从列表中随机选择一个元素。
- *
- * 该函数从提供的列表 `list` 中随机选择一个元素并返回。
- *
- * @tparam T `list` 元素的类型。
- * @param list 要选择元素的列表。
- * @return T 类型的元素，若列表为空则返回 `nullptr`。
- */
-template <typename T> T randomElement(const list<T> &list) {
-    if (list.size() == 0) {
-        return nullptr;
-    }
-    return get(list, rand() % list.size());
 }
 
 #endif // UTILITIES_H

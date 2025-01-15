@@ -118,7 +118,7 @@ void Bee::addTo(Place *place) {
  * @param place 指向要移除的 Place 的指针。
  */
 void Bee::removeFrom(Place *place) {
-    place->bees.remove(this);
+    place->bees.erase(std::remove(place->bees.begin(), place->bees.end(), this), place->bees.end());
     Insect::removeFrom(place);
 }
 
