@@ -14,14 +14,16 @@ private:
     using register_place_f = function<void(Place *, bool)>;
     using create_places = void (*)(AntHomeBase *, register_place_f, dim);
 
-    friend void wetLayout(Place *base, register_place_f registerPlace, int tunnels, int length,
-                          int moatFrequency);
-    friend void dryLayout(Place *base, register_place_f registerPlace, int tunnels, int length);
+    friend void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
+                             dim dimensions, int moatFrequency);
+    friend void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
+                          dim dimensions);
+    friend void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
+                          dim dimensions);
 
 public:
     g_time time = TIME_START;    //!> 时间
     int food = 0;                //!> 食物余额
-    strat strategy;              //!> 游戏策略
     Hive *beehive;               //!> 蜂巢
     dim dimensions;              //!> 地图尺寸
     bees_list activeBees = {};   //!> 活动 Bee
@@ -31,12 +33,15 @@ public:
     AntFactory *antFactory;      //!> Ant 工厂
     places_list bee_entrances;   //!> Bee 入口
 
-    GameState(strat strategy, AntFactory *antFactory, Hive *beehive, create_places createPlaces,
-              dim dimensions, int food = 2);
+    GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food = 2);
 
     void configure(Hive *beehive, create_places createPlaces);
 
-    bool simulate();
+    void antsTakeActions();
+
+    void beesTakeActions();
+
+    Generator<optional<bool>> simulate();
 
     Ant *deployAnt(string placeName, string antTypeName);
 
@@ -51,6 +56,8 @@ public:
     [[nodiscard]]
     insects_list getInsects() const;
 
+    void createLayout(bool isWet);
+
     operator string() const;
 };
 
@@ -64,10 +71,11 @@ void antsWin();
 
 void antsLose();
 
-void wetLayout(Place *base, GameState::register_place_f registerPlace, int tunnels = 3,
-               int length = 9, int moatFrequency = 3);
+void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions,
+                  int moatFrequency = 3);
 
-void dryLayout(Place *base, GameState::register_place_f registerPlace, int tunnels = 3,
-               int length = 9);
+void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions);
+
+void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions);
 
 #endif // GAMESTATE_HPP

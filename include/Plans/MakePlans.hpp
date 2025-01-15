@@ -13,4 +13,6 @@ AssaultPlan makeHardAssaultPlan();
 
 AssaultPlan makeExtraHardAssaultPlan();
 
+GameState createGameState(const CLIConfig &config);
+
 #endif

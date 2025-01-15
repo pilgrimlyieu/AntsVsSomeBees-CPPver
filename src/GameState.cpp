@@ -10,17 +10,14 @@
 /**
  * @brief 构造一个新的 GameState
  *
- * @param strategy 游戏策略
  * @param antFactory Ant 工厂
  * @param beehive beehive
  * @param createPlaces 创建地点的函数
  * @param dimensions 地图尺寸
  * @param food 初始食物余额，默认为 2
  */
-GameState::GameState(strat strategy, AntFactory *antFactory, Hive *beehive,
-                     create_places createPlaces, dim dimensions, int food)
-    : strategy(strategy), beehive(beehive), dimensions(std::move(dimensions)),
-      antFactory(antFactory) {
+GameState::GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food)
+    : beehive(beehive), dimensions(std::move(dimensions)), antFactory() {
     configure(beehive, createPlaces);
 }
 
@@ -48,47 +45,64 @@ void GameState::configure(Hive *beehive, create_places createPlaces) {
 }
 
 /**
+ * @brief Ant 执行动作
+ */
+void GameState::antsTakeActions() {
+    for (auto ant : getAnts()) {
+        if (ant->health > 0) {
+            ant->action(*this);
+        }
+    }
+}
+
+/**
+ * @brief Bee 执行动作
+ */
+void GameState::beesTakeActions() {
+    bees_list beesCurrent(activeBees);
+    for (auto bee : beesCurrent) {
+        if (bee->health > 0) {
+            bee->action(*this);
+        }
+        if (bee->health <= 0) {
+            activeBees.erase(std::remove(activeBees.begin(), activeBees.end(), bee),
+                             activeBees.end());
+        }
+    }
+    if (activeBees.empty()) {
+        antsWin();
+    }
+}
+
+/**
  * @brief 模拟游戏
  *
  * 模拟游戏，直到 Ant 获胜或失败。
  *
  * @return 若 Ant 获胜则返回 `true` ，否则返回 `false` 。
  */
-bool GameState::simulate() {
+Generator<optional<bool>> GameState::simulate() {
+    bool result = false;
     try {
         while (true) {
             beehive->strategy(*this);
-            strategy(*this);
-            for (auto ant : getAnts()) {
-                if (ant->health > 0) {
-                    ant->action(*this);
-                }
-            }
-            bees_list beesCurrent(activeBees);
-            for (auto bee : beesCurrent) {
-                if (bee->health > 0) {
-                    bee->action(*this);
-                }
-                if (bee->health <= 0) {
-                    activeBees.erase(std::remove(activeBees.begin(), activeBees.end(), bee),
-                                     activeBees.end());
-                }
-            }
-            if (activeBees.empty()) {
-                antsWin();
-            }
+            co_yield std::nullopt;
+            antsTakeActions();
             time++;
+            co_yield std::nullopt;
+            beesTakeActions();
         }
     } catch (AntsWinException &e) {
         log(LOGINFO, "All bees are vanquished. You win!");
-        return true;
+        result = true;
     } catch (AntsLoseException &e) {
         log(LOGINFO, "The ant queen has perished. Please try again.");
-        return false;
+        result = false;
     } catch (exception &e) {
         log(LOGERROR, e.what());
-        return false;
+        result = false;
     }
+    co_yield result;
 }
 
 /**
@@ -105,6 +119,7 @@ Ant *GameState::deployAnt(string placeName, string antTypeName) {
     if (ant != nullptr) {
         if (ant->foodCost > food) {
             delete ant;
+            log(LOGERROR, format("Insufficient food to deploy {0}.", antTypeName));
             return nullptr;
         }
         places[placeName]->addInsect(ant);
@@ -224,7 +239,7 @@ void antsLose() {
 }
 
 /**
- * @brief 湿地布局
+ * @brief 创建布局
  *
  * 从基地开始，创建一系列的隧道，其中每隔一定距离会有湿地。
  *
@@ -232,12 +247,13 @@ void antsLose() {
  *
  * @param base 基地
  * @param registerPlace 注册 Place 的函数
- * @param tunnels 隧道数量
- * @param length 隧道长度
+ * @param dimensions 布局维度
  * @param moatFrequency 湿地频率
  */
-void wetLayout(Place *base, GameState::register_place_f registerPlace, int tunnels, int length,
-               int moatFrequency) {
+void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions,
+                  int moatFrequency) {
+    int tunnels = dimensions.first;
+    int length = dimensions.second;
     for (int tunnel = 0; tunnel < tunnels; tunnel++) {
         Place *exit = base;
         for (int step = 0; step < length; step++) {
@@ -252,15 +268,27 @@ void wetLayout(Place *base, GameState::register_place_f registerPlace, int tunne
 }
 
 /**
+ * @brief 湿地布局
+ *
+ * 从基地开始，创建一系列的隧道，其中每隔一定距离会有湿地。
+ *
+ * @param base 基地
+ * @param registerPlace 注册 Place 的函数
+ * @param dimensions 布局维度
+ */
+void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions) {
+    createLayout(base, registerPlace, dimensions, 3);
+}
+
+/**
  * @brief 干地布局
  *
  * 从基地开始，创建一系列的隧道。
  *
  * @param base 基地
  * @param registerPlace 注册 Place 的函数
- * @param tunnels 隧道数量
- * @param length 隧道长度
+ * @param dimensions 布局维度
  */
-void dryLayout(Place *base, GameState::register_place_f registerPlace, int tunnels, int length) {
-    wetLayout(base, registerPlace, tunnels, length, 0);
+void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions) {
+    createLayout(base, registerPlace, dimensions, 0);
 }

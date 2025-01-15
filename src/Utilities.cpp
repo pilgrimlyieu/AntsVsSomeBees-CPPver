@@ -33,3 +33,23 @@ void log(LogLevel level, const string &msg) {
         break;
     }
 }
+
+/**
+ * @brief 分割字符串
+ *
+ * @param str 要分割的字符串
+ * @param delim 分隔符
+ * @return 分割后的字符串列表
+ */
+vector<string> split(const string &str, char delim) {
+    vector<string> parts;
+    size_t start = 0;
+    size_t end = str.find(delim);
+    while (end != string::npos) {
+        parts.push_back(str.substr(start, end - start));
+        start = end + 1;
+        end = str.find(delim, start);
+    }
+    parts.push_back(str.substr(start));
+    return parts;
+}

@@ -1,5 +1,8 @@
 #include "Insect.hpp"
 #include "Place.hpp"
+#include "WebSocket.hpp"
+
+int Insect::idCounter = 0;
 
 /**
  * @brief Insect 类的构造函数，初始化一个 Insect
@@ -17,8 +20,8 @@
  * @param properties Insect 的属性
  */
 Insect::Insect(double health, Place *place, insect_properties properties)
-    : name(properties.name), damage(properties.damage), place(place), health(health),
-      isWaterProof(properties.isWaterProof) {}
+    : id(idCounter++), name(properties.name), damage(properties.damage), place(place),
+      health(health), isWaterProof(properties.isWaterProof) {}
 
 /**
  * @brief 减少 Insect 的生命值
@@ -45,7 +48,7 @@ void Insect::reduceHealth(double amount) {
  * 当 Insect 受伤时调用此函数。
  */
 void Insect::injuryCallback() {
-    // TODO
+    WebSocket::onHealthReduced(this);
 }
 
 /**
@@ -54,7 +57,7 @@ void Insect::injuryCallback() {
  * 当 Insect 死亡时调用此函数。
  */
 void Insect::deathCallback() {
-    // TODO
+    WebSocket::onInsectDeath(this);
 }
 
 /**
@@ -93,6 +96,24 @@ Insect::operator string() const {
  */
 void Insect::kill() {
     reduceHealth(health);
+}
+
+/**
+ * @brief 获取 Insect 的 ID
+ *
+ * @return int Insect 的 ID
+ */
+int Insect::getId() const {
+    return id;
+}
+
+/**
+ * @brief 获取 Insect 所在的 Place
+ *
+ * @return Place* 指向 Insect 所在的 Place 的指针
+ */
+Place *Insect::getPlace() const {
+    return place;
 }
 
 /**

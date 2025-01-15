@@ -11,6 +11,9 @@ struct insect_properties {
 };
 class Insect {
 private:
+    static int idCounter; //!< Insect ID 计数器
+    int id;               //!< Insect ID
+
 protected:
     const string name; //!< 类名
     double damage;     //!< 伤害
@@ -42,6 +45,10 @@ public:
     virtual void addTo(Place *place);
 
     virtual void removeFrom(Place *place);
+
+    int getId() const;
+
+    Place *getPlace() const;
 
     [[nodiscard]]
     string getName() const;

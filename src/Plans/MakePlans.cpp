@@ -1,5 +1,8 @@
 #include "MakePlans.hpp"
 #include "Boss.hpp"
+#include "CLI.hpp"
+#include "GameState.hpp"
+#include "Hive.hpp"
 #include "Hornet.hpp"
 #include "NinjaBee.hpp"
 #include "Wasp.hpp"
@@ -90,4 +93,13 @@ AssaultPlan makeExtraHardAssaultPlan() {
     plan.addWave(CREATE_BEES(Hornet), 5.0, 28, 2);
     plan.addWave(CREATE_BEES(Boss), 30.0, 30, 2);
     return plan;
+}
+
+GameState createGameState(const CLIConfig &config) {
+    AssaultPlan plan = config.makeAssaultPlan();
+    Hive *beehive = new Hive(&plan);
+    static const int tunnelLength = 10;
+    dim dimensions = {config.getNumTunnels(), tunnelLength};
+    return GameState(beehive, config.waterEnabled ? wetLayout : dryLayout, dimensions,
+                     config.initialFood);
 }
