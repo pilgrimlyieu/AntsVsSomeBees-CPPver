@@ -1,5 +1,5 @@
-#include "HarvestAnt.h"
-#include "GameState.h"
+#include "HarvestAnt.hpp"
+#include "GameState.hpp"
 
 /**
  * @brief 构造一个新的 HarvestAnt

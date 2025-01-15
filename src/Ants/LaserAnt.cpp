@@ -1,6 +1,6 @@
-#include "LaserAnt.h"
-#include "Bee.h"
-#include "Place.h"
+#include "LaserAnt.hpp"
+#include "Bee.hpp"
+#include "Place.hpp"
 
 /**
  * @brief 构造一个新的 LaserAnt

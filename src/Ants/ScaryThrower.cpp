@@ -1,5 +1,5 @@
-#include "ScaryThrower.h"
-#include "Bee.h"
+#include "ScaryThrower.hpp"
+#include "Bee.hpp"
 
 /**
  * @brief 构造一个新的 ScaryThrower

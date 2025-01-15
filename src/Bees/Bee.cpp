@@ -1,7 +1,7 @@
-#include "Bee.h"
-#include "Ant.h"
-#include "GameState.h"
-#include "Place.h"
+#include "Bee.hpp"
+#include "Ant.hpp"
+#include "GameState.hpp"
+#include "Place.hpp"
 
 /**
  * @brief 构造一个新的 Bee

@@ -1,7 +1,7 @@
-#include "ThrowerAnt.h"
-#include "Bee.h"
-#include "GameState.h"
-#include "Place.h"
+#include "ThrowerAnt.hpp"
+#include "Bee.hpp"
+#include "GameState.hpp"
+#include "Place.hpp"
 
 /**
  * @brief 构造一个新的 ThrowerAnt

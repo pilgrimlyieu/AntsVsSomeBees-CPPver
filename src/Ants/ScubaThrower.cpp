@@ -1,4 +1,4 @@
-#include "ScubaThrower.h"
+#include "ScubaThrower.hpp"
 
 /**
  * @brief 构造一个新的 ScubaThrower

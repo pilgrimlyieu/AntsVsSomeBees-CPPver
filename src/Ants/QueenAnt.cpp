@@ -1,7 +1,7 @@
-#include "QueenAnt.h"
-#include "ContainerAnt.h"
-#include "GameState.h"
-#include "Place.h"
+#include "QueenAnt.hpp"
+#include "ContainerAnt.hpp"
+#include "GameState.hpp"
+#include "Place.hpp"
 
 /**
  * @brief 构造一个新的 QueenAnt

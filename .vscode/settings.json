@@ -24,7 +24,7 @@
     "error",
     "warning",
     "info",
-    "hint"
+    // "hint"
   ],
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
   // "python.terminal.activateEnvironment": false,

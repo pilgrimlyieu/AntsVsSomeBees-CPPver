@@ -1,5 +1,5 @@
-#include "Insect.h"
-#include "Place.h"
+#include "Insect.hpp"
+#include "Place.hpp"
 
 /**
  * @brief Insect 类的构造函数，初始化一个 Insect

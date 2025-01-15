@@ -1,6 +1,6 @@
-#include "Hive.h"
-#include "Bee.h"
-#include "GameState.h"
+#include "Hive.hpp"
+#include "Bee.hpp"
+#include "GameState.hpp"
 
 /**
  * @brief 构造一个新的 Hive

@@ -1,4 +1,4 @@
-#include "NinjaBee.h"
+#include "NinjaBee.hpp"
 
 /**
  * @brief 构造一个新的 NinjaBee

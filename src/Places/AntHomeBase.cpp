@@ -1,6 +1,6 @@
-#include "AntHomeBase.h"
-#include "Bee.h"
-#include "GameState.h"
+#include "AntHomeBase.hpp"
+#include "Bee.hpp"
+#include "GameState.hpp"
 
 /**
  * @brief 将一个 Insect 添加到当前 AntHomeBase

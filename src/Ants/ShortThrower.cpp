@@ -1,4 +1,4 @@
-#include "ShortThrower.h"
+#include "ShortThrower.hpp"
 
 /**
  * @brief 构造一个新的 ShortThrower

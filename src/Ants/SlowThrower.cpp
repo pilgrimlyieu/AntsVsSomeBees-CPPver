@@ -1,5 +1,5 @@
-#include "SlowThrower.h"
-#include "Bee.h"
+#include "SlowThrower.hpp"
+#include "Bee.hpp"
 
 /**
  * @brief 构造一个新的 SlowThrower
