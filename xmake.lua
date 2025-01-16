@@ -64,6 +64,14 @@ target(target_name)
     add_files("src/Main.cpp")
     add_deps(lib_name)
 
+after_build(function (target)
+    os.mkdir("$(buildir)/static")
+    os.mkdir("$(buildir)/templates")
+    os.cp("static", "$(buildir)")
+    os.cp("templates", "$(buildir)")
+    print("Resource files copied to build directory")
+end)
+
 for _, file in ipairs(os.files("test/**/test_*.cpp")) do
     local group = path.directory(path.relative(file, "./test"))
     local name = path.basename(file)
