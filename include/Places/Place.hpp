@@ -5,16 +5,11 @@
 
 class Place {
 protected:
-    virtual bool getIsHive() const {
-        return false;
-    }
-
     ~Place() = default;
 
 public:
     // exit <- place -> entrance --> Hive
     string name;         //!< 名称
-    const bool isHive;   //!< 是否是 Hive
     Place *exit;         //!< 出口（指向下一个 Place）
     Place *entrance;     //!< 入口（指向上一个 Place）
     bees_list bees = {}; //!< 在 Place 中的 Bee 列表
@@ -27,6 +22,10 @@ public:
 
     explicit Place(string name, Place *exit);
     explicit Place(string name) : Place(name, nullptr) {}
+
+    virtual bool getIsHive() const {
+        return false;
+    }
 
     Bee *randomBee();
 

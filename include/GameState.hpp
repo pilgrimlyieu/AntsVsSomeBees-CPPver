@@ -95,7 +95,7 @@ private:
 
 public:
     g_time time = TIME_START;    //!> 时间
-    int food = 0;                //!> 食物余额
+    int food;                    //!> 食物余额
     Hive *beehive;               //!> 蜂巢
     dim dimensions;              //!> 地图尺寸
     bees_list activeBees = {};   //!> 活动 Bee

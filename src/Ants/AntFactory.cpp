@@ -93,7 +93,6 @@ vector<string> AntFactory::getAntNames() const {
     };                                                                                       \
     static const AntClass##Register global_##AntClass##Register;
 
-REGISTER_ANT_CLASS(Ant)
 REGISTER_ANT_CLASS(AntRemover)
 REGISTER_ANT_CLASS(BodyguardAnt)
 REGISTER_ANT_CLASS(FireAnt)

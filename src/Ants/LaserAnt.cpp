@@ -13,7 +13,7 @@ LaserAnt::insects_distance LaserAnt::getTargets() {
     insects_distance targets;
     int distance = 0;
     Place *currentPlace = place;
-    while (!currentPlace->isHive) {
+    while (!currentPlace->getIsHive()) {
         if (currentPlace->ant != nullptr && currentPlace->ant != this) {
             targets[currentPlace->ant] = distance;
         }

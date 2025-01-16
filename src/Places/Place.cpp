@@ -11,7 +11,7 @@
  * @param name Place 的名称
  * @param exit Place 的出口
  */
-Place::Place(string name, Place *exit) : name(name), isHive(getIsHive()), exit(exit) {
+Place::Place(string name, Place *exit) : name(name), exit(exit) {
     if (this->exit != nullptr) {
         this->exit->entrance = this;
     }

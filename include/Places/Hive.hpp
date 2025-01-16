@@ -5,16 +5,15 @@
 #include "Place.hpp"
 
 class Hive final : public Place {
-private:
-    bool getIsHive() const final {
-        return true;
-    }
-
 public:
     AssaultPlan assaultPlan;
     bees_list bees;
 
     explicit Hive(AssaultPlan assaultPlan);
+
+    bool getIsHive() const final {
+        return true;
+    }
 
     void strategy(GameState &gameState);
 };

@@ -53,7 +53,7 @@ bool Bee::blocked() {
 void Bee::action(GameState &gamestate) {
     Place *destination = place->exit;
     if (scaredTime > 0) {
-        destination = (place->entrance->isHive) ? place : place->entrance;
+        destination = (place->entrance->getIsHive()) ? place : place->entrance;
     }
     if (slowedTime > 0 && gamestate.time % 2 == 1) {
         slowedTime--;

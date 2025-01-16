@@ -6,10 +6,9 @@
 #include <argparse/argparse.hpp>
 
 struct CLIConfig {
-
     string difficulty = "normal";
-    bool waterEnabled = false;
-    int initialFood = 2;
+    bool waterEnabled;
+    int initialFood;
 
     AssaultPlan makeAssaultPlan() const {
         if (difficulty == "test") {
