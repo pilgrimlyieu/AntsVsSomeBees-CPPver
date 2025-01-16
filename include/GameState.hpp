@@ -104,6 +104,7 @@ public:
     places_map places;           //!> 地点
     AntFactory *antFactory;      //!> Ant 工厂
     places_list bee_entrances;   //!> Bee 入口
+    int numBees = 0;             //!> Bee 数量
 
     GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food = 2);
 

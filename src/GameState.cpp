@@ -36,6 +36,7 @@ void GameState::configure(Hive *beehive, create_places createPlaces) {
     bee_entrances.clear();
     auto register_place = [this, beehive](Place *place, bool isBeeEntrance) {
         places[place->name] = place;
+        log(LOGTEST, format("Adding {}", *place));
         if (isBeeEntrance) {
             place->entrance = beehive;
             bee_entrances.push_back(place);
@@ -66,11 +67,13 @@ void GameState::beesTakeActions() {
             bee->action(*this);
         }
         if (bee->health <= 0) {
+            numBees--;
+            log(LOGINFO, format("Bee {} is dead", string(*bee)));
             activeBees.erase(std::remove(activeBees.begin(), activeBees.end(), bee),
                              activeBees.end());
         }
     }
-    if (activeBees.empty()) {
+    if (numBees == 0) {
         antsWin();
     }
 }
@@ -84,8 +87,12 @@ void GameState::beesTakeActions() {
  */
 Simulator GameState::simulate() {
     bool result;
+    numBees = getBees().size();
+    log(LOGINFO, format("Simulation started with {} bees", numBees));
     try {
         while (true) {
+            log(LOGTEST, *this);
+            log(LOGTEST, format("{} bees remaining", numBees));
             beehive->strategy(*this);
             co_yield nullptr;
             antsTakeActions();
@@ -123,6 +130,7 @@ Ant *GameState::deployAnt(string placeName, string antTypeName) {
             log(LOGERROR, format("Insufficient food to deploy {0}.", antTypeName));
             return nullptr;
         }
+        log(LOGTEST, format("Deploying {0} to {1}", antTypeName, placeName));
         places[placeName]->addInsect(ant);
         food -= ant->getFoodCost();
     }
@@ -194,18 +202,18 @@ GameState::insects_list GameState::getInsects() const {
  */
 GameState::operator string() const {
     string status = format(" (Food: {0}, Time: {1})", food, time);
-    string result = "[";
+    string result = "[\n\t";
     insects_list insects = getInsects();
     for (size_t i = 0; i < insects.size(); ++i) {
         result += string(*insects[i]);
         if (i != insects.size() - 1) {
-            result += ", ";
+            result += ";\t";
         }
         if (i % 5 == 4) { // 每行显示 5 个 Insect
-            result += "\n";
+            result += "\n\t";
         }
     }
-    result += "]" + status;
+    result += "\n]" + status;
     return result;
 }
 
