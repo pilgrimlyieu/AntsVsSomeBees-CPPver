@@ -1,3 +1,31 @@
+let enablePolling = false;
+let isServerRunning = true;
+let failedRequestCount = 0;
+const MAX_FAILED_REQUESTS = 3000;
+const REQUEST_TIMEOUT = 2000000;
+
+function fetchWithTimeout(url, options = {}, timeout = REQUEST_TIMEOUT) {
+  return Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timeout")), timeout)
+    ),
+  ]);
+}
+
+function handleRequestError() {
+  failedRequestCount++;
+  if (failedRequestCount >= MAX_FAILED_REQUESTS) {
+    console.log("Server seems down, stopping polling...");
+    isServerRunning = false;
+    clearAllIntervals();
+  }
+}
+
+function resetFailedCount() {
+  failedRequestCount = 0;
+}
+
 const socket = {
   callbacks: {},
   on: function (event, callback) {
@@ -62,8 +90,10 @@ function startGame() {
       playMusic();
 
       // Set calling these functions every 4 seconds and 50 milliseconds.
-      setInterval(insectsTakeActions, insectsActionInterval * 1000);
-      setInterval(updateStats, 50);
+      if (enablePolling) {
+        setInterval(insectsTakeActions, insectsActionInterval * 1000);
+        setInterval(updateStats, 50);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -171,34 +201,49 @@ function endGame(data) {
 
 function insectsTakeActions() {
   /* Called on interval. Ask insects to take actions */
+  if (!isServerRunning) return;
 
   const timeDelay = 100; // milliseconds
 
-  fetch("/ants_take_actions") // Triger insects_take_actions signal in backend for ants to take actions
-    .then((response) => response.json())
-    .then((data) => {
-      // Handle data from backend
+  fetchWithTimeout("/ants_take_actions")
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      resetFailedCount();
+      console.log(response);
+      return response.json();
     })
     .catch((error) => {
       console.error("Error:", error);
+      console.log(response);
+      handleRequestError();
     });
 
   setTimeout(() => {
-    // Leave time between ants taking action and bees taking action for the animation to play (leaf reach bee and bee turning red)
-    fetch("/bees_take_actions") // Triger insects_take_actions signal in backend for bees to take actions
-      .then((response) => response.json())
-      .then((data) => {})
+    if (!isServerRunning) return;
+
+    fetchWithTimeout("/bees_take_actions")
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        resetFailedCount();
+        return response.json();
+      })
       .catch((error) => {
         console.error("Error:", error);
+        handleRequestError();
       });
-  }, throwLeafAnimationDuration * 1000 + insectsHurtAnimationDuration * 1000 + timeDelay);
+  }, throwLeafAnimationDuration * 1000 + insectsHurtAnimationDuration * 1000);
 }
 
 function updateStats() {
   /* Called on interval. Ask server for food count and turn count */
+  if (!isServerRunning) return;
 
-  fetch("/update_stats") // Triger update_stats signal in server
-    .then((response) => response.json())
+  fetchWithTimeout("/update_stats")
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      resetFailedCount();
+      return response.json();
+    })
     .then((data) => {
       // Handle data from server
 
@@ -216,6 +261,7 @@ function updateStats() {
 
     .catch((error) => {
       console.error("Error:", error);
+      handleRequestError();
     });
 }
 
@@ -272,7 +318,42 @@ function throwAt(data) {
   }, animationDelay * 2 + throwLeafAnimationDuration * 1000);
 }
 
+function clearAllIntervals() {
+  const highestId = window.setInterval(() => {}, Number.MAX_SAFE_INTEGER);
+  for (let i = 1; i < highestId; i++) {
+    window.clearInterval(i);
+  }
+}
+
+// 添加手动触发函数
+function manualUpdate() {
+  updateStats();
+}
+
+function manualInsectActions() {
+  insectsTakeActions();
+}
+
+// 添加轮询开关函数
+function togglePolling() {
+  enablePolling = !enablePolling;
+  if (enablePolling) {
+    setInterval(insectsTakeActions, insectsActionInterval * 1000);
+    setInterval(updateStats, 50);
+    console.log("Polling enabled");
+  } else {
+    clearAllIntervals();
+    console.log("Polling disabled");
+  }
+}
+
 // Handle incoming signals from server. These functions are triggered by backend.
+socket.on("serverShutdown", () => {
+  isServerRunning = false;
+  socket.close();
+  clearAllIntervals();
+  console.log("Server has shutdown");
+});
 socket.on("loadLobby", inLobby);
 socket.on("moveBee", moveBee);
 socket.on("moveBeeFromHive", moveBeeFromHive);
