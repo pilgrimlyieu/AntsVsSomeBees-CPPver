@@ -110,6 +110,7 @@ Simulator GameState::simulate() {
         log(LOGERROR, e.what());
         result = false;
     }
+    log(LOGTEST, *this);
     co_yield result;
 }
 
@@ -209,7 +210,7 @@ GameState::operator string() const {
         if (i != insects.size() - 1) {
             result += ";\t";
         }
-        if (i % 5 == 4) { // 每行显示 5 个 Insect
+        if (i % 3 == 2) { // 每行显示 3 个 Insect
             result += "\n\t";
         }
     }

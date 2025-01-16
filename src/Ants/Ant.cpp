@@ -57,7 +57,6 @@ void Ant::removeAnt(Ant *other) {
 void Ant::addTo(Place *place) {
     if (place->ant == nullptr) {
         place->ant = this;
-        log(LOGINFO, format("{} is added to {}", *this, *place));
     } else {
         if (place->ant->canContain(this)) {
             place->ant->storeAnt(this);
@@ -84,7 +83,7 @@ void Ant::addTo(Place *place) {
 void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
-        log(LOGINFO, format("{} is removed from {}", *this, *place));
+        log(LOGTEST, format("{} is removed from {}", *this, *place));
     } else if (place->ant == nullptr) {
         THROW_EXCEPTION(invalid_argument, format("{} is not in {}", *this, *place));
     } else {

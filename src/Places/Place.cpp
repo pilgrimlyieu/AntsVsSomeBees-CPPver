@@ -52,5 +52,7 @@ void Place::removeInsect(Insect *insect) {
  * @return string Place 的名称
  */
 Place::operator string() const {
-    return name;
+    static const string ANSI_CYAN = "\x1B[36m";
+    static const string ANSI_RESET = "\x1B[0m";
+    return format("{1}{2}{0}", ANSI_RESET, ANSI_CYAN, name);
 }

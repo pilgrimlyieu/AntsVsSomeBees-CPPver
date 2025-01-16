@@ -9,7 +9,6 @@ int main(int argc, char *argv[]) {
 
     int port = 18080;
     Server server(cfg, port);
-    log(LOGINFO, format("Server started on http://localhost:{}", port));
     server.start();
     return 0;
 }

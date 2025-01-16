@@ -20,6 +20,6 @@ enum class LogLevel {
 };
 using enum LogLevel;
 
-static const LogLevel DEBUG_LOG = LOGERROR;
+static const LogLevel DEBUG_LOG = LOGTEST;
 
 #endif // PROJECTCONFIG_HPP

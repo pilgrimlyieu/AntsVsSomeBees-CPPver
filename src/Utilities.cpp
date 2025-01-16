@@ -15,16 +15,16 @@ void gameInit() {
  */
 void log(LogLevel level, const string &msg) {
     static const string ANSI_RESET = "\x1B[0m";
+    static const string ANSI_YELLOW = "\x1B[33m";
     static const string ANSI_BLUE = "\x1B[34m";
     static const string ANSI_RED = "\x1B[31m";
-    static const string ANSI_YELLOW = "\x1B[33m";
 
     if (level == LOGTEST && DEBUG_LOG <= LOGTEST) {
-        std::cout << ANSI_BLUE << "[TEST] " << msg << ANSI_RESET << std::endl;
+        std::cout << ANSI_YELLOW << "[TEST] " << ANSI_RESET << msg << std::endl;
     } else if (level == LOGINFO && DEBUG_LOG <= LOGINFO) {
-        std::cout << ANSI_BLUE << "[INFO] " << msg << ANSI_RESET << std::endl;
+        std::cout << ANSI_BLUE << "[INFO] " << ANSI_RESET << msg << std::endl;
     } else if (level == LOGERROR && DEBUG_LOG <= LOGERROR) {
-        std::cerr << ANSI_RED << "[ERROR] " << msg << ANSI_RESET << std::endl;
+        std::cerr << ANSI_RED << "[ERROR] " << ANSI_RESET << msg << std::endl;
     }
 }
 

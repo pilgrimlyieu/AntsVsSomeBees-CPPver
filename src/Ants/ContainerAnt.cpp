@@ -35,7 +35,7 @@ void ContainerAnt::removeAnt(Ant *ant) {
         THROW_EXCEPTION(invalid_argument, format("{} does not contain {}", *this, *ant));
     }
     antContained = nullptr;
-    log(LOGINFO, format("{} is removed from {}", *ant, *this));
+    log(LOGTEST, format("{} is removed from {}", *ant, *this));
 }
 
 /**
