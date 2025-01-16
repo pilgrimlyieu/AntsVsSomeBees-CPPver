@@ -5,6 +5,11 @@
 #include "Place.hpp"
 
 class Hive final : public Place {
+private:
+    bool getIsHive() const final {
+        return true;
+    }
+
 public:
     AssaultPlan *assaultPlan;
     bees_list bees;

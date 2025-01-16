@@ -5,25 +5,6 @@
 int Insect::idCounter = 0;
 
 /**
- * @brief Insect 类的构造函数，初始化一个 Insect
- *
- * 默认 Insect 的属性：
- *
- * - 类名 name 为 "Insect"
- *
- * - 伤害 damage 为 0.0
- *
- * - 是否抗水 isWaterProof 为 false
- *
- * @param health Insect 的初始生命值
- * @param place Insect 所在的 Place，默认为 nullptr
- * @param properties Insect 的属性
- */
-Insect::Insect(double health, Place *place, insect_properties properties)
-    : id(idCounter++), name(properties.name), damage(properties.damage), place(place),
-      health(health), isWaterProof(properties.isWaterProof) {}
-
-/**
  * @brief 减少 Insect 的生命值
  *
  * 减少 Insect 的生命值，并在生命值小于等于 0 时使 Insect 死亡。
@@ -66,7 +47,11 @@ void Insect::deathCallback() {
  * @param place 指向 Place 的指针。
  */
 void Insect::addTo(Place *place) {
-    log(LOGINFO, format("{} is added to {}", *this, *place));
+    if (place != nullptr) {
+        log(LOGINFO, format("{} is added to {}", *this, *place));
+    } else {
+        log(LOGINFO, format("{} is added to nullptr", *this));
+    }
     this->place = place;
 }
 
@@ -88,7 +73,11 @@ void Insect::removeFrom(Place *place) {
  * @return string 表示 Insect 的字符串。
  */
 Insect::operator string() const {
-    return format("{}[{}]({}, {})", name, id, health, *place);
+    if (place == nullptr) {
+        return format("{}[{}]({}, NULL)", getName(), id, health);
+    } else {
+        return format("{}[{}]({}, {})", getName(), id, health, *place);
+    }
 }
 
 /**
@@ -96,6 +85,13 @@ Insect::operator string() const {
  */
 void Insect::kill() {
     reduceHealth(health);
+}
+
+/**
+ * @brief 重置 Insect 的 ID 计数器
+ */
+void Insect::resetIdCounter() {
+    idCounter = 0;
 }
 
 /**
@@ -114,13 +110,4 @@ int Insect::getId() const {
  */
 Place *Insect::getPlace() const {
     return place;
-}
-
-/**
- * @brief 获取 Insect 的名称
- *
- * @return string Insect 的名称
- */
-string Insect::getName() const {
-    return name;
 }

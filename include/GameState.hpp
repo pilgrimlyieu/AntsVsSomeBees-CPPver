@@ -14,8 +14,9 @@ private:
     using register_place_f = function<void(Place *, bool)>;
     using create_places = void (*)(AntHomeBase *, register_place_f, dim);
 
-    friend void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
-                             dim dimensions, int moatFrequency);
+    static void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
+                             dim dimensions, int moatFrequency = 3);
+
     friend void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
                           dim dimensions);
     friend void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
@@ -70,9 +71,6 @@ template <> struct std::formatter<GameState> : std::formatter<string> {
 void antsWin();
 
 void antsLose();
-
-void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions,
-                  int moatFrequency = 3);
 
 void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions);
 

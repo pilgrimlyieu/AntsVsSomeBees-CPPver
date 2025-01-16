@@ -2,17 +2,6 @@
 #include "Insect.hpp"
 
 /**
- * @brief 从当前 Place 随机选择一个 Bee
- *
- * 若当前 Place 中没有 Bee ，则返回 `nullptr`。
- *
- * @return 指向随机选择的 Bee 的指针，若没有 Bee 则返回 `nullptr`。
- */
-Bee *Place::randomBee() {
-    return randomElement(bees);
-}
-
-/**
  * @brief Place 类的构造函数，初始化一个 Place
  *
  * 默认 Place 的属性：
@@ -22,11 +11,21 @@ Bee *Place::randomBee() {
  * @param name Place 的名称
  * @param exit Place 的出口
  */
-Place::Place(string name, Place *exit, place_properties properties)
-    : name(name), isHive(properties.isHive), exit(exit) {
+Place::Place(string name, Place *exit) : name(name), isHive(getIsHive()), exit(exit) {
     if (this->exit != nullptr) {
         this->exit->entrance = this;
     }
+}
+
+/**
+ * @brief 从当前 Place 随机选择一个 Bee
+ *
+ * 若当前 Place 中没有 Bee ，则返回 `nullptr`。
+ *
+ * @return 指向随机选择的 Bee 的指针，若没有 Bee 则返回 `nullptr`。
+ */
+Bee *Place::randomBee() {
+    return randomElement(bees);
 }
 
 /**

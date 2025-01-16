@@ -3,30 +3,6 @@
 #include "Place.hpp"
 
 /**
- * @brief 构造一个新的 LaserAnt
- *
- * 默认 LaserAnt 的属性：
- *
- * - 类名 name 为 "Laser"
- *
- * - 食物消耗 foodCost 为 10
- *
- * - 伤害 damage 为 2.0
- *
- * - 射击的昆虫数量 insectsShot 为 0
- *
- * @param health LaserAnt 的初始生命值，默认为 1.0
- */
-LaserAnt::LaserAnt(double health)
-    : ThrowerAnt(health,
-                 {
-                     .name = "LaserAnt",
-                     .damage = 2.0,
-                     .foodCost = 10,
-                 }),
-      insectsShot(0) {}
-
-/**
  * @brief 获取 LaserAnt 的所有攻击目标及其距离
  *
  * 从当前位置向入口，直到 Hive 方向遍历，获取所有攻击目标及其距离。
@@ -58,8 +34,8 @@ LaserAnt::insects_distance LaserAnt::getTargets() {
  * @param distance 目标距离
  * @return 造成的伤害
  */
-double LaserAnt::getDamage(int distance) {
-    double trueDamage = damage - 0.25 * distance - ((double)insectsShot) / 16;
+double LaserAnt::getTrueDamage(int distance) {
+    double trueDamage = getDamage() - 0.25 * distance - ((double)insectsShot) / 16;
     return std::max(0.0, trueDamage);
 }
 
@@ -73,7 +49,7 @@ double LaserAnt::getDamage(int distance) {
 void LaserAnt::action(GameState &gamestate) {
     insects_distance targets = getTargets();
     for (auto &target : targets) {
-        double damage = getDamage(target.second);
+        double damage = getTrueDamage(target.second);
         target.first->reduceHealth(damage);
         if (damage > 0) {
             insectsShot++;

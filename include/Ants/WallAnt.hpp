@@ -4,9 +4,16 @@
 #include "Ant.hpp"
 
 class WallAnt final : public Ant {
-public:
-    explicit WallAnt(double health);
+private:
+    string getName() const final {
+        return "WallAnt";
+    }
+    int getFoodCost() const final {
+        return 4;
+    }
 
+public:
+    explicit WallAnt(double health) : Ant(health) {}
     explicit WallAnt() : WallAnt(4.0) {}
 };
 

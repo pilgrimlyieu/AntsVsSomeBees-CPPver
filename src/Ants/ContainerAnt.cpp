@@ -3,20 +3,6 @@
 #include "Place.hpp"
 
 /**
- * @brief 构造一个新的 ContainerAnt
- *
- * 默认 ContainerAnt 的属性：
- *
- * - 类名 name 为 "Container"
- *
- * - 容纳的 Ant antContained 为 nullptr
- *
- * @param health ContainerAnt 的初始生命值，默认为 1.0
- */
-ContainerAnt::ContainerAnt(double health, container_ant_properties properties)
-    : Ant(health, properties), antContained(nullptr) {}
-
-/**
  * @brief 判断当前 ContainerAnt 是否还可以容纳另一个 Ant
  *
  * 默认情况下 ContainerAnt 只能容纳一个 Ant ，同时不允许容纳其他 ContainerAnt 。

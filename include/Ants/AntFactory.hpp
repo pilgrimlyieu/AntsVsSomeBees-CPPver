@@ -13,15 +13,14 @@ private:
 
     AntFactory() = default;
     ~AntFactory() = default;
-
-    constructors_map antConstructors; //!> Ant 构造函数
-
-public:
     AntFactory &operator=(AntFactory &&) = delete;
     AntFactory(AntFactory &&) = delete;
     AntFactory(const AntFactory &) = delete;
     AntFactory &operator=(const AntFactory &) = delete;
 
+    constructors_map antConstructors; //!> Ant 构造函数
+
+public:
     static AntFactory &getInstance();
 
     void registerAnt(const string &name, ant_constructor constructor);

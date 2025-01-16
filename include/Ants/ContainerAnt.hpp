@@ -5,19 +5,15 @@
 
 class ContainerAnt : public Ant {
 protected:
-    struct container_ant_properties : ant_properties {
-        string name = "ContainerAnt"; //!< 类名
-    };
+    virtual string getName() const override {
+        return "ContainerAnt";
+    }
 
-    explicit ContainerAnt(double health,
-                          container_ant_properties properties); //!< 抽象类，不可实例化
-
-    explicit ContainerAnt(double health) : ContainerAnt(health, {}) {}
-
+    explicit ContainerAnt(double health) : Ant(health) {}
     explicit ContainerAnt() : ContainerAnt(1.0) {}
 
 public:
-    Ant *antContained; //!< 容纳的 Ant
+    Ant *antContained = nullptr; //!< 容纳的 Ant
 
     bool canContain(Ant *other) final;
 

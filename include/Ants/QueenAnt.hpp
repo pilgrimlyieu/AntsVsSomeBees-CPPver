@@ -4,9 +4,16 @@
 #include "ScubaThrower.hpp"
 
 class QueenAnt final : public ScubaThrower {
-public:
-    explicit QueenAnt(double health);
+private:
+    string getName() const final {
+        return "QueenAnt";
+    }
+    int getFoodCost() const final {
+        return 7;
+    }
 
+public:
+    explicit QueenAnt(double health) : ScubaThrower(health) {}
     explicit QueenAnt() : QueenAnt(1.0) {}
 
     void action(GameState &gamestate) final;

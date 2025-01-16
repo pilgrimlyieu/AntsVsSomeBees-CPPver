@@ -10,7 +10,7 @@
  */
 void Water::addInsect(Insect *insect) {
     Place::addInsect(insect);
-    if (!insect->isWaterProof) {
+    if (!insect->getIsWaterProof()) {
         insect->kill();
     }
 }

@@ -5,24 +5,6 @@
 #include "WebSocket.hpp"
 
 /**
- * @brief 构造一个新的 Bee
- *
- * 默认 Bee 的属性：
- *
- * - 类名 name 为 "Bee"
- *
- * - 伤害 damage 为 1.0
- *
- * - 是否抗水 isWaterProof 为 true
- *
- * @param health Bee 的初始生命值
- * @param place Bee 所在的 Place，默认为 `nullptr`
- * @param properties Bee 的属性
- */
-Bee::Bee(double health, Place *place, bee_properties properties)
-    : Insect(health, place, properties), slowedTime(0), scaredTime(0) {}
-
-/**
  * @brief 对指定的 Ant 进行攻击
  *
  * 对指定的 Ant 进行攻击，使其减少生命值。
@@ -30,8 +12,8 @@ Bee::Bee(double health, Place *place, bee_properties properties)
  * @param ant 目标 Ant
  */
 void Bee::sting(Ant *ant) {
-    ant->reduceHealth(damage);
-    log(LOGINFO, format("{} stings {} causing {} damage", *this, *ant, damage));
+    ant->reduceHealth(getDamage());
+    log(LOGINFO, format("{} stings {} causing {} damage", *this, *ant, getDamage()));
 }
 
 /**
@@ -54,7 +36,7 @@ void Bee::moveTo(Place *place) {
  * @return 若 Bee 被阻挡，则返回 `true`；否则返回 `false`。
  */
 bool Bee::blocked() {
-    return place->ant != nullptr && place->ant->blocksPath;
+    return place->ant != nullptr && place->ant->getBlocksPath();
 }
 
 /**

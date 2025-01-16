@@ -3,21 +3,17 @@
 
 #include "Utilities.hpp"
 
-struct insect_properties {
-    string name = "Insect";    //!< 类名
-    double damage = 0.0;       //!< 伤害
-    bool isWaterProof = false; //!< 是否抗水
-    Place *place;              //!< 所在地点
-};
 class Insect {
 private:
     static int idCounter; //!< Insect ID 计数器
     int id;               //!< Insect ID
 
 protected:
-    const string name; //!< 类名
-    double damage;     //!< 伤害
-    Place *place;      //!< 所在地点
+    virtual double getDefaultDamage() const {
+        return 0.0;
+    }
+
+    Place *place; //!< 所在地点
 
     void injuryCallback();
 
@@ -29,10 +25,10 @@ public:
     Insect(const Insect &) = delete;
     Insect &operator=(const Insect &) = delete;
 
-    double health;           //!< 生命值
-    const bool isWaterProof; //!< 是否抗水
+    double health; //!< 生命值
 
-    explicit Insect(double health, Place *place = nullptr, insect_properties properties = {});
+    explicit Insect(double health, Place *place = nullptr)
+        : id(idCounter++), place(place), health(health) {}
 
     virtual void reduceHealth(double amount);
 
@@ -46,12 +42,21 @@ public:
 
     virtual void removeFrom(Place *place);
 
-    int getId() const;
+    static void resetIdCounter();
 
+    int getId() const;
     Place *getPlace() const;
 
     [[nodiscard]]
-    string getName() const;
+    virtual string getName() const {
+        return "Insect";
+    }
+    virtual double getDamage() const {
+        return getDefaultDamage();
+    }
+    virtual bool getIsWaterProof() const {
+        return false;
+    }
 
     virtual ~Insect() = default;
 };

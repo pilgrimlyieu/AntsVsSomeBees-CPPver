@@ -3,26 +3,6 @@
 #include "Place.hpp"
 
 /**
- * @brief Ant 类的构造函数，初始化一个 Ant
- *
- * 默认 Ant 的属性：
- *
- * - 类名 name 为 "Ant"
- *
- * - 食物消耗 foodCost 为 0
- *
- * - 是否被加成 buffed 为 false
- *
- * - 是否阻挡路径 blocksPath 为 true
- *
- * @param health Ant 的初始生命值，默认为 1.0
- * @param properties Ant 的属性
- */
-Ant::Ant(double health, ant_properties properties)
-    : Insect(health, nullptr, properties), buffed(properties.buffed), foodCost(properties.foodCost),
-      blocksPath(properties.blocksPath) {}
-
-/**
  * @brief 判断当前 Ant 是否可以容纳另一个 Ant
  *
  * 默认 Ant 始终不能容纳其他 Ant 。
@@ -120,7 +100,6 @@ void Ant::removeFrom(Place *place) {
  */
 void Ant::buff() {
     if (!buffed) {
-        damage *= 2;
         buffed = true;
         log(LOGINFO, format("{} is buffed", *this));
     }

@@ -4,9 +4,13 @@
 #include "Bee.hpp"
 
 class NinjaBee final : public Bee {
-public:
-    explicit NinjaBee(double health, Place *place);
+private:
+    string getName() const override {
+        return "NinjaBee";
+    }
 
+public:
+    explicit NinjaBee(double health, Place *place) : Bee(health, place) {}
     explicit NinjaBee(double health) : NinjaBee(health, nullptr) {}
 
     bool blocked() final;

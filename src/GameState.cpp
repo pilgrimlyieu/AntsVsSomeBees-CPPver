@@ -117,21 +117,19 @@ Generator<optional<bool>> GameState::simulate() {
 Ant *GameState::deployAnt(string placeName, string antTypeName) {
     Ant *ant = antFactory->createAnt(antTypeName);
     if (ant != nullptr) {
-        if (ant->foodCost > food) {
+        if (ant->getFoodCost() > food) {
             delete ant;
             log(LOGERROR, format("Insufficient food to deploy {0}.", antTypeName));
             return nullptr;
         }
         places[placeName]->addInsect(ant);
-        food -= ant->foodCost;
+        food -= ant->getFoodCost();
     }
     return ant;
 }
 
 /**
  * @brief 移除一个 Ant
- *
- * 移除一个 Ant 。
  *
  * @param placeName 地点名称
  */
@@ -144,8 +142,6 @@ void GameState::removeAnt(string placeName) {
 
 /**
  * @brief 获取所有的 Ant
- *
- * 获取所有的 Ant 。
  *
  * @return 所有的 Ant
  */
@@ -162,8 +158,6 @@ GameState::ants_list GameState::getAnts() const {
 /**
  * @brief 获取所有的 Bee
  *
- * 获取所有的 Bee 。
- *
  * @return 所有的 Bee
  */
 bees_list GameState::getBees() const {
@@ -178,8 +172,6 @@ bees_list GameState::getBees() const {
 
 /**
  * @brief 获取所有的 Insect
- *
- * 获取所有的 Insect 。
  *
  * @return 所有的 Insect
  */
@@ -241,7 +233,7 @@ void antsLose() {
 /**
  * @brief 创建布局
  *
- * 从基地开始，创建一系列的隧道，其中每隔一定距离会有湿地。
+ * 从基地开始，创建一系列的 Tunnel，其中每隔一定距离会有湿地。
  *
  * 具体而言，当 `moatFrequency` 不为 0 时，每隔 `moatFrequency` 步会有一个湿地。
  *
@@ -250,8 +242,8 @@ void antsLose() {
  * @param dimensions 布局维度
  * @param moatFrequency 湿地频率
  */
-void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions,
-                  int moatFrequency) {
+void GameState::createLayout(AntHomeBase *base, register_place_f registerPlace, dim dimensions,
+                             int moatFrequency) {
     int tunnels = dimensions.first;
     int length = dimensions.second;
     for (int tunnel = 0; tunnel < tunnels; tunnel++) {
@@ -270,25 +262,25 @@ void createLayout(AntHomeBase *base, GameState::register_place_f registerPlace, 
 /**
  * @brief 湿地布局
  *
- * 从基地开始，创建一系列的隧道，其中每隔一定距离会有湿地。
+ * 从基地开始，创建一系列的 Tunnel，其中每隔一定距离会有湿地。
  *
  * @param base 基地
  * @param registerPlace 注册 Place 的函数
  * @param dimensions 布局维度
  */
 void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions) {
-    createLayout(base, registerPlace, dimensions, 3);
+    GameState::createLayout(base, registerPlace, dimensions, 3);
 }
 
 /**
  * @brief 干地布局
  *
- * 从基地开始，创建一系列的隧道。
+ * 从基地开始，创建一系列的 Tunnel。
  *
  * @param base 基地
  * @param registerPlace 注册 Place 的函数
  * @param dimensions 布局维度
  */
 void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions) {
-    createLayout(base, registerPlace, dimensions, 0);
+    GameState::createLayout(base, registerPlace, dimensions, 0);
 }

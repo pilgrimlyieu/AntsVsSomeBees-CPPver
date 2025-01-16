@@ -4,9 +4,19 @@
 #include "ThrowerAnt.hpp"
 
 class LongThrower final : public ThrowerAnt {
-public:
-    explicit LongThrower(double health);
+private:
+    string getName() const final {
+        return "LongThrower";
+    }
+    int getFoodCost() const final {
+        return 2;
+    }
+    int getMinRange() const final {
+        return 5;
+    }
 
+public:
+    explicit LongThrower(double health) : ThrowerAnt(health) {}
     explicit LongThrower() : LongThrower(1.0) {}
 };
 

@@ -11,7 +11,7 @@
  *
  * 初始化 Hive 的名称为 "Hive"，且不包含任何 Ant 。
  */
-Hive::Hive(AssaultPlan *assaultPlan) : Place("Hive", nullptr, {.isHive = true}) {
+Hive::Hive(AssaultPlan *assaultPlan) : Place("Hive", nullptr) {
     for (auto bee : assaultPlan->getBees()) {
         addInsect(bee);
     }

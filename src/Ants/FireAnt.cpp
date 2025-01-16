@@ -3,28 +3,6 @@
 #include "Place.hpp"
 
 /**
- * @brief 构造一个新的 FireAnt
- *
- * 默认 FireAnt 的属性：
- *
- * - 类名 name 为 "Fire"
- *
- * - 伤害 damage 为 3.0
- *
- * - 食物消耗 foodCost 为 5
- *
- * @param health FireAnt 的初始生命值，默认为 3.0
- */
-FireAnt::FireAnt(double health)
-    : Ant(health, {
-                      {
-                       .damage = 3.0,
-                       },
-                      .name = "FireAnt",
-                      .foodCost = 5,
-}) {}
-
-/**
  * @brief 减少 FireAnt 的生命值
  *
  * 减少 FireAnt 的生命值，并在生命值小于等于 0 时使 FireAnt 死亡。
@@ -34,7 +12,7 @@ FireAnt::FireAnt(double health)
  * @param amount 要减少的生命值
  */
 void FireAnt::reduceHealth(double amount) {
-    double totalDamage = amount + ((amount >= health) ? damage : 0);
+    double totalDamage = amount + ((amount >= health) ? getDamage() : 0);
     log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
     std::erase_if(place->bees, [&](auto &bee) {
         bee->reduceHealth(totalDamage);

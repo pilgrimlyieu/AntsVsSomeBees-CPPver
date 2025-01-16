@@ -4,12 +4,11 @@
 #include "Utilities.hpp"
 
 class Place {
-private:
-    struct place_properties {
-        bool isHive = false; //!< 是否是 Hive
-    };
-
 protected:
+    virtual bool getIsHive() const {
+        return false;
+    }
+
     ~Place() = default;
 
 public:
@@ -26,10 +25,7 @@ public:
     Place(Place &&) = delete;
     Place &operator=(Place &&) = delete;
 
-    explicit Place(string name, Place *exit, place_properties properties);
-
-    explicit Place(string name, Place *exit) : Place(name, exit, {}) {}
-
+    explicit Place(string name, Place *exit);
     explicit Place(string name) : Place(name, nullptr) {}
 
     Bee *randomBee();

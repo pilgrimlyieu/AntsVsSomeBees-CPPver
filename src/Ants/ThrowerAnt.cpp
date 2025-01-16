@@ -5,27 +5,6 @@
 #include "WebSocket.hpp"
 
 /**
- * @brief 构造一个新的 ThrowerAnt
- *
- * 默认 ThrowerAnt 的属性：
- *
- * - 类名 name 为 "Thrower"
- *
- * - 伤害 damage 为 1.0
- *
- * - 食物消耗 foodCost 为 3
- *
- * - 最小射程 minRange 为 0
- *
- * - 最大射程 maxRange 为 INT_MAX
- *
- * @param health ThrowerAnt 的初始生命值，默认为 1.0
- * @param properties ThrowerAnt 的属性
- */
-ThrowerAnt::ThrowerAnt(double health, thrower_ant_properties properties)
-    : Ant(health, properties), minRange(properties.minRange), maxRange(properties.maxRange) {}
-
-/**
  * @brief 获取 ThrowerAnt 射程范围内最近的 Bee
  *
  * 从当前位置向入口，直到 Hive 方向遍历，获取射程范围内最近的 Bee 。
@@ -59,8 +38,8 @@ Bee *ThrowerAnt::nearestBee() {
 void ThrowerAnt::throwAt(Bee *target) {
     WebSocket::onThrowerAttack(this, target);
     if (target != nullptr) {
-        target->reduceHealth(damage);
-        log(LOGINFO, format("{} throws at {}, causing {} damage", *this, *target, damage));
+        target->reduceHealth(getDamage());
+        log(LOGINFO, format("{} throws at {}, causing {} damage", *this, *target, getDamage()));
     } else {
         log(LOGINFO, format("{} throws at nothing", *this));
     }

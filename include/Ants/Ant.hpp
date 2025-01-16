@@ -9,24 +9,30 @@
 
 class Ant : public Insect {
 protected:
-    struct ant_properties : insect_properties {
-        string name = "Ant";    //!< 类名
-        int foodCost = 0;       //!< 食物消耗
-        bool buffed = false;    //!< 是否被加成
-        bool blocksPath = true; //!< 是否阻挡路径
-    };
-
-    bool buffed; //!< 是否被加成
+    bool buffed = false; //!< 是否被加成
 
 public:
-    const int foodCost;    //!< 食物消耗
-    const bool blocksPath; //!< 是否阻挡路径
-
-    explicit Ant(double health, ant_properties properties);
-
-    explicit Ant(double health) : Ant(health, {}) {}
-
+    explicit Ant(double health) : Insect(health, nullptr) {}
     explicit Ant() : Ant(1.0) {}
+
+    virtual string getName() const override {
+        return "Ant";
+    }
+    virtual int getFoodCost() const {
+        return 0;
+    }
+    virtual bool getBlocksPath() const {
+        return true;
+    }
+    double getDamage() const final {
+        if (buffed) {
+            return 2 * getDefaultDamage();
+        } else {
+            return getDefaultDamage();
+        }
+    }
+
+    virtual void action(GameState &gamestate) override {};
 
     virtual bool canContain(Ant *other);
 

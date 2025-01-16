@@ -3,10 +3,17 @@
 
 #include "Bee.hpp"
 
-class Wasp : virtual public Bee {
-public:
-    explicit Wasp(double health, Place *place);
+class Wasp : public Bee {
+private:
+    virtual string getName() const override {
+        return "Wasp";
+    }
+    virtual double getDefaultDamage() const override {
+        return 1.0;
+    }
 
+public:
+    explicit Wasp(double health, Place *place) : Bee(health, place) {}
     explicit Wasp(double health) : Wasp(health, nullptr) {}
 };
 

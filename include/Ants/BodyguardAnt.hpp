@@ -4,9 +4,16 @@
 #include "ContainerAnt.hpp"
 
 class BodyguardAnt final : public ContainerAnt {
-public:
-    explicit BodyguardAnt(double health);
+private:
+    string getName() const final {
+        return "BodyguardAnt";
+    }
+    int getFoodCost() const final {
+        return 4;
+    }
 
+public:
+    explicit BodyguardAnt(double health) : ContainerAnt(health) {}
     explicit BodyguardAnt() : BodyguardAnt(2.0) {}
 };
 

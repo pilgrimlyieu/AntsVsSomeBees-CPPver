@@ -5,17 +5,18 @@
 
 class ScubaThrower : public ThrowerAnt {
 protected:
-    struct scuba_thrower_properties : thrower_ant_properties {
-        string name = "ScubaThrower";
-        int foodCost = 6;
-        bool isWaterProof = true;
-    };
+    virtual string getName() const override {
+        return "ScubaThrower";
+    }
+    virtual int getFoodCost() const override {
+        return 6;
+    }
+    bool getIsWaterProof() const final {
+        return true;
+    }
 
 public:
-    explicit ScubaThrower(double health, scuba_thrower_properties properties);
-
-    explicit ScubaThrower(double health) : ScubaThrower(health, {}) {}
-
+    explicit ScubaThrower(double health) : ThrowerAnt(health) {}
     explicit ScubaThrower() : ScubaThrower(1.0) {}
 };
 
