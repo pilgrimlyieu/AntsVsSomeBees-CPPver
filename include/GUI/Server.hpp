@@ -16,6 +16,7 @@ private:
     void handleWSOpen(crow::websocket::connection &conn);
     void handleWSClose(crow::websocket::connection &conn, const string &reason);
     void handleWSMessage(crow::websocket::connection &conn, const string &data, bool is_binary);
+    crow::response handleInsectActions();
 
 public:
     explicit Server(CLIConfig config, int port = 18080);

@@ -9,7 +9,7 @@ public:
     AssaultPlan assaultPlan;
     bees_list bees;
 
-    explicit Hive(AssaultPlan assaultPlan);
+    explicit Hive(AssaultPlan aP);
 
     bool getIsHive() const final {
         return true;

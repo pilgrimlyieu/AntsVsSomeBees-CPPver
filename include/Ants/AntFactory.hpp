@@ -8,6 +8,7 @@ class AntFactory {
 private:
     using ant_constructor = function<Ant *()>;
     using constructors_map = map<string, ant_constructor>;
+    using costs_map = map<string, int>;
 
     static QueenAnt *queenAnt; //!> QueenAnt
 
@@ -19,11 +20,16 @@ private:
     AntFactory &operator=(const AntFactory &) = delete;
 
     constructors_map antConstructors; //!> Ant 构造函数
+    costs_map antCosts;               //!> Ant 食物消耗
 
 public:
     static AntFactory &getInstance();
 
-    void registerAnt(const string &name, ant_constructor constructor);
+    static void resetQueenAnt();
+
+    void registerAnt(const string &name, ant_constructor constructor, int foodCost);
+
+    bool canDeployAnt(GameState &gameState, const string &name) const;
 
     [[nodiscard]]
     Ant *createAnt(const string &name) const;

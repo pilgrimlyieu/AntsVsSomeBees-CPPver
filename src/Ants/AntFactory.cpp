@@ -2,6 +2,7 @@
 #include "AntRemover.hpp"
 #include "BodyguardAnt.hpp"
 #include "FireAnt.hpp"
+#include "GameState.hpp"
 #include "HarvestAnt.hpp"
 #include "HungryAnt.hpp"
 #include "LaserAnt.hpp"
@@ -29,14 +30,48 @@ AntFactory &AntFactory::getInstance() {
 }
 
 /**
+ * @brief 重置 QueenAnt
+ */
+void AntFactory::resetQueenAnt() {
+    if (queenAnt != nullptr) {
+        delete queenAnt;
+        queenAnt = nullptr;
+    }
+}
+
+/**
  * @brief 注册一个 Ant 类
  *
  * @param name Ant 的名称
  * @param constructor 一个函数，返回一个新的 Ant
  */
-void AntFactory::registerAnt(const string &name, ant_constructor constructor) {
+void AntFactory::registerAnt(const string &name, ant_constructor constructor, int foodCost) {
     antConstructors[name] = constructor;
+    antCosts[name] = foodCost;
     log(LOGTEST, format("Registered Ant: {}", name));
+}
+
+/**
+ * @brief 判断是否可以部署指定的 Ant
+ *
+ * @param gameState 当前的游戏状态
+ * @param name Ant 的名称
+ * @return 若可以部署，则返回 `true`；否则返回 `false`。
+ */
+bool AntFactory::canDeployAnt(GameState &gameState, const string &name) const {
+    if (name == "QueenAnt") {
+        if (queenAnt == nullptr) {
+            return true;
+        }
+        return false;
+    } else {
+        auto it = antCosts.find(name);
+        if (it != antCosts.end()) {
+            return it->second <= gameState.food;
+        }
+    }
+
+    return false;
 }
 
 /**
@@ -83,29 +118,29 @@ vector<string> AntFactory::getAntNames() const {
  *
  * @param AntClass Ant 类名
  */
-#define REGISTER_ANT_CLASS(AntClass)                                                         \
-    class AntClass##Register {                                                               \
-    public:                                                                                  \
-        AntClass##Register() {                                                               \
-            AntFactory::getInstance().registerAnt(#AntClass,                                 \
-                                                  []() -> Ant * { return new AntClass(); }); \
-        }                                                                                    \
-    };                                                                                       \
+#define REGISTER_ANT_CLASS(AntClass, FoodCost)                                  \
+    class AntClass##Register {                                                  \
+    public:                                                                     \
+        AntClass##Register() {                                                  \
+            AntFactory::getInstance().registerAnt(                              \
+                #AntClass, []() -> Ant * { return new AntClass(); }, FoodCost); \
+        }                                                                       \
+    };                                                                          \
     static const AntClass##Register global_##AntClass##Register;
 
-REGISTER_ANT_CLASS(AntRemover)
-REGISTER_ANT_CLASS(BodyguardAnt)
-REGISTER_ANT_CLASS(FireAnt)
-REGISTER_ANT_CLASS(HarvestAnt)
-REGISTER_ANT_CLASS(HungryAnt)
-REGISTER_ANT_CLASS(LaserAnt)
-REGISTER_ANT_CLASS(LongThrower)
-REGISTER_ANT_CLASS(NinjaAnt)
-REGISTER_ANT_CLASS(QueenAnt)
-REGISTER_ANT_CLASS(ScaryThrower)
-REGISTER_ANT_CLASS(ScubaThrower)
-REGISTER_ANT_CLASS(ShortThrower)
-REGISTER_ANT_CLASS(SlowThrower)
-REGISTER_ANT_CLASS(TankAnt)
-REGISTER_ANT_CLASS(ThrowerAnt)
-REGISTER_ANT_CLASS(WallAnt)
+REGISTER_ANT_CLASS(AntRemover, 0)
+REGISTER_ANT_CLASS(BodyguardAnt, 4)
+REGISTER_ANT_CLASS(FireAnt, 5)
+REGISTER_ANT_CLASS(HarvestAnt, 2)
+REGISTER_ANT_CLASS(HungryAnt, 4)
+REGISTER_ANT_CLASS(LaserAnt, 10)
+REGISTER_ANT_CLASS(LongThrower, 2)
+REGISTER_ANT_CLASS(NinjaAnt, 5)
+REGISTER_ANT_CLASS(QueenAnt, 7)
+REGISTER_ANT_CLASS(ScaryThrower, 6)
+REGISTER_ANT_CLASS(ScubaThrower, 6)
+REGISTER_ANT_CLASS(ShortThrower, 2)
+REGISTER_ANT_CLASS(SlowThrower, 4)
+REGISTER_ANT_CLASS(TankAnt, 6)
+REGISTER_ANT_CLASS(ThrowerAnt, 3)
+REGISTER_ANT_CLASS(WallAnt, 4)

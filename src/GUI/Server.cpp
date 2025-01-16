@@ -77,11 +77,8 @@ void Server::setupRoutes() {
 
         vector<string> availableAnts;
         for (const auto &antName : AntFactory::getInstance().getAntNames()) {
-            if (Ant *temp = AntFactory::getInstance().createAnt(antName)) {
-                if (temp->getFoodCost() <= gameState->food) {
-                    availableAnts.push_back(antName);
-                }
-                delete temp;
+            if (AntFactory::getInstance().canDeployAnt(*gameState, antName)) {
+                availableAnts.push_back(antName);
             }
         }
         response["available_ants"] = std::move(availableAnts);
@@ -122,29 +119,9 @@ void Server::setupRoutes() {
         .onmessage(std::bind(&Server::handleWSMessage, this, std::placeholders::_1,
                              std::placeholders::_2, std::placeholders::_3));
 
-    CROW_ROUTE(app, "/ants_take_actions")([this] {
-        game.next();
-        if (game.isGameOver()) {
-            auto result = game.getResult();
-            emitter.emit("endGame", {
-                                        {"antsWon", result}
-            });
-            // stop();
-        };
-        return crow::response(crow::status::OK);
-    });
+    CROW_ROUTE(app, "/ants_take_actions")([this] { return handleInsectActions(); });
 
-    CROW_ROUTE(app, "/bees_take_actions")([this] {
-        game.next();
-        if (game.isGameOver()) {
-            auto result = game.getResult();
-            emitter.emit("endGame", {
-                                        {"antsWon", result}
-            });
-            // stop();
-        };
-        return crow::response(crow::status::OK);
-    });
+    CROW_ROUTE(app, "/bees_take_actions")([this] { return handleInsectActions(); });
 };
 
 /**
@@ -180,6 +157,23 @@ void Server::handleWSClose(crow::websocket::connection &conn, const string &reas
 void Server::handleWSMessage(crow::websocket::connection &conn, const string &data,
                              bool is_binary) {
     // Handle incoming WebSocket messages if needed
+}
+
+/**
+ * @brief 处理 Insect 动作
+ *
+ * @return HTTP 响应
+ */
+crow::response Server::handleInsectActions() {
+    game.next();
+    if (game.isGameOver()) {
+        auto result = game.getResult();
+        emitter.emit("endGame", {
+                                    {"antsWon", result}
+        });
+        // stop();
+    };
+    return crow::response{crow::json::wvalue()};
 }
 
 /**
