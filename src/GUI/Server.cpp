@@ -9,7 +9,7 @@
  * @param port 服务器端口，默认为 18080
  */
 Server::Server(CLIConfig config, int port) : config(std::move(config)), gameState(nullptr), game() {
-    app.port(port).multithreaded().loglevel(crow::LogLevel::Info);
+    app.port(port).multithreaded().loglevel(crow::LogLevel::Error);
     setupRoutes();
     createNewGame();
 }
@@ -122,26 +122,29 @@ void Server::setupRoutes() {
         .onmessage(std::bind(&Server::handleWSMessage, this, std::placeholders::_1,
                              std::placeholders::_2, std::placeholders::_3));
 
-    auto insectsTakeActions = [this]() {
+    CROW_ROUTE(app, "/ants_take_actions")([this] {
         game.next();
         if (game.isGameOver()) {
             auto result = game.getResult();
             emitter.emit("endGame", {
                                         {"antsWon", result}
             });
+            // stop();
         };
-        // if (result && result.value().has_value()) {
-        //     bool gameResult = result.value().value();
-        //     emitter.emit("endGame", {
-        //                                 {"antsWon", gameResult}
-        //     });
-        // }
         return crow::response(crow::status::OK);
-    };
+    });
 
-    CROW_ROUTE(app, "/ants_take_actions")(insectsTakeActions);
-
-    CROW_ROUTE(app, "/bees_take_actions")(insectsTakeActions);
+    CROW_ROUTE(app, "/bees_take_actions")([this] {
+        game.next();
+        if (game.isGameOver()) {
+            auto result = game.getResult();
+            emitter.emit("endGame", {
+                                        {"antsWon", result}
+            });
+            // stop();
+        };
+        return crow::response(crow::status::OK);
+    });
 };
 
 /**
@@ -184,4 +187,17 @@ void Server::handleWSMessage(crow::websocket::connection &conn, const string &da
  */
 void Server::start() {
     app.run();
+}
+
+/**
+ * @brief 停止服务器
+ */
+void Server::stop() {
+    emitter.emit("serverShutdown", crow::json::wvalue());
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    app.stop();
+}
+
+Server::~Server() {
+    stop();
 }

@@ -19,8 +19,10 @@ private:
 
 public:
     explicit Server(CLIConfig config, int port = 18080);
+    ~Server();
 
     void start();
+    void stop();
     void setupRoutes();
     void createNewGame();
 };
