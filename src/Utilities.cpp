@@ -14,27 +14,17 @@ void gameInit() {
  * @param msg 日志信息
  */
 void log(LogLevel level, const string &msg) {
-    if (!DEBUG_LOG) {
-        return;
-    }
-
     static const string ANSI_RESET = "\x1B[0m";
     static const string ANSI_BLUE = "\x1B[34m";
     static const string ANSI_RED = "\x1B[31m";
     static const string ANSI_YELLOW = "\x1B[33m";
 
-    switch (level) {
-    case LOGINFO:
+    if (level == LOGTEST && DEBUG_LOG <= LOGTEST) {
+        std::cout << ANSI_BLUE << "[TEST] " << msg << ANSI_RESET << std::endl;
+    } else if (level == LOGINFO && DEBUG_LOG <= LOGINFO) {
         std::cout << ANSI_BLUE << "[INFO] " << msg << ANSI_RESET << std::endl;
-        break;
-    case LOGERROR:
+    } else if (level == LOGERROR && DEBUG_LOG <= LOGERROR) {
         std::cerr << ANSI_RED << "[ERROR] " << msg << ANSI_RESET << std::endl;
-        break;
-    case LOGTEST:
-#ifdef DEBUG
-        std::cout << ANSI_YELLOW << "[TEST] " << msg << ANSI_RESET << std::endl;
-#endif
-        break;
     }
 }
 

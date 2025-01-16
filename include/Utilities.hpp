@@ -85,22 +85,6 @@ using strat = void (*)(GameState &);
  */
 using dim = pair<int, int>;
 
-/**
- * @brief 日志级别
- *
- * - LOGINFO: 信息
- *
- * - LOGERROR: 错误
- *
- * - LOGTEST: 测试
- */
-enum class LogLevel {
-    LOGINFO,
-    LOGERROR,
-    LOGTEST,
-};
-using enum LogLevel;
-
 void gameInit();
 
 void log(LogLevel level, const string &msg);
