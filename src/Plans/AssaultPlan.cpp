@@ -12,7 +12,7 @@
 AssaultPlan &AssaultPlan::addWave(bee_type beeType, double beeHealth, g_time time, int count) {
     bees_list bees;
     for (int i = 0; i < count; i++) {
-        bees.push_back(beeType(beeHealth));
+        bees.emplace_back(beeType(beeHealth));
     }
     if (waves.find(time) == waves.end()) {
         waves[time] = bees;

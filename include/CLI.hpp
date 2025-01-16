@@ -44,6 +44,7 @@ private:
 public:
     CLI();
 
+    [[nodiscard]]
     CLIConfig parse(int argc, char *argv[]);
 };
 

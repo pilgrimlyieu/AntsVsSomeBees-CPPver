@@ -9,8 +9,6 @@ class WebSocket {
 private:
     static EventEmitter emitter; //!< 事件发射器
 
-    static vector<int> parseCoordinates(const string &name);
-
 public:
     static void onInsectMove(Bee *bee, Place *place);
 
@@ -20,5 +18,7 @@ public:
 
     static void onInsectDeath(const Insect *insect);
 };
+
+vector<int> parseCoordinates(const string &name);
 
 #endif // WEBSOCKET_HPP

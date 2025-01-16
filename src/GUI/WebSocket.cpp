@@ -78,7 +78,7 @@ void WebSocket::onInsectDeath(const Insect *insect) {
  * @param name 地点名称
  * @return 坐标
  */
-vector<int> WebSocket::parseCoordinates(const string &name) {
+vector<int> parseCoordinates(const string &name) {
     size_t first = name.find("_");
     size_t second = name.find("_", first + 1);
     assert(first != string::npos && second != string::npos);

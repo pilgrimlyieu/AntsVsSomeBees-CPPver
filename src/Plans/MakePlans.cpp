@@ -93,6 +93,7 @@ AssaultPlan makeExtraHardAssaultPlan() {
 }
 
 GameState createGameState(const CLIConfig &config) {
+    Insect::resetIdCounter();
     AssaultPlan plan = config.makeAssaultPlan();
     Hive *beehive = new Hive(&plan);
     static const int tunnelLength = 10;

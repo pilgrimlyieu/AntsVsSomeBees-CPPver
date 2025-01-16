@@ -46,10 +46,10 @@ vector<string> split(const string &str, char delim) {
     size_t start = 0;
     size_t end = str.find(delim);
     while (end != string::npos) {
-        parts.push_back(str.substr(start, end - start));
+        parts.emplace_back(str.substr(start, end - start));
         start = end + 1;
         end = str.find(delim, start);
     }
-    parts.push_back(str.substr(start));
+    parts.emplace_back(str.substr(start));
     return parts;
 }
