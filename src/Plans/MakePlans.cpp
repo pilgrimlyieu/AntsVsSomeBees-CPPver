@@ -3,7 +3,6 @@
 #include "CLI.hpp"
 #include "GameState.hpp"
 #include "Hive.hpp"
-#include "Hornet.hpp"
 #include "NinjaBee.hpp"
 #include "Wasp.hpp"
 
@@ -23,7 +22,6 @@ AssaultPlan makeEasyAssaultPlan() {
     }
     plan.addWave(CREATE_BEES(Wasp), 3.0, 4, 1);
     plan.addWave(CREATE_BEES(NinjaBee), 3.0, 8, 1);
-    plan.addWave(CREATE_BEES(Hornet), 3.0, 12, 1);
     plan.addWave(CREATE_BEES(Boss), 15.0, 16, 1);
     return plan;
 }
@@ -35,7 +33,6 @@ AssaultPlan makeNormalAssaultPlan() {
     }
     plan.addWave(CREATE_BEES(Wasp), 3.0, 4, 1);
     plan.addWave(CREATE_BEES(NinjaBee), 3.0, 8, 1);
-    plan.addWave(CREATE_BEES(Hornet), 3.0, 12, 1);
     plan.addWave(CREATE_BEES(Wasp), 3.0, 16, 1);
 
     // Boss Stage
@@ -43,9 +40,9 @@ AssaultPlan makeNormalAssaultPlan() {
         plan.addWave(CREATE_BEES(Bee), 3.0, time, 2);
     }
     plan.addWave(CREATE_BEES(Wasp), 3.0, 22, 2);
-    plan.addWave(CREATE_BEES(Hornet), 3.0, 24, 2);
+    plan.addWave(CREATE_BEES(Bee), 1.5, 24, 1);
     plan.addWave(CREATE_BEES(NinjaBee), 3.0, 26, 2);
-    plan.addWave(CREATE_BEES(Hornet), 3.0, 28, 2);
+    plan.addWave(CREATE_BEES(Bee), 1.5, 28, 1);
     plan.addWave(CREATE_BEES(Boss), 20.0, 30, 1);
     return plan;
 }
@@ -57,7 +54,7 @@ AssaultPlan makeHardAssaultPlan() {
     }
     plan.addWave(CREATE_BEES(Wasp), 4.0, 4, 2);
     plan.addWave(CREATE_BEES(NinjaBee), 4.0, 8, 2);
-    plan.addWave(CREATE_BEES(Hornet), 4.0, 12, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.0, 12, 1);
     plan.addWave(CREATE_BEES(Wasp), 4.0, 16, 2);
 
     // Boss Stage
@@ -65,22 +62,22 @@ AssaultPlan makeHardAssaultPlan() {
         plan.addWave(CREATE_BEES(Bee), 4.0, time, 3);
     }
     plan.addWave(CREATE_BEES(Wasp), 4.0, 22, 2);
-    plan.addWave(CREATE_BEES(Hornet), 4.0, 24, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.0, 24, 1);
     plan.addWave(CREATE_BEES(NinjaBee), 4.0, 26, 2);
-    plan.addWave(CREATE_BEES(Hornet), 4.0, 28, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.0, 28, 1);
     plan.addWave(CREATE_BEES(Boss), 30.0, 30, 1);
     return plan;
 }
 
 AssaultPlan makeExtraHardAssaultPlan() {
     AssaultPlan plan = AssaultPlan();
-    plan.addWave(CREATE_BEES(Hornet), 5.0, 2, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.5, 2, 1);
     for (g_time time = 3; time < 16; time += 2) {
         plan.addWave(CREATE_BEES(Bee), 5.0, time, 2);
     }
     plan.addWave(CREATE_BEES(Wasp), 5.0, 4, 2);
     plan.addWave(CREATE_BEES(NinjaBee), 5.0, 8, 2);
-    plan.addWave(CREATE_BEES(Hornet), 5.0, 12, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.5, 12, 1);
     plan.addWave(CREATE_BEES(Wasp), 5.0, 16, 2);
 
     // Boss Stage
@@ -88,9 +85,9 @@ AssaultPlan makeExtraHardAssaultPlan() {
         plan.addWave(CREATE_BEES(Bee), 5.0, time, 3);
     }
     plan.addWave(CREATE_BEES(Wasp), 5.0, 22, 2);
-    plan.addWave(CREATE_BEES(Hornet), 5.0, 24, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.5, 24, 1);
     plan.addWave(CREATE_BEES(NinjaBee), 5.0, 26, 2);
-    plan.addWave(CREATE_BEES(Hornet), 5.0, 28, 2);
+    plan.addWave(CREATE_BEES(Bee), 2.5, 28, 1);
     plan.addWave(CREATE_BEES(Boss), 30.0, 30, 2);
     return plan;
 }

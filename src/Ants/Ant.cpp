@@ -23,17 +23,6 @@ Ant::Ant(double health, ant_properties properties)
       blocksPath(properties.blocksPath) {}
 
 /**
- * @brief 执行 Ant 的动作
- *
- * 这个函数定义了 Ant 在给定 GameState 下的具体行为。
- *
- * @param gamestate 当前的游戏状态。
- */
-void Ant::action(GameState &gamestate) {
-    // TODO
-}
-
-/**
  * @brief 判断当前 Ant 是否可以容纳另一个 Ant
  *
  * 默认 Ant 始终不能容纳其他 Ant 。

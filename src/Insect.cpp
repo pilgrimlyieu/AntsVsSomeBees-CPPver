@@ -83,12 +83,12 @@ void Insect::removeFrom(Place *place) {
 /**
  * @brief 将 Insect 转换为字符串表示形式
  *
- * 该操作符重载函数将 Insect 转换为一个字符串，格式为 "name(health, damage)"。
+ * 该操作符重载函数将 Insect 转换为一个字符串，格式为 "name[id](health, place)"。
  *
  * @return string 表示 Insect 的字符串。
  */
 Insect::operator string() const {
-    return format("{}({}, {})", name, health, damage);
+    return format("{}[{}]({}, {})", name, id, health, *place);
 }
 
 /**

@@ -28,8 +28,6 @@ public:
 
     explicit Ant() : Ant(1.0) {}
 
-    void action(GameState &gamestate) override;
-
     virtual bool canContain(Ant *other);
 
     virtual void storeAnt(Ant *other);

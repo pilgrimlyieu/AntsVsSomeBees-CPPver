@@ -1,7 +1,7 @@
 # Doxyfile 1.12.0
 
 PROJECT_NAME           = CPP
-OUTPUT_DIRECTORY       = D:/Project/School/CPP/doc
+OUTPUT_DIRECTORY       = ./doc
 ALLOW_UNICODE_NAMES    = YES
 OUTPUT_LANGUAGE        = Chinese
 INLINE_INHERITED_MEMB  = YES
@@ -9,12 +9,9 @@ FULL_PATH_NAMES        = NO
 OPTIMIZE_OUTPUT_FOR_C  = YES
 MARKDOWN_ID_STYLE      = GITHUB
 EXTRACT_PRIVATE        = YES
-INPUT                  = D:/Project/School/CPP
+INPUT                  = .
 RECURSIVE              = YES
-EXCLUDE_PATTERNS       = */include/crow.h \
-                         */include/crow/* \
-                         */include/asio/* \
-                         */include/asio.hpp
+EXCLUDE_PATTERNS       = */dependencies/*
 HTML_COLORSTYLE        = LIGHT
 GENERATE_TREEVIEW      = YES
 GENERATE_LATEX         = NO

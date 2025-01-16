@@ -15,7 +15,7 @@ Boss::Boss(double health, Place *place)
           {
               .name = "Boss",
           }),
-      Wasp(health, place), Hornet(health, place), damageCap(8.0) {}
+      Wasp(health, place), damageCap(8.0) {}
 
 /**
  * @brief 计算伤害修正

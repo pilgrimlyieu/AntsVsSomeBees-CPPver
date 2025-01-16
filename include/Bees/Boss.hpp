@@ -1,10 +1,9 @@
 #ifndef BOSS_HPP
 #define BOSS_HPP
 
-#include "Hornet.hpp"
 #include "Wasp.hpp"
 
-class Boss final : public Wasp, public Hornet {
+class Boss final : public Wasp {
 private:
     const double damageCap; //!< 受伤害上限
 
@@ -14,8 +13,6 @@ public:
     explicit Boss(double health, Place *place);
 
     explicit Boss(double health) : Boss(health, nullptr) {}
-
-    using Wasp::action;
 
     void reduceHealth(double amount) final;
 };
