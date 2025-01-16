@@ -6,6 +6,77 @@
 #include "Hive.hpp"
 #include "QueenAnt.hpp"
 
+class Simulator {
+public:
+    struct promise_type;
+    using handle_type = std::coroutine_handle<promise_type>;
+
+    struct promise_type {
+        Simulator get_return_object() {
+            return Simulator{handle_type::from_promise(*this)};
+        }
+        std::suspend_always initial_suspend() {
+            return {};
+        }
+        std::suspend_always final_suspend() noexcept {
+            return {};
+        }
+        void return_void() {}
+        void unhandled_exception() {
+            std::terminate();
+        }
+
+        std::suspend_always yield_value(std::nullptr_t) {
+            is_game_over = false;
+            return {};
+        }
+
+        std::suspend_always yield_value(bool value) {
+            is_game_over = true;
+            result = value;
+            return {};
+        }
+
+        bool is_game_over = false;
+        bool result = false;
+    };
+
+    explicit Simulator() : handle(nullptr) {}
+    explicit Simulator(handle_type h) : handle(h) {}
+    Simulator(Simulator &&other) noexcept : handle(other.handle) {
+        other.handle = nullptr;
+    }
+    Simulator &operator=(Simulator &&other) noexcept {
+        if (this != &other) {
+            if (handle) {
+                handle.destroy();
+            }
+            handle = other.handle;
+            other.handle = nullptr;
+        }
+        return *this;
+    }
+    ~Simulator() {
+        if (handle) {
+            handle.destroy();
+        }
+    }
+    void next() {
+        if (!handle.done()) {
+            handle.resume();
+        }
+    }
+    bool isGameOver() const {
+        return handle.promise().is_game_over;
+    }
+    bool getResult() const {
+        return handle.promise().result;
+    }
+
+private:
+    handle_type handle;
+};
+
 class GameState final {
 private:
     using insects_list = vector<Insect *>;
@@ -42,7 +113,7 @@ public:
 
     void beesTakeActions();
 
-    Generator<optional<bool>> simulate();
+    Simulator simulate();
 
     Ant *deployAnt(string placeName, string antTypeName);
 

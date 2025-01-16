@@ -14,6 +14,10 @@ void gameInit() {
  * @param msg 日志信息
  */
 void log(LogLevel level, const string &msg) {
+    if (!DEBUG_LOG) {
+        return;
+    }
+
     static const string ANSI_RESET = "\x1B[0m";
     static const string ANSI_BLUE = "\x1B[34m";
     static const string ANSI_RED = "\x1B[31m";

@@ -11,8 +11,8 @@
  *
  * 初始化 Hive 的名称为 "Hive"，且不包含任何 Ant 。
  */
-Hive::Hive(AssaultPlan *assaultPlan) : Place("Hive", nullptr) {
-    for (auto bee : assaultPlan->getBees()) {
+Hive::Hive(AssaultPlan assaultPlan) : Place("Hive", nullptr), assaultPlan(std::move(assaultPlan)) {
+    for (auto bee : assaultPlan.getBees()) {
         addInsect(bee);
     }
     // Always `nullptr` for a Hive
@@ -28,7 +28,7 @@ void Hive::strategy(GameState &gameState) {
             log(LOGTEST, format("Bee entrance {} added", name));
         }
     }
-    for (auto bee : (*assaultPlan)[gameState.time]) {
+    for (auto bee : assaultPlan[gameState.time]) {
         gameState.activeBees.push_back(bee);
         log(LOGTEST, format("Bee {} added", string(*bee)));
         bee->moveTo(randomElement(exits));

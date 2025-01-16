@@ -81,22 +81,22 @@ void GameState::beesTakeActions() {
  *
  * @return 若 Ant 获胜则返回 `true` ，否则返回 `false` 。
  */
-Generator<optional<bool>> GameState::simulate() {
+Simulator GameState::simulate() {
     bool result;
     try {
         while (true) {
             beehive->strategy(*this);
-            co_yield nullopt;
+            co_yield nullptr;
             antsTakeActions();
             time++;
-            co_yield nullopt;
+            co_yield nullptr;
             beesTakeActions();
         }
     } catch (AntsWinException &e) {
         log(LOGINFO, "All bees are vanquished. You win!");
         result = true;
     } catch (AntsLoseException &e) {
-        log(LOGINFO, "The ant queen has perished. Please try again.");
+        log(LOGINFO, "The bees reached homebase or the queen ant has perished. Please try again.");
         result = false;
     } catch (exception &e) {
         log(LOGERROR, e.what());

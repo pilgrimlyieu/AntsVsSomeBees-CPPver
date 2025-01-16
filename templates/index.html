@@ -45,7 +45,9 @@
         <audio id="backgroundmusic" loop>
             <source src="/static/assets/backgroundmusic.mp3" type="audio/mpeg">
         </audio>
-        <script src="/static/socket.io.min.js"></script>
+        <script>
+        const ws = new WebSocket(`ws://${location.host}/ws`);
+        </script>
         <script src="/static/utility.js"></script>
         <script src="/static/script.js"></script>
     </body>

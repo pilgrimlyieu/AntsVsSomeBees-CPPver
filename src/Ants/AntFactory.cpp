@@ -53,6 +53,7 @@ Ant *AntFactory::createAnt(const string &name) const {
             return queenAnt;
         }
         log(LOGERROR, "QueenAnt has already been created");
+        return nullptr;
     } else {
         auto it = antConstructors.find(name);
         if (it != antConstructors.end()) {

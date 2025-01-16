@@ -11,10 +11,10 @@ private:
     }
 
 public:
-    AssaultPlan *assaultPlan;
+    AssaultPlan assaultPlan;
     bees_list bees;
 
-    explicit Hive(AssaultPlan *assaultPlan);
+    explicit Hive(AssaultPlan assaultPlan);
 
     void strategy(GameState &gameState);
 };
