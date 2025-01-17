@@ -6,8 +6,9 @@
 #ifndef UTILITIES_HPP
 #define UTILITIES_HPP
 
-#include "Config.hpp"
+#include "Constants.hpp"
 #include "Info.hpp"
+
 
 // #ifdef DEBUG
 // #define private   public

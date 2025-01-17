@@ -48,7 +48,6 @@ void AntFactory::resetQueenAnt() {
 void AntFactory::registerAnt(const string &name, ant_constructor constructor, int foodCost) {
     antConstructors[name] = constructor;
     antCosts[name] = foodCost;
-    log(LOGTEST, format("Registered Ant: {}", name));
 }
 
 /**

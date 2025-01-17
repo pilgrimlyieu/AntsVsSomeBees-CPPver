@@ -4,33 +4,29 @@
 #include "MakePlans.hpp"
 
 struct CLIConfig {
-    string difficulty = "normal";
+    string difficulty;
     bool waterEnabled;
     int initialFood;
+    int logLevel;
 
-    AssaultPlan makeAssaultPlan() const {
-        if (difficulty == "test") {
-            return makeTestAssaultPlan();
-        } else if (difficulty == "easy") {
-            return makeEasyAssaultPlan();
-        } else if (difficulty == "hard") {
-            return makeHardAssaultPlan();
-        } else if (difficulty == "extra-hard") {
-            return makeExtraHardAssaultPlan();
-        } else {
-            return makeNormalAssaultPlan();
-        }
-    }
+    friend class CLI;
 
-    int getNumTunnels() const {
-        if (difficulty == "test") {
-            return 1;
-        } else if (difficulty == "easy") {
-            return 2;
-        } else {
-            return 4;
-        }
-    }
+    AssaultPlan makeAssaultPlan() const;
+
+    LogLevel getLogLevel() const;
+
+    int getNumTunnels() const;
+};
+
+class ConfigManager {
+private:
+    static inline CLIConfig config;
+    static inline bool initialized = false;
+
+public:
+    static void setConfig(const CLIConfig &cfg);
+
+    static const CLIConfig &getConfig();
 };
 
 class CLI {
@@ -43,6 +39,9 @@ public:
 
     [[nodiscard]]
     CLIConfig parse(int argc, char *argv[]);
+
+    [[nodiscard]]
+    CLIConfig getConfig() const;
 };
 
 #endif // CLI_HPP

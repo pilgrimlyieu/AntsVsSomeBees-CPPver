@@ -1,4 +1,5 @@
 #include "Utilities.hpp"
+#include "CLI.hpp"
 
 /**
  * @brief 游戏初始化
@@ -13,11 +14,12 @@ void gameInit() {
  * @param msg 日志信息
  */
 void log(LogLevel level, const string &msg) {
-    if (level == LOGTEST && DEBUG_LOG <= LOGTEST) {
+    LogLevel cfgLogLevel = ConfigManager::getConfig().getLogLevel();
+    if (level == LOGTEST && cfgLogLevel <= LOGTEST) {
         std::cout << ANSI_YELLOW << "[TEST] " << ANSI_RESET << msg << std::endl;
-    } else if (level == LOGINFO && DEBUG_LOG <= LOGINFO) {
+    } else if (level == LOGINFO && cfgLogLevel <= LOGINFO) {
         std::cout << ANSI_BLUE << "[INFO] " << ANSI_RESET << msg << std::endl;
-    } else if (level == LOGERROR && DEBUG_LOG <= LOGERROR) {
+    } else if (level == LOGERROR && cfgLogLevel <= LOGERROR) {
         std::cerr << ANSI_RED << "[ERROR] " << ANSI_RESET << msg << std::endl;
     }
 }
