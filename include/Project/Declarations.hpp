@@ -42,7 +42,7 @@ using dim = pair<int, int>;
  * - NOLOG: 无日志
  */
 enum class LogLevel {
-    LOGTEST,
+    LOGTEST = 0,
     LOGINFO,
     LOGERROR,
     NOLOG,

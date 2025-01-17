@@ -56,7 +56,7 @@ void LaserAnt::action(GameState &gamestate) {
             insectsShot++;
         }
     }
-    log(LOGINFO, format("{} has shot {} insects", *this, insectsShot));
+    log(LOGTEST, format("{} has shot {} insects", *this, insectsShot));
 }
 
 /**
