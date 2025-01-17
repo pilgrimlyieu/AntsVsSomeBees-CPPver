@@ -124,6 +124,11 @@ void Server::setupRoutes() {
     CROW_ROUTE(app, "/ants_take_actions")([this] { return handleInsectActions(); });
 
     CROW_ROUTE(app, "/bees_take_actions")([this] { return handleInsectActions(); });
+
+    CROW_ROUTE(app, "/exit_game").methods("POST"_method)([this] {
+        stop();
+        return crow::response(200);
+    });
 };
 
 /**

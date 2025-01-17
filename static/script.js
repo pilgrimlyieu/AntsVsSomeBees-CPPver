@@ -94,9 +94,25 @@ function startGame() {
         setInterval(insectsTakeActions, insectsActionInterval * 1000);
         setInterval(updateStats, 50);
       }
+
+      let exitButton = document.querySelector(".exit-button");
+      exitButton.addEventListener("click", exitGame);
     })
     .catch((error) => {
       console.error("Error:", error);
+    });
+}
+
+function exitGame() {
+  fetch("/exit_game", {
+    method: "POST",
+  })
+    .then(() => {
+      window.close(); // 关闭浏览器窗口
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      window.close(); // 即使请求失败也关闭窗口
     });
 }
 
@@ -209,12 +225,10 @@ function insectsTakeActions() {
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok");
       resetFailedCount();
-      console.log(response);
       return response.json();
     })
     .catch((error) => {
       console.error("Error:", error);
-      console.log(response);
       handleRequestError();
     });
 
