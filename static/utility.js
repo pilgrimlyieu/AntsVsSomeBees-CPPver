@@ -1,5 +1,6 @@
 function formatAntButtons(antTypes) {
   let antSection = document.querySelector(".ants-section");
+  antTypes.sort((a, b) => a.food_cost - b.food_cost);
   for (let antInfo of antTypes) {
     let antContainer = document.createElement("div");
     antContainer.style.display = "flex";
@@ -9,7 +10,12 @@ function formatAntButtons(antTypes) {
 
     // 创建显示蚂蚁名称的div
     let nameDiv = document.createElement("div");
-    nameDiv.innerText = antInfo.type.replace(/Ant|Thrower/, "");
+    nameDiv.innerText =
+      antInfo.type === "BodyguardAnt"
+        ? "Guard"
+        : antInfo.type === "ThrowerAnt"
+        ? antInfo.type.replace("Ant", "")
+        : antInfo.type.replace(/Thrower|Ant/g, "");
     nameDiv.className = "ant-name";
 
     // 创建蚂蚁按钮

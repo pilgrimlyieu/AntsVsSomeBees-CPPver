@@ -1,8 +1,8 @@
-let enablePolling = false;
+let enablePolling = true;
 let isServerRunning = true;
 let failedRequestCount = 0;
-const MAX_FAILED_REQUESTS = 3000;
-const REQUEST_TIMEOUT = 2000000;
+const MAX_FAILED_REQUESTS = 10;
+const REQUEST_TIMEOUT = 10000;
 
 function fetchWithTimeout(url, options = {}, timeout = REQUEST_TIMEOUT) {
   return Promise.race([
