@@ -54,20 +54,7 @@ void Server::setupRoutes() {
     CROW_ROUTE(app, "/initialize_game").methods("POST"_method)([this](const crow::request &req) {
         game.next();
 
-        crow::json::wvalue response;
-        response["dimensions_x"] = gameState->dimensions.first;
-        response["dimensions_y"] = gameState->dimensions.second;
-
-        vector<string> antTypes = AntFactory::getInstance().getAntNames();
-        response["ant_types"] = std::move(antTypes);
-
-        vector<vector<int>> wetPlaces;
-        for (const auto &[name, place] : gameState->places) {
-            if (dynamic_cast<Water *>(place)) {
-                wetPlaces.emplace_back(parseCoordinates(name));
-            }
-        }
-        response["wet_places"] = std::move(wetPlaces);
+        auto response = getGameInfo();
 
         return crow::response{response};
     });
@@ -152,11 +139,7 @@ void Server::setupRoutes() {
             game = gameState->simulate();
             game.next();
 
-            crow::json::wvalue response;
-            response["success"] = true;
-            response["dimensions_x"] = gameState->dimensions.first;
-            response["dimensions_y"] = gameState->dimensions.second;
-            response["ant_types"] = AntFactory::getInstance().getAntNames();
+            auto response = getGameInfo();
 
             vector<crow::json::wvalue> existingAnts;
             for (auto ant : gameState->getAnts()) {
@@ -185,14 +168,6 @@ void Server::setupRoutes() {
                 existingBees.push_back(std::move(beeInfo));
             }
             response["existing_bees"] = std::move(existingBees);
-
-            vector<vector<int>> wetPlaces;
-            for (const auto &[name, place] : gameState->places) {
-                if (dynamic_cast<Water *>(place)) {
-                    wetPlaces.emplace_back(parseCoordinates(name));
-                }
-            }
-            response["wet_places"] = std::move(wetPlaces);
 
             return crow::response{response};
         } catch (const std::exception &e) {
@@ -268,6 +243,30 @@ void Server::stop() {
     WebSocket::getEmitter().emit("serverShutdown", crow::json::wvalue());
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     app.stop();
+}
+
+crow::json::wvalue Server::getGameInfo() {
+    crow::json::wvalue response;
+    response["dimensions_x"] = gameState->dimensions.first;
+    response["dimensions_y"] = gameState->dimensions.second;
+
+    vector<crow::json::wvalue> antInfos;
+    for (const auto &antName : AntFactory::getInstance().getAntNames()) {
+        crow::json::wvalue antInfo;
+        antInfo["type"] = antName;
+        antInfo["food_cost"] = AntFactory::getInstance().getAntCost(antName);
+        antInfos.push_back(std::move(antInfo));
+    }
+    response["ant_types"] = std::move(antInfos);
+
+    vector<vector<int>> wetPlaces;
+    for (const auto &[name, place] : gameState->places) {
+        if (dynamic_cast<Water *>(place)) {
+            wetPlaces.emplace_back(parseCoordinates(name));
+        }
+    }
+    response["wet_places"] = std::move(wetPlaces);
+    return response;
 }
 
 Server::~Server() {

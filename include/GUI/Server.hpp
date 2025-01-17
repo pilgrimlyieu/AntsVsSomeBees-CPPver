@@ -25,6 +25,7 @@ public:
     void stop();
     void setupRoutes();
     void createNewGame();
+    crow::json::wvalue getGameInfo();
 };
 
 #endif // SERVER_HPP

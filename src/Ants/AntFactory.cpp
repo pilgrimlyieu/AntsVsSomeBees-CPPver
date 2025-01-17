@@ -51,6 +51,16 @@ void AntFactory::registerAnt(const string &name, ant_constructor constructor, in
 }
 
 /**
+ * @brief 获取指定 Ant 的食物消耗
+ *
+ * @param name Ant 的名称
+ * @return Ant 的食物消耗
+ */
+int AntFactory::getAntCost(const string &name) const {
+    return antCosts.at(name);
+}
+
+/**
  * @brief 判断是否可以部署指定的 Ant
  *
  * @param gameState 当前的游戏状态
@@ -63,11 +73,7 @@ bool AntFactory::canDeployAnt(GameState &gameState, const string &name) const {
             return false;
         }
     }
-    auto it = antCosts.find(name);
-    if (it != antCosts.end()) {
-        return it->second <= gameState.food;
-    }
-    return false;
+    return gameState.food >= getAntCost(name);
 }
 
 /**

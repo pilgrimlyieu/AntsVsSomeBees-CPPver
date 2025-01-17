@@ -8,7 +8,7 @@ struct CLIConfig {
     bool waterEnabled = false;
     int initialFood = 2;
     int logLevel = 1;
-    int port = 10800;
+    int port = 18080;
     string configPath = "./config.json";
 
     friend class CLI;

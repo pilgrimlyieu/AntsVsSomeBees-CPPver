@@ -1,16 +1,36 @@
 function formatAntButtons(antTypes) {
-  // Create buttons for each type of ant
-
   let antSection = document.querySelector(".ants-section");
-  for (i = 0; i < antTypes.length; i++) {
+  for (let antInfo of antTypes) {
+    let antContainer = document.createElement("div");
+    antContainer.style.display = "flex";
+    antContainer.style.flexDirection = "column";
+    antContainer.style.alignItems = "center";
+    antContainer.style.width = "6.25%";
+
+    // 创建显示蚂蚁名称的div
+    let nameDiv = document.createElement("div");
+    nameDiv.innerText = antInfo.type.replace(/Ant|Thrower/, "");
+    nameDiv.className = "ant-name";
+
+    // 创建蚂蚁按钮
     let antButton = document.createElement("button");
-    antButton.setAttribute("class", `ant-btn`);
-    antButton.setAttribute("id", antTypes[i]);
-    antButton.style.backgroundImage = `url('/static/assets/ants/${antTypes[i]}.gif')`;
-    antSection.appendChild(antButton);
-    selectedAntsTable[antTypes[i]] = false; // Add key value pairs to table (key = ant name, val = whether it's selected)
+    antButton.setAttribute("class", "ant-btn");
+    antButton.setAttribute("id", antInfo.type);
+    antButton.style.backgroundImage = `url('/static/assets/ants/${antInfo.type}.gif')`;
+
+    // 创建显示食物成本的div
+    let costDiv = document.createElement("div");
+    costDiv.innerText = `${antInfo.food_cost}`;
+    costDiv.className = "ant-cost";
+
+    antContainer.appendChild(nameDiv);
+    antContainer.appendChild(antButton);
+    antContainer.appendChild(costDiv);
+    antSection.appendChild(antContainer);
+
+    selectedAntsTable[antInfo.type] = false;
   }
-  addListenerToAnts(); // Add event listener to ant button
+  addListenerToAnts();
 }
 
 function formatGameGrid(rows, cols, wetPlaces) {
@@ -79,7 +99,6 @@ function createButtonsForRow(buttonCount, row, wetPlaces) {
     document.querySelector(`.tunnel-row-${row}`).appendChild(button);
   }
 }
-
 
 function formatHive() {
   // Set up and add image to bee hive
@@ -202,50 +221,49 @@ function placeAnt(antName, place, ant_id) {
   image.style.transform = "translate(-50%, -50%)";
 }
 
-
 function adjustAntButtons(availableAnts) {
-    // Increase brightness of available ants (enough food to de deployed), and decrease unavailable ants
-    let antButtons = document.getElementsByClassName('ant-btn');
-    for (i = 0; i < antButtons.length; i++) {
-        let button = antButtons[i];
-        if (availableAnts.includes(button.id)) {
-            button.style.filter = 'brightness(100%)';
-        } else {
-            button.style.filter = 'brightness(35%)';
-        }
+  // Increase brightness of available ants (enough food to de deployed), and decrease unavailable ants
+  let antButtons = document.getElementsByClassName("ant-btn");
+  for (i = 0; i < antButtons.length; i++) {
+    let button = antButtons[i];
+    if (availableAnts.includes(button.id)) {
+      button.style.filter = "brightness(100%)";
+    } else {
+      button.style.filter = "brightness(35%)";
     }
+  }
 }
-
 
 function showEndGameAlert(result) {
-    // Display alert message. Called when game ends.
-    let body = document.body;
-    let alert = document.createElement('alert');
-    alert.style.opacity = '0'; // Set initial opacity to 0
-    body.appendChild(alert);
-    alert.setAttribute('class', 'alert');
-    let text = document.createElement('p');
-    alert.appendChild(text);
+  // Display alert message. Called when game ends.
+  let body = document.body;
+  let alert = document.createElement("alert");
+  alert.style.opacity = "0"; // Set initial opacity to 0
+  body.appendChild(alert);
+  alert.setAttribute("class", "alert");
+  let text = document.createElement("p");
+  alert.appendChild(text);
 
-    if (result) { // Ants won
-        text.innerText = 'You Won!';
-        alert.style.backgroundColor = 'rgba(30, 200, 50, 1)';
-    } else {
-        text.innerText = 'You Lost!';
-        alert.style.backgroundColor = 'rgba(190, 40, 50, 1)';
-    }
+  if (result) {
+    // Ants won
+    text.innerText = "You Won!";
+    alert.style.backgroundColor = "rgba(30, 200, 50, 1)";
+  } else {
+    text.innerText = "You Lost!";
+    alert.style.backgroundColor = "rgba(190, 40, 50, 1)";
+  }
 
-    alert.style.transition = 'opacity 2s ease-in-out';
-    setTimeout(() => { // Need time out for animation
-        alert.style.opacity = '0.9'; // Change alert opacity to 90% over 2 seconds
-    }, 50);
+  alert.style.transition = "opacity 2s ease-in-out";
+  setTimeout(() => {
+    // Need time out for animation
+    alert.style.opacity = "0.9"; // Change alert opacity to 90% over 2 seconds
+  }, 50);
 }
 
-
 function playMusic() {
-    // Play music
-    let audio = document.getElementById('backgroundmusic');
-    audio.play();
+  // Play music
+  let audio = document.getElementById("backgroundmusic");
+  audio.play();
 }
 
 document.querySelector(".load-button").addEventListener("click", function () {
@@ -287,30 +305,27 @@ document.getElementById("load-file").addEventListener("change", function (e) {
               data.wet_places
             ); // Set up game grid
 
-                for (let ant of data.existing_ants) {
-                  placeAnt(ant.type, `${ant.pos[0]}-${ant.pos[1]}`, ant.id);
-                }
+            for (let ant of data.existing_ants) {
+              placeAnt(ant.type, `${ant.pos[0]}-${ant.pos[1]}`, ant.id);
+            }
 
-                // 显示已存在的蜜蜂
-                for (let bee of data.existing_bees) {
-                  let beeImg = document.createElement("img");
-                  let destination = document.getElementById(
-                    `${bee.pos[0]}-${bee.pos[1]}`
-                  );
-                  destination.appendChild(beeImg);
-                  beeImg.setAttribute("class", "insect-on-tile-img");
-                  beeImg.setAttribute("id", bee.id);
-                  beeImg.setAttribute(
-                    "src",
-                    `/static/assets/bees/${bee.type}.gif`
-                  );
-                  beeImg.style.zIndex = "5";
+            // 显示已存在的蜜蜂
+            for (let bee of data.existing_bees) {
+              let beeImg = document.createElement("img");
+              let destination = document.getElementById(
+                `${bee.pos[0]}-${bee.pos[1]}`
+              );
+              destination.appendChild(beeImg);
+              beeImg.setAttribute("class", "insect-on-tile-img");
+              beeImg.setAttribute("id", bee.id);
+              beeImg.setAttribute("src", `/static/assets/bees/${bee.type}.gif`);
+              beeImg.style.zIndex = "5";
 
-                  // 放置在格子中央
-                  beeImg.style.top = "50%";
-                  beeImg.style.left = "50%";
-                  beeImg.style.transform = "translate(-50%, -50%)";
-                }
+              // 放置在格子中央
+              beeImg.style.top = "50%";
+              beeImg.style.left = "50%";
+              beeImg.style.transform = "translate(-50%, -50%)";
+            }
 
             playMusic();
 
@@ -349,5 +364,3 @@ document.querySelector(".save-button").addEventListener("click", function () {
     })
     .catch((error) => console.error("Error saving game:", error));
 });
-
-

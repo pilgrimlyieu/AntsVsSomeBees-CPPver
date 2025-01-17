@@ -145,6 +145,27 @@ body {
   background-color: rgb(150, 10, 10);
 }
 
+.ant-name {
+  color: white;
+  font-size: 1px;
+  padding-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.ant-cost {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
 .ants-section {
   display: flex;
   flex-direction: row;

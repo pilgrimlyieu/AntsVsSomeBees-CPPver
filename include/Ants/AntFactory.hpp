@@ -29,6 +29,8 @@ public:
 
     void registerAnt(const string &name, ant_constructor constructor, int foodCost);
 
+    int getAntCost(const string &name) const;
+
     bool canDeployAnt(GameState &gameState, const string &name) const;
 
     [[nodiscard]]
