@@ -2,6 +2,7 @@
 #include "Ant.hpp"
 #include "AntHomeBase.hpp"
 #include "Bee.hpp"
+#include "ContainerAnt.hpp"
 #include "Hive.hpp"
 #include "Insect.hpp"
 #include "Water.hpp"
@@ -101,7 +102,12 @@ Place *Place::deserialize(const json &data) {
     }
     if (place) {
         if (data.contains("ant")) {
-            place->addInsect(Ant::deserialize(data["ant"]));
+            auto ant = Ant::deserialize(data["ant"]);
+            place->addInsect(ant);
+            auto containerAnt = dynamic_cast<ContainerAnt *>(ant);
+            if (containerAnt) {
+                containerAnt->antContained->setPlace(place);
+            }
         }
         if (type != "Hive") {
             for (const auto &beeData : data["bees"]) {

@@ -53,7 +53,7 @@ void Insect::addTo(Place *place) {
     } else {
         log(LOGTEST, format("{} is added to nullptr", *this));
     }
-    this->place = place;
+    setPlace(place);
 }
 
 /**
