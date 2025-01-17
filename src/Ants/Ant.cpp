@@ -83,7 +83,6 @@ void Ant::addTo(Place *place) {
 void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
-        log(LOGTEST, format("{} is removed from {}", *this, *place));
     } else if (place->ant == nullptr) {
         THROW_EXCEPTION(invalid_argument, format("{} is not in {}", *this, *place));
     } else {

@@ -50,11 +50,11 @@ void LaserAnt::action(GameState &gamestate) {
     insects_distance targets = getTargets();
     for (auto &target : targets) {
         double damage = getTrueDamage(target.second);
+        log(LOGINFO, format("{} shoots {}, dealing {} damage", *this, *target.first, damage));
         target.first->reduceHealth(damage);
         if (damage > 0) {
             insectsShot++;
         }
-        log(LOGINFO, format("{} shoots {}, dealing {} damage", *this, *target.first, damage));
     }
     log(LOGINFO, format("{} has shot {} insects", *this, insectsShot));
 }

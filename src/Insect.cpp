@@ -19,7 +19,6 @@ void Insect::reduceHealth(double amount) {
         deathCallback();
         place->removeInsect(this);
         log(LOGINFO, format("{} is dead", *this));
-        delete this;
     }
 }
 
@@ -73,12 +72,12 @@ void Insect::removeFrom(Place *place) {
  * @return string 表示 Insect 的字符串。
  */
 Insect::operator string() const {
-    if (place == nullptr) {
-        return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, NULL)", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
-                      getName(), id, health);
-    } else {
+    if (place) {
         return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, {6})", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
                       getName(), id, health, *place);
+    } else {
+        return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, NULL)", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
+                      getName(), id, health);
     }
 }
 

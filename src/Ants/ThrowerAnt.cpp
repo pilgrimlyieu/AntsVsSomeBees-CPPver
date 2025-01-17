@@ -38,8 +38,8 @@ Bee *ThrowerAnt::nearestBee() {
 void ThrowerAnt::throwAt(Bee *target) {
     WebSocket::onThrowerAttack(this, target);
     if (target != nullptr) {
-        target->reduceHealth(getDamage());
         log(LOGINFO, format("{} throws at {}, causing {} damage", *this, *target, getDamage()));
+        target->reduceHealth(getDamage());
     } else {
         log(LOGINFO, format("{} throws at nothing", *this));
     }

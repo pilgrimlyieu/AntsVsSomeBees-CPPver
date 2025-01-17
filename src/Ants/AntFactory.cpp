@@ -60,17 +60,14 @@ void AntFactory::registerAnt(const string &name, ant_constructor constructor, in
  */
 bool AntFactory::canDeployAnt(GameState &gameState, const string &name) const {
     if (name == "QueenAnt") {
-        if (queenAnt == nullptr) {
-            return true;
-        }
-        return false;
-    } else {
-        auto it = antCosts.find(name);
-        if (it != antCosts.end()) {
-            return it->second <= gameState.food;
+        if (queenAnt != nullptr) {
+            return false;
         }
     }
-
+    auto it = antCosts.find(name);
+    if (it != antCosts.end()) {
+        return it->second <= gameState.food;
+    }
     return false;
 }
 

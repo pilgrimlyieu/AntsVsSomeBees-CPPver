@@ -4,6 +4,7 @@
 #include "AntsLoseException.hpp"
 #include "AntsWinException.hpp"
 #include "Bee.hpp"
+#include "ContainerAnt.hpp"
 #include "Utilities.hpp"
 #include "Water.hpp"
 
@@ -54,6 +55,9 @@ void GameState::antsTakeActions() {
         if (ant->health > 0) {
             ant->action(*this);
         }
+        if (ant->health <= 0) {
+            delete ant;
+        }
     }
 }
 
@@ -68,9 +72,9 @@ void GameState::beesTakeActions() {
         }
         if (bee->health <= 0) {
             numBees--;
-            log(LOGINFO, format("Bee {} is dead", string(*bee)));
             activeBees.erase(std::remove(activeBees.begin(), activeBees.end(), bee),
                              activeBees.end());
+            delete bee;
         }
     }
     if (numBees == 0) {
@@ -126,8 +130,7 @@ Simulator GameState::simulate() {
 Ant *GameState::deployAnt(string placeName, string antTypeName) {
     Ant *ant = antFactory->createAnt(antTypeName);
     if (ant != nullptr) {
-        if (ant->getFoodCost() > food) {
-            delete ant;
+        if (!AntFactory::getInstance().canDeployAnt(*this, antTypeName)) {
             log(LOGERROR, format("Insufficient food to deploy {0}.", antTypeName));
             return nullptr;
         }
@@ -160,6 +163,10 @@ GameState::ants_list GameState::getAnts() const {
     for (auto &[name, place] : places) {
         if (place->ant != nullptr) {
             ants.push_back(place->ant);
+            auto container_ptr = dynamic_cast<ContainerAnt *>(place->ant);
+            if (container_ptr && container_ptr->antContained != nullptr) {
+                ants.push_back(container_ptr->antContained);
+            }
         }
     }
     return ants;
