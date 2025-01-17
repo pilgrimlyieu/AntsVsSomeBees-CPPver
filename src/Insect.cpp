@@ -14,7 +14,7 @@ int Insect::idCounter = 0;
 void Insect::reduceHealth(double amount) {
     health -= amount;
     injuryCallback();
-    log(LOGTEST, format("{} is reduced by {}", *this, amount));
+    log(LOGTEST, format("{} is reduced by {:.2f}", *this, amount));
     if (health <= 0.0) {
         deathCallback();
         place->removeInsect(this);

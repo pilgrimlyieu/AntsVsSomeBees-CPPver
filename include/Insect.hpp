@@ -4,7 +4,7 @@
 #include "Serializable.hpp"
 #include "Utilities.hpp"
 
-class Insect : Serializable {
+class Insect : public Serializable {
 private:
     static int idCounter; //!< Insect ID 计数器
     int id;               //!< Insect ID

@@ -16,7 +16,7 @@
  */
 void Bee::sting(Ant *ant) {
     ant->reduceHealth(getDamage());
-    log(LOGINFO, format("{} stings {} causing {} damage", *this, *ant, getDamage()));
+    log(LOGINFO, format("{} stings {} causing {:.2f} damage", *this, *ant, getDamage()));
 }
 
 /**

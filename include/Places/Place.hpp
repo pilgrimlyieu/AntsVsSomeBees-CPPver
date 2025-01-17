@@ -4,7 +4,7 @@
 #include "Serializable.hpp"
 #include "Utilities.hpp"
 
-class Place : Serializable {
+class Place : public Serializable {
 protected:
     ~Place() = default;
 
