@@ -2,12 +2,14 @@
 #include "Server.hpp"
 
 int main(int argc, char *argv[]) {
-    CLI cli;
-    CLIConfig cfg = cli.parse(argc, argv);
-    ConfigManager::setConfig(cfg);
-
-    int port = 18080;
-    Server server(cfg, port);
-    server.start();
+    try {
+        CLI cli;
+        CLIConfig cfg = cli.parse(argc, argv);
+        Server server(cfg);
+        server.start();
+    } catch (const std::exception &e) {
+        log(LOGERROR, e.what());
+        return 1;
+    }
     return 0;
 }

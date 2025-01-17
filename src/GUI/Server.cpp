@@ -1,4 +1,5 @@
 #include "Server.hpp"
+#include "Bee.hpp"
 #include "MakePlans.hpp"
 #include "Water.hpp"
 #include "WebSocket.hpp"
@@ -9,8 +10,8 @@
  * @param config CLI 配置
  * @param port 服务器端口，默认为 18080
  */
-Server::Server(CLIConfig config, int port) : config(std::move(config)), gameState(nullptr), game() {
-    app.port(port).multithreaded().loglevel(crow::LogLevel::Error);
+Server::Server(CLIConfig config) : config(std::move(config)), gameState(nullptr), game() {
+    app.port(config.port).multithreaded().loglevel(crow::LogLevel::Critical);
     setupRoutes();
     createNewGame();
 }
@@ -44,7 +45,7 @@ void Server::createNewGame() {
  */
 void Server::setupRoutes() {
     CROW_ROUTE(app, "/")([this]() {
-        std::cout << "\n ===== New Game Started ===== \n";
+        log(LOGINFO, "New game started");
         createNewGame();
         auto page = crow::mustache::load("index.html");
         return page.render();
@@ -156,6 +157,34 @@ void Server::setupRoutes() {
             response["dimensions_x"] = gameState->dimensions.first;
             response["dimensions_y"] = gameState->dimensions.second;
             response["ant_types"] = AntFactory::getInstance().getAntNames();
+
+            vector<crow::json::wvalue> existingAnts;
+            for (auto ant : gameState->getAnts()) {
+                if (!ant->getPlace()) {
+                    continue;
+                }
+                crow::json::wvalue antInfo;
+                antInfo["type"] = ant->getName();
+                antInfo["id"] = ant->getId();
+                auto coords = parseCoordinates(ant->getPlace()->name);
+                antInfo["pos"] = coords;
+                existingAnts.push_back(std::move(antInfo));
+            }
+            response["existing_ants"] = std::move(existingAnts);
+
+            vector<crow::json::wvalue> existingBees;
+            for (auto bee : gameState->activeBees) {
+                if (!bee->getPlace() || bee->getPlace()->getIsHive()) {
+                    continue;
+                }
+                crow::json::wvalue beeInfo;
+                beeInfo["type"] = bee->getName();
+                beeInfo["id"] = bee->getId();
+                auto coords = parseCoordinates(bee->getPlace()->name);
+                beeInfo["pos"] = coords;
+                existingBees.push_back(std::move(beeInfo));
+            }
+            response["existing_bees"] = std::move(existingBees);
 
             vector<vector<int>> wetPlaces;
             for (const auto &[name, place] : gameState->places) {

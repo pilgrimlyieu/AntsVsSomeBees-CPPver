@@ -4,12 +4,18 @@
 #include "MakePlans.hpp"
 
 struct CLIConfig {
-    string difficulty;
-    bool waterEnabled;
-    int initialFood;
-    int logLevel;
+    string difficulty = "normal";
+    bool waterEnabled = false;
+    int initialFood = 2;
+    int logLevel = 1;
+    int port = 10800;
+    string configPath = "./config.json";
 
     friend class CLI;
+
+    void loadFromJson(const json &j);
+
+    void saveToJson(const string &path) const;
 
     AssaultPlan makeAssaultPlan() const;
 
@@ -33,9 +39,12 @@ class CLI {
 private:
     argparse::ArgumentParser parser;
     CLIConfig config;
+    CLIConfig cmdConfig;
 
 public:
     CLI();
+
+    void loadConfigFile(const string &path, CLIConfig &cfg);
 
     [[nodiscard]]
     CLIConfig parse(int argc, char *argv[]);

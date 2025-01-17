@@ -18,7 +18,7 @@ private:
     crow::response handleInsectActions();
 
 public:
-    explicit Server(CLIConfig config, int port = 18080);
+    explicit Server(CLIConfig config);
     ~Server();
 
     void start();
