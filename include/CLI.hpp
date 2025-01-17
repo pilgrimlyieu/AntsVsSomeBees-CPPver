@@ -6,6 +6,7 @@
 struct CLIConfig {
     string difficulty = "normal";
     bool waterEnabled = false;
+    bool autoOpen = false;
     int initialFood = 2;
     int logLevel = 1;
     int port = 18080;

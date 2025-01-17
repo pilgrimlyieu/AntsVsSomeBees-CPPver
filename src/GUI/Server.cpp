@@ -233,6 +233,17 @@ crow::response Server::handleInsectActions() {
 void Server::start() {
     log(LOGINFO,
         format("Server started at {1}http://localhost:{2}{0}", ANSI_RESET, ANSI_BOLD, app.port()));
+    if (config.autoOpen) {
+        string command;
+#ifdef _WIN32
+        command = format("start http://localhost:{0}", app.port());
+#elif __APPLE__
+        command = format("open http://localhost:{0}", app.port());
+#else
+        command = format("xdg-open http://localhost:{0}", app.port());
+#endif
+        system(command.c_str());
+    }
     app.run();
 }
 

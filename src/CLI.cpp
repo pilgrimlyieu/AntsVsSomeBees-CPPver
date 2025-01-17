@@ -9,6 +9,9 @@ void CLIConfig::loadFromJson(const json &j) {
     if (j.contains("water")) {
         waterEnabled = j["water"];
     }
+    if (j.contains("autoOpen")) {
+        autoOpen = j["autoOpen"];
+    }
     if (j.contains("initialFood")) {
         initialFood = j["initialFood"];
     }
@@ -24,6 +27,7 @@ void CLIConfig::saveToJson(const string &path) const {
     json j;
     j["difficulty"] = difficulty;
     j["water"] = waterEnabled;
+    j["autoOpen"] = autoOpen;
     j["initialFood"] = initialFood;
     j["logLevel"] = logLevel;
     j["port"] = port;
@@ -90,6 +94,14 @@ CLI::CLI() : parser(ProjectInfo::PROJECT_NAME, ProjectInfo::VERSION) {
         .flag()
         .action([this](const std::string &) {
             cmdConfig.waterEnabled = true;
+            return "true";
+        });
+
+    parser.add_argument("-o", "--open")
+        .help("automatically open the game in a browser (maybe not work in your OS!)")
+        .flag()
+        .action([this](const std::string &) {
+            cmdConfig.autoOpen = true;
             return "true";
         });
 
@@ -171,6 +183,9 @@ CLIConfig CLI::parse(int argc, char *argv[]) {
         }
         if (parser.is_used("--water")) {
             config.waterEnabled = cmdConfig.waterEnabled;
+        }
+        if (parser.is_used("--open")) {
+            config.autoOpen = cmdConfig.autoOpen;
         }
         if (parser.is_used("--food")) {
             config.initialFood = cmdConfig.initialFood;
