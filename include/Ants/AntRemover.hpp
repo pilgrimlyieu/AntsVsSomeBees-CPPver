@@ -9,11 +9,20 @@ protected:
         return "AntRemover";
     }
     int getFoodCost() const final {
-        return 1;
+        return 0;
     }
 
 public:
     explicit AntRemover() : Ant(0.0) {}
+
+    bool canContain(Ant *other) final {
+        return true;
+    }
+
+    void storeAnt(Ant *other) final {
+        log(LOGINFO, format("Remove {}", *other));
+        other->kill();
+    }
 };
 
 #endif // ANTREMOVER_HPP

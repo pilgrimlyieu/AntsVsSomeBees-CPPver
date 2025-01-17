@@ -28,6 +28,9 @@ void WebSocket::setEmitter(EventEmitter emitter) {
  * @param place 目的地
  */
 void WebSocket::onInsectMove(Bee *bee, Place *place) {
+    if (bee->getPlace() && place->name == "Ant Home Base") {
+        return;
+    }
     if (bee->getPlace() && bee->getPlace()->getIsHive()) {
         crow::json::wvalue data;
         data["bee_id"] = bee->getId();

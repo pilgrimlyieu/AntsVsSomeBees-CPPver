@@ -128,15 +128,22 @@ Simulator GameState::simulate() {
  * @return 部署的 Ant
  */
 Ant *GameState::deployAnt(string placeName, string antTypeName) {
+    if (!AntFactory::getInstance().canDeployAnt(*this, antTypeName)) {
+        log(LOGERROR, format("Can not deploy {0}.", antTypeName));
+        return nullptr;
+    }
+    if (places.find(placeName) == places.end()) {
+        throw out_of_range(format("Place {0} not found", placeName));
+    }
     Ant *ant = antFactory->createAnt(antTypeName);
     if (ant != nullptr) {
-        if (!AntFactory::getInstance().canDeployAnt(*this, antTypeName)) {
-            log(LOGERROR, format("Insufficient food to deploy {0}.", antTypeName));
-            return nullptr;
-        }
         log(LOGTEST, format("Deploying {0} to {1}", antTypeName, placeName));
         places[placeName]->addInsect(ant);
         food -= ant->getFoodCost();
+        if (ant->getName() == "AntRemover") {
+            ant->removeFrom(places[placeName]);
+            ant = nullptr;
+        }
     }
     return ant;
 }
