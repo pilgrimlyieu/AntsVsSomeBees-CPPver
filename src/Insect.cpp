@@ -73,10 +73,6 @@ void Insect::removeFrom(Place *place) {
  * @return string 表示 Insect 的字符串。
  */
 Insect::operator string() const {
-    static const string ANSI_GREEN = "\x1B[32m";
-    static const string ANSI_MAGENTA = "\x1B[35m";
-    static const string ANSI_DEFAULT = "\x1B[39m";
-
     if (place == nullptr) {
         return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, NULL)", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
                       getName(), id, health);

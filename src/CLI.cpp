@@ -1,5 +1,5 @@
 #include "CLI.hpp"
-#include "ProjectInfo.hpp"
+#include "Info.hpp"
 
 CLI::CLI() : parser(ProjectInfo::PROJECT_NAME, ProjectInfo::VERSION) {
     parser.add_argument("-d", "--difficulty")

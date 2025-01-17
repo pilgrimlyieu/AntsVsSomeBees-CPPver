@@ -180,8 +180,6 @@ crow::response Server::handleInsectActions() {
  * @brief 启动服务器
  */
 void Server::start() {
-    static string ANSI_BOLD = "\x1B[1m";
-    static string ANSI_RESET = "\x1B[0m";
     log(LOGINFO,
         format("Server started at {1}http://localhost:{2}{0}", ANSI_RESET, ANSI_BOLD, app.port()));
     app.run();

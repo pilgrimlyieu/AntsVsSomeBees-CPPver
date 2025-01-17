@@ -1,6 +1,6 @@
 /**
  * @file Utilities.h
- * @brief 提供一些常用的工具函数和类型定义。
+ * @brief 提供一些常用的工具。
  */
 
 #ifndef UTILITIES_HPP
@@ -11,29 +11,8 @@
 // #define protected public
 // #endif
 
-#include <coroutine>
-#include <cstdarg>
-#include <format>
-#include <functional>
-#include <map>
-#include <memory>
-#include <optional>
-#include <stdexcept>
-#include <unordered_map>
-#include <vector>
-
-#include "ProjectConfig.hpp"
-#include "ProjectInfo.hpp"
-
-
-class CLI;
-class GameState;
-class Place;
-class Insect;
-class Ant;
-class Bee;
-
-struct CLIConfig;
+#include "Config.hpp"
+#include "Info.hpp"
 
 #ifdef DEBUG
 #define THROW_EXCEPTION(Ex, msg)                                        \
@@ -48,42 +27,6 @@ struct CLIConfig;
         throw Ex(msg);           \
     } while (0)
 #endif
-
-using std::exception;
-using std::format;
-using std::function;
-using std::invalid_argument;
-using std::make_shared;
-using std::make_unique;
-using std::map;
-using std::nullopt;
-using std::optional;
-using std::out_of_range;
-using std::pair;
-using std::shared_ptr;
-using std::string;
-using std::unique_ptr;
-using std::unordered_map;
-using std::vector;
-
-using g_time = int;
-static const g_time TIME_START = (g_time)0;
-
-using bee_type = function<Bee *(double)>;
-using bees_list = vector<Bee *>;
-using places_list = vector<Place *>;
-
-/**
- * @brief 游戏策略
- *
- * 接受 GameState 的引用，执行游戏策略。
- */
-using strat = void (*)(GameState &);
-
-/**
- * @brief 维度
- */
-using dim = pair<int, int>;
 
 void gameInit();
 

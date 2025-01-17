@@ -1,5 +1,4 @@
 #include "Utilities.hpp"
-#include <iostream>
 
 /**
  * @brief 游戏初始化
@@ -14,11 +13,6 @@ void gameInit() {
  * @param msg 日志信息
  */
 void log(LogLevel level, const string &msg) {
-    static const string ANSI_RESET = "\x1B[0m";
-    static const string ANSI_YELLOW = "\x1B[33m";
-    static const string ANSI_BLUE = "\x1B[34m";
-    static const string ANSI_RED = "\x1B[31m";
-
     if (level == LOGTEST && DEBUG_LOG <= LOGTEST) {
         std::cout << ANSI_YELLOW << "[TEST] " << ANSI_RESET << msg << std::endl;
     } else if (level == LOGINFO && DEBUG_LOG <= LOGINFO) {

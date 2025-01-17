@@ -2,7 +2,6 @@
 #define EVENTEMITTER_HPP
 
 #include "Utilities.hpp"
-#include <crow.h>
 
 class EventEmitter {
 private:

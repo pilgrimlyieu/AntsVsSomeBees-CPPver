@@ -3,8 +3,6 @@
 
 #include "MakePlans.hpp"
 
-#include <argparse/argparse.hpp>
-
 struct CLIConfig {
     string difficulty = "normal";
     bool waterEnabled;

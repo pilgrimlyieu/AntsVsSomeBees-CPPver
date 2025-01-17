@@ -22,7 +22,8 @@ add_includedirs(
     "include/Exceptions",
     "include/GUI",
     "include/Places",
-    "include/Plans"
+    "include/Plans",
+    "include/Project"
 )
 add_files("src/**.cpp")
 

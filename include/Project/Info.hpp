@@ -1,11 +1,9 @@
 #ifndef PROJECTINFO_HPP
 #define PROJECTINFO_HPP
 
-#include <string>
+#include "Libraries.hpp"
 
 namespace ProjectInfo {
-using std::string;
-
 const string PROJECT_NAME = "Ants vs. SomeBees";
 const string VERSION = "0.1.0-developing";
 const string AUTHOR = "PilgrimLyieu";
