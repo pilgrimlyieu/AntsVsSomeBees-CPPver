@@ -286,6 +286,32 @@ document.getElementById("load-file").addEventListener("change", function (e) {
               data.dimensions_y,
               data.wet_places
             ); // Set up game grid
+
+                for (let ant of data.existing_ants) {
+                  placeAnt(ant.type, `${ant.pos[0]}-${ant.pos[1]}`, ant.id);
+                }
+
+                // 显示已存在的蜜蜂
+                for (let bee of data.existing_bees) {
+                  let beeImg = document.createElement("img");
+                  let destination = document.getElementById(
+                    `${bee.pos[0]}-${bee.pos[1]}`
+                  );
+                  destination.appendChild(beeImg);
+                  beeImg.setAttribute("class", "insect-on-tile-img");
+                  beeImg.setAttribute("id", bee.id);
+                  beeImg.setAttribute(
+                    "src",
+                    `/static/assets/bees/${bee.type}.gif`
+                  );
+                  beeImg.style.zIndex = "5";
+
+                  // 放置在格子中央
+                  beeImg.style.top = "50%";
+                  beeImg.style.left = "50%";
+                  beeImg.style.transform = "translate(-50%, -50%)";
+                }
+
             playMusic();
 
             // Set calling these functions every 4 seconds and 50 milliseconds.
