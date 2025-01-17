@@ -88,6 +88,8 @@ function startGame() {
       loadButton.remove(); // Remove load button
       let docButton = document.querySelector(".doc-button");
       docButton.remove();
+      let customButton = document.querySelector(".custom-button");
+      customButton.remove();
 
       formatAntButtons(data.ant_types); // Set up ant buttons according to available ant types
       formatGameGrid(data.dimensions_x, data.dimensions_y, data.wet_places); // Set up game grid
@@ -112,11 +114,11 @@ function exitGame() {
     method: "POST",
   })
     .then(() => {
-      window.close(); // 关闭浏览器窗口
+      window.close();
     })
     .catch((error) => {
       console.error("Error:", error);
-      window.close(); // 即使请求失败也关闭窗口
+      window.close();
     });
 }
 
@@ -343,7 +345,6 @@ function clearAllIntervals() {
   }
 }
 
-// 添加手动触发函数
 function manualUpdate() {
   updateStats();
 }
@@ -352,7 +353,11 @@ function manualInsectActions() {
   insectsTakeActions();
 }
 
-// 添加轮询开关函数
+function manualOneTurn() {
+  manualInsectActions();
+  manualUpdate();
+}
+
 function togglePolling() {
   enablePolling = !enablePolling;
   if (enablePolling) {

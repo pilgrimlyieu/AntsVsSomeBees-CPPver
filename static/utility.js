@@ -8,7 +8,6 @@ function formatAntButtons(antTypes) {
     antContainer.style.alignItems = "center";
     antContainer.style.width = "6.25%";
 
-    // 创建显示蚂蚁名称的div
     let nameDiv = document.createElement("div");
     nameDiv.innerText =
       antInfo.type === "BodyguardAnt"
@@ -18,13 +17,11 @@ function formatAntButtons(antTypes) {
         : antInfo.type.replace(/Thrower|Ant/g, "");
     nameDiv.className = "ant-name";
 
-    // 创建蚂蚁按钮
     let antButton = document.createElement("button");
     antButton.setAttribute("class", "ant-btn");
     antButton.setAttribute("id", antInfo.type);
     antButton.style.backgroundImage = `url('/static/assets/ants/${antInfo.type}.gif')`;
 
-    // 创建显示食物成本的div
     let costDiv = document.createElement("div");
     costDiv.innerText = `${antInfo.food_cost}`;
     costDiv.className = "ant-cost";
@@ -315,7 +312,6 @@ document.getElementById("load-file").addEventListener("change", function (e) {
               placeAnt(ant.type, `${ant.pos[0]}-${ant.pos[1]}`, ant.id);
             }
 
-            // 显示已存在的蜜蜂
             for (let bee of data.existing_bees) {
               let beeImg = document.createElement("img");
               let destination = document.getElementById(
@@ -327,7 +323,6 @@ document.getElementById("load-file").addEventListener("change", function (e) {
               beeImg.setAttribute("src", `/static/assets/bees/${bee.type}.gif`);
               beeImg.style.zIndex = "5";
 
-              // 放置在格子中央
               beeImg.style.top = "50%";
               beeImg.style.left = "50%";
               beeImg.style.transform = "translate(-50%, -50%)";
@@ -369,4 +364,43 @@ document.querySelector(".save-button").addEventListener("click", function () {
       document.body.removeChild(a);
     })
     .catch((error) => console.error("Error saving game:", error));
+});
+
+document.querySelector(".custom-button").addEventListener("click", function () {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = ".json";
+  fileInput.style.display = "none";
+  document.body.appendChild(fileInput);
+
+  fileInput.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const plan = JSON.parse(e.target.result);
+          fetch("/save_custom_plan", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(plan),
+          }).then((response) => {
+            if (response.ok) {
+              location.reload();
+            } else {
+              response.text().then((text) => alert(text));
+            }
+          });
+        } catch (error) {
+          alert("Invalid JSON file");
+        }
+      };
+      reader.readAsText(file);
+    }
+    document.body.removeChild(fileInput);
+  });
+
+  fileInput.click();
 });

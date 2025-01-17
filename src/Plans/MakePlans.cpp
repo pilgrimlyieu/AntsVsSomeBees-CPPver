@@ -99,7 +99,7 @@ void resetGame() {
 
 GameState createGameState(const CLIConfig &config) {
     resetGame();
-    AssaultPlan plan = config.makeAssaultPlan();
+    AssaultPlan plan = config.getAssaultPlan();
     Hive *beehive = new Hive(plan);
     static const int tunnelLength = 10;
     dim dimensions = {config.getNumTunnels(), tunnelLength};

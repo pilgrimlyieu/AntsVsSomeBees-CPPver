@@ -3,7 +3,8 @@
 
 #include "MakePlans.hpp"
 
-struct CLIConfig {
+class CLIConfig {
+private:
     string difficulty = "normal";
     bool waterEnabled = false;
     bool autoOpen = false;
@@ -11,15 +12,26 @@ struct CLIConfig {
     int logLevel = 1;
     int port = 18080;
     string configPath = "./config.json";
+    string planPath = "";
+
+    AssaultPlan customPlan;
+    bool hasCustomPlan = false;
 
     friend class CLI;
+    friend class Server;
+    friend GameState createGameState(const CLIConfig &config);
 
+public:
     void loadFromJson(const json &j);
 
     void saveToJson(const string &path) const;
 
-    AssaultPlan makeAssaultPlan() const;
+    void setCustomePlan(const AssaultPlan &plan);
 
+    [[nodiscard]]
+    AssaultPlan getAssaultPlan() const;
+
+    [[nodiscard]]
     LogLevel getLogLevel() const;
 
     int getNumTunnels() const;

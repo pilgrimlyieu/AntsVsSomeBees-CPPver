@@ -8,7 +8,6 @@
  * @brief 构造一个新的 Server
  *
  * @param config CLI 配置
- * @param port 服务器端口，默认为 18080
  */
 Server::Server(CLIConfig config) : config(std::move(config)), gameState(nullptr), game() {
     app.port(config.port).multithreaded().loglevel(crow::LogLevel::Critical);
@@ -170,8 +169,26 @@ void Server::setupRoutes() {
             response["existing_bees"] = std::move(existingBees);
 
             return crow::response{response};
-        } catch (const std::exception &e) {
+        } catch (const exception &e) {
             return crow::response(400, e.what());
+        }
+    });
+
+    CROW_ROUTE(app, "/save_custom_plan").methods("POST"_method)([this](const crow::request &req) {
+        try {
+            auto j = json::parse(req.body);
+
+            try {
+                auto plan = AssaultPlan::deserialize(j);
+                config.setCustomePlan(std::move(plan));
+                createNewGame();
+                auto response = getGameInfo();
+                return crow::response{response};
+            } catch (const exception &e) {
+                return crow::response(400, "Invalid assault plan format");
+            }
+        } catch (const exception &e) {
+            return crow::response(400, "Invalid JSON format");
         }
     });
 };

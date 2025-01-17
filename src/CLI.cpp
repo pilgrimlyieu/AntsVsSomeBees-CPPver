@@ -6,6 +6,9 @@ void CLIConfig::loadFromJson(const json &j) {
     if (j.contains("difficulty")) {
         difficulty = j["difficulty"];
     }
+    if (j.contains("planPath")) {
+        planPath = j["planPath"];
+    }
     if (j.contains("water")) {
         waterEnabled = j["water"];
     }
@@ -26,6 +29,7 @@ void CLIConfig::loadFromJson(const json &j) {
 void CLIConfig::saveToJson(const string &path) const {
     json j;
     j["difficulty"] = difficulty;
+    j["planPath"] = planPath;
     j["water"] = waterEnabled;
     j["autoOpen"] = autoOpen;
     j["initialFood"] = initialFood;
@@ -35,7 +39,28 @@ void CLIConfig::saveToJson(const string &path) const {
     file << j.dump(2);
 }
 
-AssaultPlan CLIConfig::makeAssaultPlan() const {
+void CLIConfig::setCustomePlan(const AssaultPlan &plan) {
+    customPlan = plan;
+    hasCustomPlan = true;
+}
+
+AssaultPlan CLIConfig::getAssaultPlan() const {
+    if (hasCustomPlan) {
+        return customPlan;
+    }
+    if (!planPath.empty()) {
+        try {
+            std::ifstream file(planPath);
+            if (!file.is_open()) {
+                throw std::runtime_error("Failed to open plan file");
+            }
+            json j;
+            file >> j;
+            return AssaultPlan::deserialize(j);
+        } catch (const std::exception &e) {
+            log(LOGERROR, format("Failed to load plan file {0}: {1}", planPath, e.what()));
+        }
+    }
     if (difficulty == "test") {
         return makeTestAssaultPlan();
     } else if (difficulty == "easy") {
@@ -76,7 +101,8 @@ const CLIConfig &ConfigManager::getConfig() {
 }
 
 CLI::CLI() : parser(ProjectInfo::PROJECT_NAME, ProjectInfo::VERSION) {
-    parser.add_argument("-d", "--difficulty")
+    auto &group = parser.add_mutually_exclusive_group();
+    group.add_argument("-d", "--difficulty")
         .help("sets difficulty of game (test/easy/normal/hard/extra-hard)")
         .metavar("DIFFICULTY")
         .default_value("normal")
@@ -86,6 +112,14 @@ CLI::CLI() : parser(ProjectInfo::PROJECT_NAME, ProjectInfo::VERSION) {
             if (parser.is_used("--difficulty")) {
                 cmdConfig.difficulty = value;
             }
+            return value;
+        });
+    group.add_argument("-a", "--plan")
+        .help("path to custom assault plan JSON file")
+        .metavar("PLAN")
+        .nargs(1)
+        .action([this](const std::string &value) {
+            cmdConfig.planPath = value;
             return value;
         });
 
@@ -180,6 +214,9 @@ CLIConfig CLI::parse(int argc, char *argv[]) {
         }
         if (parser.is_used("--difficulty")) {
             config.difficulty = cmdConfig.difficulty;
+        }
+        if (parser.is_used("--plan")) {
+            config.planPath = cmdConfig.planPath;
         }
         if (parser.is_used("--water")) {
             config.waterEnabled = cmdConfig.waterEnabled;
