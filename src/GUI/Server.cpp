@@ -130,7 +130,7 @@ void Server::setupRoutes() {
  * @param conn WebSocket 连接
  */
 void Server::handleWSOpen(crow::websocket::connection &conn) {
-    emitter.addConnection(&conn);
+    WebSocket::getEmitter().addConnection(&conn);
     crow::json::wvalue msg;
     msg["event"] = "loadLobby";
     msg["data"] = crow::json::wvalue();
@@ -144,7 +144,7 @@ void Server::handleWSOpen(crow::websocket::connection &conn) {
  * @param reason 关闭原因
  */
 void Server::handleWSClose(crow::websocket::connection &conn, const string &reason) {
-    emitter.removeConnection(&conn);
+    WebSocket::getEmitter().removeConnection(&conn);
 }
 
 /**
@@ -168,8 +168,8 @@ crow::response Server::handleInsectActions() {
     game.next();
     if (game.isGameOver()) {
         auto result = game.getResult();
-        emitter.emit("endGame", {
-                                    {"antsWon", result}
+        WebSocket::getEmitter().emit("endGame", {
+                                                    {"antsWon", result}
         });
         // stop();
     };
@@ -189,7 +189,7 @@ void Server::start() {
  * @brief 停止服务器
  */
 void Server::stop() {
-    emitter.emit("serverShutdown", crow::json::wvalue());
+    WebSocket::getEmitter().emit("serverShutdown", crow::json::wvalue());
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     app.stop();
 }

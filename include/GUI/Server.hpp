@@ -11,7 +11,6 @@ private:
     unique_ptr<GameState> gameState; //!< 游戏状态
     Simulator game;                  //!< 游戏输出
     crow::SimpleApp app;             //!< Web 服务器
-    EventEmitter emitter;            //!< 事件发射器
 
     void handleWSOpen(crow::websocket::connection &conn);
     void handleWSClose(crow::websocket::connection &conn, const string &reason);

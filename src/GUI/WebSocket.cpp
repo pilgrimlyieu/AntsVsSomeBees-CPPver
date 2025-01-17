@@ -1,7 +1,23 @@
 #include "WebSocket.hpp"
 #include "Bee.hpp"
 
-EventEmitter WebSocket::emitter = EventEmitter();
+/**
+ * @brief 获取事件发射器
+ */
+EventEmitter &WebSocket::getEmitter() {
+    return emitter;
+}
+
+/**
+ * @brief 设置事件发射器
+ *
+ * 设置事件发射器。
+ *
+ * @param emitter 事件发射器
+ */
+void WebSocket::setEmitter(EventEmitter emitter) {
+    WebSocket::emitter = std::move(emitter);
+}
 
 /**
  * @brief 当 Bee 移动时调用
