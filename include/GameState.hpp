@@ -93,18 +93,19 @@ private:
     friend void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace,
                           dim dimensions);
 
+    GameState(int food, dim dimensions);
+
 public:
-    g_time time = TIME_START;    //!> 时间
-    int food;                    //!> 食物余额
-    Hive *beehive;               //!> 蜂巢
-    dim dimensions;              //!> 地图尺寸
-    bees_list activeBees = {};   //!> 活动 Bee
-    QueenAnt *Queen = nullptr;   //!> QueenAnt
-    AntHomeBase *base = nullptr; //!> 基地
-    places_map places;           //!> 地点
-    AntFactory *antFactory;      //!> Ant 工厂
-    places_list bee_entrances;   //!> Bee 入口
-    int numBees = 0;             //!> Bee 数量
+    g_time time = TIME_START;      //!> 时间
+    int food;                      //!> 食物余额
+    Hive *beehive;                 //!> 蜂巢
+    dim dimensions;                //!> 地图尺寸
+    bees_list activeBees = {};     //!> 活动 Bee
+    AntHomeBase *base = nullptr;   //!> 基地
+    places_map places;             //!> 地点
+    static AntFactory *antFactory; //!> Ant 工厂
+    places_list bee_entrances;     //!> Bee 入口
+    int numBees = 0;               //!> Bee 数量
 
     GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food = 2);
 
@@ -130,6 +131,9 @@ public:
     insects_list getInsects() const;
 
     void createLayout(bool isWet);
+
+    json serialize() const;
+    static GameState deserialize(const json &data);
 
     operator string() const;
 };

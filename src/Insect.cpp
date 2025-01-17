@@ -114,3 +114,25 @@ int Insect::getId() const {
 Place *Insect::getPlace() const {
     return place;
 }
+
+/**
+ * @brief 设置 Insect 的 Place
+ *
+ * @param place 指向要设置的 Place 的指针
+ */
+void Insect::setPlace(Place *place) {
+    this->place = place;
+}
+
+/**
+ * @brief 将 Insect 序列化为 JSON 对象
+ *
+ * @return json JSON 对象
+ */
+json Insect::serialize() const {
+    json j;
+    j["type"] = getName();
+    j["health"] = health;
+    j["place"] = place ? place->name : "";
+    return j;
+}

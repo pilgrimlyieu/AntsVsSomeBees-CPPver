@@ -38,6 +38,9 @@ public:
     void slow(g_time length);
 
     void scare(g_time length);
+
+    virtual json serialize() const override;
+    static Bee *deserialize(const json &data);
 };
 
 #endif // BEE_HPP

@@ -248,4 +248,80 @@ function playMusic() {
     audio.play();
 }
 
+document.querySelector(".load-button").addEventListener("click", function () {
+  document.getElementById("load-file").click();
+});
+
+document.getElementById("load-file").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const gameState = JSON.parse(e.target.result);
+        fetch("/load_game", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(gameState),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handling incoming data from server
+
+            let main = document.querySelector(".main-window");
+            main.style.opacity = "1"; // Make main window visible
+
+            let body = document.getElementsByTagName("BODY")[0];
+            body.style.backgroundImage = "none"; // Remove lobby background image
+            let startButton = document.querySelector(".start-button");
+            startButton.remove(); // Remove start button
+            let loadButton = document.querySelector(".load-button");
+            loadButton.remove(); // Remove load button
+
+            formatAntButtons(data.ant_types); // Set up ant buttons according to available ant types
+            formatGameGrid(
+              data.dimensions_x,
+              data.dimensions_y,
+              data.wet_places
+            ); // Set up game grid
+            playMusic();
+
+            // Set calling these functions every 4 seconds and 50 milliseconds.
+            if (enablePolling) {
+              setInterval(insectsTakeActions, insectsActionInterval * 1000);
+              setInterval(updateStats, 50);
+            }
+
+            let exitButton = document.querySelector(".exit-button");
+            exitButton.addEventListener("click", exitGame);
+          });
+      } catch (error) {
+        console.error("Error loading save file:", error);
+      }
+    };
+    reader.readAsText(file);
+  }
+});
+
+document.querySelector(".save-button").addEventListener("click", function () {
+  fetch("/save_game")
+    .then((response) => response.json())
+    .then((data) => {
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ants_vs_bees_save_${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    })
+    .catch((error) => console.error("Error saving game:", error));
+});
+
 

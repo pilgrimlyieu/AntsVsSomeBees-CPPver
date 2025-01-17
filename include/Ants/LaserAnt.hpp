@@ -4,7 +4,7 @@
 #include "ThrowerAnt.hpp"
 
 class LaserAnt final : public ThrowerAnt {
-private:
+protected:
     string getName() const final {
         return "LaserAnt";
     }
@@ -14,6 +14,8 @@ private:
     int getFoodCost() const final {
         return 10;
     }
+
+    friend Ant *Ant::deserialize(const json &data);
 
     using insects_distance = unordered_map<Insect *, int>;
 
@@ -28,6 +30,8 @@ public:
     explicit LaserAnt() : LaserAnt(1.0) {}
 
     void action(GameState &gamestate) final;
+
+    json serialize() const final;
 };
 
 #endif // LASERANT_HPP{

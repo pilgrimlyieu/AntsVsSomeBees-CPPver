@@ -66,3 +66,14 @@ void ContainerAnt::action(GameState &gamestate) {
         antContained->action(gamestate);
     }
 }
+
+/**
+ * @brief 序列化当前 ContainerAnt
+ *
+ * @return 当前 ContainerAnt 的序列化结果
+ */
+json ContainerAnt::serialize() const {
+    json j = Ant::serialize();
+    j["antContained"] = (antContained != nullptr) ? antContained->serialize() : nullptr;
+    return j;
+}

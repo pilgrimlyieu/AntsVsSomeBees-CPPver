@@ -16,6 +16,8 @@ public:
     }
 
     void strategy(GameState &gameState);
+
+    json serialize() const final;
 };
 
 #endif // HIVE_HPP

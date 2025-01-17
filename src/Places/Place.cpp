@@ -1,5 +1,10 @@
 #include "Place.hpp"
+#include "Ant.hpp"
+#include "AntHomeBase.hpp"
+#include "Bee.hpp"
+#include "Hive.hpp"
 #include "Insect.hpp"
+#include "Water.hpp"
 
 /**
  * @brief Place 类的构造函数，初始化一个 Place
@@ -53,4 +58,56 @@ void Place::removeInsect(Insect *insect) {
  */
 Place::operator string() const {
     return format("{1}{2}{0}", ANSI_RESET, ANSI_CYAN, name);
+}
+
+/**
+ * @brief 序列化当前 Place
+ *
+ * @return Place 的序列化 JSON 对象
+ */
+json Place::serialize() const {
+    json j;
+    j["type"] = "Place";
+    j["name"] = name;
+    j["exit_name"] = exit ? exit->name : "";
+    j["entrance_name"] = entrance ? entrance->name : "";
+    if (ant != nullptr) {
+        j["ant"] = ant->serialize();
+    }
+    j["bees"] = json::array();
+    for (const auto &bee : bees) {
+        j["bees"].push_back(bee->serialize());
+    }
+    return j;
+}
+
+/**
+ * @brief 从 JSON 对象反序列化得到 Place
+ *
+ * @param data Place 的 JSON 对象
+ * @return 反序列化得到的 Place 指针
+ */
+Place *Place::deserialize(const json &data) {
+    Place *place = nullptr;
+    string type = data["type"];
+    if (type == "Place") {
+        place = new Place(data["name"]);
+    } else if (type == "AntHomeBase") {
+        place = new AntHomeBase(data["name"]);
+    } else if (type == "Hive") {
+        place = new Hive(AssaultPlan::deserialize(data["assaultPlan"]));
+    } else if (type == "Water") {
+        place = new Water(data["name"]);
+    }
+    if (place) {
+        if (data.contains("ant")) {
+            place->addInsect(Ant::deserialize(data["ant"]));
+        }
+        if (type != "Hive") {
+            for (const auto &beeData : data["bees"]) {
+                place->addInsect(Bee::deserialize(beeData));
+            }
+        }
+    }
+    return place;
 }

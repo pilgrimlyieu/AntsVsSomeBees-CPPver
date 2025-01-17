@@ -58,3 +58,14 @@ void LaserAnt::action(GameState &gamestate) {
     }
     log(LOGINFO, format("{} has shot {} insects", *this, insectsShot));
 }
+
+/**
+ * @brief 序列化当前 LaserAnt
+ *
+ * @return 当前 LaserAnt 的序列化结果
+ */
+json LaserAnt::serialize() const {
+    json j = ThrowerAnt::serialize();
+    j["insectsShot"] = insectsShot;
+    return j;
+}

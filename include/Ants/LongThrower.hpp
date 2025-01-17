@@ -4,7 +4,7 @@
 #include "ThrowerAnt.hpp"
 
 class LongThrower final : public ThrowerAnt {
-private:
+protected:
     string getName() const final {
         return "LongThrower";
     }

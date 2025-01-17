@@ -8,6 +8,17 @@
 #include "Utilities.hpp"
 #include "Water.hpp"
 
+AntFactory *GameState::antFactory = &AntFactory::getInstance();
+
+/**
+ * @brief 创建一个 GameState
+ *
+ * @param food 初始食物余额，默认为 2
+ * @param dimensions 地图尺寸
+ */
+GameState::GameState(int food, dim dimensions)
+    : food(food), dimensions(std::move(dimensions)), beehive(nullptr) {}
+
 /**
  * @brief 构造一个新的 GameState
  *
@@ -18,8 +29,7 @@
  * @param food 初始食物余额，默认为 2
  */
 GameState::GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food)
-    : beehive(beehive), dimensions(std::move(dimensions)), antFactory(&AntFactory::getInstance()),
-      food(food) {
+    : beehive(beehive), dimensions(std::move(dimensions)), food(food) {
     configure(beehive, createPlaces);
 }
 
@@ -44,6 +54,7 @@ void GameState::configure(Hive *beehive, create_places createPlaces) {
         }
     };
     register_place(beehive, false);
+    register_place(base, false);
     createPlaces(base, register_place, dimensions);
 }
 
@@ -105,10 +116,8 @@ Simulator GameState::simulate() {
             beesTakeActions();
         }
     } catch (AntsWinException &e) {
-        log(LOGINFO, "All bees are vanquished. You win!");
         result = true;
     } catch (AntsLoseException &e) {
-        log(LOGINFO, "The bees reached homebase or the queen ant has perished. Please try again.");
         result = false;
     } catch (exception &e) {
         log(LOGERROR, e.what());
@@ -240,6 +249,7 @@ GameState::operator string() const {
  * @throw AntsWinException
  */
 void antsWin() {
+    log(LOGINFO, "All bees are vanquished. You win!");
     throw AntsWinException();
 }
 
@@ -251,6 +261,7 @@ void antsWin() {
  * @throw AntsLoseException
  */
 void antsLose() {
+    log(LOGINFO, "The bees reached homebase or the queen ant has perished. Please try again.");
     throw AntsLoseException();
 }
 
@@ -307,4 +318,92 @@ void wetLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim
  */
 void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim dimensions) {
     GameState::createLayout(base, registerPlace, dimensions, 0);
+}
+
+/**
+ * @brief 序列化当前 GameState
+ *
+ * @return 当前 GameState 的序列化 JSON 对象。
+ */
+json GameState::serialize() const {
+    json j;
+    j["time"] = time;
+    j["food"] = food;
+    j["numBees"] = numBees;
+    j["dimensions"] = {dimensions.first, dimensions.second};
+
+    j["places"] = json::array();
+    for (const auto &[name, place] : places) {
+        j["places"].push_back({
+            {"name",  name              },
+            {"place", place->serialize()}
+        });
+    }
+
+    j["bee_entrances"] = json::array();
+    for (const auto &entrance : bee_entrances) {
+        j["bee_entrances"].push_back(entrance->name);
+    }
+
+    return j;
+}
+
+/**
+ * @brief 从 JSON 对象反序列化得到 GameState
+ *
+ * @param data GameState 的 JSON 对象
+ * @return 反序列化后的 GameState
+ */
+GameState GameState::deserialize(const json &data) {
+    auto state = GameState(data["food"], {data["dimensions"][0], data["dimensions"][1]});
+    state.time = data["time"];
+    state.food = data["food"];
+    state.numBees = data["numBees"];
+    state.dimensions = {data["dimensions"][0], data["dimensions"][1]};
+    state.base = new AntHomeBase("Ant Home Base");
+    state.places["Ant Home Base"] = state.base;
+
+    for (const auto &placeData : data["places"]) {
+        const string &name = placeData["name"];
+        const json &place_json = placeData["place"];
+        Place *place = Place::deserialize(place_json);
+        if (place->name == "Hive") {
+            state.beehive = dynamic_cast<Hive *>(place);
+        }
+        state.places[name] = place;
+    }
+
+    for (const auto &placeData : data["places"]) {
+        const string &name = placeData["name"];
+        const json &place_json = placeData["place"];
+        Place *current = state.places[name];
+        if (place_json.contains("exit_name") && !place_json["exit_name"].empty()) {
+            if (state.places.contains(place_json["exit_name"])) {
+                current->exit = state.places[place_json["exit_name"]];
+            } else {
+                current->exit = nullptr;
+            }
+        }
+        if (place_json.contains("entrance_name") && !place_json["entrance_name"].empty()) {
+            if (state.places.contains(place_json["entrance_name"])) {
+                current->entrance = state.places[place_json["entrance_name"]];
+            } else {
+                current->entrance = nullptr;
+            }
+        }
+    }
+
+    for (const auto &entrance_name : data["bee_entrances"]) {
+        state.bee_entrances.push_back(state.places[entrance_name]);
+    }
+
+    for (const auto &[name, place] : state.places) {
+        if (!place->getIsHive()) {
+            for (Bee *bee : place->bees) {
+                state.activeBees.push_back(bee);
+            }
+        }
+    }
+
+    return state;
 }

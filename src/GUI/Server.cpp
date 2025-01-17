@@ -1,4 +1,5 @@
 #include "Server.hpp"
+#include "MakePlans.hpp"
 #include "Water.hpp"
 #include "WebSocket.hpp"
 
@@ -129,6 +130,46 @@ void Server::setupRoutes() {
         stop();
         return crow::response(200);
     });
+
+    CROW_ROUTE(app, "/save_game")([this] {
+        if (!gameState) {
+            return crow::response(404, "Game not found");
+        }
+
+        json response = gameState->serialize();
+        std::string json_str = response.dump();
+        return crow::response{json_str};
+    });
+
+    CROW_ROUTE(app, "/load_game").methods("POST"_method)([this](const crow::request &req) {
+        try {
+            resetGame();
+            auto data = json::parse(req.body);
+            auto newState = GameState::deserialize(data);
+
+            gameState = make_unique<GameState>(std::move(newState));
+            game = gameState->simulate();
+            game.next();
+
+            crow::json::wvalue response;
+            response["success"] = true;
+            response["dimensions_x"] = gameState->dimensions.first;
+            response["dimensions_y"] = gameState->dimensions.second;
+            response["ant_types"] = AntFactory::getInstance().getAntNames();
+
+            vector<vector<int>> wetPlaces;
+            for (const auto &[name, place] : gameState->places) {
+                if (dynamic_cast<Water *>(place)) {
+                    wetPlaces.emplace_back(parseCoordinates(name));
+                }
+            }
+            response["wet_places"] = std::move(wetPlaces);
+
+            return crow::response{response};
+        } catch (const std::exception &e) {
+            return crow::response(400, e.what());
+        }
+    });
 };
 
 /**
@@ -178,7 +219,6 @@ crow::response Server::handleInsectActions() {
         WebSocket::getEmitter().emit("endGame", {
                                                     {"antsWon", result}
         });
-        // stop();
     };
     return crow::response{crow::json::wvalue()};
 }

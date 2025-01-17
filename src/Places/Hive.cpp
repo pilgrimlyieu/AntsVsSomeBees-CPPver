@@ -21,6 +21,13 @@ Hive::Hive(AssaultPlan aP) : Place("Hive", nullptr), assaultPlan(std::move(aP)) 
     this->ant = nullptr;
 }
 
+/**
+ * @brief Hive 的策略
+ *
+ * Hive 的策略是在每个时间点将 assaultPlan 中的 Bee 添加到游戏状态中。
+ *
+ * @param gameState 当前的游戏状态
+ */
 void Hive::strategy(GameState &gameState) {
     places_list exits;
     for (auto &[name, place] : gameState.places) {
@@ -33,4 +40,16 @@ void Hive::strategy(GameState &gameState) {
         log(LOGTEST, format("Bee {} added", string(*bee)));
         bee->moveTo(randomElement(exits));
     }
+}
+
+/**
+ * @brief 序列化当前 Hive
+ *
+ * @return 当前 Hive 的序列化 JSON 对象。
+ */
+json Hive::serialize() const {
+    json j = Place::serialize();
+    j["type"] = "Hive";
+    j["assaultPlan"] = assaultPlan.serialize();
+    return j;
 }

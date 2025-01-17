@@ -11,9 +11,13 @@
     </head>
 
     <body>
-        <button class="start-button">
-            START
-        </button>
+        <div class="start-section">
+            <button class="start-button">START</button>
+            <div class="load-section">
+                <input type="file" id="load-file" accept=".json" style="display: none;">
+                <button class="load-button">LOAD</button>
+            </div>
+        </div>
         <div class="main-window">
             <div></div> <!-- left white space -->
 
@@ -24,6 +28,7 @@
 
                     <div class="display-section">
                         <div class="exit-button">Exit</div>
+                        <div class="save-button">Save</div>
                         <div class="display-food-div"> Food: 0 </div>
                         <div class="display-turn-div"> Turn: 0 </div>
                     </div>

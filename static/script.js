@@ -84,6 +84,8 @@ function startGame() {
       body.style.backgroundImage = "none"; // Remove lobby background image
       let startButton = document.querySelector(".start-button");
       startButton.remove(); // Remove start button
+      let loadButton = document.querySelector(".load-button");
+      loadButton.remove(); // Remove load button
 
       formatAntButtons(data.ant_types); // Set up ant buttons according to available ant types
       formatGameGrid(data.dimensions_x, data.dimensions_y, data.wet_places); // Set up game grid

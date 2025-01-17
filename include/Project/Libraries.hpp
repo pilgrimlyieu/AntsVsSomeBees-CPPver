@@ -1,10 +1,6 @@
 #ifndef PROJECTSTANDARDLIBS_HPP
 #define PROJECTSTANDARDLIBS_HPP
 
-#include <argparse/argparse.hpp>
-#include <crow.h>
-#include <nlohmann/json.hpp>
-
 #include <coroutine>
 #include <cstdarg>
 #include <format>
@@ -16,6 +12,10 @@
 #include <stdexcept>
 #include <unordered_map>
 #include <vector>
+
+#include <argparse/argparse.hpp>
+#include <crow.h>
+#include <nlohmann/json.hpp>
 
 using std::exception;
 using std::format;
@@ -33,5 +33,7 @@ using std::string;
 using std::unique_ptr;
 using std::unordered_map;
 using std::vector;
+
+using json = nlohmann::json;
 
 #endif // PROJECTSTANDARDLIBS_HPP

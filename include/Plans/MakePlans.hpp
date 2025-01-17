@@ -13,6 +13,8 @@ AssaultPlan makeHardAssaultPlan();
 
 AssaultPlan makeExtraHardAssaultPlan();
 
+void resetGame();
+
 GameState createGameState(const CLIConfig &config);
 
 #endif

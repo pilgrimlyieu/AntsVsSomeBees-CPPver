@@ -1,6 +1,20 @@
-#include "Ant.hpp"
+#include "BodyguardAnt.hpp"
+#include "ContainerAnt.hpp"
+#include "FireAnt.hpp"
 #include "GameState.hpp"
+#include "HarvestAnt.hpp"
+#include "HungryAnt.hpp"
+#include "LaserAnt.hpp"
+#include "LongThrower.hpp"
+#include "NinjaAnt.hpp"
 #include "Place.hpp"
+#include "QueenAnt.hpp"
+#include "ScaryThrower.hpp"
+#include "ScubaThrower.hpp"
+#include "ShortThrower.hpp"
+#include "SlowThrower.hpp"
+#include "TankAnt.hpp"
+#include "WallAnt.hpp"
 
 /**
  * @brief 判断当前 Ant 是否可以容纳另一个 Ant
@@ -101,4 +115,64 @@ void Ant::buff() {
         buffed = true;
         log(LOGINFO, format("{} is buffed", *this));
     }
+}
+
+/**
+ * @brief 序列化当前 Ant
+ *
+ * @return 当前 Ant 的序列化 JSON 对象。
+ */
+json Ant::serialize() const {
+    json j = Insect::serialize();
+    j["buffed"] = buffed;
+    return j;
+}
+
+/**
+ * @brief 从 JSON 对象反序列化得到 Ant
+ *
+ * @param data Ant 的 JSON 对象。
+ * @return 反序列化得到的 Ant 指针。
+ */
+Ant *Ant::deserialize(const json &data) {
+    string type = data["type"];
+    double health = data["health"];
+    Ant *ant;
+    if (type == "BodyguardAnt") { // ContainerAnt
+        ant = new BodyguardAnt(health);
+        dynamic_cast<ContainerAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+    } else if (type == "FireAnt") {
+        ant = new FireAnt(health);
+    } else if (type == "HarvestAnt") {
+        ant = new HarvestAnt(health);
+    } else if (type == "HungryAnt") { // HungryAnt
+        ant = new HungryAnt(health);
+        dynamic_cast<HungryAnt *>(ant)->chewCountDown = data["chewCountDown"];
+    } else if (type == "LaserAnt") { // LaserAnt
+        ant = new LaserAnt(health);
+        dynamic_cast<LaserAnt *>(ant)->insectsShot = data["insectsShot"];
+    } else if (type == "LongThrower") {
+        ant = new LongThrower(health);
+    } else if (type == "NinjaAnt") {
+        ant = new NinjaAnt(health);
+    } else if (type == "QueenAnt") {
+        ant = new QueenAnt(health);
+    } else if (type == "ScaryThrower") {
+        ant = new ScaryThrower(health);
+    } else if (type == "ScubaThrower") {
+        ant = new ScubaThrower(health);
+    } else if (type == "ShortThrower") {
+        ant = new ShortThrower(health);
+    } else if (type == "SlowThrower") {
+        ant = new SlowThrower(health);
+    } else if (type == "TankAnt") { // ContainerAnt
+        ant = new TankAnt(health);
+        dynamic_cast<TankAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+    } else if (type == "ThrowerAnt") {
+        ant = new ThrowerAnt(health);
+    } else if (type == "WallAnt") {
+        ant = new WallAnt(health);
+    }
+    ant->buffed = data["buffed"];
+    return ant;
 }

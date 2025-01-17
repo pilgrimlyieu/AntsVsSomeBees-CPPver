@@ -14,3 +14,14 @@ void Water::addInsect(Insect *insect) {
         insect->kill();
     }
 }
+
+/**
+ * @brief 序列化当前 Water
+ *
+ * @return 当前 Water 的序列化 JSON 对象。
+ */
+json Water::serialize() const {
+    json j = Place::serialize();
+    j["type"] = "Water";
+    return j;
+}

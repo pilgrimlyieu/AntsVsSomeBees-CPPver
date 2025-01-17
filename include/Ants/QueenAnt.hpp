@@ -4,7 +4,7 @@
 #include "ScubaThrower.hpp"
 
 class QueenAnt final : public ScubaThrower {
-private:
+protected:
     string getName() const final {
         return "QueenAnt";
     }

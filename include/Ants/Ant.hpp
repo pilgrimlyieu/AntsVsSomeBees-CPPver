@@ -45,6 +45,9 @@ public:
     void removeFrom(Place *place) override;
 
     void buff();
+
+    virtual json serialize() const override;
+    static Ant *deserialize(const json &data);
 };
 
 #endif // ANT_HPP

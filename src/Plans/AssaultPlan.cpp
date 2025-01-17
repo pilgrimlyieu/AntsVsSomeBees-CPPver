@@ -1,4 +1,5 @@
 #include "AssaultPlan.hpp"
+#include "Bee.hpp"
 
 /**
  * @brief 添加一波 Bee 的攻击
@@ -46,4 +47,40 @@ bees_list &AssaultPlan::operator[](g_time time) {
         waves[time] = {};
     }
     return waves[time];
+}
+
+/**
+ * @brief 序列化 AssaultPlan
+ *
+ * @return AssaultPlan 的 JSON 表示
+ */
+json AssaultPlan::serialize() const {
+    json j;
+    j["waves"] = json::object();
+    for (const auto &[time, bees] : waves) {
+        j["waves"][std::to_string(time)] = json::array();
+        for (const auto &bee : bees) {
+            j["waves"][std::to_string(time)].push_back(bee->serialize());
+        }
+    }
+    return j;
+}
+
+/**
+ * @brief 反序列化 AssaultPlan
+ *
+ * @param data AssaultPlan 的 JSON 表示
+ *
+ * @return 反序列化后的 AssaultPlan
+ */
+AssaultPlan AssaultPlan::deserialize(const json &data) {
+    AssaultPlan plan;
+    for (const auto &[time_str, bees_json] : data["waves"].items()) {
+        g_time time = std::stoi(time_str);
+        for (const auto &bee_json : bees_json) {
+            Bee *bee = Bee::deserialize(bee_json);
+            plan[time].push_back(bee);
+        }
+    }
+    return plan;
 }

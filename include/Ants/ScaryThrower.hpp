@@ -4,7 +4,7 @@
 #include "ThrowerAnt.hpp"
 
 class ScaryThrower final : public ThrowerAnt {
-private:
+protected:
     string getName() const final {
         return "ScaryThrower";
     }

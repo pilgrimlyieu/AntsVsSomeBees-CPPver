@@ -4,7 +4,7 @@
 #include "ThrowerAnt.hpp"
 
 class SlowThrower final : public ThrowerAnt {
-private:
+protected:
     string getName() const final {
         return "SlowThrower";
     }

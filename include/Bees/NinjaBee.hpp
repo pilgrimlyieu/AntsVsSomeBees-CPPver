@@ -4,7 +4,7 @@
 #include "Bee.hpp"
 
 class NinjaBee final : public Bee {
-private:
+protected:
     string getName() const override {
         return "NinjaBee";
     }

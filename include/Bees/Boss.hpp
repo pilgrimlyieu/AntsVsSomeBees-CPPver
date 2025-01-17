@@ -4,7 +4,7 @@
 #include "Wasp.hpp"
 
 class Boss final : public Wasp {
-private:
+protected:
     string getName() const override {
         return "Boss";
     }

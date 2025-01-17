@@ -8,6 +8,8 @@ public:
     using Place::Place;
 
     void addInsect(Insect *insect) final;
+
+    json serialize() const final;
 };
 
 #endif // WATER_HPP

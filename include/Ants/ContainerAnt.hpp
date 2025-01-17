@@ -24,6 +24,8 @@ public:
     void removeFrom(Place *place) final;
 
     void action(GameState &gamestate) override;
+
+    virtual json serialize() const override;
 };
 
 #endif // CONTAINERANT_HPP

@@ -1,9 +1,10 @@
 #ifndef INSECT_HPP
 #define INSECT_HPP
 
+#include "Serializable.hpp"
 #include "Utilities.hpp"
 
-class Insect {
+class Insect : Serializable {
 private:
     static int idCounter; //!< Insect ID 计数器
     int id;               //!< Insect ID
@@ -46,6 +47,7 @@ public:
 
     int getId() const;
     Place *getPlace() const;
+    void setPlace(Place *place);
 
     [[nodiscard]]
     virtual string getName() const {
@@ -57,6 +59,8 @@ public:
     virtual bool getIsWaterProof() const {
         return false;
     }
+    virtual json serialize() const override;
+    static Insect *deserialize(const json &data);
 
     virtual ~Insect() = default;
 };

@@ -4,7 +4,7 @@
 #include "Bee.hpp"
 
 class Wasp : public Bee {
-private:
+protected:
     virtual string getName() const override {
         return "Wasp";
     }

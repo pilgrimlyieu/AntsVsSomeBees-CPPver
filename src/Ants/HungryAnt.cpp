@@ -25,3 +25,14 @@ void HungryAnt::action(GameState &gamestate) {
         chewCountDown--;
     }
 }
+
+/**
+ * @brief 序列化当前 HungryAnt
+ *
+ * @return 当前 HungryAnt 的序列化 JSON 对象。
+ */
+json HungryAnt::serialize() const {
+    json j = Ant::serialize();
+    j["chewCountDown"] = chewCountDown;
+    return j;
+}

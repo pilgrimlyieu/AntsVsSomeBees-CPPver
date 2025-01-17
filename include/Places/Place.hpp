@@ -1,9 +1,10 @@
 #ifndef PLACE_HPP
 #define PLACE_HPP
 
+#include "Serializable.hpp"
 #include "Utilities.hpp"
 
-class Place {
+class Place : Serializable {
 protected:
     ~Place() = default;
 
@@ -34,6 +35,9 @@ public:
     virtual void removeInsect(Insect *insect);
 
     operator string() const;
+
+    virtual json serialize() const override;
+    static Place *deserialize(const json &data);
 };
 
 template <std::derived_from<Place> T> struct std::formatter<T> : std::formatter<string> {

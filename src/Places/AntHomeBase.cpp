@@ -16,3 +16,14 @@ void AntHomeBase::addInsect(Insect *insect) {
         antsLose();
     }
 }
+
+/**
+ * @brief 序列化当前 AntHomeBase
+ *
+ * @return 当前 AntHomeBase 的序列化 JSON 对象。
+ */
+json AntHomeBase::serialize() const {
+    json j = Place::serialize();
+    j["type"] = "AntHomeBase";
+    return j;
+}

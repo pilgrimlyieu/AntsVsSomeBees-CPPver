@@ -4,7 +4,7 @@
 #include "ContainerAnt.hpp"
 
 class TankAnt final : public ContainerAnt {
-private:
+protected:
     string getName() const final {
         return "TankAnt";
     }

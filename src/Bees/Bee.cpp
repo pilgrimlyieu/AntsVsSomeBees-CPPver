@@ -1,7 +1,10 @@
 #include "Bee.hpp"
 #include "Ant.hpp"
+#include "Boss.hpp"
 #include "GameState.hpp"
+#include "NinjaBee.hpp"
 #include "Place.hpp"
+#include "Wasp.hpp"
 #include "WebSocket.hpp"
 
 /**
@@ -114,4 +117,42 @@ void Bee::scare(g_time length) {
     } else {
         log(LOGINFO, format("{} is already scared", *this));
     }
+}
+
+/**
+ * @brief 序列化当前 Bee
+ *
+ * @return 当前 Bee 的序列化结果。
+ */
+json Bee::serialize() const {
+    json j = Insect::serialize();
+    j["slowedTime"] = slowedTime;
+    j["scaredTime"] = scaredTime;
+    return j;
+}
+
+/**
+ * @brief 反序列化 Bee
+ *
+ * @param data Bee 的序列化 JSON 对象。
+ * @return 反序列化后的 Bee 指针。
+ */
+Bee *Bee::deserialize(const json &data) {
+    Bee *bee = nullptr;
+    string type = data["type"];
+    double health = data["health"];
+    if (type == "Bee") {
+        bee = new Bee(health);
+    } else if (type == "Boss") {
+        bee = new Boss(health);
+    } else if (type == "NinjaBee") {
+        bee = new NinjaBee(health);
+    } else if (type == "Wasp") {
+        bee = new Wasp(health);
+    }
+    if (bee) {
+        bee->slowedTime = data["slowedTime"];
+        bee->scaredTime = data["scaredTime"];
+    }
+    return bee;
 }

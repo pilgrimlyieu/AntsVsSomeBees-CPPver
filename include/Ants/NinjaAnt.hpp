@@ -4,7 +4,7 @@
 #include "Ant.hpp"
 
 class NinjaAnt final : public Ant {
-private:
+protected:
     string getName() const final {
         return "NinjaAnt";
     }
