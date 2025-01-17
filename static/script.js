@@ -86,6 +86,8 @@ function startGame() {
       startButton.remove(); // Remove start button
       let loadButton = document.querySelector(".load-button");
       loadButton.remove(); // Remove load button
+      let docButton = document.querySelector(".doc-button");
+      docButton.remove();
 
       formatAntButtons(data.ant_types); // Set up ant buttons according to available ant types
       formatGameGrid(data.dimensions_x, data.dimensions_y, data.wet_places); // Set up game grid

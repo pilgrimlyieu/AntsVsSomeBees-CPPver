@@ -70,6 +70,24 @@ body {
   background-color: rgb(20, 120, 60);
 }
 
+.doc-button {
+  width: 170px;
+  height: 80px;
+  border-radius: 20px;
+  border-style: solid;
+  background-color: rgba(190, 60, 60, 0.8);
+  border-width: 4px;
+  border-color: rgba(150, 20, 20, 0.5);
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.doc-button:hover {
+  background-color: rgba(150, 40, 40, 0.7);
+}
+
+
 .main-window {
   display: grid;
   grid-template-columns: 1fr 15fr 1fr;
