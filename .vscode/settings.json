@@ -23,7 +23,7 @@
   "errorLens.enabledDiagnosticLevels": [
     "error",
     "warning",
-    "info",
+    "info"
     // "hint"
   ],
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",

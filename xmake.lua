@@ -32,7 +32,7 @@ add_packages("argparse")
 
 add_syslinks("wsock32", "ws2_32")
 
-local target_name = "MyToy"
+local target_name = "Avsb"
 local lib_name = target_name .. "Lib"
 
 if is_mode("debug") then

@@ -1,8 +1,8 @@
 {
-    "recommendations": [
-        "vadimcn.vscode-lldb",
-        "matepek.vscode-catch2-test-adapter",
-        "tboox.xmake-vscode",
-        "llvm-vs-code-extensions.vscode-clangd",
-    ]
+  "recommendations": [
+    "vadimcn.vscode-lldb",
+    "matepek.vscode-catch2-test-adapter",
+    "tboox.xmake-vscode",
+    "llvm-vs-code-extensions.vscode-clangd"
+  ]
 }
