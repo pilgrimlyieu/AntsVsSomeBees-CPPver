@@ -37,9 +37,10 @@ void Hive::strategy(GameState &gameState) {
     }
     for (auto bee : assaultPlan[gameState.time]) {
         gameState.activeBees.push_back(bee);
-        log(LOGTEST, format("Bee {} added", string(*bee)));
+        log(LOGTEST, format("Bee {} added", *bee));
         bee->moveTo(randomElement(exits));
     }
+    assaultPlan.timeReleased(gameState.time);
 }
 
 /**

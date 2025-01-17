@@ -24,6 +24,15 @@ AssaultPlan &AssaultPlan::addWave(bee_type beeType, double beeHealth, g_time tim
 }
 
 /**
+ * @brief 标记某个时间已释放
+ *
+ * @param time 要标记的时间
+ */
+void AssaultPlan::timeReleased(g_time time) {
+    waves.erase(time);
+}
+
+/**
  * @brief 获取所有 Bee
  *
  * @return 所有 Bee 的列表

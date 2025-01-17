@@ -11,6 +11,8 @@ private:
 public:
     AssaultPlan &addWave(bee_type beeType, double beeHealth, g_time time, int count);
 
+    void timeReleased(g_time time);
+
     [[nodiscard]]
     bees_list getBees() const;
 
