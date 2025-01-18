@@ -34,19 +34,8 @@ void QueenAnt::action(GameState &gamestate) {
  * @param amount 要减少的生命值
  */
 void QueenAnt::reduceHealth(double amount) {
-    health -= amount;
+    Insect::reduceHealth(amount);
     if (health <= 0.0) {
         antsLose();
     }
-}
-
-/**
- * @brief 从指定的 Place 中移除 QueenAnt
- *
- * QueenAnt 死亡时结束游戏，因此不需要从 Place 中移除 QueenAnt 。
- *
- * @param place 指向要移除的 Place 的指针
- */
-void QueenAnt::removeFrom(Place *place) {
-    // Do nothing because game ends when QueenAnt dies
 }

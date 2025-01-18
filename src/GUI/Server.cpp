@@ -87,10 +87,8 @@ void Server::setupRoutes() {
 
         try {
             if (Ant *ant = gameState->deployAnt(tunnel, antName)) {
-                if (ant != nullptr) {
-                    response["deployed"] = true;
-                    response["insect_id"] = ant->getId();
-                }
+                response["deployed"] = true;
+                response["insect_id"] = ant->getId();
             }
         } catch (const out_of_range &) {
             tunnel = format("Water_{}_{}", coords[0], coords[1]);

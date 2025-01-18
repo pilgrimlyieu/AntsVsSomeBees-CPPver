@@ -23,7 +23,11 @@ public:
 
     void addTo(Place *place) final {
         if (place->ant != nullptr) {
-            place->ant->kill();
+            if (place->ant->getName() != "QueenAnt") {
+                place->ant->kill();
+            } else {
+                log(LOGERROR, "Cannot remove QueenAnt");
+            }
         }
     }
 };

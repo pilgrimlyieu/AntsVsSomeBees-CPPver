@@ -4,7 +4,6 @@
 #include "AntFactory.hpp"
 #include "AntHomeBase.hpp"
 #include "Hive.hpp"
-#include "QueenAnt.hpp"
 
 class Simulator {
 public:
@@ -129,8 +128,6 @@ public:
 
     [[nodiscard]]
     insects_list getInsects() const;
-
-    void createLayout(bool isWet);
 
     json serialize() const;
     static GameState deserialize(const json &data);

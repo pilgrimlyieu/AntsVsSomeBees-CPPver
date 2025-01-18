@@ -19,8 +19,6 @@ public:
     void action(GameState &gamestate) final;
 
     void reduceHealth(double amount) final;
-
-    void removeFrom(Place *place) final;
 };
 
 #endif // QUEENANT_HPP

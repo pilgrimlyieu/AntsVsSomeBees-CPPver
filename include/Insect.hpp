@@ -60,7 +60,6 @@ public:
         return false;
     }
     virtual json serialize() const override;
-    static Insect *deserialize(const json &data);
 
     virtual ~Insect() = default;
 };
