@@ -101,20 +101,21 @@ const CLIConfig &ConfigManager::getConfig() {
 }
 
 CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::VERSION) {
+    // [ISSUE] `store_into` is incompatible with `required`
+    // https://github.com/p-ranav/argparse/issues/385)
+    // temporary workaround: remove `required()`.
     auto &group = parser.add_mutually_exclusive_group();
     group.add_argument("-d", "--difficulty")
+        .default_value("normal")
         .help("sets difficulty of game (test/easy/normal/hard/extra-hard)")
         .metavar("DIFFICULTY")
-        .default_value("normal")
         .choices("test", "easy", "normal", "hard", "extra-hard")
         .nargs(1)
-        .required()
         .store_into(cmdConfig.difficulty);
     group.add_argument("-a", "--plan")
         .help("path to custom assault plan JSON file")
         .metavar("PLAN")
         .nargs(1)
-        .required()
         .store_into(cmdConfig.planPath);
     parser.add_argument("-w", "--water")
         .help("loads a full layout with water")
@@ -125,36 +126,32 @@ CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::VERSION) {
         .flag()
         .store_into(cmdConfig.autoOpen);
     parser.add_argument("-f", "--food")
+        .default_value(2)
         .help("number of food to start with when testing")
         .metavar("FOOD")
-        .default_value(2)
         .scan<'i', int>()
         .nargs(1)
-        .required()
         .store_into(cmdConfig.initialFood);
     parser.add_argument("-l", "--log")
+        .default_value(1)
         .help("sets log level (0:TEST, 1:INFO, 2:ERROR, 3:NONE)")
         .metavar("LEVEL")
-        .default_value(1)
         .scan<'i', int>()
         .choices(0, 1, 2, 3)
         .nargs(1)
-        .required()
         .store_into(cmdConfig.logLevel);
     parser.add_argument("-p", "--port")
+        .default_value(18080)
         .help("sets the port for the server")
         .metavar("PORT")
-        .default_value(18080)
         .scan<'i', int>()
         .nargs(1)
-        .required()
         .store_into(cmdConfig.port);
     parser.add_argument("-c", "--config")
+        .default_value("./config.json")
         .help("path to config file")
         .metavar("CONFIG")
-        .default_value("./config.json")
         .nargs(1)
-        .required()
         .store_into(cmdConfig.configPath);
     parser.add_argument("-s", "--save")
         .help("save game configuration to file and exit")
