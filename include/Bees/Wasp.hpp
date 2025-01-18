@@ -9,7 +9,7 @@ protected:
         return "Wasp";
     }
     virtual double getDefaultDamage() const override {
-        return 1.0;
+        return 2.0;
     }
 
 public:
