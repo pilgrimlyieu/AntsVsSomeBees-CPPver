@@ -1,15 +1,29 @@
 add_rules("mode.debug", "mode.release")
 
+local enable_test = false
+local platform = os.host()
+
+if platform == "windows" then
+    set_defaultplat("mingw")
+elseif platform == "linux" then
+    set_defaultplat("linux")
+end
+
 add_requires("argparse")
-add_requires("catch2")
--- add_requires("crow") -- OpenSSL 一直失败 :(
 add_requires("nlohmann_json")
+if enable_test then
+    add_requires("catch2")
+end
+if is_plat("linux") then
+    -- Windows OpenSSL 一直失败 :(
+    -- 如果能使用 XMake 管理，就可以把这个 if 和下面的 dependencies 去掉
+    add_requires("crow")
+end
 
 set_languages("cxx20")
 set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
-set_defaultplat("mingw")
 
 if is_mode("release") then
     if is_plat("mingw") then
@@ -21,10 +35,6 @@ if is_mode("release") then
 end
 
 add_includedirs(
-    "dependencies",
-    "dependencies/asio",
-    "dependencies/crow",
-
     "include",
     "include/Ants",
     "include/Bees",
@@ -38,6 +48,16 @@ add_files("src/**.cpp")
 
 add_packages("nlohmann_json")
 add_packages("argparse")
+
+if is_plat("linux") then
+    add_packages("crow")
+else
+    add_includedirs( 
+        "dependencies",
+        "dependencies/asio",
+        "dependencies/crow"
+    )
+end
 
 if is_plat("mingw") then
     add_syslinks("wsock32", "ws2_32")
@@ -100,5 +120,7 @@ for _, file in ipairs(os.files("test/**/test_*.cpp")) do
         add_tests(name)
         add_files(file)
         add_deps(lib_name)
-        add_packages("catch2")
+        if enable_test then
+            add_packages("catch2")
+        end
 end

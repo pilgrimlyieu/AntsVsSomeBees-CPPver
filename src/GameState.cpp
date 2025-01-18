@@ -29,7 +29,7 @@ GameState::GameState(int food, dim dimensions)
  * @param food 初始食物余额，默认为 2
  */
 GameState::GameState(Hive *beehive, create_places createPlaces, dim dimensions, int food)
-    : beehive(beehive), dimensions(std::move(dimensions)), food(food) {
+    : food(food), beehive(beehive), dimensions(std::move(dimensions)) {
     configure(beehive, createPlaces);
 }
 
