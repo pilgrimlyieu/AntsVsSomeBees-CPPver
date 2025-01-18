@@ -137,7 +137,7 @@ json Ant::serialize() const {
 Ant *Ant::deserialize(const json &data) {
     string type = data["type"];
     double health = data["health"];
-    Ant *ant;
+    Ant *ant = nullptr;
     if (type == "BodyguardAnt") { // ContainerAnt
         ant = new BodyguardAnt(health);
         dynamic_cast<ContainerAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));

@@ -23,13 +23,7 @@ public:
 
     void addTo(Place *place) final {
         if (place->ant != nullptr) {
-            auto container = dynamic_cast<ContainerAnt *>(place->ant);
-            if (container && container->antContained) {
-                Ant *contained = container->antContained;
-                container->kill();
-            } else {
-                place->ant->kill();
-            }
+            place->ant->kill();
         }
     }
 };

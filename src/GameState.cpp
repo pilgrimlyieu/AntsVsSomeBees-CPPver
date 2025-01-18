@@ -17,7 +17,7 @@ AntFactory *GameState::antFactory = &AntFactory::getInstance();
  * @param dimensions 地图尺寸
  */
 GameState::GameState(int food, dim dimensions)
-    : food(food), dimensions(std::move(dimensions)), beehive(nullptr) {}
+    : food(food), beehive(nullptr), dimensions(std::move(dimensions)) {}
 
 /**
  * @brief 构造一个新的 GameState

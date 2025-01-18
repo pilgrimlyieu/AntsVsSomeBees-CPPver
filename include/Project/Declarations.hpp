@@ -10,7 +10,7 @@ class Insect;
 class Ant;
 class Bee;
 
-struct CLIConfig;
+class CLIConfig;
 
 using g_time = int;
 
