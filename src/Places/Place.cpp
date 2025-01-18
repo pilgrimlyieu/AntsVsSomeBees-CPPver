@@ -105,7 +105,7 @@ Place *Place::deserialize(const json &data) {
             auto ant = Ant::deserialize(data["ant"]);
             place->addInsect(ant);
             auto containerAnt = dynamic_cast<ContainerAnt *>(ant);
-            if (containerAnt) {
+            if (containerAnt && containerAnt->antContained) {
                 containerAnt->antContained->setPlace(place);
             }
         }
