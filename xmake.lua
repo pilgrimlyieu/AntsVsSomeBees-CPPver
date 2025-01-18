@@ -37,12 +37,16 @@ local lib_name = target_name .. "Lib"
 
 if is_mode("debug") then
     add_defines("DEBUG")
+    target_name = target_name .. "Debug"
+    lib_name = lib_name .. "Debug"
 elseif is_mode("release") then 
     add_defines("RELEASE")
 elseif is_mode("check") then
     -- set_policy("build.sanitizer.address", true)
     set_symbols("debug")
     set_optimize("none")
+    target_name = target_name .. "Debug"
+    lib_name = lib_name .. "Debug"
 
     add_cxflags(
         "-fno-strict-aliasing",

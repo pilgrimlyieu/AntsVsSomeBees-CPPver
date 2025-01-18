@@ -1,70 +1,82 @@
 {
   "tasks": [
     {
-      "args": ["-c", "xmake f -m debug && xmake build ${config:targetName}"],
-      "command": "sh",
-      "group": "build",
       "label": "Build Debug",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [""],
-      "type": "shell"
-    },
-    {
-      "args": [
-        "-c",
-        "xmake f -m release && xmake build ${config:targetName}; xmake f -m debug"
-      ],
+      "type": "shell",
       "command": "sh",
+      "args": ["-c", "xmake f -m debug && xmake build"],
       "group": "build",
-      "label": "Build Release",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [""],
-      "type": "shell"
-    },
-    {
-      "args": [
-        "-c",
-        "xmake f -m check && xmake build ${config:targetName}; xmake f -m debug"
-      ],
-      "command": "sh",
-      "group": "build",
-      "label": "Build Check",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [""],
-      "type": "shell"
-    },
-    {
-      "args": ["test"],
-      "command": "xmake",
-      "group": "build",
-      "label": "Build Test",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [""],
-      "type": "shell"
-    },
-    {
-      "args": ["clean", "--all"],
-      "command": "xmake",
-      "group": "build",
-      "label": "Clean",
       "options": {
         "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
-      "type": "shell"
     },
     {
-      "args": ["run", "${config:targetName}"],
+      "label": "Build Release",
+      "type": "shell",
+      "command": "sh",
+      "args": ["-c", "xmake f -m release && xmake build; xmake f -m debug"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "Build Check",
+      "type": "shell",
+      "command": "sh",
+      "args": ["-c", "xmake f -m check && xmake build; xmake f -m debug"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "Build Test",
+      "type": "shell",
       "command": "xmake",
-      "dependsOn": ["Build Debug"],
+      "args": ["test"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "xmake",
+      "args": ["clean", "--all"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "Pack Release",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-NoLogo",
+        "-NonInteractive",
+        "-Command",
+        "$temp = Join-Path $env:TEMP 'vscode_pack_temp'; New-Item -Force -ItemType Directory $temp; Copy-Item build/${config:targetName}.exe $temp/; Copy-Item -Recurse static $temp/ -ErrorAction SilentlyContinue; Copy-Item -Recurse templates $temp/ -ErrorAction SilentlyContinue; Compress-Archive -Force -Path $temp/* -DestinationPath build/${config:targetName}.zip; Remove-Item -Recurse -Force $temp"
+      ],
+      "group": "build",
+      "dependsOn": ["Build Release"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "args": ["run", "${config:targetName}Debug"],
+      "command": "xmake",
+      "dependsOn": ["Run Debug"],
       "group": {
         "isDefault": true,
         "kind": "test"

@@ -5,7 +5,7 @@
       "preLaunchTask": "Build Debug",
       "request": "launch",
       "stopAtEntry": true,
-      "target": "${config:targetName}",
+      "target": "${config:targetName}Debug",
       "type": "xmake"
     }
   ],
