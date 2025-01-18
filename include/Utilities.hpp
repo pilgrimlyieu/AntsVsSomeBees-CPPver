@@ -9,7 +9,6 @@
 #include "Constants.hpp"
 #include "Info.hpp"
 
-
 // #ifdef DEBUG
 // #define private   public
 // #define protected public

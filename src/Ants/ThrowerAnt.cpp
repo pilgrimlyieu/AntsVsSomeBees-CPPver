@@ -41,7 +41,7 @@ void ThrowerAnt::throwAt(Bee *target) {
         log(LOGINFO, format("{} throws at {}, causing {:.2f} damage", *this, *target, getDamage()));
         target->reduceHealth(getDamage());
     } else {
-        log(LOGINFO, format("{} throws at nothing", *this));
+        log(LOGTEST, format("{} throws at nothing", *this));
     }
 }
 

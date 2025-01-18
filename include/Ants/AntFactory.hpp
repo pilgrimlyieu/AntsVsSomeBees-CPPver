@@ -37,9 +37,6 @@ public:
     Ant *createAnt(const string &name) const;
 
     [[nodiscard]]
-    Ant *deserialize(const json &data) const;
-
-    [[nodiscard]]
     vector<string> getAntNames() const;
 };
 

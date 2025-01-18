@@ -23,8 +23,8 @@
   "errorLens.enabledDiagnosticLevels": [
     "error",
     "warning",
-    "info"
-    // "hint"
+    "info",
+    "hint"
   ],
   // "cmake.cmakePath": "D:/Software/Qt/Tools/CMake_64/bin/cmake.exe",
   // "python.terminal.activateEnvironment": false,
@@ -43,6 +43,6 @@
   "targetName": "Avsb",
   "xmake.debugConfigType": "codelldb",
   "xmake.debuggingTargetsArguments": {
-    "default": ["-d", "test", "-f", "999"]
+    "default": ["-d", "normal", "-f", "999", "-l", "0"]
   }
 }

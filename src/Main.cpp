@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
         CLIConfig cfg = cli.parse(argc, argv);
         Server server(cfg);
         server.start();
-    } catch (const std::exception &e) {
+    } catch (const exception &e) {
         log(LOGERROR, e.what());
         return 1;
     }
