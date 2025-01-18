@@ -74,6 +74,8 @@ void ContainerAnt::action(GameState &gamestate) {
  */
 json ContainerAnt::serialize() const {
     json j = Ant::serialize();
-    j["antContained"] = (antContained != nullptr) ? antContained->serialize() : nullptr;
+    if (antContained != nullptr) {
+        j["antContained"] = antContained->serialize();
+    }
     return j;
 }

@@ -140,7 +140,9 @@ Ant *Ant::deserialize(const json &data) {
     Ant *ant = nullptr;
     if (type == "BodyguardAnt") { // ContainerAnt
         ant = new BodyguardAnt(health);
-        dynamic_cast<ContainerAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+        if (data.contains("antContained")) {
+            dynamic_cast<ContainerAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+        }
     } else if (type == "FireAnt") {
         ant = new FireAnt(health);
     } else if (type == "HarvestAnt") {
@@ -167,7 +169,9 @@ Ant *Ant::deserialize(const json &data) {
         ant = new SlowThrower(health);
     } else if (type == "TankAnt") { // ContainerAnt
         ant = new TankAnt(health);
-        dynamic_cast<TankAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+        if (data.contains("antContained")) {
+            dynamic_cast<ContainerAnt *>(ant)->storeAnt(Ant::deserialize(data["antContained"]));
+        }
     } else if (type == "ThrowerAnt") {
         ant = new ThrowerAnt(health);
     } else if (type == "WallAnt") {
