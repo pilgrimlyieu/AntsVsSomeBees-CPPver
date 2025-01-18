@@ -149,10 +149,10 @@ Ant *GameState::deployAnt(string placeName, string antTypeName) {
         log(LOGTEST, format("Deploying {0} to {1}", antTypeName, placeName));
         places[placeName]->addInsect(ant);
         food -= ant->getFoodCost();
-        if (ant->getName() == "AntRemover") {
-            ant->removeFrom(places[placeName]);
-            ant = nullptr;
-        }
+    }
+    if (ant->getName() == "AntRemover") {
+        delete ant;
+        ant = nullptr;
     }
     return ant;
 }

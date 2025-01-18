@@ -2,6 +2,8 @@
 #define ANTREMOVER_HPP
 
 #include "Ant.hpp"
+#include "ContainerAnt.hpp"
+#include "Place.hpp"
 
 class AntRemover final : public Ant {
 protected:
@@ -15,13 +17,20 @@ protected:
 public:
     explicit AntRemover() : Ant(0.0) {}
 
-    bool canContain(Ant *other) final {
+    bool getIsWaterProof() const final {
         return true;
     }
 
-    void storeAnt(Ant *other) final {
-        log(LOGINFO, format("Remove {}", *other));
-        other->kill();
+    void addTo(Place *place) final {
+        if (place->ant != nullptr) {
+            auto container = dynamic_cast<ContainerAnt *>(place->ant);
+            if (container && container->antContained) {
+                Ant *contained = container->antContained;
+                container->kill();
+            } else {
+                place->ant->kill();
+            }
+        }
     }
 };
 

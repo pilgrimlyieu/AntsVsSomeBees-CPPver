@@ -8,7 +8,6 @@
 #include <iostream>
 #include <map>
 #include <memory>
-#include <optional>
 #include <stdexcept>
 #include <unordered_map>
 #include <vector>
@@ -24,8 +23,6 @@ using std::invalid_argument;
 using std::make_shared;
 using std::make_unique;
 using std::map;
-using std::nullopt;
-using std::optional;
 using std::out_of_range;
 using std::pair;
 using std::shared_ptr;

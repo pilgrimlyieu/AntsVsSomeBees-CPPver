@@ -76,9 +76,7 @@ void Ant::addTo(Place *place) {
             place->ant->storeAnt(this);
         } else if (canContain(place->ant)) {
             storeAnt(place->ant);
-            if (getName() != "AntRemover") {
-                place->ant = this;
-            }
+            place->ant = this;
         } else {
             THROW_EXCEPTION(invalid_argument, format("Two ants in {}", *place));
         }

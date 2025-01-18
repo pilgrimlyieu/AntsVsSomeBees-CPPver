@@ -11,10 +11,13 @@
  * 同时会执行身为 ContainerAnt 的动作。
  */
 void TankAnt::action(GameState &gamestate) {
-    log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
-    std::erase_if(place->bees, [&](auto &bee) {
-        bee->reduceHealth(getDamage());
-        return bee->health <= 0;
-    });
+    if (place->bees.size() > 0) {
+        bees_list beesToDamage(place->bees);
+        for (auto bee : beesToDamage) {
+            if (bee->health > 0) {
+                bee->reduceHealth(getDamage());
+            }
+        }
+    }
     ContainerAnt::action(gamestate);
 }

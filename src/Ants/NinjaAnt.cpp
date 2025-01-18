@@ -8,9 +8,13 @@
  * NinjaAnt 的动作是对当前位置的所有 Bee 造成伤害。
  */
 void NinjaAnt::action(GameState &gamestate) {
-    log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
-    std::erase_if(place->bees, [&](auto &bee) {
-        bee->reduceHealth(getDamage());
-        return bee->health <= 0;
-    });
+    if (place->bees.size() > 0) {
+        log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
+        bees_list beesToDamage(place->bees);
+        for (auto bee : beesToDamage) {
+            if (bee->health > 0) {
+                bee->reduceHealth(getDamage());
+            }
+        }
+    }
 }

@@ -36,7 +36,7 @@ public:
 
     virtual void removeAnt(Ant *other);
 
-    void addTo(Place *place) final;
+    void addTo(Place *place) override;
 
     void removeFrom(Place *place) override;
 

@@ -46,9 +46,7 @@ void Insect::deathCallback() {
  * @param place 指向 Place 的指针。
  */
 void Insect::addTo(Place *place) {
-    if (getName() == "AntRemover") {
-        return;
-    } else if (place != nullptr) {
+    if (place != nullptr) {
         log(LOGTEST, format("{} is added to {}", *this, *place));
     } else {
         log(LOGTEST, format("{} is added to nullptr", *this));
