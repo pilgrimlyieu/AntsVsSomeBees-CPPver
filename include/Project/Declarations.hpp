@@ -39,14 +39,18 @@ using dim = pair<int, int>;
  *
  * - LOGERROR: 错误
  *
- * - NOLOG: 无日志
+ * - LOGQUIET: 无日志
  */
 enum class LogLevel {
     LOGTEST = 0,
     LOGINFO,
     LOGERROR,
-    NOLOG,
+    LOGQUIET,
 };
 using enum LogLevel;
+
+inline bool operator<=(LogLevel a, LogLevel b) {
+    return static_cast<int>(a) <= static_cast<int>(b);
+}
 
 #endif // PROJECTDECLARATIONS_HPP

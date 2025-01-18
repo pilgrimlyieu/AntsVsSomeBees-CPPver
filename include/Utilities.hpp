@@ -31,7 +31,7 @@
 
 void gameInit();
 
-void log(LogLevel level, const string &msg);
+void log(LogLevel level, const string &msg, bool force = false);
 
 vector<string> split(const string &str, char delim);
 

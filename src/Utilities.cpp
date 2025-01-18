@@ -13,13 +13,18 @@ void gameInit() {
  *
  * @param msg 日志信息
  */
-void log(LogLevel level, const string &msg) {
-    LogLevel cfgLogLevel = ConfigManager::getConfig().getLogLevel();
-    if (level == LOGTEST && cfgLogLevel <= LOGTEST) {
+void log(LogLevel level, const string &msg, bool force) {
+    LogLevel logLevel;
+    if (!force) {
+        logLevel = ConfigManager::getConfig().getLogLevel();
+    } else {
+        logLevel = LOGTEST;
+    }
+    if (level == LOGTEST && logLevel <= LOGTEST) {
         std::cout << ANSI_YELLOW << "[TEST] " << ANSI_RESET << msg << std::endl;
-    } else if (level == LOGINFO && cfgLogLevel <= LOGINFO) {
+    } else if (level == LOGINFO && logLevel <= LOGINFO) {
         std::cout << ANSI_BLUE << "[INFO] " << ANSI_RESET << msg << std::endl;
-    } else if (level == LOGERROR && cfgLogLevel <= LOGERROR) {
+    } else if (level == LOGERROR && logLevel <= LOGERROR) {
         std::cerr << ANSI_RED << "[ERROR] " << ANSI_RESET << msg << std::endl;
     }
 }

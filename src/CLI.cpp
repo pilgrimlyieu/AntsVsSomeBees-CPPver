@@ -57,8 +57,8 @@ AssaultPlan CLIConfig::getAssaultPlan() const {
             json j;
             file >> j;
             return AssaultPlan::deserialize(j);
-        } catch (const std::exception &e) {
-            log(LOGERROR, format("Failed to load plan file {0}: {1}", planPath, e.what()));
+        } catch (const exception &e) {
+            log(LOGERROR, format("Failed to load plan file {0}: {1}", planPath, e.what()), true);
         }
     }
     if (difficulty == "test") {
@@ -108,48 +108,30 @@ CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::VERSION) {
         .default_value("normal")
         .choices("test", "easy", "normal", "hard", "extra-hard")
         .nargs(1)
-        .action([this](const std::string &value) {
-            if (parser.is_used("--difficulty")) {
-                cmdConfig.difficulty = value;
-            }
-            return value;
-        });
+        .required()
+        .store_into(cmdConfig.difficulty);
     group.add_argument("-a", "--plan")
         .help("path to custom assault plan JSON file")
         .metavar("PLAN")
         .nargs(1)
-        .action([this](const std::string &value) {
-            cmdConfig.planPath = value;
-            return value;
-        });
-
+        .required()
+        .store_into(cmdConfig.planPath);
     parser.add_argument("-w", "--water")
         .help("loads a full layout with water")
         .flag()
-        .action([this](const std::string &) {
-            cmdConfig.waterEnabled = true;
-            return "true";
-        });
-
+        .store_into(cmdConfig.waterEnabled);
     parser.add_argument("-o", "--open")
         .help("automatically open the game in a browser (maybe not work in your OS!)")
         .flag()
-        .action([this](const std::string &) {
-            cmdConfig.autoOpen = true;
-            return "true";
-        });
-
+        .store_into(cmdConfig.autoOpen);
     parser.add_argument("-f", "--food")
         .help("number of food to start with when testing")
         .metavar("FOOD")
         .default_value(2)
         .scan<'i', int>()
         .nargs(1)
-        .action([this](const std::string &value) {
-            cmdConfig.initialFood = std::stoi(value);
-            return value;
-        });
-
+        .required()
+        .store_into(cmdConfig.initialFood);
     parser.add_argument("-l", "--log")
         .help("sets log level (0:TEST, 1:INFO, 2:ERROR, 3:NONE)")
         .metavar("LEVEL")
@@ -157,32 +139,23 @@ CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::VERSION) {
         .scan<'i', int>()
         .choices(0, 1, 2, 3)
         .nargs(1)
-        .action([this](const std::string &value) {
-            cmdConfig.logLevel = std::stoi(value);
-            return value;
-        });
-
+        .required()
+        .store_into(cmdConfig.logLevel);
     parser.add_argument("-p", "--port")
         .help("sets the port for the server")
         .metavar("PORT")
         .default_value(18080)
         .scan<'i', int>()
         .nargs(1)
-        .action([this](const std::string &value) {
-            cmdConfig.port = std::stoi(value);
-            return value;
-        });
-
+        .required()
+        .store_into(cmdConfig.port);
     parser.add_argument("-c", "--config")
         .help("path to config file")
         .metavar("CONFIG")
         .default_value("./config.json")
         .nargs(1)
-        .action([this](const std::string &value) {
-            cmdConfig.configPath = value;
-            return value;
-        });
-
+        .required()
+        .store_into(cmdConfig.configPath);
     parser.add_argument("-s", "--save")
         .help("save game configuration to file and exit")
         .metavar("SAVE")
@@ -199,7 +172,7 @@ void CLI::loadConfigFile(const string &path, CLIConfig &cfg) {
         }
     } catch (const exception &e) {
         if (path != "./config.json") {
-            log(LOGERROR, format("Failed to load config file {0}: {1}", path, e.what()));
+            log(LOGERROR, format("Failed to load config file {0}: {1}", path, e.what()), true);
         }
     }
 }
@@ -240,9 +213,9 @@ CLIConfig CLI::parse(int argc, char *argv[]) {
             exit(0);
         }
         return config;
-    } catch (const std::runtime_error &err) {
-        log(LOGERROR, format("Error parsing CLI arguments: {0}", err.what()));
-        std::cerr << parser << std::endl;
+    } catch (const exception &err) {
+        log(LOGERROR, format("Error parsing CLI arguments: {0}", err.what()), true);
+        std::cerr << parser;
         exit(1);
     }
 }

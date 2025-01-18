@@ -4,6 +4,7 @@
 #include "GameState.hpp"
 #include "Hive.hpp"
 #include "NinjaBee.hpp"
+#include "Utilities.hpp"
 #include "Wasp.hpp"
 
 #define CREATE_BEES(type) [](double health) { return new type(health); }
@@ -93,6 +94,7 @@ AssaultPlan makeExtraHardAssaultPlan() {
 }
 
 void resetGame() {
+    gameInit();
     Insect::resetIdCounter();
     AntFactory::resetQueenAnt();
 }
