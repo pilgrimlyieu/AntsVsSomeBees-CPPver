@@ -40,6 +40,9 @@
   // "terminal.integrated.env.windows": {
   //     "PATH": "D:/Software/Qt/Tools/mingw1120_64/bin;D:/Software/Qt/6.7.3/mingw_64/bin;${env:PATH}",
   // },
-  "targetName": "MyToy",
-  "xmake.debugConfigType": "codelldb"
+  "targetName": "Avsb",
+  "xmake.debugConfigType": "codelldb",
+  "xmake.debuggingTargetsArguments": {
+    "default": ["-d", "test", "-f", "999"]
+  }
 }

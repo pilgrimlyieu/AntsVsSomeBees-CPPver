@@ -3,10 +3,6 @@
 
 #include "Insect.hpp"
 
-#pragma clang diagnostic ignored \
-    "-Wc99-designator" // mixture of designated and non-designated initializers in the same
-                       // initializer list is a C99 extension
-
 class Ant : public Insect {
 protected:
     bool buffed = false; //!< 是否被加成

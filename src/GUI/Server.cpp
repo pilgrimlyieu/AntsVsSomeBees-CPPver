@@ -115,12 +115,12 @@ void Server::setupRoutes() {
 
     CROW_ROUTE(app, "/exit_game").methods("POST"_method)([this] {
         stop();
-        return crow::response(200);
+        return crow::response(crow::status::OK);
     });
 
     CROW_ROUTE(app, "/save_game")([this] {
         if (!gameState) {
-            return crow::response(404, "Game not found");
+            return crow::response(crow::status::NOT_FOUND, "Game not found");
         }
 
         json response = gameState->serialize();
@@ -170,7 +170,7 @@ void Server::setupRoutes() {
 
             return crow::response{response};
         } catch (const exception &e) {
-            return crow::response(400, e.what());
+            return crow::response(crow::status::BAD_REQUEST, e.what());
         }
     });
 
@@ -185,10 +185,10 @@ void Server::setupRoutes() {
                 auto response = getGameInfo();
                 return crow::response{response};
             } catch (const exception &e) {
-                return crow::response(400, "Invalid assault plan format");
+                return crow::response(crow::status::BAD_REQUEST, "Invalid assault plan format");
             }
         } catch (const exception &e) {
-            return crow::response(400, "Invalid JSON format");
+            return crow::response(crow::status::BAD_REQUEST, "Invalid JSON format");
         }
     });
 };

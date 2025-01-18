@@ -100,7 +100,7 @@ const CLIConfig &ConfigManager::getConfig() {
     return config;
 }
 
-CLI::CLI() : parser(ProjectInfo::PROJECT_NAME, ProjectInfo::VERSION) {
+CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::VERSION) {
     auto &group = parser.add_mutually_exclusive_group();
     group.add_argument("-d", "--difficulty")
         .help("sets difficulty of game (test/easy/normal/hard/extra-hard)")

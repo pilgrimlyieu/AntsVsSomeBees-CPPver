@@ -1,4 +1,4 @@
 If:
-  PathMatch: ["include/asio.hpp", "include/asio/*", "include/crow.h", "include/crow/*"]
+  PathMatch: ["dependencies/*"]
 Index:
   Background: Skip
