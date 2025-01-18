@@ -348,7 +348,10 @@ function clearAllIntervals() {
 }
 
 function setGameIntervals() {
-  if (!window.gameIntervals) window.gameIntervals = [];
+  clearAllIntervals();
+  if (!window.gameIntervals) {
+    window.gameIntervals = [];
+  }
   window.gameIntervals.push(
     setInterval(insectsTakeActions, insectsActionInterval * 1000)
   );
@@ -375,8 +378,7 @@ function togglePause() {
   } else {
     overlay.style.display = "none";
     if (enablePolling) {
-      setInterval(insectsTakeActions, insectsActionInterval * 1000);
-      setInterval(updateStats, 50);
+      setGameIntervals();
     }
   }
 }

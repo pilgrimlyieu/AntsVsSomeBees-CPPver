@@ -336,8 +336,7 @@ document.getElementById("load-file").addEventListener("change", function (e) {
 
             // Set calling these functions every 4 seconds and 50 milliseconds.
             if (enablePolling) {
-              setInterval(insectsTakeActions, insectsActionInterval * 1000);
-              setInterval(updateStats, 50);
+              setGameIntervals();
             }
 
             let exitButton = document.querySelector(".exit-button");
