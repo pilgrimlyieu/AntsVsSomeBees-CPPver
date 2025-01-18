@@ -249,7 +249,8 @@ crow::response Server::handleInsectActions() {
  */
 void Server::start() {
     log(LOGINFO,
-        format("Server started at {1}http://localhost:{2}{0}", ANSI_RESET, ANSI_BOLD, app.port()));
+        format("Server started at {1}http://localhost:{2}{0}", ANSI_RESET, ANSI_BOLD, app.port()),
+        true);
     if (config.autoOpen) {
         string command;
 #ifdef _WIN32

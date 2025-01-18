@@ -1,5 +1,6 @@
 let enablePolling = true;
 let isServerRunning = true;
+let isPaused = false;
 let failedRequestCount = 0;
 const MAX_FAILED_REQUESTS = 10;
 const REQUEST_TIMEOUT = 10000;
@@ -97,10 +98,11 @@ function startGame() {
 
       // Set calling these functions every 4 seconds and 50 milliseconds.
       if (enablePolling) {
-        setInterval(insectsTakeActions, insectsActionInterval * 1000);
-        setInterval(updateStats, 50);
+        setGameIntervals();
       }
 
+      let restartButton = document.querySelector(".restart-button");
+      restartButton.addEventListener("click", restartGame);
       let exitButton = document.querySelector(".exit-button");
       exitButton.addEventListener("click", exitGame);
     })
@@ -223,7 +225,7 @@ function endGame(data) {
 
 function insectsTakeActions() {
   /* Called on interval. Ask insects to take actions */
-  if (!isServerRunning) return;
+  if (!isNowWorking()) return;
 
   const timeDelay = 100; // milliseconds
 
@@ -239,7 +241,7 @@ function insectsTakeActions() {
     });
 
   setTimeout(() => {
-    if (!isServerRunning) return;
+    if (!isNowWorking()) return;
 
     fetchWithTimeout("/bees_take_actions")
       .then((response) => {
@@ -256,7 +258,7 @@ function insectsTakeActions() {
 
 function updateStats() {
   /* Called on interval. Ask server for food count and turn count */
-  if (!isServerRunning) return;
+  if (!isNowWorking()) return;
 
   fetchWithTimeout("/update_stats")
     .then((response) => {
@@ -339,11 +341,52 @@ function throwAt(data) {
 }
 
 function clearAllIntervals() {
-  const highestId = window.setInterval(() => {}, Number.MAX_SAFE_INTEGER);
-  for (let i = 1; i < highestId; i++) {
-    window.clearInterval(i);
+  if (window.gameIntervals) {
+    window.gameIntervals.forEach((id) => clearInterval(id));
+    window.gameIntervals = [];
   }
 }
+
+function setGameIntervals() {
+  if (!window.gameIntervals) window.gameIntervals = [];
+  window.gameIntervals.push(
+    setInterval(insectsTakeActions, insectsActionInterval * 1000)
+  );
+  window.gameIntervals.push(setInterval(updateStats, 50));
+}
+
+function isNowWorking() {
+  return isServerRunning && !isPaused;
+}
+
+function restartGame() {
+  location.reload();
+}
+
+function togglePause() {
+  if (!isServerRunning) return;
+
+  isPaused = !isPaused;
+  const overlay = document.querySelector(".pause-overlay");
+
+  if (isPaused) {
+    clearAllIntervals();
+    overlay.style.display = "flex";
+  } else {
+    overlay.style.display = "none";
+    if (enablePolling) {
+      setInterval(insectsTakeActions, insectsActionInterval * 1000);
+      setInterval(updateStats, 50);
+    }
+  }
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "Space" && isServerRunning) {
+    event.preventDefault();
+    togglePause();
+  }
+});
 
 function manualUpdate() {
   updateStats();
@@ -360,9 +403,8 @@ function manualOneTurn() {
 
 function togglePolling() {
   enablePolling = !enablePolling;
-  if (enablePolling) {
-    setInterval(insectsTakeActions, insectsActionInterval * 1000);
-    setInterval(updateStats, 50);
+  if (enablePolling && !isPaused) {
+    setGameIntervals();
     console.log("Polling enabled");
   } else {
     clearAllIntervals();
