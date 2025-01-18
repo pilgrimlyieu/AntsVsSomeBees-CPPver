@@ -1,5 +1,10 @@
 add_rules("mode.debug", "mode.release")
 
+if is_plat("mingw") and is_mode("release") then
+    add_cxflags("-static")
+    add_ldflags("-static", "-static-libgcc", "-static-libstdc++")
+end
+
 add_requires("argparse")
 add_requires("catch2")
 -- add_requires("crow") -- OpenSSL 一直失败 :(
@@ -30,7 +35,9 @@ add_files("src/**.cpp")
 add_packages("nlohmann_json")
 add_packages("argparse")
 
-add_syslinks("wsock32", "ws2_32")
+if is_plat("mingw") then
+    add_syslinks("wsock32", "ws2_32")
+end
 
 local target_name = "Avsb"
 local lib_name = target_name .. "Lib"
