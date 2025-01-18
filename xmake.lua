@@ -1,10 +1,5 @@
 add_rules("mode.debug", "mode.release")
 
-if is_plat("mingw") and is_mode("release") then
-    add_cxflags("-static")
-    add_ldflags("-static", "-static-libgcc", "-static-libstdc++")
-end
-
 add_requires("argparse")
 add_requires("catch2")
 -- add_requires("crow") -- OpenSSL 一直失败 :(
@@ -15,6 +10,15 @@ set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
 set_defaultplat("mingw")
+
+if is_mode("release") then
+    if is_plat("mingw") then
+        add_cxflags("-static")
+        add_ldflags("-static", "-static-libgcc", "-static-libstdc++")
+    elseif is_plat("linux") then
+        add_ldflags("-static-libgcc", "-static-libstdc++")
+    end
+end
 
 add_includedirs(
     "dependencies",
