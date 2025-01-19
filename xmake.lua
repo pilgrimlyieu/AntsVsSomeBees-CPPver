@@ -48,6 +48,10 @@ add_includedirs(
 )
 add_files("src/**.cpp")
 
+if is_plat("mingw") and is_mode("release") then
+    add_files("src/Resource.rc")
+end
+
 add_packages("nlohmann_json")
 add_packages("argparse")
 
