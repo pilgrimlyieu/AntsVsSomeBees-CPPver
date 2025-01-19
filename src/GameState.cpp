@@ -5,7 +5,6 @@
 #include "AntsWinException.hpp"
 #include "Bee.hpp"
 #include "ContainerAnt.hpp"
-#include "Utilities.hpp"
 #include "Water.hpp"
 
 AntFactory *GameState::antFactory = &AntFactory::getInstance();
@@ -54,7 +53,6 @@ void GameState::configure(Hive *beehive, create_places createPlaces) {
         }
     };
     register_place(beehive, false);
-    register_place(base, false);
     createPlaces(base, register_place, dimensions);
 }
 
@@ -327,6 +325,7 @@ void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim
  */
 json GameState::serialize() const {
     json j;
+    j["version"] = AVSBInfo::VERSION;
     j["time"] = time;
     j["food"] = food;
     j["numBees"] = numBees;
@@ -356,10 +355,14 @@ json GameState::serialize() const {
  */
 GameState GameState::deserialize(const json &data) {
     auto state = GameState(data["food"], {data["dimensions"][0], data["dimensions"][1]});
+    string version = data["version"];
+    if (version != AVSBInfo::VERSION) {
+        log(LOGERROR, format("Version mismatch: {0} != {1}, which may cause issues. Go to "
+                             "{2}/releases/tag/v{0} for the matching version.",
+                             version, AVSBInfo::VERSION, AVSBInfo::GITHUB_REPO));
+    }
     state.time = data["time"];
-    state.food = data["food"];
     state.numBees = data["numBees"];
-    state.dimensions = {data["dimensions"][0], data["dimensions"][1]};
     state.base = new AntHomeBase("Ant Home Base");
     state.places["Ant Home Base"] = state.base;
 
