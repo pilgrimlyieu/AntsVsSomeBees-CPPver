@@ -74,42 +74,42 @@
       "problemMatcher": []
     },
     {
-      "args": ["run", "${config:targetName}Debug"],
+      "label": "Run",
+      "type": "shell",
       "command": "xmake",
+      "args": ["run", "${config:targetName}Debug"],
       "dependsOn": ["Run Debug"],
       "group": {
         "isDefault": true,
         "kind": "test"
       },
-      "label": "Run",
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": [],
-      "type": "shell"
+      "problemMatcher": []
     },
     {
-      "args": ["doxygen", "-o", "doc"],
-      "command": "xmake",
-      "group": "doc",
       "label": "Generate Documnet",
+      "type": "shell",
+      "command": "xmake",
+      "args": ["doxygen", "-o", "doc"],
+      "group": "doc",
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": [],
-      "type": "shell"
+      "problemMatcher": []
     },
     {
-      "args": ["'${workspaceFolder}/doc/html/index.html'"],
+      "label": "Open Documnet",
+      "type": "shell",
       "command": "start",
+      "args": ["'${workspaceFolder}/doc/html/index.html'"],
       "dependsOn": ["Generate Documnet"],
       "group": "doc",
-      "label": "Open Documnet",
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": [],
-      "type": "shell"
+      "problemMatcher": []
     }
   ],
   "version": "2.0.0"

@@ -1,5 +1,7 @@
 add_rules("mode.debug", "mode.release")
 
+local target_name = "Avsb"
+local lib_name = target_name .. "Lib"
 local enable_test = false
 local platform = os.host()
 
@@ -62,9 +64,6 @@ end
 if is_plat("mingw") then
     add_syslinks("wsock32", "ws2_32")
 end
-
-local target_name = "Avsb"
-local lib_name = target_name .. "Lib"
 
 if is_mode("debug") then
     add_defines("DEBUG")
