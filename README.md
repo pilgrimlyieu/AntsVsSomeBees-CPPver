@@ -1,6 +1,7 @@
 # Ants Vs. SomeBees (C++ version)
 
 > 这是一个用于验收的临时简单的 README，更多细节有待完善。
+> 稍微详细一点的内容、随意的演示、评分细则，同时也是视频中用的文档（修正前），可见 [doc/demo.md](doc/demo.md)
 
 ## 项目简介
 
