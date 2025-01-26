@@ -4,7 +4,7 @@ Checks: modernize-*,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-slicing,
-  -cppcoreguidelines-owning-memory, # Temporary disable before using smart pointers
+  -cppcoreguidelines-owning-memory,
   readability-braces-around-statements,
   readability-identifier-naming.ClassCase,
   readability-identifier-naming.StructCase,

@@ -1,21 +1,18 @@
+# build
 build
-material
+
+# private
 private.*
-.vscode/compile_commands.json
-.cache
+
 # cache
-# *.log
-# *.lock
+.cache
 .xmake
 
-# Temporary notes
-TODO.md
-
-# Doxygen
+# code documentation
 doc/html
 
 # dependencies
 dependencies
 
-# temporary
+# test
 test

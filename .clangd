@@ -1,4 +1,4 @@
 If:
-  PathMatch: ["dependencies/*"]
+  PathMatch: [dependencies/.*]
 Index:
   Background: Skip
