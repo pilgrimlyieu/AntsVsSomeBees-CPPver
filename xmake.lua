@@ -1,3 +1,4 @@
+add_rules("plugin.compile_commands.autoupdate", { outputdir = "build" })
 add_rules("mode.debug", "mode.release")
 
 local target_name = "Avsb"
