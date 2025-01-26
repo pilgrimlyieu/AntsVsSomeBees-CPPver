@@ -5,9 +5,6 @@
 #include "Utilities.hpp"
 
 class Place : public Serializable {
-protected:
-    ~Place() = default;
-
 public:
     // exit <- place -> entrance --> Hive
     string name;         //!< 名称
@@ -16,13 +13,13 @@ public:
     bees_list bees = {}; //!< 在 Place 中的 Bee 列表
     Ant *ant = nullptr;  //!< 在 Place 中的 Ant
 
-    Place(const Place &) = delete;
-    Place &operator=(const Place &) = delete;
-    Place(Place &&) = delete;
-    Place &operator=(Place &&) = delete;
-
     explicit Place(string name, Place *exit);
     explicit Place(string name) : Place(name, nullptr) {}
+    Place(const Place &) = delete;
+    Place(Place &&) = delete;
+    Place &operator=(const Place &) = delete;
+    Place &operator=(Place &&) = delete;
+    ~Place() = default;
 
     virtual bool getIsHive() const {
         return false;

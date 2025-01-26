@@ -31,16 +31,13 @@ void WebSocket::onInsectMove(Bee *bee, Place *place) {
     if (bee->getPlace() && place->name == "Ant Home Base") {
         return;
     }
+    crow::json::wvalue data;
+    data["bee_id"] = bee->getId();
+    data["destination"] = parseCoordinates(place->name);
     if (bee->getPlace() && bee->getPlace()->getIsHive()) {
-        crow::json::wvalue data;
-        data["bee_id"] = bee->getId();
         data["bee_name"] = bee->getName();
-        data["destination"] = parseCoordinates(place->name);
         emitter.emit("moveBeeFromHive", data);
     } else {
-        crow::json::wvalue data;
-        data["bee_id"] = bee->getId();
-        data["destination"] = parseCoordinates(place->name);
         data["current_pos"] = parseCoordinates(bee->getPlace()->name);
         emitter.emit("moveBee", data);
     }

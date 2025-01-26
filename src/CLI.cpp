@@ -2,39 +2,32 @@
 #include "Info.hpp"
 #include <iostream>
 
+#define LOAD_JSON(name)      \
+    if (j.contains(#name)) { \
+        name = j[#name];     \
+    }
+
+#define SAVE_JSON(name) j[#name] = name;
+
 void CLIConfig::loadFromJson(const json &j) {
-    if (j.contains("difficulty")) {
-        difficulty = j["difficulty"];
-    }
-    if (j.contains("planPath")) {
-        planPath = j["planPath"];
-    }
-    if (j.contains("water")) {
-        waterEnabled = j["water"];
-    }
-    if (j.contains("autoOpen")) {
-        autoOpen = j["autoOpen"];
-    }
-    if (j.contains("initialFood")) {
-        initialFood = j["initialFood"];
-    }
-    if (j.contains("logLevel")) {
-        logLevel = j["logLevel"];
-    }
-    if (j.contains("port")) {
-        port = j["port"];
-    }
+    LOAD_JSON(difficulty)
+    LOAD_JSON(planPath)
+    LOAD_JSON(waterEnabled)
+    LOAD_JSON(autoOpen)
+    LOAD_JSON(initialFood)
+    LOAD_JSON(logLevel)
+    LOAD_JSON(port)
 }
 
 void CLIConfig::saveToJson(const string &path) const {
     json j;
-    j["difficulty"] = difficulty;
-    j["planPath"] = planPath;
-    j["water"] = waterEnabled;
-    j["autoOpen"] = autoOpen;
-    j["initialFood"] = initialFood;
-    j["logLevel"] = logLevel;
-    j["port"] = port;
+    SAVE_JSON(difficulty)
+    SAVE_JSON(planPath)
+    SAVE_JSON(waterEnabled)
+    SAVE_JSON(autoOpen)
+    SAVE_JSON(initialFood)
+    SAVE_JSON(logLevel)
+    SAVE_JSON(port)
     std::ofstream file(path);
     file << j.dump(2);
 }
@@ -174,6 +167,11 @@ void CLI::loadConfigFile(const string &path, CLIConfig &cfg) {
     }
 }
 
+#define UPDATE_CLI_CONFIG(option, name) \
+    if (parser.is_used("--" #option)) { \
+        config.name = cmdConfig.name;   \
+    }
+
 CLIConfig CLI::parse(int argc, char *argv[]) {
     try {
         config = CLIConfig();
@@ -182,27 +180,13 @@ CLIConfig CLI::parse(int argc, char *argv[]) {
         if (!cmdConfig.configPath.empty() && cmdConfig.configPath != "./config.json") {
             loadConfigFile(cmdConfig.configPath, config);
         }
-        if (parser.is_used("--difficulty")) {
-            config.difficulty = cmdConfig.difficulty;
-        }
-        if (parser.is_used("--plan")) {
-            config.planPath = cmdConfig.planPath;
-        }
-        if (parser.is_used("--water")) {
-            config.waterEnabled = cmdConfig.waterEnabled;
-        }
-        if (parser.is_used("--open")) {
-            config.autoOpen = cmdConfig.autoOpen;
-        }
-        if (parser.is_used("--food")) {
-            config.initialFood = cmdConfig.initialFood;
-        }
-        if (parser.is_used("--log")) {
-            config.logLevel = cmdConfig.logLevel;
-        }
-        if (parser.is_used("--port")) {
-            config.port = cmdConfig.port;
-        }
+        UPDATE_CLI_CONFIG(difficulty, difficulty)
+        UPDATE_CLI_CONFIG(plan, planPath)
+        UPDATE_CLI_CONFIG(water, waterEnabled)
+        UPDATE_CLI_CONFIG(open, autoOpen)
+        UPDATE_CLI_CONFIG(food, initialFood)
+        UPDATE_CLI_CONFIG(log, logLevel)
+        UPDATE_CLI_CONFIG(port, port)
         ConfigManager::setConfig(config);
         if (parser["--save"] == true) {
             config.saveToJson("./config.json");

@@ -52,9 +52,7 @@ void Server::setupRoutes() {
 
     CROW_ROUTE(app, "/initialize_game").methods("POST"_method)([this](const crow::request &req) {
         game.next();
-
         auto response = getGameInfo();
-
         return crow::response{response};
     });
 

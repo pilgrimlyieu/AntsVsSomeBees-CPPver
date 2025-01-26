@@ -91,14 +91,15 @@ json Place::serialize() const {
 Place *Place::deserialize(const json &data) {
     Place *place = nullptr;
     string type = data["type"];
+    string name = data["name"];
     if (type == "Place") {
-        place = new Place(data["name"]);
+        place = new Place(name);
     } else if (type == "AntHomeBase") {
-        place = new AntHomeBase(data["name"]);
+        place = new AntHomeBase(name);
     } else if (type == "Hive") {
         place = new Hive(AssaultPlan::deserialize(data["assaultPlan"]));
     } else if (type == "Water") {
-        place = new Water(data["name"]);
+        place = new Water(name);
     }
     if (place) {
         if (data.contains("ant")) {

@@ -10,6 +10,8 @@ private:
     static inline EventEmitter emitter; //!< 事件发射器
 
 public:
+    WebSocket() = delete;
+
     static EventEmitter &getEmitter();
     static void setEmitter(EventEmitter emitter);
 
