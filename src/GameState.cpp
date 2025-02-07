@@ -359,7 +359,7 @@ GameState GameState::deserialize(const json &data) {
     if (version != AVSBInfo::VERSION) {
         log(LOGERROR, format("Version mismatch: {0} != {1}, which may cause issues. Go to "
                              "{2}/releases/tag/v{0} for the matching version.",
-                             version, AVSBInfo::VERSION, AVSBInfo::GITHUB_REPO));
+                             version, AVSBInfo::VERSION, AVSBInfo::REPOSITORY));
     }
     state.time = data["time"];
     state.numBees = data["numBees"];
