@@ -80,8 +80,8 @@ elseif is_mode("check") then
     -- set_policy("build.sanitizer.address", true)
     set_symbols("debug")
     set_optimize("none")
-    target_name = target_name .. "Debug"
-    lib_name = lib_name .. "Debug"
+    target_name = target_name .. "Check"
+    lib_name = lib_name .. "Check"
 
     add_cxflags(
         "-fno-strict-aliasing",

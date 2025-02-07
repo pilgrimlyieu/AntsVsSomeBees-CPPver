@@ -3,7 +3,7 @@ let isServerRunning = true;
 let isPaused = false;
 let failedRequestCount = 0;
 const MAX_FAILED_REQUESTS = 100;
-const REQUEST_TIMEOUT = 100000;
+const REQUEST_TIMEOUT = 3000;
 
 function fetchWithTimeout(url, options = {}, timeout = REQUEST_TIMEOUT) {
   return Promise.race([
