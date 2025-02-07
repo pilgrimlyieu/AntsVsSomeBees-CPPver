@@ -5,9 +5,11 @@
 
 class QueenAnt final : public ScubaThrower {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "QueenAnt";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 7;
     }

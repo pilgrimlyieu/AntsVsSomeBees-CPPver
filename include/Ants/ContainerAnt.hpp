@@ -5,7 +5,8 @@
 
 class ContainerAnt : public Ant {
 protected:
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "ContainerAnt";
     }
 
@@ -25,7 +26,8 @@ public:
 
     void action(GameState &gamestate) override;
 
-    virtual json serialize() const override;
+    [[nodiscard]]
+    json serialize() const override;
 };
 
 #endif // CONTAINERANT_HPP

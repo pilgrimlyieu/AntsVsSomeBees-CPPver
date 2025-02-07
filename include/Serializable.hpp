@@ -6,8 +6,10 @@
 class Serializable {
 public:
     virtual ~Serializable() = default;
+    [[nodiscard]]
     virtual json serialize() const = 0;
-    static Serializable *deserialize(const json &data);
+    [[nodiscard]]
+    static Serializable *deserialize(const json &data) = delete;
 };
 
 #endif

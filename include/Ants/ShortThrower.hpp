@@ -5,12 +5,15 @@
 
 class ShortThrower final : public ThrowerAnt {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "ShortThrower";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 2;
     }
+    [[nodiscard]]
     int getMaxRange() const final {
         return 3;
     }

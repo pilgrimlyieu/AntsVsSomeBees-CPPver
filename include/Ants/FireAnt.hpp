@@ -5,12 +5,15 @@
 
 class FireAnt final : public Ant {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "FireAnt";
     }
+    [[nodiscard]]
     double getDefaultDamage() const final {
         return 3.0;
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 5;
     }

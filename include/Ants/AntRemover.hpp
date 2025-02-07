@@ -2,14 +2,15 @@
 #define ANTREMOVER_HPP
 
 #include "Ant.hpp"
-#include "ContainerAnt.hpp"
 #include "Place.hpp"
 
 class AntRemover final : public Ant {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "AntRemover";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 0;
     }
@@ -17,6 +18,7 @@ protected:
 public:
     explicit AntRemover() : Ant(0.0) {}
 
+    [[nodiscard]]
     bool getIsWaterProof() const final {
         return true;
     }

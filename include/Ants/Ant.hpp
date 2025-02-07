@@ -11,15 +11,19 @@ public:
     explicit Ant(double health) : Insect(health, nullptr) {}
     explicit Ant() : Ant(1.0) {}
 
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "Ant";
     }
+    [[nodiscard]]
     virtual int getFoodCost() const {
         return 0;
     }
+    [[nodiscard]]
     virtual bool getBlocksPath() const {
         return true;
     }
+    [[nodiscard]]
     double getDamage() const final {
         if (buffed) {
             return 2 * getDefaultDamage();
@@ -28,7 +32,7 @@ public:
         }
     }
 
-    virtual void action(GameState &gamestate) override {};
+    void action(GameState &gamestate) override {};
 
     virtual bool canContain(Ant *other);
 
@@ -42,7 +46,8 @@ public:
 
     void buff();
 
-    virtual json serialize() const override;
+    [[nodiscard]]
+    json serialize() const override;
     static Ant *deserialize(const json &data);
 };
 

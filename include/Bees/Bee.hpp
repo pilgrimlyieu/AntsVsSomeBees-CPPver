@@ -5,10 +5,12 @@
 
 class Bee : public Insect {
 protected:
-    virtual double getDefaultDamage() const override {
+    [[nodiscard]]
+    double getDefaultDamage() const override {
         return 1.0;
     }
-    virtual bool getIsWaterProof() const override {
+    [[nodiscard]]
+    bool getIsWaterProof() const override {
         return true;
     }
 
@@ -19,7 +21,8 @@ public:
     explicit Bee(double health, Place *place) : Insect(health, place) {}
     explicit Bee(double health) : Bee(health, nullptr) {}
 
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "Bee";
     }
 
@@ -27,6 +30,7 @@ public:
 
     void moveTo(Place *place);
 
+    [[nodiscard]]
     virtual bool blocked();
 
     void action(GameState &gamestate) override;
@@ -39,7 +43,9 @@ public:
 
     void scare(g_time length);
 
-    virtual json serialize() const override;
+    [[nodiscard]]
+    json serialize() const override;
+    [[nodiscard]]
     static Bee *deserialize(const json &data);
 };
 

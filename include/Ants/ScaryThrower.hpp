@@ -5,9 +5,11 @@
 
 class ScaryThrower final : public ThrowerAnt {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "ScaryThrower";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 6;
     }

@@ -5,12 +5,15 @@
 
 class LongThrower final : public ThrowerAnt {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "LongThrower";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 2;
     }
+    [[nodiscard]]
     int getMinRange() const final {
         return 5;
     }

@@ -11,12 +11,14 @@ public:
 
     explicit Hive(AssaultPlan aP);
 
+    [[nodiscard]]
     bool getIsHive() const final {
         return true;
     }
 
     void strategy(GameState &gameState);
 
+    [[nodiscard]]
     json serialize() const final;
 };
 

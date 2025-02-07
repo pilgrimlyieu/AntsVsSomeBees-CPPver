@@ -7,7 +7,7 @@
         name = j[#name];     \
     }
 
-#define SAVE_JSON(name) j[#name] = name;
+#define STORE_JSON(name) j[#name] = name;
 
 void CLIConfig::loadFromJson(const json &j) {
     LOAD_JSON(difficulty)
@@ -21,13 +21,13 @@ void CLIConfig::loadFromJson(const json &j) {
 
 void CLIConfig::saveToJson(const string &path) const {
     json j;
-    SAVE_JSON(difficulty)
-    SAVE_JSON(planPath)
-    SAVE_JSON(waterEnabled)
-    SAVE_JSON(autoOpen)
-    SAVE_JSON(initialFood)
-    SAVE_JSON(logLevel)
-    SAVE_JSON(port)
+    STORE_JSON(difficulty)
+    STORE_JSON(planPath)
+    STORE_JSON(waterEnabled)
+    STORE_JSON(autoOpen)
+    STORE_JSON(initialFood)
+    STORE_JSON(logLevel)
+    STORE_JSON(port)
     std::ofstream file(path);
     file << j.dump(2);
 }

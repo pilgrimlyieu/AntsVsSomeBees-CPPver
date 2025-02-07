@@ -19,7 +19,9 @@ public:
     [[nodiscard]]
     bees_list &operator[](g_time time);
 
+    [[nodiscard]]
     json serialize() const final;
+    [[nodiscard]]
     static AssaultPlan deserialize(const json &data);
 };
 

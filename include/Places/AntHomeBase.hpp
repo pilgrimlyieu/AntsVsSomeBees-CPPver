@@ -9,6 +9,7 @@ public:
 
     void addInsect(Insect *insect) final;
 
+    [[nodiscard]]
     json serialize() const final;
 };
 

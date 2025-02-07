@@ -19,8 +19,9 @@ public:
     Place(Place &&) = delete;
     Place &operator=(const Place &) = delete;
     Place &operator=(Place &&) = delete;
-    ~Place() = default;
+    ~Place() override = default;
 
+    [[nodiscard]]
     virtual bool getIsHive() const {
         return false;
     }
@@ -33,7 +34,8 @@ public:
 
     operator string() const;
 
-    virtual json serialize() const override;
+    [[nodiscard]]
+    json serialize() const override;
     static Place *deserialize(const json &data);
 };
 

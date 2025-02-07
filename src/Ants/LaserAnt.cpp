@@ -29,7 +29,7 @@ LaserAnt::insects_distance LaserAnt::getTargets() {
 /**
  * @brief 获取 LaserAnt 对指定距离的目标造成的伤害
  *
- * 最终伤害 = 基础伤害 - 0.25 * 距离 - 已射击昆虫数量 / 16
+ * 最终伤害 = 基础伤害 - 0.25 * 距离 - 已攻击昆虫数量 / 16
  *
  * @param distance 目标距离
  * @return 造成的伤害

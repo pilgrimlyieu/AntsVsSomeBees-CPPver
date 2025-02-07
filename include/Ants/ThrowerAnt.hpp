@@ -5,18 +5,23 @@
 
 class ThrowerAnt : public Ant {
 protected:
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "ThrowerAnt";
     }
-    virtual double getDefaultDamage() const override {
+    [[nodiscard]]
+    double getDefaultDamage() const override {
         return 1.0;
     }
-    virtual int getFoodCost() const override {
+    [[nodiscard]]
+    int getFoodCost() const override {
         return 3;
     }
+    [[nodiscard]]
     virtual int getMinRange() const {
         return 0;
     }
+    [[nodiscard]]
     virtual int getMaxRange() const {
         return INT_MAX;
     }
@@ -24,6 +29,7 @@ protected:
     const int minRange; //!< 最小射程
     const int maxRange; //!< 最大射程
 
+    [[nodiscard]]
     Bee *nearestBee();
 
     virtual void throwAt(Bee *target);

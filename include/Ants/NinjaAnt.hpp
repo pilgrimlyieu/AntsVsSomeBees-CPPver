@@ -5,15 +5,19 @@
 
 class NinjaAnt final : public Ant {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "NinjaAnt";
     }
+    [[nodiscard]]
     double getDefaultDamage() const final {
         return 1.0;
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 5;
     }
+    [[nodiscard]]
     bool getBlocksPath() const final {
         return false;
     }

@@ -5,10 +5,12 @@
 
 class Wasp : public Bee {
 protected:
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "Wasp";
     }
-    virtual double getDefaultDamage() const override {
+    [[nodiscard]]
+    double getDefaultDamage() const override {
         return 2.0;
     }
 

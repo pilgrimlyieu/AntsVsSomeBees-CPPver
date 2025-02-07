@@ -5,9 +5,11 @@
 
 class WallAnt final : public Ant {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "WallAnt";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 4;
     }

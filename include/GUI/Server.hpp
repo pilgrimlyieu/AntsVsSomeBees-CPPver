@@ -18,6 +18,10 @@ private:
     crow::response handleInsectActions();
 
 public:
+    Server(const Server &) = delete;
+    Server(Server &&) = delete;
+    Server &operator=(const Server &) = delete;
+    Server &operator=(Server &&) = delete;
     explicit Server(CLIConfig config);
     ~Server();
 

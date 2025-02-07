@@ -11,7 +11,9 @@ void gameInit() {
 /**
  * @brief 记录日志
  *
+ * @param level 日志等级
  * @param msg 日志信息
+ * @param force 是否强制显示
  */
 void log(LogLevel level, const string &msg, bool force) {
     LogLevel logLevel;

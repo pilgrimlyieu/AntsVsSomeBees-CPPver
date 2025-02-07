@@ -5,9 +5,11 @@
 
 class HarvestAnt final : public Ant {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "HarvestAnt";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 2;
     }

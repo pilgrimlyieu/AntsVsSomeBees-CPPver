@@ -5,12 +5,15 @@
 
 class ScubaThrower : public ThrowerAnt {
 protected:
-    virtual string getName() const override {
+    [[nodiscard]]
+    string getName() const override {
         return "ScubaThrower";
     }
-    virtual int getFoodCost() const override {
+    [[nodiscard]]
+    int getFoodCost() const override {
         return 6;
     }
+    [[nodiscard]]
     bool getIsWaterProof() const final {
         return true;
     }

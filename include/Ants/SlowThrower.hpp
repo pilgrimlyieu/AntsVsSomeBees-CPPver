@@ -5,9 +5,11 @@
 
 class SlowThrower final : public ThrowerAnt {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "SlowThrower";
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 4;
     }

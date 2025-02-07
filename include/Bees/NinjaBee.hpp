@@ -5,6 +5,7 @@
 
 class NinjaBee final : public Bee {
 protected:
+    [[nodiscard]]
     string getName() const override {
         return "NinjaBee";
     }
@@ -13,6 +14,7 @@ public:
     explicit NinjaBee(double health, Place *place) : Bee(health, place) {}
     explicit NinjaBee(double health) : NinjaBee(health, nullptr) {}
 
+    [[nodiscard]]
     bool blocked() final;
 };
 

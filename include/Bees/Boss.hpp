@@ -5,10 +5,12 @@
 
 class Boss final : public Wasp {
 protected:
+    [[nodiscard]]
     string getName() const override {
         return "Boss";
     }
 
+    [[nodiscard]]
     double damageModifier(double amount);
 
     const double damageCap = 8.0; //!< 受伤害上限

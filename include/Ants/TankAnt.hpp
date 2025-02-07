@@ -5,12 +5,15 @@
 
 class TankAnt final : public ContainerAnt {
 protected:
+    [[nodiscard]]
     string getName() const final {
         return "TankAnt";
     }
+    [[nodiscard]]
     double getDefaultDamage() const final {
         return 1.0;
     }
+    [[nodiscard]]
     int getFoodCost() const final {
         return 6;
     }
