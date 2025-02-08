@@ -28,9 +28,10 @@ set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
 
+add_cxxflags("-stdlib=libc++")
 if is_mode("release") then
     if is_plat("mingw") then
-        add_cxflags("-static")
+        add_cxxflags("-static")
         add_ldflags("-static", "-static-libgcc", "-static-libstdc++")
     elseif is_plat("linux") then
         add_ldflags("-static-libgcc", "-static-libstdc++")
@@ -83,7 +84,7 @@ elseif is_mode("check") then
     target_name = target_name .. "Check"
     lib_name = lib_name .. "Check"
 
-    add_cxflags(
+    add_cxxflags(
         "-fno-strict-aliasing",
         "-fno-omit-frame-pointer",
         "-ftrapv",
