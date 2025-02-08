@@ -11,8 +11,8 @@
 void SlowThrower::throwAt(Bee *target) {
     if (target != nullptr) {
         target->slow(3);
-        log(LOGINFO, format("{} slows {} for 3 rounds", *this, *target));
+        log(LOGINFO, format("{} slows {} for 3 rounds", this, target));
     } else {
-        log(LOGTEST, format("{} throws at nothing", *this));
+        log(LOGTEST, format("{} throws at nothing", this));
     }
 }

@@ -46,7 +46,7 @@ void GameState::configure(Hive *beehive, create_places createPlaces) {
     bee_entrances.clear();
     auto register_place = [this, beehive](Place *place, bool isBeeEntrance) {
         places[place->name] = place;
-        log(LOGTEST, format("Adding {}", *place));
+        log(LOGTEST, format("Adding {}", place));
         if (isBeeEntrance) {
             place->entrance = beehive;
             bee_entrances.push_back(place);

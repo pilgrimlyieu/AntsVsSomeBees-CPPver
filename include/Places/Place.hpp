@@ -39,9 +39,9 @@ public:
     static Place *deserialize(const json &data);
 };
 
-template <std::derived_from<Place> T> struct std::formatter<T> : std::formatter<string> {
-    auto format(const T &place, format_context &ctx) const {
-        return std::formatter<string>::format(static_cast<string>(place), ctx);
+template <std::derived_from<Place> T> struct std::formatter<T *> : std::formatter<string> {
+    auto format(const T *place, format_context &ctx) const {
+        return std::formatter<string>::format(static_cast<string>(*place), ctx);
     }
 };
 

@@ -14,11 +14,11 @@ int Insect::idCounter = 0;
 void Insect::reduceHealth(double amount) {
     health -= amount;
     injuryCallback();
-    log(LOGTEST, format("{} is reduced by {:.2f}", *this, amount));
+    log(LOGTEST, format("{} is reduced by {:.2f}", this, amount));
     if (health <= 0.0) {
         deathCallback();
         place->removeInsect(this);
-        log(LOGINFO, format("{} is dead", *this));
+        log(LOGINFO, format("{} is dead", this));
     }
 }
 
@@ -47,9 +47,9 @@ void Insect::deathCallback() {
  */
 void Insect::addTo(Place *place) {
     if (place != nullptr) {
-        log(LOGTEST, format("{} is added to {}", *this, *place));
+        log(LOGTEST, format("{} is added to {}", this, place));
     } else {
-        log(LOGTEST, format("{} is added to nullptr", *this));
+        log(LOGTEST, format("{} is added to nullptr", this));
     }
     setPlace(place);
 }
@@ -60,7 +60,7 @@ void Insect::addTo(Place *place) {
  * @param place 要从中移除 Insect 的 Place 。
  */
 void Insect::removeFrom(Place *place) {
-    log(LOGTEST, format("{} is removed from {}", *this, *place));
+    log(LOGTEST, format("{} is removed from {}", this, place));
     this->place = nullptr;
 }
 
@@ -74,7 +74,7 @@ void Insect::removeFrom(Place *place) {
 Insect::operator string() const {
     if (place) {
         return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, {6})", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
-                      getName(), id, health, *place);
+                      getName(), id, health, place);
     } else {
         return format("{1}{3}{0}[{4}]({2}{5:.2f}{0}, NULL)", ANSI_DEFAULT, ANSI_GREEN, ANSI_MAGENTA,
                       getName(), id, health);

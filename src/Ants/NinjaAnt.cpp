@@ -9,7 +9,7 @@
  */
 void NinjaAnt::action(GameState &gamestate) {
     if (place->bees.size() > 0) {
-        log(LOGINFO, format("{} attacks all bees in {}", *this, *place));
+        log(LOGINFO, format("{} attacks all bees in {}", this, place));
         bees_list beesToDamage(place->bees);
         for (auto bee : beesToDamage) {
             if (bee->health > 0) {

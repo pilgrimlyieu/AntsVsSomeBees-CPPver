@@ -10,6 +10,6 @@
  */
 void HarvestAnt::action(GameState &gamestate) {
     gamestate.food += 1;
-    log(LOGINFO, format("{} harvests 1 food", *this));
+    log(LOGINFO, format("{} harvests 1 food", this));
     log(LOGTEST, format("Food: {}", gamestate.food));
 }

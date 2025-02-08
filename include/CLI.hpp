@@ -34,6 +34,7 @@ public:
     [[nodiscard]]
     LogLevel getLogLevel() const;
 
+    [[nodiscard]]
     int getNumTunnels() const;
 };
 

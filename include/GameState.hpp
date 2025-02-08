@@ -42,6 +42,8 @@ public:
 
     explicit Simulator() : handle(nullptr) {}
     explicit Simulator(handle_type h) : handle(h) {}
+    Simulator(const Simulator &) = delete;
+    Simulator &operator=(const Simulator &) = delete;
     Simulator(Simulator &&other) noexcept : handle(other.handle) {
         other.handle = nullptr;
     }
@@ -65,9 +67,12 @@ public:
             handle.resume();
         }
     }
+
+    [[nodiscard]]
     bool isGameOver() const {
         return handle.promise().is_game_over;
     }
+    [[nodiscard]]
     bool getResult() const {
         return handle.promise().result;
     }
@@ -129,6 +134,7 @@ public:
     [[nodiscard]]
     insects_list getInsects() const;
 
+    [[nodiscard]]
     json serialize() const;
     static GameState deserialize(const json &data);
 

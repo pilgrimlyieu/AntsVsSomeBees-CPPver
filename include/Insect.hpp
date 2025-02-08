@@ -10,6 +10,7 @@ private:
     int id;               //!< Insect ID
 
 protected:
+    [[nodiscard]]
     virtual double getDefaultDamage() const {
         return 0.0;
     }
@@ -45,7 +46,9 @@ public:
 
     static void resetIdCounter();
 
+    [[nodiscard]]
     int getId() const;
+    [[nodiscard]]
     Place *getPlace() const;
     void setPlace(Place *place);
 
@@ -53,20 +56,23 @@ public:
     virtual string getName() const {
         return "Insect";
     }
+    [[nodiscard]]
     virtual double getDamage() const {
         return getDefaultDamage();
     }
+    [[nodiscard]]
     virtual bool getIsWaterProof() const {
         return false;
     }
-    virtual json serialize() const override;
+    [[nodiscard]]
+    json serialize() const override;
 
-    virtual ~Insect() = default;
+    ~Insect() override = default;
 };
 
-template <std::derived_from<Insect> T> struct std::formatter<T> : std::formatter<string> {
-    auto format(const T &insect, std::format_context &ctx) const {
-        return std::formatter<string>::format(static_cast<string>(insect), ctx);
+template <std::derived_from<Insect> T> struct std::formatter<T *> : std::formatter<string> {
+    auto format(const T *insect, std::format_context &ctx) const {
+        return std::formatter<string>::format(static_cast<string>(*insect), ctx);
     }
 };
 

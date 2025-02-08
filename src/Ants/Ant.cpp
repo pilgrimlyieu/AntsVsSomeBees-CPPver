@@ -37,7 +37,7 @@ bool Ant::canContain(Ant *other) {
  * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::storeAnt(Ant *other) {
-    THROW_EXCEPTION(invalid_argument, format("{} cannot contain {}", *this, *other));
+    THROW_EXCEPTION(invalid_argument, format("{} cannot contain {}", this, other));
 }
 
 /**
@@ -49,7 +49,7 @@ void Ant::storeAnt(Ant *other) {
  * @throws invalid_argument 当不能容纳另一只 Ant 时抛出异常。
  */
 void Ant::removeAnt(Ant *other) {
-    THROW_EXCEPTION(invalid_argument, format("{} cannot contain {}", *this, *other));
+    THROW_EXCEPTION(invalid_argument, format("{} cannot contain {}", this, other));
 }
 
 /**
@@ -78,7 +78,7 @@ void Ant::addTo(Place *place) {
             storeAnt(place->ant);
             place->ant = this;
         } else {
-            THROW_EXCEPTION(invalid_argument, format("Two ants in {}", *place));
+            THROW_EXCEPTION(invalid_argument, format("Two ants in {}", place));
         }
     }
     Insect::addTo(place);
@@ -98,7 +98,7 @@ void Ant::removeFrom(Place *place) {
     if (place->ant == this) {
         place->ant = nullptr;
     } else if (place->ant == nullptr) {
-        THROW_EXCEPTION(invalid_argument, format("{} is not in {}", *this, *place));
+        THROW_EXCEPTION(invalid_argument, format("{} is not in {}", this, place));
     } else {
         removeAnt(place->ant);
     }
@@ -113,7 +113,7 @@ void Ant::removeFrom(Place *place) {
 void Ant::buff() {
     if (!buffed) {
         buffed = true;
-        log(LOGINFO, format("{} is buffed", *this));
+        log(LOGINFO, format("{} is buffed", this));
     }
 }
 

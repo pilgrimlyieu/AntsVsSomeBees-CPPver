@@ -16,7 +16,7 @@
  */
 void Bee::sting(Ant *ant) {
     ant->reduceHealth(getDamage());
-    log(LOGINFO, format("{} stings {} causing {:.2f} damage", *this, *ant, getDamage()));
+    log(LOGINFO, format("{} stings {} causing {:.2f} damage", this, ant, getDamage()));
 }
 
 /**
@@ -30,7 +30,7 @@ void Bee::moveTo(Place *place) {
     WebSocket::onInsectMove(this, place);
     this->place->removeInsect(this);
     place->addInsect(this);
-    log(LOGINFO, format("{} moves to {}", *this, *place));
+    log(LOGINFO, format("{} moves to {}", this, place));
 }
 
 /**
@@ -100,7 +100,7 @@ void Bee::removeFrom(Place *place) {
  */
 void Bee::slow(g_time length) {
     slowedTime += length;
-    log(LOGINFO, format("{} is slowed for {} turns", *this, length));
+    log(LOGINFO, format("{} is slowed for {} turns", this, length));
 }
 
 /**
@@ -113,9 +113,9 @@ void Bee::slow(g_time length) {
 void Bee::scare(g_time length) {
     if (scaredTime == 0) {
         scaredTime = length;
-        log(LOGINFO, format("{} is scared for {} turns", *this, length));
+        log(LOGINFO, format("{} is scared for {} turns", this, length));
     } else {
-        log(LOGINFO, format("{} is already scared", *this));
+        log(LOGINFO, format("{} is already scared", this));
     }
 }
 
