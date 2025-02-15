@@ -28,9 +28,8 @@ set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
 
-add_cxxflags("-stdlib=libc++")
 if is_mode("release") and is_plat("mingw") then
-    add_cxxflags("-static")
+    add_cxxflags("-stdlib=libc++", "-static")
     add_ldflags("-static")
 end
 
