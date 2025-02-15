@@ -3,7 +3,7 @@ add_rules("mode.debug", "mode.release")
 
 local target_name = "Avsb"
 local lib_name = target_name .. "Lib"
-local enable_test = false
+local enable_test = true
 local platform = os.host()
 
 if platform == "windows" then
@@ -29,13 +29,9 @@ set_toolchains("clang")
 set_defaultmode("debug")
 
 add_cxxflags("-stdlib=libc++")
-if is_mode("release") then
-    if is_plat("mingw") then
-        add_cxxflags("-static")
-        add_ldflags("-static", "-static-libgcc", "-static-libstdc++")
-    elseif is_plat("linux") then
-        add_ldflags("-static-libgcc", "-static-libstdc++")
-    end
+if is_mode("release") and is_plat("mingw") then
+    add_cxxflags("-static")
+    add_ldflags("-static")
 end
 
 add_includedirs(

@@ -15,7 +15,7 @@
   "clangd.arguments": [
     "--background-index",
     "--clang-tidy",
-    "-j=16"
+    "-j=8"
   ],
   "editor.detectIndentation": false,
   "errorLens.codeLensEnabled": true,

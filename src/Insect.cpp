@@ -2,7 +2,7 @@
 #include "Place.hpp"
 #include "WebSocket.hpp"
 
-int Insect::idCounter = 0;
+unsigned Insect::idCounter = 0;
 
 /**
  * @brief 减少 Insect 的生命值
@@ -100,7 +100,7 @@ void Insect::resetIdCounter() {
  *
  * @return int Insect 的 ID
  */
-int Insect::getId() const {
+unsigned Insect::getId() const {
     return id;
 }
 

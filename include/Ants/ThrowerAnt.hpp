@@ -26,17 +26,13 @@ protected:
         return INT_MAX;
     }
 
-    const int minRange; //!< 最小射程
-    const int maxRange; //!< 最大射程
-
     [[nodiscard]]
     Bee *nearestBee();
 
     virtual void throwAt(Bee *target);
 
 public:
-    explicit ThrowerAnt(double health)
-        : Ant(health), minRange(getMinRange()), maxRange(getMaxRange()) {}
+    explicit ThrowerAnt(double health) : Ant(health) {}
     explicit ThrowerAnt() : ThrowerAnt(1.0) {}
 
     void action(GameState &gamestate) override;

@@ -19,7 +19,7 @@ Bee *ThrowerAnt::nearestBee() {
     Place *place = this->place;
     int distance = 0;
     while (!place->getIsHive()) {
-        if (place->bees.size() > 0 && distance >= minRange && distance <= maxRange) {
+        if (place->bees.size() > 0 && distance >= getMinRange() && distance <= getMaxRange()) {
             return place->randomBee();
         }
         distance++;

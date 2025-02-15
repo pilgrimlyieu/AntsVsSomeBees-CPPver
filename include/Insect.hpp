@@ -6,8 +6,8 @@
 
 class Insect : public Serializable {
 private:
-    static int idCounter; //!< Insect ID 计数器
-    int id;               //!< Insect ID
+    static unsigned idCounter; //!< Insect ID 计数器
+    unsigned id;               //!< Insect ID
 
 protected:
     [[nodiscard]]
@@ -47,7 +47,7 @@ public:
     static void resetIdCounter();
 
     [[nodiscard]]
-    int getId() const;
+    unsigned getId() const;
     [[nodiscard]]
     Place *getPlace() const;
     void setPlace(Place *place);
