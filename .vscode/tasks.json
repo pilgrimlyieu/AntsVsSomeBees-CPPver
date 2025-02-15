@@ -53,24 +53,6 @@
       "problemMatcher": [],
     },
     {
-      "label": "Pack Release",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-NoLogo",
-        "-NonInteractive",
-        "-Command",
-        "$temp = Join-Path $env:TEMP 'vscode_pack_temp'; New-Item -Force -ItemType Directory $temp; Copy-Item build/${config:targetName}.exe $temp/; Copy-Item -Recurse static $temp/ -ErrorAction SilentlyContinue; Copy-Item -Recurse templates $temp/ -ErrorAction SilentlyContinue; Compress-Archive -Force -Path $temp/* -DestinationPath build/${config:targetName}.zip; Remove-Item -Recurse -Force $temp"
-      ],
-      "group": "build",
-      "dependsOn": ["Build Release"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "Run",
       "type": "shell",
       "command": "xmake",

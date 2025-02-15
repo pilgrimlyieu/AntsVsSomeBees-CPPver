@@ -2,6 +2,7 @@ add_rules("plugin.compile_commands.autoupdate", { outputdir = "build" })
 add_rules("mode.debug", "mode.release")
 
 local target_name = "Avsb"
+local version = "0.1.0"
 local lib_name = target_name .. "Lib"
 local enable_test = false
 local platform = os.host()
@@ -101,11 +102,38 @@ target(target_name)
     add_deps(lib_name)
 
 after_build(function (target)
+    -- 复制静态资源文件到构建目录
     os.mkdir("$(buildir)/static")
     os.mkdir("$(buildir)/templates")
     os.cp("static", "$(buildir)")
     os.cp("templates", "$(buildir)")
     print("Resource files copied to build directory")
+    -- 打包
+    import("core.project.config")
+    local buildir = config.buildir()
+    local target_file = target:targetfile()
+    local zip_name = target_name .. "-" .. platform .. "-" .. version .. ".zip"
+    local zip_path = path.join(buildir, zip_name)
+    if platform == "windows" then
+        local powershell_command = string.format(
+            "Compress-Archive -Force -Path '%s', 'static', 'templates' -DestinationPath '%s'",
+            target_file,
+            zip_path
+        )
+        os.execv("pwsh", { "-NoProfile", "-Command", powershell_command })
+    else
+        os.cd(buildir)
+        local target_basename = path.filename(target_file)
+        os.execv("zip", {
+            "-qFSr",
+            zip_name,
+            target_basename,
+            "static",
+            "templates"
+        })
+        os.cd("..")
+    end
+    print("Package created: " .. zip_path)
 end)
 
 for _, file in ipairs(os.files("test/**/test_*.cpp")) do
