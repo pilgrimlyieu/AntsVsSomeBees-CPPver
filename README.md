@@ -1,7 +1,10 @@
 # Ants Vs. SomeBees (C++ version)
 
+> 项目介绍见博文 [**Ants Vs. SomeBees (C++ 版本) 介绍**](https://pilgrimlyieu.github.io/2025/02/ants-vs-somebees)。
+> 项目开发历程见博文 [**C++ 项目 Avsb 回顾与总结**](https://pilgrimlyieu.github.io/2025/02/ants-vs-somebees-development)。
+
 > 这是一个用于验收的临时简单的 README，更多细节有待完善。
-> 稍微详细一点的内容、随意的演示、评分细则，同时也是视频中用的文档（修正前），可见 [doc/demo.md](doc/demo.md)
+> 稍微详细一点的内容、随意的演示、评分细则，同时也是视频中用的文档（修正前），可见 [doc/demo.md](doc/demo.md)。
 
 ## 项目简介
 
