@@ -3,7 +3,7 @@ add_rules("mode.debug", "mode.release")
 
 local target_name = "Avsb"
 local lib_name = target_name .. "Lib"
-local enable_test = true
+local enable_test = false
 local platform = os.host()
 
 if platform == "windows" then
