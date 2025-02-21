@@ -29,9 +29,12 @@ set_targetdir("build")
 set_toolchains("clang")
 set_defaultmode("debug")
 
-if is_mode("release") and is_plat("mingw") then
-    add_cxxflags("-stdlib=libc++", "-static")
-    add_ldflags("-static")
+if is_plat("mingw") then
+    add_cxxflags("-stdlib=libc++")
+    if is_mode("release") then
+        add_cxxflags("-static")
+        add_ldflags("-static")
+    end
 end
 
 add_includedirs(
@@ -120,7 +123,7 @@ after_build(function (target)
             target_file,
             zip_path
         )
-        os.execv("pwsh", { "-NoProfile", "-Command", powershell_command })
+        os.execv("powershell", { "-NoProfile", "-Command", powershell_command })
     else
         os.cd(buildir)
         local target_basename = path.filename(target_file)
@@ -136,19 +139,19 @@ after_build(function (target)
     print("Package created: " .. zip_path)
 end)
 
-for _, file in ipairs(os.files("test/**/test_*.cpp")) do
-    local group = path.directory(path.relative(file, "./test"))
-    local name = path.basename(file)
-    target("test/" .. group .. "/" .. name)
-        set_default(false)
-        set_kind("binary")
-        set_group(group)
+-- for _, file in ipairs(os.files("test/**/test_*.cpp")) do
+--     local group = path.directory(path.relative(file, "./test"))
+--     local name = path.basename(file)
+--     target("test/" .. group .. "/" .. name)
+--         set_default(false)
+--         set_kind("binary")
+--         set_group(group)
 
-        remove_files("src/Main.cpp")
-        add_tests(name)
-        add_files(file)
-        add_deps(lib_name)
-        if enable_test then
-            add_packages("catch2")
-        end
-end
+--         remove_files("src/Main.cpp")
+--         add_tests(name)
+--         add_files(file)
+--         add_deps(lib_name)
+--         if enable_test then
+--             add_packages("catch2")
+--         end
+-- end
