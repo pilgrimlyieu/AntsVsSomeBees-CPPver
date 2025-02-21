@@ -2,10 +2,35 @@
 #include "CLI.hpp"
 
 /**
+ * @brief 程序初始化
+ */
+void programInit() {
+#ifdef _WIN32
+    // Windows: Get the full path of the executable and set the working directory to its parent
+    // directory.
+    char exePath[MAX_PATH];
+    GetModuleFileNameA(NULL, exePath, MAX_PATH);
+    std::filesystem::current_path(std::filesystem::path(exePath).parent_path());
+#elif __linux__
+    // Linux: Read the symbolic link /proc/self/exe to get the full path of the executable.
+    char exePath[PATH_MAX];
+    ssize_t count = readlink("/proc/self/exe", exePath, sizeof(exePath) - 1);
+    if (count != -1) {
+        exePath[count] = '\0';
+        std::filesystem::current_path(std::filesystem::path(exePath).parent_path());
+    }
+#else
+    // Fallback: Use the current working directory.
+    auto path = std::filesystem::current_path();
+    std::filesystem::current_path(path);
+#endif
+}
+
+/**
  * @brief 游戏初始化
  */
 void gameInit() {
-    srand((unsigned)time(nullptr));
+    srand(static_cast<unsigned>(time(nullptr)));
 }
 
 /**

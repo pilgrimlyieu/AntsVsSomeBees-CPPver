@@ -2,6 +2,7 @@
 #include "Server.hpp"
 
 int main(int argc, char *argv[]) {
+    programInit();
     try {
         CLI cli;
         CLIConfig cfg = cli.parse(argc, argv);

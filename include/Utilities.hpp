@@ -28,6 +28,8 @@
     } while (0)
 #endif
 
+void programInit();
+
 void gameInit();
 
 void log(LogLevel level, const string &msg, bool force = false);
