@@ -112,6 +112,9 @@ after_build(function (target)
     os.cp("templates", "$(buildir)")
     print("Resource files copied to build directory")
     -- 打包
+    if not is_mode("release") then
+        return
+    end
     import("core.project.config")
     local buildir = config.buildir()
     local target_file = target:targetfile()
