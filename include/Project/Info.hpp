@@ -16,7 +16,7 @@ INFO string LICENSE = "MIT License";                                            
 INFO unsigned VERSION_PRIMARY = 0;         //!< 主序号
 INFO unsigned VERSION_PHASE = 1;           //!< 阶段号
 INFO unsigned VERSION_BUILD = 0;           //!< 构建号
-INFO unsigned VERSION_PATCH = 2;           //!< 补丁号
+INFO unsigned VERSION_PATCH = 3;           //!< 补丁号
 INFO string VERSION_CODENAME = "SeaOtter"; //!< 代号
 
 INFO string VERSION = format("{0}.{1}.{2}-{3}", VERSION_PRIMARY, VERSION_PHASE, VERSION_BUILD,
