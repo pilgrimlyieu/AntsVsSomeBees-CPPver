@@ -5,7 +5,7 @@
 #include "AntsWinException.hpp"
 #include "Bee.hpp"
 #include "ContainerAnt.hpp"
-#include "Version.hpp"
+#include "ProjectVersion.hpp"
 #include "Water.hpp"
 
 AntFactory *GameState::antFactory = &AntFactory::getInstance();

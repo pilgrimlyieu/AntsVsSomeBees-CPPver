@@ -1,5 +1,5 @@
 #include "CLI.hpp"
-#include "Version.hpp"
+#include "ProjectVersion.hpp"
 #include <iostream>
 
 #define LOAD_JSON(name)      \

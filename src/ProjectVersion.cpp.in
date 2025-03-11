@@ -1,0 +1,4 @@
+#include "ProjectVersion.hpp"
+
+const char *const VERSION = "${VERSION}";
+const char *const FULL_VERSION = "${FULL_VERSION}";
