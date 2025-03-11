@@ -1,5 +1,5 @@
 #include "CLI.hpp"
-#include "Info.hpp"
+#include "Version.hpp"
 #include <iostream>
 
 #define LOAD_JSON(name)      \
@@ -93,7 +93,7 @@ const CLIConfig &ConfigManager::getConfig() {
     return config;
 }
 
-CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, AVSBInfo::FULL_VERSION) {
+CLI::CLI() : parser(AVSBInfo::PROJECT_NAME, FULL_VERSION) {
     // [ISSUE] `store_into` is incompatible with `required`
     // https://github.com/p-ranav/argparse/issues/385)
     // temporary workaround: remove `required()`.

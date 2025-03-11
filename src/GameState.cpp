@@ -5,6 +5,7 @@
 #include "AntsWinException.hpp"
 #include "Bee.hpp"
 #include "ContainerAnt.hpp"
+#include "Version.hpp"
 #include "Water.hpp"
 
 AntFactory *GameState::antFactory = &AntFactory::getInstance();
@@ -325,7 +326,7 @@ void dryLayout(AntHomeBase *base, GameState::register_place_f registerPlace, dim
  */
 json GameState::serialize() const {
     json j;
-    j["version"] = AVSBInfo::VERSION;
+    j["version"] = VERSION;
     j["time"] = time;
     j["food"] = food;
     j["numBees"] = numBees;
@@ -356,10 +357,10 @@ json GameState::serialize() const {
 GameState GameState::deserialize(const json &data) {
     auto state = GameState(data["food"], {data["dimensions"][0], data["dimensions"][1]});
     string version = data["version"];
-    if (version != AVSBInfo::VERSION) {
+    if (version != VERSION) {
         log(LOGERROR, format("Version mismatch: {0} != {1}, which may cause issues. Go to "
                              "{2}/releases/tag/v{0} for the matching version.",
-                             version, AVSBInfo::VERSION, AVSBInfo::REPOSITORY));
+                             version, VERSION, AVSBInfo::REPOSITORY));
     }
     state.time = data["time"];
     state.numBees = data["numBees"];

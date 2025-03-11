@@ -2,10 +2,19 @@ add_rules("plugin.compile_commands.autoupdate", { outputdir = "build" })
 add_rules("mode.debug", "mode.release")
 
 local target_name = "Avsb"
-local version = "0.1.0"
+
+local version_primary = 0
+local version_phase = 1
+local version_build = 0
+local version_patch = 3
+local version_codename = "SeaOtter"
+local version = string.format("%d.%d.%d-%s", version_primary, version_phase, version_build, version_codename)
+local full_version = string.format("%s-patch.%d", version, version_patch)
+
 local lib_name = target_name .. "Lib"
 local enable_test = false
 local platform = os.host()
+local arch = os.arch()
 
 if platform == "windows" then
     set_defaultplat("mingw")
@@ -48,6 +57,7 @@ add_includedirs(
     "include/Project"
 )
 add_files("src/**.cpp")
+add_files("$(buildir)/Version.cpp")
 
 if is_plat("mingw") and is_mode("release") then
     add_files("src/Resource.rc")
@@ -104,6 +114,13 @@ target(target_name)
     add_files("src/Main.cpp")
     add_deps(lib_name)
 
+before_build(function (target)
+    local cpp_content = io.readfile("src/Version.cpp.in")
+    cpp_content = cpp_content:gsub("@VERSION@", version)
+    cpp_content = cpp_content:gsub("@FULL_VERSION@", full_version)
+    io.writefile(target:targetdir() .. "/Version.cpp", cpp_content)
+end)
+
 after_build(function (target)
     -- 复制静态资源文件到构建目录
     os.mkdir("$(buildir)/static")
@@ -118,7 +135,7 @@ after_build(function (target)
     import("core.project.config")
     local buildir = config.buildir()
     local target_file = target:targetfile()
-    local zip_name = target_name .. "-" .. platform .. "-" .. version .. ".zip"
+    local zip_name = string.format("%s-%s-%s-%s.zip", target_name, platform, arch, version)
     local zip_path = path.join(buildir, zip_name)
     if platform == "windows" then
         local powershell_command = string.format(
