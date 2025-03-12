@@ -6,7 +6,7 @@ on:
       - "v*"
   release:
     types: [created]
-  workflow_dispatch: # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,28 +27,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 安装 xmake
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
         with:
           xmake-version: latest
           build-cache: true
+          actions-cache-folder: '.xmake-cache'
 
-      # 安装 LLVM/Clang (Windows)
-      - name: Setup LLVM (Windows)
+      - name: Setup MSYS2 (Windows)
         if: matrix.os == 'windows-latest'
-        uses: KyleMayes/install-llvm-action@v1
+        uses: msys2/setup-msys2@v2
         with:
-          version: "18.0"
+          msystem: CLANG64
+          update: true
+          path-type: inherit
+          install: mingw-w64-clang-x86_64-toolchain
 
-      # 安装 LLVM/Clang (Linux)
       - name: Setup LLVM (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
           sudo apt install -y clang
 
-      # 准备 Windows 特殊依赖
       - name: Prepare Windows Dependencies
         if: matrix.os == 'windows-latest'
         run: |
@@ -68,13 +68,20 @@ jobs:
           mv Crow-master/include/crow dependencies/crow
         shell: bash
 
-      # 配置并构建 release 版本
-      - name: Configure and Build
+      - name: Configure and Build (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
         run: |
-          xmake f -m release -y && xmake build
-        shell: bash
+          xmake f -m release -y
+          xmake build
 
-      # 上传构建产物
+      - name: Configure and Build (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          xmake f -m release -y
+          xmake build
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -97,12 +104,15 @@ jobs:
       - name: Read RELEASE_NOTES
         id: release_notes
         run: |
-          RELEASE_NOTES=$(cat RELEASE_NOTES.md)
+          if [ -f "RELEASE_NOTES.md" ]; then
+            RELEASE_NOTES=$(cat RELEASE_NOTES.md)
+          else
+            RELEASE_NOTES="## 自动构建发布\n\n由 GitHub Actions 自动构建的发布版本。"
+          fi
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
           echo "$RELEASE_NOTES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      # 发布到 GitHub Releases
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
