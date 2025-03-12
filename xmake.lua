@@ -12,8 +12,8 @@ local target_name = "Avsb"
 -- 版本信息
 local version_primary = 0
 local version_phase = 1
-local version_build = 0
-local version_patch = 3
+local version_build = 1
+local version_patch = 0
 local version_codename = "SeaOtter"
 local version = string.format("%d.%d.%d-%s", version_primary, version_phase, version_build, version_codename)
 if version_patch > 0 then
