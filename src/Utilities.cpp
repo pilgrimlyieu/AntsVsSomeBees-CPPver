@@ -11,6 +11,13 @@ void programInit() {
     char exePath[MAX_PATH];
     GetModuleFileNameA(NULL, exePath, MAX_PATH);
     std::filesystem::current_path(std::filesystem::path(exePath).parent_path());
+#elif __APPLE__
+    // macOS: Use _NSGetExecutablePath to get the full path of the executable.
+    char exePath[PATH_MAX];
+    uint32_t size = sizeof(exePath);
+    if (_NSGetExecutablePath(exePath, &size) == 0) {
+        std::filesystem::current_path(std::filesystem::path(exePath).parent_path());
+    }
 #elif __linux__
     // Linux: Read the symbolic link /proc/self/exe to get the full path of the executable.
     char exePath[PATH_MAX];
@@ -19,10 +26,6 @@ void programInit() {
         exePath[count] = '\0';
         std::filesystem::current_path(std::filesystem::path(exePath).parent_path());
     }
-#else
-    // Fallback: Use the current working directory.
-    auto path = std::filesystem::current_path();
-    std::filesystem::current_path(path);
 #endif
 }
 
