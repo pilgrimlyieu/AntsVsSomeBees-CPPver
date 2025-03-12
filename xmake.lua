@@ -16,7 +16,11 @@ local version_build = 0
 local version_patch = 3
 local version_codename = "SeaOtter"
 local version = string.format("%d.%d.%d-%s", version_primary, version_phase, version_build, version_codename)
-local full_version = string.format("%s-patch.%d", version, version_patch)
+if version_patch > 0 then
+    full_version = string.format("%s-patch.%d", version, version_patch)
+else
+    full_version = version
+end
 set_configvar("VERSION", version)
 set_configvar("FULL_VERSION", full_version)
 add_configfiles("src/ProjectVersion.cpp.in")
