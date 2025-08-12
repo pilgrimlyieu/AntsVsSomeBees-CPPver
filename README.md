@@ -1,5 +1,7 @@
 # Ants Vs. SomeBees (C++ version)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/pilgrimlyieu/AntsVsSomeBees-CPPver)
+
 > 项目介绍见博文 [**Ants Vs. SomeBees (C++ 版本) 介绍**](https://pilgrimlyieu.github.io/2025/02/ants-vs-somebees)。
 > 项目开发历程见博文 [**C++ 项目 Avsb 回顾与总结**](https://pilgrimlyieu.github.io/2025/02/ants-vs-somebees-development)。
 
