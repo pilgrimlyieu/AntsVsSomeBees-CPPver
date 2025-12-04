@@ -24,7 +24,7 @@ end
 set_configvar("VERSION", version)
 set_configvar("FULL_VERSION", full_version)
 add_configfiles("src/ProjectVersion.cpp.in")
-add_files("$(buildir)/ProjectVersion.cpp")
+add_files("$(builddir)/ProjectVersion.cpp")
 
 -- 设置编译工具链
 set_languages("cxx20")
@@ -128,10 +128,10 @@ target(target_name)
 -- 构建后操作
 after_build(function (target)
     -- 复制静态资源文件到构建目录
-    os.mkdir("$(buildir)/static")
-    os.mkdir("$(buildir)/templates")
-    os.cp("static", "$(buildir)")
-    os.cp("templates", "$(buildir)")
+    os.mkdir("$(builddir)/static")
+    os.mkdir("$(builddir)/templates")
+    os.cp("static", "$(builddir)")
+    os.cp("templates", "$(builddir)")
     print("Resource files copied to build directory")
     -- 打包
     if not is_mode("release") then
@@ -140,7 +140,7 @@ after_build(function (target)
     import("core.project.config")
     local target_file = target:targetfile()
     local zip_name = string.format("%s-v%s-%s-%s.zip", target_name, version, platform, arch)
-    local zip_path = string.format("%s/%s", config.buildir(), zip_name)
+    local zip_path = string.format("%s/%s", config.builddir(), zip_name)
     if platform == "windows" then
         local powershell_command = string.format(
             "Compress-Archive -Force -Path '%s', 'static', 'templates' -DestinationPath '%s'",
@@ -149,7 +149,7 @@ after_build(function (target)
         )
         os.execv("powershell", { "-NoProfile", "-Command", powershell_command })
     else
-        os.cd("$(buildir)")
+        os.cd("$(builddir)")
         local target_basename = path.filename(target_file)
         os.execv("zip", {
             "-qFSr",

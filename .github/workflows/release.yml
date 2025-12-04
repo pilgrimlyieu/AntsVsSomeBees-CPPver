@@ -57,13 +57,13 @@ jobs:
 
           # 下载 asio
           curl -L -o asio.zip https://github.com/chriskohlhoff/asio/archive/refs/heads/master.zip
-          7z x asio.zip -o.
+          unzip -o -q asio.zip
           mv asio-master/asio/include/asio.hpp dependencies/
           mv asio-master/asio/include/asio dependencies/asio
 
           # 下载 crow
           curl -L -o crow.zip https://github.com/CrowCpp/Crow/archive/refs/heads/master.zip
-          7z x crow.zip -o.
+          unzip -o -q crow.zip
           mv Crow-master/include/crow.h dependencies/
           mv Crow-master/include/crow dependencies/crow
         shell: bash
